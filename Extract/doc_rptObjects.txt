@@ -1,0 +1,5190 @@
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: ACTIONS                                                                                       Page: 1
+
+
+
+Properties
+
+Date Created:          8/7/2003 10:35:56 PM           Last Updated:          8/7/2003 10:35:56 PM
+OrderByOn:             False                          RecordCount:           8
+Updatable:             True
+
+
+
+
+Columns
+
+         Name                                                  Type                        Size
+         Action_id                                             Long Integer                             4
+
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+                  Collating Order:           General
+
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               Default
+
+                  Data Updatable:            False
+                  DecimalPlaces:             Auto
+                  DisplayControl:            Text Box
+                  Ordinal Position:          0
+
+                  Required:                  False
+                  Source Field:              Action_id
+                  Source Table:              ACTIONS
+
+
+         Action_Name                                           Text                                    20
+                  AllowZeroLength:           False
+                  Attributes:                Variable Length
+
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+
+                  ColumnWidth:               Default
+                  Data Updatable:            False
+                  DisplayControl:            Text Box
+                  Ordinal Position:          1
+
+                  Required:                  False
+                  Source Field:              Action_Name
+                  Source Table:              ACTIONS
+
+
+
+Table Indexes
+
+         Name                                     Number of Fields
+
+         Action_id                                1
+                  Clustered:                 False
+                  DistinctCount:             8
+
+                  Foreign:                   False
+                  Ignore Nulls:              False
+                  Name:                      Action_id
+
+                  Primary:                   False
+                  Required:                  False
+                  Unique:                    False
+
+                  Fields:                    Ascending
+
+
+User Permissions
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: ACTIONS                                                                                       Page: 2
+
+
+
+
+
+         admin                      Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+
+
+
+
+Group Permissions
+
+         Admins                     Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+         Users                      Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: CASHFLOWITEM                                                                                  Page: 3
+
+
+
+Properties
+
+Date Created:          8/7/2003 10:35:56 PM           Last Updated:          8/7/2003 10:35:56 PM
+OrderByOn:             False                          RecordCount:           11
+Updatable:             True
+
+
+
+
+Columns
+
+         Name                                                  Type                        Size
+         ID                                                    Long Integer                             4
+
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+                  Collating Order:           General
+
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               Default
+
+                  Data Updatable:            False
+                  DecimalPlaces:             Auto
+                  DisplayControl:            Text Box
+                  Ordinal Position:          0
+
+                  Required:                  False
+                  Source Field:              ID
+                  Source Table:              CASHFLOWITEM
+
+
+         ItemName                                              Text                                    30
+                  AllowZeroLength:           False
+                  Attributes:                Variable Length
+
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+
+                  ColumnWidth:               1755
+                  Data Updatable:            False
+                  DisplayControl:            Text Box
+                  Ordinal Position:          1
+
+                  Required:                  False
+                  Source Field:              ItemName
+                  Source Table:              CASHFLOWITEM
+
+
+         ItemCode                                              Text                                    10
+                  AllowZeroLength:           False
+
+                  Attributes:                Variable Length
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+
+                  ColumnWidth:               Default
+                  Data Updatable:            False
+                  DisplayControl:            Text Box
+
+                  Ordinal Position:          2
+                  Required:                  False
+                  Source Field:              ItemCode
+                  Source Table:              CASHFLOWITEM
+
+
+         Gst                                                   Double                                   8
+                  AllowZeroLength:           False
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: CASHFLOWITEM                                                                                  Page: 4
+
+
+                  Attributes:                Fixed Size
+                  Collating Order:           General
+                  ColumnHidden:              False
+
+                  ColumnOrder:               Default
+                  ColumnWidth:               Default
+                  Data Updatable:            False
+
+                  DecimalPlaces:             Auto
+                  DisplayControl:            Text Box
+                  Ordinal Position:          3
+                  Required:                  False
+
+                  Source Field:              Gst
+                  Source Table:              CASHFLOWITEM
+
+
+         Type                                                  Text                                    10
+                  AllowZeroLength:           False
+                  Attributes:                Variable Length
+
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               Default
+
+                  Data Updatable:            False
+                  DisplayControl:            Text Box
+                  Ordinal Position:          4
+
+                  Required:                  False
+                  Source Field:              Type
+                  Source Table:              CASHFLOWITEM
+
+
+
+Table Indexes
+
+         Name                                     Number of Fields
+
+         ID                                       1
+                  Clustered:                 False
+                  DistinctCount:             11
+
+                  Foreign:                   False
+                  Ignore Nulls:              False
+                  Name:                      ID
+
+                  Primary:                   False
+                  Required:                  False
+                  Unique:                    False
+
+                  Fields:                    Ascending
+         ItemCode                                 1
+                  Clustered:                 False
+
+                  DistinctCount:             11
+                  Foreign:                   False
+                  Ignore Nulls:              False
+
+                  Name:                      ItemCode
+                  Primary:                   False
+                  Required:                  False
+
+                  Unique:                    False
+                  Fields:                    Ascending
+
+
+
+
+
+User Permissions
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: CASHFLOWITEM                                                                                  Page: 5
+
+
+
+         admin                      Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+
+
+
+
+Group Permissions
+
+         Admins                     Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+         Users                      Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: CASHIN                                                                                        Page: 6
+
+
+
+Properties
+
+Date Created:          8/7/2003 10:35:56 PM           Last Updated:          8/7/2003 10:35:56 PM
+OrderByOn:             False                          Orientation:           0
+RecordCount:           0                              Updatable:             True
+
+
+
+
+Columns
+
+         Name                                                  Type                        Size
+         ID                                                    Long Integer                             4
+
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+                  Collating Order:           General
+
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               Default
+
+                  Data Updatable:            False
+                  DecimalPlaces:             0
+                  DisplayControl:            Text Box
+                  Ordinal Position:          0
+
+                  Required:                  False
+                  Source Field:              ID
+                  Source Table:              CASHIN
+
+
+         ITEM                                                  Text                                    20
+                  AllowZeroLength:           True
+                  Attributes:                Variable Length
+
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+
+                  ColumnWidth:               Default
+                  Data Updatable:            False
+                  DisplayControl:            Text Box
+                  Ordinal Position:          1
+
+                  Required:                  False
+                  Source Field:              ITEM
+                  Source Table:              CASHIN
+
+                  UnicodeCompression:        True
+
+         DateOfCashIn                                          Date/Time                                8
+
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+                  Collating Order:           General
+                  ColumnHidden:              False
+
+                  ColumnOrder:               Default
+                  ColumnWidth:               Default
+                  Data Updatable:            False
+
+                  Ordinal Position:          2
+                  Required:                  False
+                  Source Field:              DateOfCashIn
+                  Source Table:              CASHIN
+
+
+         AMOUNT                                                Double                                   8
+                  AllowZeroLength:           False
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: CASHIN                                                                                        Page: 7
+
+
+                  Attributes:                Fixed Size
+                  Collating Order:           General
+                  ColumnHidden:              False
+
+                  ColumnOrder:               Default
+                  ColumnWidth:               Default
+                  Data Updatable:            False
+
+                  DecimalPlaces:             Auto
+                  DisplayControl:            Text Box
+                  Ordinal Position:          3
+                  Required:                  False
+
+                  Source Field:              AMOUNT
+                  Source Table:              CASHIN
+
+
+         GST                                                   Double                                   8
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               Default
+
+                  Data Updatable:            False
+                  DecimalPlaces:             Auto
+                  DisplayControl:            Text Box
+
+                  Ordinal Position:          4
+                  Required:                  False
+                  Source Field:              GST
+                  Source Table:              CASHIN
+
+
+         Net_AMOUNT                                            Single                                   4
+                  AllowZeroLength:           False
+
+                  Attributes:                Fixed Size
+                  Collating Order:           General
+                  ColumnHidden:              False
+
+                  ColumnOrder:               Default
+                  ColumnWidth:               1740
+                  Data Updatable:            False
+                  DecimalPlaces:             Auto
+
+                  DisplayControl:            Text Box
+                  Ordinal Position:          5
+                  Required:                  False
+
+                  Source Field:              Net_AMOUNT
+                  Source Table:              CASHIN
+
+         COMMENT                                               Memo                                     -
+
+                  AllowZeroLength:           True
+                  Attributes:                Variable Length
+                  Collating Order:           General
+
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               Default
+                  Data Updatable:            False
+
+                  Ordinal Position:          6
+                  Required:                  False
+                  Source Field:              COMMENT
+
+                  Source Table:              CASHIN
+                  UnicodeCompression:        True
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: CASHIN                                                                                        Page: 8
+
+
+
+
+
+Table Indexes
+         Name                                     Number of Fields
+
+         ID                                       1
+                  Clustered:                 False
+
+                  DistinctCount:             0
+                  Foreign:                   False
+                  Ignore Nulls:              False
+
+                  Name:                      ID
+                  Primary:                   False
+                  Required:                  False
+
+                  Unique:                    False
+                  Fields:                    Ascending
+
+
+
+
+
+User Permissions
+
+         admin                      Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+
+
+
+
+Group Permissions
+
+         Admins                     Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+
+         Users                      Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: CASHOUT                                                                                       Page: 9
+
+
+
+Properties
+
+Date Created:          8/7/2003 10:35:56 PM           Last Updated:          8/7/2003 10:35:56 PM
+OrderByOn:             False                          Orientation:           0
+RecordCount:           0                              Updatable:             True
+
+
+
+
+Columns
+
+         Name                                                  Type                        Size
+         ID                                                    Long Integer                             4
+
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+                  Collating Order:           General
+
+                  ColumnHidden:              False
+                  ColumnOrder:               1
+                  ColumnWidth:               Default
+
+                  Data Updatable:            False
+                  DecimalPlaces:             Auto
+                  DisplayControl:            Text Box
+                  Ordinal Position:          0
+
+                  Required:                  False
+                  Source Field:              ID
+                  Source Table:              CASHOUT
+
+
+         ITEM                                                  Text                                    20
+                  AllowZeroLength:           True
+                  Attributes:                Variable Length
+
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+
+                  ColumnWidth:               Default
+                  Data Updatable:            False
+                  DisplayControl:            Text Box
+                  Ordinal Position:          1
+
+                  Required:                  False
+                  Source Field:              ITEM
+                  Source Table:              CASHOUT
+
+                  UnicodeCompression:        True
+
+         ITEM_CODE                                             Text                                    10
+
+                  AllowZeroLength:           True
+                  Attributes:                Variable Length
+                  Collating Order:           General
+                  ColumnHidden:              False
+
+                  ColumnOrder:               Default
+                  ColumnWidth:               Default
+                  Data Updatable:            False
+
+                  DisplayControl:            Text Box
+                  Ordinal Position:          2
+                  Required:                  False
+                  Source Field:              ITEM_CODE
+
+                  Source Table:              CASHOUT
+                  UnicodeCompression:        True
+
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: CASHOUT                                                                                      Page: 10
+
+         DateOfCashOut                                         Date/Time                                8
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               1830
+
+                  Data Updatable:            False
+                  Ordinal Position:          3
+                  Required:                  False
+
+                  Source Field:              DateOfCashOut
+                  Source Table:              CASHOUT
+
+         AMOUNT                                                Currency                                 8
+
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+                  Collating Order:           General
+
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               Default
+                  Data Updatable:            False
+
+                  DecimalPlaces:             Auto
+                  Format:                    $#,##0.00;-$#,##0.00
+                  Ordinal Position:          4
+
+                  Required:                  False
+                  Source Field:              AMOUNT
+                  Source Table:              CASHOUT
+
+
+         GST                                                   Currency                                 8
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+
+                  ColumnWidth:               Default
+                  Data Updatable:            False
+                  DecimalPlaces:             Auto
+                  Format:                    $#,##0.00;-$#,##0.00
+
+                  Ordinal Position:          5
+                  Required:                  False
+                  Source Field:              GST
+
+                  Source Table:              CASHOUT
+
+         Net_AMOUNT                                            Currency                                 8
+                  AllowZeroLength:           False
+
+                  Attributes:                Fixed Size
+                  Collating Order:           General
+                  ColumnHidden:              False
+
+                  ColumnOrder:               Default
+                  ColumnWidth:               Default
+                  Data Updatable:            False
+
+                  DecimalPlaces:             Auto
+                  Format:                    $#,##0.00;-$#,##0.00
+                  Ordinal Position:          6
+                  Required:                  False
+
+                  Source Field:              Net_AMOUNT
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: CASHOUT                                                                                      Page: 11
+
+                  Source Table:              CASHOUT
+
+         COMMENT                                               Memo                                     -
+
+                  AllowZeroLength:           True
+                  Attributes:                Variable Length
+                  Collating Order:           General
+                  ColumnHidden:              False
+
+                  ColumnOrder:               Default
+                  ColumnWidth:               Default
+                  Data Updatable:            False
+
+                  Ordinal Position:          7
+                  Required:                  False
+                  Source Field:              COMMENT
+                  Source Table:              CASHOUT
+
+                  UnicodeCompression:        True
+
+
+
+Table Indexes
+         Name                                     Number of Fields
+
+         ID                                       1
+                  Clustered:                 False
+
+                  DistinctCount:             0
+                  Foreign:                   False
+                  Ignore Nulls:              False
+
+                  Name:                      ID
+                  Primary:                   False
+                  Required:                  False
+
+                  Unique:                    False
+                  Fields:                    Ascending
+
+         ITEM_CODE                                1
+                  Clustered:                 False
+                  DistinctCount:             0
+
+                  Foreign:                   False
+                  Ignore Nulls:              False
+                  Name:                      ITEM_CODE
+
+                  Primary:                   False
+                  Required:                  False
+                  Unique:                    False
+
+                  Fields:                    Ascending
+
+
+
+
+User Permissions
+
+         admin                      Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+
+
+
+
+
+Group Permissions
+
+         Admins                     Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+         Users                      Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: CASHOUT                                                                                      Page: 12
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: CHILDREN                                                                                     Page: 13
+
+
+
+Properties
+
+Date Created:          8/7/2003 10:35:56 PM           Last Updated:          8/7/2003 10:35:56 PM
+OrderByOn:             False                          Orientation:           0
+RecordCount:           0                              Updatable:             True
+
+
+
+
+Columns
+
+         Name                                                  Type                        Size
+         ID                                                    Long Integer                             4
+
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+                  Collating Order:           General
+
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               Default
+
+                  Data Updatable:            False
+                  DecimalPlaces:             0
+                  DisplayControl:            Text Box
+                  Ordinal Position:          0
+
+                  Required:                  False
+                  Source Field:              ID
+                  Source Table:              CHILDREN
+
+
+         MNo                                                   Long Integer                             4
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+
+                  ColumnWidth:               570
+                  Data Updatable:            False
+                  DecimalPlaces:             0
+                  DisplayControl:            Text Box
+
+                  Ordinal Position:          1
+                  Required:                  False
+                  Source Field:              MNo
+
+                  Source Table:              CHILDREN
+
+         CHILDNO                                               Double                                   8
+
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+                  Collating Order:           General
+                  ColumnHidden:              False
+
+                  ColumnOrder:               Default
+                  ColumnWidth:               900
+                  Data Updatable:            False
+
+                  DecimalPlaces:             0
+                  DisplayControl:            Text Box
+                  Ordinal Position:          2
+                  Required:                  False
+
+                  Source Field:              CHILDNO
+                  Source Table:              CHILDREN
+
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: CHILDREN                                                                                     Page: 14
+
+         FIRST_NAME                                            Text                                    15
+                  AllowZeroLength:           True
+                  Attributes:                Variable Length
+
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               1290
+
+                  Data Updatable:            False
+                  DisplayControl:            Text Box
+                  Ordinal Position:          3
+
+                  Required:                  False
+                  Source Field:              FIRST_NAME
+                  Source Table:              CHILDREN
+                  UnicodeCompression:        True
+
+
+         SURNAME                                               Text                                    20
+                  AllowZeroLength:           True
+
+                  Attributes:                Variable Length
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+
+                  ColumnWidth:               90
+                  Data Updatable:            False
+                  DisplayControl:            Text Box
+
+                  Ordinal Position:          4
+                  Required:                  False
+                  Source Field:              SURNAME
+                  Source Table:              CHILDREN
+
+                  UnicodeCompression:        True
+
+         GENDA                                                 Text                                     1
+
+                  AllowZeroLength:           True
+                  Attributes:                Variable Length
+                  Collating Order:           General
+
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               780
+                  Data Updatable:            False
+
+                  DisplayControl:            Text Box
+                  Ordinal Position:          5
+                  Required:                  False
+
+                  Source Field:              GENDA
+                  Source Table:              CHILDREN
+                  UnicodeCompression:        False
+
+
+         BIRTH_DATE                                            Date/Time                                8
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+
+                  ColumnWidth:               1200
+                  Data Updatable:            False
+                  Format:                    Medium Date
+                  Ordinal Position:          6
+
+                  Required:                  False
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: CHILDREN                                                                                     Page: 15
+
+                  Source Field:              BIRTH_DATE
+                  Source Table:              CHILDREN
+
+         MEMBER                                                Text                                     1
+
+                  AllowZeroLength:           True
+                  Attributes:                Variable Length
+                  Collating Order:           General
+
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               Default
+
+                  Data Updatable:            False
+                  DisplayControl:            Text Box
+                  Ordinal Position:          7
+                  Required:                  False
+
+                  Source Field:              MEMBER
+                  Source Table:              CHILDREN
+                  UnicodeCompression:        True
+
+
+
+Table Indexes
+
+         Name                                     Number of Fields
+
+         ID                                       1
+                  Clustered:                 False
+                  DistinctCount:             0
+
+                  Foreign:                   False
+                  Ignore Nulls:              False
+                  Name:                      ID
+
+                  Primary:                   False
+                  Required:                  False
+                  Unique:                    True
+
+                  Fields:                    Ascending
+         MNo                                      1
+
+                  Clustered:                 False
+                  DistinctCount:             0
+                  Foreign:                   False
+
+                  Ignore Nulls:              False
+                  Name:                      MNo
+                  Primary:                   False
+
+                  Required:                  False
+                  Unique:                    False
+                  Fields:                    Ascending
+
+
+
+
+
+User Permissions
+
+         admin                      Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+
+
+
+
+Group Permissions
+
+         Admins                     Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+
+         Users                      Delete, Read Permissions, Set Permissions, Change Owner, Read
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: CHILDREN                                                                                     Page: 16
+
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+                                    Delete Data
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: COLLECTION                                                                                   Page: 17
+
+
+
+Properties
+
+Date Created:          8/7/2003 10:35:56 PM           Last Updated:          8/7/2003 10:35:56 PM
+OrderByOn:             False                          Orientation:           0
+RecordCount:           0                              Updatable:             True
+
+
+
+
+Columns
+
+         Name                                                  Type                        Size
+         PAYMENT                                               Text                                    20
+
+                  AllowZeroLength:           False
+                  Attributes:                Variable Length
+                  Collating Order:           General
+
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               Default
+
+                  Data Updatable:            False
+                  DisplayControl:            Text Box
+                  Ordinal Position:          0
+                  Required:                  False
+
+                  Source Field:              PAYMENT
+                  Source Table:              COLLECTION
+                  UnicodeCompression:        True
+
+
+         DATE_OF_COLLECTION                                    Date/Time                                8
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+
+                  ColumnWidth:               Default
+                  Data Updatable:            False
+                  Format:                    Short Date
+                  Ordinal Position:          1
+
+                  Required:                  False
+                  Source Field:              DATE_OF_COLLECTION
+                  Source Table:              COLLECTION
+
+
+         AMOUNT_IN_WORDS                                       Text                                    60
+                  AllowZeroLength:           True
+
+                  Attributes:                Variable Length
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+
+                  ColumnWidth:               Default
+                  Data Updatable:            False
+                  DisplayControl:            Text Box
+
+                  Ordinal Position:          2
+                  Required:                  False
+                  Source Field:              AMOUNT_IN_WORDS
+                  Source Table:              COLLECTION
+
+                  UnicodeCompression:        True
+
+         AMOUNT                                                Double                                   8
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: COLLECTION                                                                                   Page: 18
+
+
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               Default
+
+                  Data Updatable:            False
+                  DecimalPlaces:             2
+                  DisplayControl:            Text Box
+
+                  Ordinal Position:          3
+                  Required:                  False
+                  Source Field:              AMOUNT
+                  Source Table:              COLLECTION
+
+
+         COMMENTS                                              Memo                                     -
+                  AllowZeroLength:           True
+
+                  Attributes:                Variable Length
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+
+                  ColumnWidth:               1980
+                  Data Updatable:            False
+                  Ordinal Position:          4
+
+                  Required:                  False
+                  Source Field:              COMMENTS
+                  Source Table:              COLLECTION
+                  UnicodeCompression:        True
+
+
+         COL_ID                                                Long Integer                             4
+                  AllowZeroLength:           False
+
+                  Attributes:                Fixed Size
+                  Collating Order:           General
+                  ColumnHidden:              False
+
+                  ColumnOrder:               Default
+                  ColumnWidth:               Default
+                  Data Updatable:            False
+                  DecimalPlaces:             0
+
+                  DisplayControl:            Text Box
+                  Ordinal Position:          5
+                  Required:                  False
+
+                  Source Field:              COL_ID
+                  Source Table:              COLLECTION
+
+         USER_NAME                                             Text                                    50
+
+                  AllowZeroLength:           True
+                  Attributes:                Variable Length
+                  Collating Order:           General
+
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               Default
+
+                  Data Updatable:            False
+                  DisplayControl:            Text Box
+                  Ordinal Position:          6
+                  Required:                  False
+
+                  Source Field:              USER_NAME
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: COLLECTION                                                                                   Page: 19
+
+                  Source Table:              COLLECTION
+                  UnicodeCompression:        True
+
+
+
+Table Indexes
+
+         Name                                     Number of Fields
+         col_ID                                   1
+
+                  Clustered:                 False
+                  DistinctCount:             0
+                  Foreign:                   False
+
+                  Ignore Nulls:              False
+                  Name:                      col_ID
+                  Primary:                   False
+
+                  Required:                  False
+                  Unique:                    True
+                  Fields:                    Ascending
+
+         payment                                  1
+                  Clustered:                 False
+
+                  DistinctCount:             0
+                  Foreign:                   False
+                  Ignore Nulls:              False
+
+                  Name:                      payment
+                  Primary:                   False
+                  Required:                  False
+
+                  Unique:                    False
+                  Fields:                    Ascending
+         PrimaryKey                               1
+
+                  Clustered:                 False
+                  DistinctCount:             0
+                  Foreign:                   False
+
+                  Ignore Nulls:              False
+                  Name:                      PrimaryKey
+                  Primary:                   True
+
+                  Required:                  True
+                  Unique:                    True
+                  Fields:                    Ascending
+
+
+
+
+
+User Permissions
+
+         admin                      Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+
+
+
+
+
+Group Permissions
+
+         Admins                     Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+         Users                      Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+
+
+
+
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: COLLECTIONTYPE                                                                               Page: 20
+
+
+
+Properties
+
+Date Created:          8/7/2003 10:35:56 PM           Last Updated:          8/7/2003 10:35:56 PM
+OrderByOn:             False                          RecordCount:           15
+Updatable:             True
+
+
+
+
+Columns
+
+         Name                                                  Type                        Size
+         ID                                                    Long Integer                             4
+
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+                  Collating Order:           General
+
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               Default
+
+                  Data Updatable:            False
+                  DecimalPlaces:             0
+                  DisplayControl:            Text Box
+                  Ordinal Position:          0
+
+                  Required:                  False
+                  Source Field:              ID
+                  Source Table:              COLLECTIONTYPE
+
+
+         Collection_Type                                       Text                                    30
+                  AllowZeroLength:           False
+                  Attributes:                Variable Length
+
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+
+                  ColumnWidth:               Default
+                  Data Updatable:            False
+                  DisplayControl:            Text Box
+                  Ordinal Position:          1
+
+                  Required:                  False
+                  Source Field:              Collection_Type
+                  Source Table:              COLLECTIONTYPE
+
+
+
+Table Indexes
+
+         Name                                     Number of Fields
+
+         ID                                       1
+                  Clustered:                 False
+                  DistinctCount:             15
+
+                  Foreign:                   False
+                  Ignore Nulls:              False
+                  Name:                      ID
+
+                  Primary:                   False
+                  Required:                  False
+                  Unique:                    False
+
+                  Fields:                    Ascending
+
+
+User Permissions
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: COLLECTIONTYPE                                                                               Page: 21
+
+
+
+
+
+         admin                      Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+
+
+
+
+Group Permissions
+
+         Admins                     Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+         Users                      Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: INVOICE                                                                                      Page: 22
+
+
+
+Properties
+
+Date Created:          8/7/2003 10:35:56 PM           Last Updated:          8/7/2003 10:35:56 PM
+OrderByOn:             False                          Orientation:           0
+RecordCount:           0                              Updatable:             True
+
+
+
+
+Columns
+
+         Name                                                  Type                        Size
+         ID                                                    Long Integer                             4
+
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+                  Collating Order:           General
+
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               Default
+
+                  Data Updatable:            False
+                  DecimalPlaces:             0
+                  DisplayControl:            Text Box
+                  Ordinal Position:          0
+
+                  Required:                  False
+                  Source Field:              ID
+                  Source Table:              INVOICE
+
+
+         Invoice_no                                            Text                                    20
+                  AllowZeroLength:           True
+                  Attributes:                Variable Length
+
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+
+                  ColumnWidth:               Default
+                  Data Updatable:            False
+                  DisplayControl:            Text Box
+                  Ordinal Position:          1
+
+                  Required:                  False
+                  Source Field:              Invoice_no
+                  Source Table:              INVOICE
+
+                  UnicodeCompression:        True
+
+         Ref                                                   Text                                    20
+
+                  AllowZeroLength:           True
+                  Attributes:                Variable Length
+                  Collating Order:           General
+                  ColumnHidden:              False
+
+                  ColumnOrder:               Default
+                  ColumnWidth:               Default
+                  Data Updatable:            False
+
+                  DisplayControl:            Text Box
+                  Ordinal Position:          2
+                  Required:                  False
+                  Source Field:              Ref
+
+                  Source Table:              INVOICE
+                  UnicodeCompression:        True
+
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: INVOICE                                                                                      Page: 23
+
+         Created_date                                          Date/Time                                8
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               Default
+
+                  Data Updatable:            False
+                  Format:                    Short Date
+                  Ordinal Position:          3
+
+                  Required:                  False
+                  Source Field:              Created_date
+                  Source Table:              INVOICE
+
+
+         over_due_date                                         Date/Time                                8
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               1785
+
+                  Data Updatable:            False
+                  Format:                    Short Date
+                  Ordinal Position:          4
+
+                  Required:                  False
+                  Source Field:              over_due_date
+                  Source Table:              INVOICE
+
+
+         Name1                                                 Text                                    20
+                  AllowZeroLength:           True
+                  Attributes:                Variable Length
+
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+
+                  ColumnWidth:               Default
+                  Data Updatable:            False
+                  DisplayControl:            Text Box
+                  Ordinal Position:          5
+
+                  Required:                  False
+                  Source Field:              Name1
+                  Source Table:              INVOICE
+
+                  UnicodeCompression:        True
+
+         Name2                                                 Text                                    20
+                  AllowZeroLength:           True
+
+                  Attributes:                Variable Length
+                  Collating Order:           General
+                  ColumnHidden:              False
+
+                  ColumnOrder:               Default
+                  ColumnWidth:               Default
+                  Data Updatable:            False
+
+                  DisplayControl:            Text Box
+                  Ordinal Position:          6
+                  Required:                  False
+                  Source Field:              Name2
+
+                  Source Table:              INVOICE
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: INVOICE                                                                                      Page: 24
+
+                  UnicodeCompression:        True
+
+         Address1                                              Text                                    20
+
+                  AllowZeroLength:           True
+                  Attributes:                Variable Length
+                  Collating Order:           General
+                  ColumnHidden:              False
+
+                  ColumnOrder:               Default
+                  ColumnWidth:               Default
+                  Data Updatable:            False
+
+                  DisplayControl:            Text Box
+                  Ordinal Position:          7
+                  Required:                  False
+                  Source Field:              Address1
+
+                  Source Table:              INVOICE
+                  UnicodeCompression:        True
+
+
+         Address2                                              Text                                    20
+                  AllowZeroLength:           True
+                  Attributes:                Variable Length
+                  Collating Order:           General
+
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               Default
+
+                  Data Updatable:            False
+                  DisplayControl:            Text Box
+                  Ordinal Position:          8
+                  Required:                  False
+
+                  Source Field:              Address2
+                  Source Table:              INVOICE
+                  UnicodeCompression:        True
+
+
+         Address3                                              Text                                    50
+                  AllowZeroLength:           False
+
+                  Attributes:                Variable Length
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+
+                  ColumnWidth:               Default
+                  Data Updatable:            False
+                  DisplayControl:            Text Box
+
+                  Ordinal Position:          9
+                  Required:                  False
+                  Source Field:              Address3
+                  Source Table:              INVOICE
+
+                  UnicodeCompression:        True
+
+         Terms                                                 Text                                    20
+
+                  AllowZeroLength:           True
+                  Attributes:                Variable Length
+                  Collating Order:           General
+
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               Default
+                  Data Updatable:            False
+
+                  DisplayControl:            Text Box
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: INVOICE                                                                                      Page: 25
+
+                  Ordinal Position:          10
+                  Required:                  False
+                  Source Field:              Terms
+                  Source Table:              INVOICE
+
+                  UnicodeCompression:        True
+
+         Total_amount                                          Double                                   8
+
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+                  Collating Order:           General
+
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               Default
+                  Data Updatable:            False
+
+                  DecimalPlaces:             2
+                  DisplayControl:            Text Box
+                  Ordinal Position:          11
+
+                  Required:                  False
+                  Source Field:              Total_amount
+                  Source Table:              INVOICE
+
+
+         state                                                 Text                                     4
+                  AllowZeroLength:           True
+                  Attributes:                Variable Length
+
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               Default
+
+                  Data Updatable:            False
+                  DisplayControl:            Text Box
+                  Ordinal Position:          12
+
+                  Required:                  False
+                  Source Field:              state
+                  Source Table:              INVOICE
+
+                  UnicodeCompression:        True
+
+         Balance                                               Double                                   8
+                  AllowZeroLength:           False
+
+                  Attributes:                Fixed Size
+                  Collating Order:           General
+                  ColumnHidden:              False
+
+                  ColumnOrder:               Default
+                  ColumnWidth:               Default
+                  Data Updatable:            False
+                  DecimalPlaces:             2
+
+                  DisplayControl:            Text Box
+                  Ordinal Position:          13
+                  Required:                  False
+
+                  Source Field:              Balance
+                  Source Table:              INVOICE
+
+         Phone                                                 Text                                    15
+
+                  AllowZeroLength:           True
+                  Attributes:                Variable Length
+                  Collating Order:           General
+
+                  ColumnHidden:              False
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: INVOICE                                                                                      Page: 26
+
+                  ColumnOrder:               Default
+                  ColumnWidth:               Default
+                  Data Updatable:            False
+                  DisplayControl:            Text Box
+
+                  Ordinal Position:          14
+                  Required:                  False
+                  Source Field:              Phone
+
+                  Source Table:              INVOICE
+                  UnicodeCompression:        True
+
+         Mobile                                                Text                                    12
+
+                  AllowZeroLength:           True
+                  Attributes:                Variable Length
+                  Collating Order:           General
+
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               Default
+
+                  Data Updatable:            False
+                  DisplayControl:            Text Box
+                  Ordinal Position:          15
+                  Required:                  False
+
+                  Source Field:              Mobile
+                  Source Table:              INVOICE
+                  UnicodeCompression:        True
+
+
+
+Relationships
+
+
+         INVOICEINVOICEITEM
+
+                             INVOICE                           INVOICEITEM
+
+                    Invoice_no                          Invoice_id
+
+
+
+                  Attributes:                Not Enforced
+                  RelationshipType:          One-To-Many
+
+
+
+
+Table Indexes
+
+         Name                                     Number of Fields
+         ID                                       1
+
+                  Clustered:                 False
+                  DistinctCount:             0
+                  Foreign:                   False
+
+                  Ignore Nulls:              False
+                  Name:                      ID
+                  Primary:                   True
+
+                  Required:                  True
+                  Unique:                    True
+                  Fields:                    Ascending
+
+         Invoice_no                               1
+                  Clustered:                 False
+                  DistinctCount:             0
+
+                  Foreign:                   False
+                  Ignore Nulls:              False
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: INVOICE                                                                                      Page: 27
+
+
+                  Name:                      Invoice_no
+                  Primary:                   False
+
+                  Required:                  False
+                  Unique:                    True
+                  Fields:                    Ascending
+
+
+
+
+
+User Permissions
+
+         admin                      Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+
+
+
+
+Group Permissions
+
+         Admins                     Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+
+         Users                      Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: INVOICEITEM                                                                                  Page: 28
+
+
+
+Properties
+
+Date Created:          8/7/2003 10:35:56 PM           Last Updated:          8/7/2003 10:35:56 PM
+OrderByOn:             False                          Orientation:           0
+RecordCount:           0                              Updatable:             True
+
+
+
+
+Columns
+
+         Name                                                  Type                        Size
+         Item_Id                                               Long Integer                             4
+
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+                  Collating Order:           General
+
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               Default
+
+                  Data Updatable:            False
+                  DecimalPlaces:             Auto
+                  DisplayControl:            Text Box
+                  Ordinal Position:          0
+
+                  Required:                  False
+                  Source Field:              Item_Id
+                  Source Table:              INVOICEITEM
+
+
+         Invoice_id                                            Long Integer                             4
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+
+                  ColumnWidth:               Default
+                  Data Updatable:            False
+                  DecimalPlaces:             Auto
+                  DisplayControl:            Text Box
+
+                  Ordinal Position:          1
+                  Required:                  True
+                  Source Field:              Invoice_id
+
+                  Source Table:              INVOICEITEM
+
+         Description                                           Text                                    50
+
+                  AllowZeroLength:           False
+                  Attributes:                Variable Length
+                  Collating Order:           General
+                  ColumnHidden:              False
+
+                  ColumnOrder:               Default
+                  ColumnWidth:               Default
+                  Data Updatable:            False
+
+                  DisplayControl:            Text Box
+                  Ordinal Position:          2
+                  Required:                  False
+                  Source Field:              Description
+
+                  Source Table:              INVOICEITEM
+                  UnicodeCompression:        True
+
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: INVOICEITEM                                                                                  Page: 29
+
+         Amount                                                Currency                                 8
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               Default
+
+                  Data Updatable:            False
+                  DecimalPlaces:             2
+                  Format:                    $#,##0.00;-$#,##0.00
+
+                  Ordinal Position:          3
+                  Required:                  True
+                  Source Field:              Amount
+                  Source Table:              INVOICEITEM
+
+
+         Gst                                                   Currency                                 8
+                  AllowZeroLength:           False
+
+                  Attributes:                Fixed Size
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+
+                  ColumnWidth:               Default
+                  Data Updatable:            False
+                  DecimalPlaces:             Auto
+
+                  Format:                    $#,##0.00;-$#,##0.00
+                  Ordinal Position:          4
+                  Required:                  False
+                  Source Field:              Gst
+
+                  Source Table:              INVOICEITEM
+
+         total_amount                                          Currency                                 8
+
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+                  Collating Order:           General
+
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               Default
+                  Data Updatable:            False
+
+                  DecimalPlaces:             Auto
+                  Format:                    $#,##0.00;-$#,##0.00
+                  Ordinal Position:          5
+
+                  Required:                  False
+                  Source Field:              total_amount
+                  Source Table:              INVOICEITEM
+
+
+
+Relationships
+
+
+
+
+
+
+
+
+
+
+
+
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: INVOICEITEM                                                                                  Page: 30
+
+
+         INVOICEINVOICEITEM
+
+                             INVOICE                           INVOICEITEM
+
+                    Invoice_no                          Invoice_id
+
+
+
+                  Attributes:                Not Enforced
+                  RelationshipType:          One-To-Many
+
+
+
+
+Table Indexes
+         Name                                     Number of Fields
+
+         Invoice_id                               1
+                  Clustered:                 False
+
+                  DistinctCount:             0
+                  Foreign:                   False
+                  Ignore Nulls:              False
+
+                  Name:                      Invoice_id
+                  Primary:                   False
+                  Required:                  False
+
+                  Unique:                    False
+                  Fields:                    Ascending
+
+         Item_Id                                  1
+                  Clustered:                 False
+                  DistinctCount:             0
+
+                  Foreign:                   False
+                  Ignore Nulls:              False
+                  Name:                      Item_Id
+
+                  Primary:                   False
+                  Required:                  False
+                  Unique:                    False
+
+                  Fields:                    Ascending
+
+
+
+
+User Permissions
+
+         admin                      Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+
+
+
+
+
+Group Permissions
+
+         Admins                     Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+         Users                      Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+
+
+
+
+
+
+
+
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: INVOICEITEMTYPE                                                                              Page: 31
+
+
+
+Properties
+
+Date Created:          8/7/2003 10:35:56 PM           Last Updated:          8/7/2003 10:35:56 PM
+OrderByOn:             False                          Orientation:           0
+RecordCount:           1                              Updatable:             True
+
+
+
+
+Columns
+
+         Name                                                  Type                        Size
+         ID                                                    Long Integer                             4
+
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+                  Collating Order:           General
+
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               Default
+
+                  Data Updatable:            False
+                  DecimalPlaces:             Auto
+                  DisplayControl:            Text Box
+                  Ordinal Position:          0
+
+                  Required:                  False
+                  Source Field:              ID
+                  Source Table:              INVOICEITEMTYPE
+
+
+         Descriprtion                                          Text                                    50
+                  AllowZeroLength:           False
+                  Attributes:                Variable Length
+
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+
+                  ColumnWidth:               Default
+                  Data Updatable:            False
+                  DisplayControl:            Text Box
+                  Ordinal Position:          1
+
+                  Required:                  False
+                  Source Field:              Descriprtion
+                  Source Table:              INVOICEITEMTYPE
+
+                  UnicodeCompression:        True
+
+         ItemCode                                              Text                                    50
+
+                  AllowZeroLength:           False
+                  Attributes:                Variable Length
+                  Collating Order:           General
+                  ColumnHidden:              False
+
+                  ColumnOrder:               Default
+                  ColumnWidth:               Default
+                  Data Updatable:            False
+
+                  DisplayControl:            Text Box
+                  Ordinal Position:          2
+                  Required:                  False
+                  Source Field:              ItemCode
+
+                  Source Table:              INVOICEITEMTYPE
+                  UnicodeCompression:        True
+
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: INVOICEITEMTYPE                                                                              Page: 32
+
+         Gst                                                   Double                                   8
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               Default
+
+                  Data Updatable:            False
+                  DecimalPlaces:             Auto
+                  DisplayControl:            Text Box
+
+                  Ordinal Position:          3
+                  Required:                  False
+                  Source Field:              Gst
+                  Source Table:              INVOICEITEMTYPE
+
+
+
+Table Indexes
+
+         Name                                     Number of Fields
+
+         ID                                       1
+                  Clustered:                 False
+                  DistinctCount:             1
+
+                  Foreign:                   False
+                  Ignore Nulls:              False
+                  Name:                      ID
+
+                  Primary:                   False
+                  Required:                  False
+                  Unique:                    False
+
+                  Fields:                    Ascending
+         ItemCode                                 1
+
+                  Clustered:                 False
+                  DistinctCount:             1
+                  Foreign:                   False
+
+                  Ignore Nulls:              False
+                  Name:                      ItemCode
+                  Primary:                   False
+
+                  Required:                  False
+                  Unique:                    False
+                  Fields:                    Ascending
+
+         PrimaryKey                               1
+                  Clustered:                 False
+
+                  DistinctCount:             1
+                  Foreign:                   False
+                  Ignore Nulls:              False
+
+                  Name:                      PrimaryKey
+                  Primary:                   True
+                  Required:                  True
+
+                  Unique:                    True
+                  Fields:                    Ascending
+
+
+
+
+
+User Permissions
+
+         admin                      Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: INVOICEITEMTYPE                                                                              Page: 33
+
+                                    Delete Data
+
+
+
+
+Group Permissions
+
+         Admins                     Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+         Users                      Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: MEMBER                                                                                       Page: 34
+
+
+
+Properties
+
+Date Created:          8/7/2003 10:35:56 PM           Last Updated:          8/7/2003 10:35:56 PM
+OrderByOn:             True                           Orientation:           0
+RecordCount:           0                              Updatable:             True
+
+
+
+
+Columns
+
+         Name                                                  Type                        Size
+         MNo                                                   Long Integer                             4
+
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+                  Collating Order:           General
+
+                  ColumnHidden:              False
+                  ColumnOrder:               1
+                  ColumnWidth:               570
+
+                  Data Updatable:            False
+                  DecimalPlaces:             0
+                  DisplayControl:            Text Box
+                  Ordinal Position:          0
+
+                  Required:                  False
+                  Source Field:              MNo
+                  Source Table:              MEMBER
+
+
+         Mr                                                    Text                                     4
+                  AllowZeroLength:           True
+                  Attributes:                Variable Length
+
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+
+                  ColumnWidth:               525
+                  Data Updatable:            False
+                  DisplayControl:            Text Box
+                  Ordinal Position:          1
+
+                  Required:                  False
+                  Source Field:              Mr
+                  Source Table:              MEMBER
+
+                  UnicodeCompression:        True
+
+         SURNAME                                               Text                                    20
+
+                  AllowZeroLength:           True
+                  Attributes:                Variable Length
+                  Collating Order:           General
+                  ColumnHidden:              False
+
+                  ColumnOrder:               Default
+                  ColumnWidth:               1245
+                  Data Updatable:            False
+
+                  DisplayControl:            Text Box
+                  Ordinal Position:          2
+                  Required:                  True
+                  Source Field:              SURNAME
+
+                  Source Table:              MEMBER
+                  UnicodeCompression:        True
+
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: MEMBER                                                                                       Page: 35
+
+         GIVEN_NAME                                            Text                                    20
+                  AllowZeroLength:           True
+                  Attributes:                Variable Length
+
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               1590
+
+                  Data Updatable:            False
+                  DisplayControl:            Text Box
+                  Ordinal Position:          3
+
+                  Required:                  True
+                  Source Field:              GIVEN_NAME
+                  Source Table:              MEMBER
+                  UnicodeCompression:        True
+
+
+         FULL_NAME                                             Text                                    50
+                  AllowZeroLength:           True
+
+                  Attributes:                Variable Length
+                  Collating Order:           General
+                  ColumnHidden:              True
+                  ColumnOrder:               Default
+
+                  ColumnWidth:               2340
+                  Data Updatable:            False
+                  DisplayControl:            Text Box
+
+                  Ordinal Position:          4
+                  Required:                  False
+                  Source Field:              FULL_NAME
+                  Source Table:              MEMBER
+
+                  UnicodeCompression:        True
+
+         SPOUSE_NAME                                           Text                                    20
+
+                  AllowZeroLength:           True
+                  Attributes:                Variable Length
+                  Collating Order:           General
+
+                  ColumnHidden:              True
+                  ColumnOrder:               Default
+                  ColumnWidth:               1845
+                  Data Updatable:            False
+
+                  DisplayControl:            Text Box
+                  Ordinal Position:          5
+                  Required:                  False
+
+                  Source Field:              SPOUSE_NAME
+                  Source Table:              MEMBER
+                  UnicodeCompression:        True
+
+
+         ADDRESS1                                              Text                                   100
+                  AllowZeroLength:           True
+                  Attributes:                Variable Length
+
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+
+                  ColumnWidth:               2340
+                  Data Updatable:            False
+                  DisplayControl:            Text Box
+                  Ordinal Position:          6
+
+                  Required:                  False
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: MEMBER                                                                                       Page: 36
+
+                  Source Field:              ADDRESS1
+                  Source Table:              MEMBER
+                  UnicodeCompression:        True
+
+
+         ADDRESS2                                              Text                                    20
+                  AllowZeroLength:           True
+                  Attributes:                Variable Length
+
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+
+                  ColumnWidth:               1965
+                  Data Updatable:            False
+                  DisplayControl:            Text Box
+                  Ordinal Position:          7
+
+                  Required:                  False
+                  Source Field:              ADDRESS2
+                  Source Table:              MEMBER
+
+                  UnicodeCompression:        True
+
+         STATE                                                 Text                                     3
+                  AllowZeroLength:           True
+
+                  Attributes:                Variable Length
+                  Collating Order:           General
+                  ColumnHidden:              True
+
+                  ColumnOrder:               Default
+                  ColumnWidth:               765
+                  Data Updatable:            False
+                  DisplayControl:            Text Box
+
+                  Ordinal Position:          8
+                  Required:                  False
+                  Source Field:              STATE
+
+                  Source Table:              MEMBER
+                  UnicodeCompression:        True
+
+
+         POSTCODE                                              Text                                     4
+                  AllowZeroLength:           True
+                  Attributes:                Variable Length
+                  Collating Order:           General
+
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               555
+
+                  Data Updatable:            False
+                  DecimalPlaces:             0
+                  DisplayControl:            Text Box
+                  InputMask:                 9999;;_
+
+                  Ordinal Position:          9
+                  Required:                  False
+                  Source Field:              POSTCODE
+
+                  Source Table:              MEMBER
+                  UnicodeCompression:        True
+
+         PHONE                                                 Text                                    15
+
+                  AllowZeroLength:           True
+                  Attributes:                Variable Length
+                  Collating Order:           General
+
+                  ColumnHidden:              False
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: MEMBER                                                                                       Page: 37
+
+                  ColumnOrder:               Default
+                  ColumnWidth:               1380
+                  Data Updatable:            False
+                  DisplayControl:            Text Box
+
+                  Ordinal Position:          10
+                  Required:                  False
+                  Source Field:              PHONE
+
+                  Source Table:              MEMBER
+                  UnicodeCompression:        True
+
+         MEMBERSHIP_EXPIARY                                    Date/Time                                8
+
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+                  Collating Order:           General
+
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               2400
+
+                  Data Updatable:            False
+                  Format:                    Short Date
+                  Ordinal Position:          11
+                  Required:                  False
+
+                  Source Field:              MEMBERSHIP_EXPIARY
+                  Source Table:              MEMBER
+
+
+         COMMENTS                                              Memo                                     -
+                  AllowZeroLength:           True
+                  Attributes:                Variable Length
+                  Collating Order:           General
+
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               1470
+
+                  Data Updatable:            False
+                  Ordinal Position:          12
+                  Required:                  False
+
+                  Source Field:              COMMENTS
+                  Source Table:              MEMBER
+                  UnicodeCompression:        True
+
+
+         STATUS                                                Text                                    50
+                  AllowZeroLength:           True
+                  Attributes:                Variable Length
+
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               Default
+
+                  Data Updatable:            False
+                  DisplayControl:            Text Box
+                  Ordinal Position:          13
+
+                  Required:                  False
+                  Source Field:              STATUS
+                  Source Table:              MEMBER
+                  UnicodeCompression:        True
+
+
+
+
+Table Indexes
+         Name                                     Number of Fields
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: MEMBER                                                                                       Page: 38
+
+
+         Given Name                               1
+
+                  Clustered:                 False
+                  DistinctCount:             0
+                  Foreign:                   False
+
+                  Ignore Nulls:              False
+                  Name:                      Given Name
+                  Primary:                   False
+
+                  Required:                  False
+                  Unique:                    False
+                  Fields:                    Ascending
+
+         mno                                      1
+                  Clustered:                 False
+                  DistinctCount:             0
+
+                  Foreign:                   False
+                  Ignore Nulls:              False
+                  Name:                      mno
+
+                  Primary:                   True
+                  Required:                  True
+                  Unique:                    True
+
+                  Fields:                    Ascending
+         PostCode                                 1
+
+                  Clustered:                 False
+                  DistinctCount:             0
+                  Foreign:                   False
+
+                  Ignore Nulls:              False
+                  Name:                      PostCode
+                  Primary:                   False
+
+                  Required:                  False
+                  Unique:                    False
+                  Fields:                    Ascending
+
+         Surname                                  1
+                  Clustered:                 False
+
+                  DistinctCount:             0
+                  Foreign:                   False
+                  Ignore Nulls:              False
+
+                  Name:                      Surname
+                  Primary:                   False
+                  Required:                  False
+
+                  Unique:                    False
+                  Fields:                    Ascending
+
+
+
+
+
+User Permissions
+
+         admin                      Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+
+
+
+
+Group Permissions
+
+         Admins                     Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: MEMBER                                                                                       Page: 39
+
+                                    Delete Data
+         Users                      Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: Paste Errors                                                                                 Page: 40
+
+
+
+Properties
+
+Date Created:          8/7/2003 10:35:56 PM           Last Updated:          8/7/2003 10:35:56 PM
+OrderByOn:             False                          RecordCount:           57
+Updatable:             True
+
+
+
+
+Columns
+
+         Name                                                  Type                        Size
+         Amount in Words Field                                 Text                                   255
+
+                  AllowZeroLength:           False
+                  Attributes:                Variable Length
+                  Collating Order:           General
+
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               4650
+
+                  Data Updatable:            False
+                  Ordinal Position:          0
+                  Required:                  False
+                  Source Field:              Amount in Words Field
+
+                  Source Table:              Paste Errors
+
+
+
+
+User Permissions
+
+         admin                      Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+
+
+
+
+
+Group Permissions
+
+         Admins                     Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+         Users                      Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: PAYMENT                                                                                      Page: 41
+
+
+
+Properties
+
+Date Created:          8/7/2003 10:35:56 PM           Last Updated:          8/7/2003 10:35:56 PM
+OrderByOn:             True                           Orientation:           0
+RecordCount:           0                              RowHeight:             285
+
+Updatable:             True
+
+
+
+Columns
+
+         Name                                                  Type                        Size
+
+         MNo                                                   Long Integer                             4
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+
+                  ColumnWidth:               495
+                  Data Updatable:            False
+                  DecimalPlaces:             0
+                  DisplayControl:            Text Box
+
+                  Ordinal Position:          0
+                  Required:                  False
+                  Source Field:              MNo
+
+                  Source Table:              PAYMENT
+
+         PAYMENT                                               Text                                    10
+                  AllowZeroLength:           True
+
+                  Attributes:                Variable Length
+                  Collating Order:           General
+                  ColumnHidden:              False
+
+                  ColumnOrder:               Default
+                  ColumnWidth:               1215
+                  Data Updatable:            False
+
+                  DisplayControl:            Text Box
+                  Ordinal Position:          1
+                  Required:                  True
+                  Source Field:              PAYMENT
+
+                  Source Table:              PAYMENT
+                  UnicodeCompression:        True
+
+
+         DETAILS                                               Text                                   200
+                  AllowZeroLength:           True
+                  Attributes:                Variable Length
+                  Collating Order:           General
+
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               2955
+
+                  Data Updatable:            False
+                  DisplayControl:            Text Box
+                  Ordinal Position:          2
+                  Required:                  False
+
+                  Source Field:              DETAILS
+                  Source Table:              PAYMENT
+                  UnicodeCompression:        True
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: PAYMENT                                                                                      Page: 42
+
+
+
+         TYPE                                                  Text                                     6
+
+                  AllowZeroLength:           True
+                  Attributes:                Variable Length
+                  Collating Order:           General
+                  ColumnHidden:              False
+
+                  ColumnOrder:               Default
+                  ColumnWidth:               615
+                  Data Updatable:            False
+
+                  DisplayControl:            Text Box
+                  Ordinal Position:          3
+                  Required:                  True
+                  Source Field:              TYPE
+
+                  Source Table:              PAYMENT
+                  UnicodeCompression:        True
+
+
+         MEMBER_EFFECTIVE                                      Date/Time                                8
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+                  Collating Order:           General
+
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               1350
+
+                  Data Updatable:            False
+                  Format:                    Short Date
+                  Ordinal Position:          4
+                  Required:                  False
+
+                  Source Field:              MEMBER_EFFECTIVE
+                  Source Table:              PAYMENT
+
+
+         MEMBER_EXPIARY                                        Date/Time                                8
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               1935
+
+                  Data Updatable:            False
+                  Format:                    Short Date
+                  Ordinal Position:          5
+
+                  Required:                  False
+                  Source Field:              MEMBER_EXPIARY
+                  Source Table:              PAYMENT
+
+
+         DATE_OF_PAYMENT                                       Date/Time                                8
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+
+                  ColumnWidth:               1275
+                  Data Updatable:            False
+                  Format:                    Medium Date
+                  Ordinal Position:          6
+
+                  Required:                  False
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: PAYMENT                                                                                      Page: 43
+
+                  Source Field:              DATE_OF_PAYMENT
+                  Source Table:              PAYMENT
+
+         AMOUNT_IN_WORDS                                       Text                                    60
+
+                  AllowZeroLength:           True
+                  Attributes:                Variable Length
+                  Collating Order:           General
+
+                  ColumnHidden:              True
+                  ColumnOrder:               Default
+                  ColumnWidth:               0
+
+                  Data Updatable:            False
+                  DisplayControl:            Text Box
+                  Ordinal Position:          7
+                  Required:                  False
+
+                  Source Field:              AMOUNT_IN_WORDS
+                  Source Table:              PAYMENT
+                  UnicodeCompression:        True
+
+
+         AMOUNT                                                Double                                   8
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+
+                  ColumnWidth:               1110
+                  Data Updatable:            False
+                  DecimalPlaces:             2
+                  DisplayControl:            Text Box
+
+                  Ordinal Position:          8
+                  Required:                  False
+                  Source Field:              AMOUNT
+
+                  Source Table:              PAYMENT
+
+         COMMENTS                                              Memo                                     -
+
+                  AllowZeroLength:           True
+                  Attributes:                Variable Length
+                  Collating Order:           General
+                  ColumnHidden:              True
+
+                  ColumnOrder:               Default
+                  ColumnWidth:               0
+                  Data Updatable:            False
+
+                  Ordinal Position:          9
+                  Required:                  False
+                  Source Field:              COMMENTS
+                  Source Table:              PAYMENT
+
+                  UnicodeCompression:        True
+
+         RECEIPT_NO                                            Long Integer                             4
+
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+                  Collating Order:           General
+
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               1365
+                  Data Updatable:            False
+
+                  DecimalPlaces:             0
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: PAYMENT                                                                                      Page: 44
+
+                  DisplayControl:            Text Box
+                  Ordinal Position:          10
+                  Required:                  False
+                  Source Field:              RECEIPT_NO
+
+                  Source Table:              PAYMENT
+
+         USER_NAME                                             Text                                    50
+
+                  AllowZeroLength:           True
+                  Attributes:                Variable Length
+                  Collating Order:           General
+
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               1560
+                  Data Updatable:            False
+
+                  DisplayControl:            Text Box
+                  Ordinal Position:          11
+                  Required:                  False
+
+                  Source Field:              USER_NAME
+                  Source Table:              PAYMENT
+                  UnicodeCompression:        True
+
+
+
+Table Indexes
+
+         Name                                     Number of Fields
+
+         MNo                                      1
+                  Clustered:                 False
+                  DistinctCount:             0
+
+                  Foreign:                   False
+                  Ignore Nulls:              False
+                  Name:                      MNo
+
+                  Primary:                   False
+                  Required:                  False
+                  Unique:                    False
+
+                  Fields:                    Ascending
+         Payment                                  1
+                  Clustered:                 False
+
+                  DistinctCount:             0
+                  Foreign:                   False
+                  Ignore Nulls:              False
+
+                  Name:                      Payment
+                  Primary:                   False
+                  Required:                  False
+
+                  Unique:                    False
+                  Fields:                    Ascending
+
+         Receipt No                               1
+                  Clustered:                 False
+                  DistinctCount:             0
+
+                  Foreign:                   False
+                  Ignore Nulls:              False
+                  Name:                      Receipt No
+
+                  Primary:                   False
+                  Required:                  False
+                  Unique:                    True
+
+                  Fields:                    Ascending
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: PAYMENT                                                                                      Page: 45
+
+
+
+
+
+User Permissions
+
+         admin                      Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+
+
+
+
+Group Permissions
+
+         Admins                     Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+         Users                      Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: PAYMENT_TYPE                                                                                 Page: 46
+
+
+
+Properties
+
+Date Created:          8/7/2003 10:35:56 PM           Last Updated:          8/7/2003 10:35:56 PM
+OrderByOn:             False                          RecordCount:           7
+Updatable:             True
+
+
+
+
+Columns
+
+         Name                                                  Type                        Size
+         ID                                                    Long Integer                             4
+
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+                  Collating Order:           General
+
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               Default
+
+                  Data Updatable:            False
+                  DecimalPlaces:             Auto
+                  DisplayControl:            Text Box
+                  Ordinal Position:          0
+
+                  Required:                  False
+                  Source Field:              ID
+                  Source Table:              PAYMENT_TYPE
+
+
+         Payment                                               Text                                    30
+                  AllowZeroLength:           False
+                  Attributes:                Variable Length
+
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+
+                  ColumnWidth:               Default
+                  Data Updatable:            False
+                  DisplayControl:            Text Box
+                  Ordinal Position:          1
+
+                  Required:                  False
+                  Source Field:              Payment
+                  Source Table:              PAYMENT_TYPE
+
+
+
+Table Indexes
+
+         Name                                     Number of Fields
+
+         ID                                       1
+                  Clustered:                 False
+                  DistinctCount:             7
+
+                  Foreign:                   False
+                  Ignore Nulls:              False
+                  Name:                      ID
+
+                  Primary:                   False
+                  Required:                  False
+                  Unique:                    False
+
+                  Fields:                    Ascending
+
+
+User Permissions
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: PAYMENT_TYPE                                                                                 Page: 47
+
+
+
+
+
+         admin                      Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+
+
+
+
+Group Permissions
+
+         Admins                     Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+         Users                      Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: PRIVILEGE                                                                                    Page: 48
+
+
+
+Properties
+
+Date Created:          8/7/2003 10:35:56 PM           Last Updated:          8/7/2003 10:35:56 PM
+OrderByOn:             True                           RecordCount:           24
+Updatable:             True
+
+
+
+
+Columns
+
+         Name                                                  Type                        Size
+         User_Id                                               Long Integer                             4
+
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+                  Collating Order:           General
+
+                  ColumnHidden:              False
+                  ColumnOrder:               1
+                  ColumnWidth:               Default
+
+                  Data Updatable:            False
+                  DecimalPlaces:             Auto
+                  DisplayControl:            Text Box
+                  Ordinal Position:          0
+
+                  Required:                  False
+                  Source Field:              User_Id
+                  Source Table:              PRIVILEGE
+
+
+         Action_Id                                             Long Integer                             4
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+
+                  ColumnWidth:               Default
+                  Data Updatable:            False
+                  DecimalPlaces:             Auto
+                  DisplayControl:            Text Box
+
+                  Ordinal Position:          1
+                  Required:                  False
+                  Source Field:              Action_Id
+
+                  Source Table:              PRIVILEGE
+
+         Create_data                                           Text                                     1
+
+                  AllowZeroLength:           False
+                  Attributes:                Variable Length
+                  Collating Order:           General
+                  ColumnHidden:              False
+
+                  ColumnOrder:               Default
+                  ColumnWidth:               Default
+                  Data Updatable:            False
+
+                  DisplayControl:            Text Box
+                  Ordinal Position:          2
+                  Required:                  False
+                  Source Field:              Create_data
+
+                  Source Table:              PRIVILEGE
+
+         Edit_data                                             Text                                     1
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: PRIVILEGE                                                                                    Page: 49
+
+
+                  AllowZeroLength:           False
+                  Attributes:                Variable Length
+
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               Default
+
+                  Data Updatable:            False
+                  DisplayControl:            Text Box
+                  Ordinal Position:          3
+
+                  Required:                  False
+                  Source Field:              Edit_data
+                  Source Table:              PRIVILEGE
+
+
+         Delete_data                                           Text                                     1
+                  AllowZeroLength:           False
+                  Attributes:                Variable Length
+
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               Default
+
+                  Data Updatable:            False
+                  DisplayControl:            Text Box
+                  Ordinal Position:          4
+
+                  Required:                  False
+                  Source Field:              Delete_data
+                  Source Table:              PRIVILEGE
+
+
+         Read_data                                             Text                                     1
+                  AllowZeroLength:           False
+                  Attributes:                Variable Length
+
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+
+                  ColumnWidth:               Default
+                  Data Updatable:            False
+                  DisplayControl:            Text Box
+                  Ordinal Position:          5
+
+                  Required:                  False
+                  Source Field:              Read_data
+                  Source Table:              PRIVILEGE
+
+
+
+Table Indexes
+
+         Name                                     Number of Fields
+
+         Action_Id                                1
+                  Clustered:                 False
+                  DistinctCount:             8
+
+                  Foreign:                   False
+                  Ignore Nulls:              False
+                  Name:                      Action_Id
+
+                  Primary:                   False
+                  Required:                  False
+                  Unique:                    False
+
+                  Fields:                    Ascending
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: PRIVILEGE                                                                                    Page: 50
+
+         User_Id                                  1
+                  Clustered:                 False
+                  DistinctCount:             3
+
+                  Foreign:                   False
+                  Ignore Nulls:              False
+                  Name:                      User_Id
+
+                  Primary:                   False
+                  Required:                  False
+                  Unique:                    False
+
+                  Fields:                    Ascending
+
+
+
+
+User Permissions
+
+         admin                      Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+
+
+
+
+
+Group Permissions
+
+         Admins                     Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+         Users                      Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: RECEIPT                                                                                      Page: 51
+
+
+
+Properties
+
+Date Created:          8/7/2003 10:35:56 PM           Last Updated:          8/7/2003 10:35:56 PM
+OrderByOn:             False                          Orientation:           0
+RecordCount:           0                              Updatable:             True
+
+
+
+
+Columns
+
+         Name                                                  Type                        Size
+         ID                                                    Long Integer                             4
+
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+                  Collating Order:           General
+
+                  ColumnHidden:              False
+                  ColumnOrder:               1
+                  ColumnWidth:               Default
+
+                  Data Updatable:            False
+                  DecimalPlaces:             0
+                  DisplayControl:            Text Box
+                  Ordinal Position:          0
+
+                  Required:                  False
+                  Source Field:              ID
+                  Source Table:              RECEIPT
+
+
+         INV_ID                                                Long Integer                             4
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+
+                  ColumnWidth:               Default
+                  Data Updatable:            False
+                  DecimalPlaces:             Auto
+                  DisplayControl:            Text Box
+
+                  Ordinal Position:          1
+                  Required:                  False
+                  Source Field:              INV_ID
+
+                  Source Table:              RECEIPT
+
+         INV_NO                                                Text                                    12
+
+                  AllowZeroLength:           True
+                  Attributes:                Variable Length
+                  Collating Order:           General
+                  ColumnHidden:              False
+
+                  ColumnOrder:               Default
+                  ColumnWidth:               Default
+                  Data Updatable:            False
+
+                  DisplayControl:            Text Box
+                  Ordinal Position:          2
+                  Required:                  False
+                  Source Field:              INV_NO
+
+                  Source Table:              RECEIPT
+                  UnicodeCompression:        True
+
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: RECEIPT                                                                                      Page: 52
+
+         amount                                                Double                                   8
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               Default
+
+                  Data Updatable:            False
+                  DecimalPlaces:             2
+                  DisplayControl:            Text Box
+
+                  Ordinal Position:          3
+                  Required:                  False
+                  Source Field:              amount
+                  Source Table:              RECEIPT
+
+
+         Date_Of_Receipt                                       Date/Time                                8
+                  AllowZeroLength:           False
+
+                  Attributes:                Fixed Size
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+
+                  ColumnWidth:               1920
+                  Data Updatable:            False
+                  Format:                    Short Date
+
+                  Ordinal Position:          4
+                  Required:                  False
+                  Source Field:              Date_Of_Receipt
+                  Source Table:              RECEIPT
+
+
+         User_Name                                             Text                                    50
+                  AllowZeroLength:           True
+
+                  Attributes:                Variable Length
+                  Collating Order:           General
+                  ColumnHidden:              False
+
+                  ColumnOrder:               Default
+                  ColumnWidth:               1530
+                  Data Updatable:            False
+                  DisplayControl:            Text Box
+
+                  Ordinal Position:          5
+                  Required:                  False
+                  Source Field:              User_Name
+
+                  Source Table:              RECEIPT
+                  UnicodeCompression:        True
+
+         cheque_Number                                         Text                                    20
+
+                  AllowZeroLength:           True
+                  Attributes:                Variable Length
+                  Collating Order:           General
+
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               1710
+
+                  Data Updatable:            False
+                  DisplayControl:            Text Box
+                  Ordinal Position:          6
+                  Required:                  False
+
+                  Source Field:              cheque_Number
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: RECEIPT                                                                                      Page: 53
+
+                  Source Table:              RECEIPT
+                  UnicodeCompression:        True
+
+
+
+Table Indexes
+
+         Name                                     Number of Fields
+         ID                                       1
+
+                  Clustered:                 False
+                  DistinctCount:             0
+                  Foreign:                   False
+
+                  Ignore Nulls:              False
+                  Name:                      ID
+                  Primary:                   True
+
+                  Required:                  True
+                  Unique:                    True
+                  Fields:                    Ascending
+
+         INV_ID                                   1
+                  Clustered:                 False
+
+                  DistinctCount:             0
+                  Foreign:                   False
+                  Ignore Nulls:              False
+
+                  Name:                      INV_ID
+                  Primary:                   False
+                  Required:                  False
+
+                  Unique:                    False
+                  Fields:                    Ascending
+
+
+
+
+
+User Permissions
+
+         admin                      Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+
+
+
+
+Group Permissions
+
+         Admins                     Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+         Users                      Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: TERM                                                                                         Page: 54
+
+
+
+Properties
+
+Date Created:          8/7/2003 10:35:56 PM           Last Updated:          8/7/2003 10:35:56 PM
+OrderByOn:             False                          RecordCount:           3
+Updatable:             True
+
+
+
+
+Columns
+
+         Name                                                  Type                        Size
+         ID                                                    Long Integer                             4
+
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+                  Collating Order:           General
+
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               Default
+
+                  Data Updatable:            False
+                  DecimalPlaces:             0
+                  DisplayControl:            Text Box
+                  Ordinal Position:          0
+
+                  Required:                  False
+                  Source Field:              ID
+                  Source Table:              TERM
+
+
+         TermName                                              Text                                    30
+                  AllowZeroLength:           False
+                  Attributes:                Variable Length
+
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+
+                  ColumnWidth:               Default
+                  Data Updatable:            False
+                  DisplayControl:            Text Box
+                  Ordinal Position:          1
+
+                  Required:                  False
+                  Source Field:              TermName
+                  Source Table:              TERM
+
+
+
+Table Indexes
+
+         Name                                     Number of Fields
+
+         ID                                       1
+                  Clustered:                 False
+                  DistinctCount:             3
+
+                  Foreign:                   False
+                  Ignore Nulls:              False
+                  Name:                      ID
+
+                  Primary:                   False
+                  Required:                  False
+                  Unique:                    False
+
+                  Fields:                    Ascending
+
+
+User Permissions
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: TERM                                                                                         Page: 55
+
+
+
+
+
+         admin                      Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+
+
+
+
+Group Permissions
+
+         Admins                     Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+         Users                      Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: TYPE                                                                                         Page: 56
+
+
+
+Properties
+
+Date Created:          8/7/2003 10:35:56 PM           Last Updated:          8/7/2003 10:35:56 PM
+OrderByOn:             False                          RecordCount:           2
+Updatable:             True
+
+
+
+
+Columns
+
+         Name                                                  Type                        Size
+         ID                                                    Long Integer                             4
+
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+                  Collating Order:           General
+
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               Default
+
+                  Data Updatable:            False
+                  DecimalPlaces:             Auto
+                  DisplayControl:            Text Box
+                  Ordinal Position:          0
+
+                  Required:                  False
+                  Source Field:              ID
+                  Source Table:              TYPE
+
+
+         Payment_type                                          Text                                    20
+                  AllowZeroLength:           False
+                  Attributes:                Variable Length
+
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+
+                  ColumnWidth:               Default
+                  Data Updatable:            False
+                  DisplayControl:            Text Box
+                  Ordinal Position:          1
+
+                  Required:                  False
+                  Source Field:              Payment_type
+                  Source Table:              TYPE
+
+
+
+Table Indexes
+
+         Name                                     Number of Fields
+
+         ID                                       1
+                  Clustered:                 False
+                  DistinctCount:             2
+
+                  Foreign:                   False
+                  Ignore Nulls:              False
+                  Name:                      ID
+
+                  Primary:                   False
+                  Required:                  False
+                  Unique:                    False
+
+                  Fields:                    Ascending
+
+
+User Permissions
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: TYPE                                                                                         Page: 57
+
+
+
+
+
+         admin                      Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+
+
+
+
+Group Permissions
+
+         Admins                     Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+         Users                      Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: USERS                                                                                        Page: 58
+
+
+
+Properties
+
+Date Created:          8/7/2003 10:35:56 PM           Last Updated:          8/7/2003 10:35:56 PM
+OrderByOn:             False                          Orientation:           0
+RecordCount:           1                              Updatable:             True
+
+
+
+
+Columns
+
+         Name                                                  Type                        Size
+         ID                                                    Long Integer                             4
+
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+                  Collating Order:           General
+
+                  ColumnHidden:              False
+                  ColumnOrder:               1
+                  ColumnWidth:               Default
+
+                  Data Updatable:            False
+                  DecimalPlaces:             Auto
+                  DisplayControl:            Text Box
+                  Ordinal Position:          0
+
+                  Required:                  False
+                  Source Field:              ID
+                  Source Table:              USERS
+
+
+         Logon_Id                                              Text                                    20
+                  AllowZeroLength:           False
+                  Attributes:                Variable Length
+
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+
+                  ColumnWidth:               Default
+                  Data Updatable:            False
+                  DisplayControl:            Text Box
+                  Ordinal Position:          1
+
+                  Required:                  False
+                  Source Field:              Logon_Id
+                  Source Table:              USERS
+
+                  UnicodeCompression:        True
+
+         Full_Name                                             Text                                    50
+
+                  AllowZeroLength:           False
+                  Attributes:                Variable Length
+                  Collating Order:           General
+                  ColumnHidden:              False
+
+                  ColumnOrder:               Default
+                  ColumnWidth:               1560
+                  Data Updatable:            False
+
+                  DisplayControl:            Text Box
+                  Ordinal Position:          2
+                  Required:                  False
+                  Source Field:              Full_Name
+
+                  Source Table:              USERS
+                  UnicodeCompression:        True
+
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: USERS                                                                                        Page: 59
+
+         Password_last_Update                                  Date/Time                                8
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               2670
+
+                  Data Updatable:            False
+                  Ordinal Position:          3
+                  Required:                  False
+
+                  Source Field:              Password_last_Update
+                  Source Table:              USERS
+
+         Logon_password                                        Text                                    50
+
+                  AllowZeroLength:           False
+                  Attributes:                Variable Length
+                  Collating Order:           General
+
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               2820
+                  Data Updatable:            False
+
+                  DisplayControl:            Text Box
+                  Ordinal Position:          4
+                  Required:                  False
+
+                  Source Field:              Logon_password
+                  Source Table:              USERS
+                  UnicodeCompression:        True
+
+
+         SYSTEM_MANAGER                                        Text                                     1
+                  AllowZeroLength:           False
+                  Attributes:                Variable Length
+
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+
+                  ColumnWidth:               2025
+                  Data Updatable:            False
+                  DisplayControl:            Text Box
+                  Ordinal Position:          5
+
+                  Required:                  False
+                  Source Field:              SYSTEM_MANAGER
+                  Source Table:              USERS
+
+                  UnicodeCompression:        False
+
+         Report_View                                           Text                                     1
+                  AllowZeroLength:           False
+
+                  Attributes:                Variable Length
+                  Collating Order:           General
+                  ColumnHidden:              False
+
+                  ColumnOrder:               Default
+                  ColumnWidth:               Default
+                  Data Updatable:            False
+
+                  DisplayControl:            Text Box
+                  Ordinal Position:          6
+                  Required:                  False
+                  Source Field:              Report_View
+
+                  Source Table:              USERS
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: USERS                                                                                        Page: 60
+
+                  UnicodeCompression:        True
+
+
+
+Table Indexes
+         Name                                     Number of Fields
+
+         Logon_Id                                 1
+                  Clustered:                 False
+
+                  DistinctCount:             1
+                  Foreign:                   False
+                  Ignore Nulls:              False
+
+                  Name:                      Logon_Id
+                  Primary:                   False
+                  Required:                  False
+
+                  Unique:                    False
+                  Fields:                    Ascending
+
+         PrimaryKey                               1
+                  Clustered:                 False
+                  DistinctCount:             1
+
+                  Foreign:                   False
+                  Ignore Nulls:              False
+                  Name:                      PrimaryKey
+
+                  Primary:                   True
+                  Required:                  True
+                  Unique:                    True
+
+                  Fields:                    Ascending
+
+
+
+
+User Permissions
+
+         admin                      Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+
+
+
+
+
+Group Permissions
+
+         Admins                     Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+         Users                      Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: WORDAMOUNT                                                                                   Page: 61
+
+
+
+Properties
+
+Date Created:          8/7/2003 10:35:56 PM           Last Updated:          8/7/2003 10:35:56 PM
+OrderByOn:             False                          RecordCount:           10
+Updatable:             True
+
+
+
+
+Columns
+
+         Name                                                  Type                        Size
+         ID                                                    Long Integer                             4
+
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size, Auto-Increment
+                  Collating Order:           General
+
+                  ColumnHidden:              False
+                  ColumnOrder:               Default
+                  ColumnWidth:               345
+
+                  Data Updatable:            False
+                  Ordinal Position:          0
+                  Required:                  False
+                  Source Field:              ID
+
+                  Source Table:              WORDAMOUNT
+
+         AmountInWord                                          Text                                    70
+
+                  AllowZeroLength:           False
+                  Attributes:                Variable Length
+                  Collating Order:           General
+                  ColumnHidden:              False
+
+                  ColumnOrder:               Default
+                  ColumnWidth:               4740
+                  Data Updatable:            False
+
+                  DisplayControl:            Text Box
+                  Ordinal Position:          1
+                  Required:                  False
+                  Source Field:              AmountInWord
+
+                  Source Table:              WORDAMOUNT
+
+
+
+Table Indexes
+         Name                                     Number of Fields
+
+         ID                                       1
+                  Clustered:                 False
+
+                  DistinctCount:             10
+                  Foreign:                   False
+                  Ignore Nulls:              False
+
+                  Name:                      ID
+                  Primary:                   False
+                  Required:                  False
+
+                  Unique:                    True
+                  Fields:                    Ascending
+
+
+
+
+
+User Permissions
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Table: WORDAMOUNT                                                                                   Page: 62
+
+
+
+         admin                      Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+
+
+
+
+Group Permissions
+
+         Admins                     Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+         Users                      Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Query: AllIncome                                                                                    Page: 63
+
+
+
+Properties
+
+Date Created:          8/7/2003 10:35:56 PM           Last Updated:          8/7/2003 10:35:56 PM
+MaxRecords:            0                              ODBCTimeout:           60
+OrderByOn:             False                          Orientation:           0
+
+RecordLocks:           No Locks                       RecordsAffected:       0
+ReturnsRecords:        True                           Type:                  128
+Updatable:             True
+
+
+
+
+SQL
+         SELECT collection.payment, collection.[Date_of_collection] as [date_of_payment], collection.col_ID
+          AS [receipt_no], collection.User_name,collection.Amount,null as [Member_Effective] ,null
+         as[Member_Expiary],null as mno
+         FROM collection
+         order by collection.payment
+         UNION SELECT
+          'Receipt' as payment , receipt.[date_of_receipt] as [date_of_payment],receipt.id as
+         [Receipt_no],receipt.user_name,receipt.amount,null as [member_effective], null as [member_expiary]
+          ,receipt.[cheque_number] as mno
+         from receipt
+         ORDER BY collection.payment
+         UNION ALL SELECT
+         Payment.payment,Payment.[date_of_payment],Payment.[receipt_no],payment.User_Name,Payment.amount,Pa
+         yment.[Member_Effective], Payment.[Member_Expiary],payment.mno
+         from payment
+         ORDER BY collection.payment;
+
+
+
+
+Columns
+
+         Name                                                  Type                        Size
+
+         payment                                               Text                                   255
+                  AllowZeroLength:           False
+
+                  Attributes:                Variable Length
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnWidth:               1395
+
+                  Data Updatable:            False
+                  Ordinal Position:          0
+                  Required:                  False
+
+
+         date_of_payment                                       Date/Time                                8
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+
+                  Collating Order:           General
+                  Data Updatable:            False
+                  Ordinal Position:          1
+
+                  Required:                  False
+
+         receipt_no                                            Long Integer                             4
+
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+                  Collating Order:           General
+                  Data Updatable:            False
+
+                  Ordinal Position:          2
+                  Required:                  False
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Query: AllIncome                                                                                    Page: 64
+
+         User_name                                             Text                                   255
+                  AllowZeroLength:           False
+                  Attributes:                Variable Length
+
+                  Collating Order:           General
+                  Data Updatable:            False
+                  Ordinal Position:          3
+                  Required:                  False
+
+
+         Amount                                                Double                                   8
+                  AllowZeroLength:           False
+
+                  Attributes:                Fixed Size
+                  Collating Order:           General
+                  Data Updatable:            False
+                  Ordinal Position:          4
+
+                  Required:                  False
+
+         Member_Effective                                      Text                                   255
+
+                  AllowZeroLength:           False
+                  Attributes:                Variable Length
+                  Collating Order:           General
+
+                  Data Updatable:            False
+                  Ordinal Position:          5
+                  Required:                  False
+
+
+         Member_Expiary                                        Text                                   255
+                  AllowZeroLength:           False
+                  Attributes:                Variable Length
+
+                  Collating Order:           General
+                  Data Updatable:            False
+                  Ordinal Position:          6
+                  Required:                  False
+
+
+         mno                                                   Text                                   255
+                  AllowZeroLength:           False
+
+                  Attributes:                Variable Length
+                  Collating Order:           General
+                  Data Updatable:            False
+
+                  Ordinal Position:          7
+                  Required:                  False
+
+
+
+
+User Permissions
+
+         admin                      Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+
+
+
+
+
+Group Permissions
+
+         Admins                     Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+         Users                      Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+
+
+
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Query: AllIncome_old                                                                                Page: 65
+
+
+
+Properties
+
+Date Created:          8/7/2003 10:35:56 PM           Last Updated:          8/7/2003 10:35:56 PM
+MaxRecords:            0                              ODBCTimeout:           60
+OrderByOn:             False                          Orientation:           0
+
+RecordLocks:           No Locks                       RecordsAffected:       0
+ReturnsRecords:        True                           Type:                  128
+Updatable:             True
+
+
+
+
+SQL
+         SELECT collection.payment, collection.[Date_of_collection] as [date_of_payment], collection.col_ID
+          AS [receipt_no], collection.User_name,collection.Amount,null as [Member_Effective] ,null
+         as[Member_Expiary],null as mno
+         FROM collection
+         order by collection.payment
+         UNION ALL SELECT
+         Payment.payment,Payment.[date_of_payment],Payment.[receipt_no],payment.User_Name,Payment.amount,Pa
+         yment.[Member_Effective], Payment.[Member_Expiary],payment.mno
+         from payment
+         ORDER BY collection.payment;
+
+
+
+
+Columns
+
+         Name                                                  Type                        Size
+         payment                                               Text                                   255
+
+                  AllowZeroLength:           False
+                  Attributes:                Variable Length
+                  Collating Order:           General
+
+                  Data Updatable:            False
+                  Ordinal Position:          0
+                  Required:                  False
+
+
+         date_of_payment                                       Date/Time                                8
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+
+                  Collating Order:           General
+                  ColumnHidden:              False
+                  ColumnWidth:               2340
+
+                  Data Updatable:            False
+                  Ordinal Position:          1
+                  Required:                  False
+
+
+         receipt_no                                            Long Integer                             4
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+
+                  Collating Order:           General
+                  Data Updatable:            False
+                  Ordinal Position:          2
+                  Required:                  False
+
+
+         User_name                                             Text                                   255
+                  AllowZeroLength:           False
+
+                  Attributes:                Variable Length
+                  Collating Order:           General
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Query: AllIncome_old                                                                                Page: 66
+
+                  ColumnHidden:              False
+                  ColumnWidth:               2040
+                  Data Updatable:            False
+                  Ordinal Position:          3
+
+                  Required:                  False
+
+         Amount                                                Double                                   8
+
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+                  Collating Order:           General
+
+                  Data Updatable:            False
+                  Ordinal Position:          4
+                  Required:                  False
+
+
+         Member_Effective                                      Date/Time                              510
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+
+                  Collating Order:           General
+                  Data Updatable:            False
+                  Ordinal Position:          5
+                  Required:                  False
+
+
+         Member_Expiary                                        Date/Time                              510
+                  AllowZeroLength:           False
+
+                  Attributes:                Fixed Size
+                  Collating Order:           General
+                  Data Updatable:            False
+
+                  Ordinal Position:          6
+                  Required:                  False
+
+         mno                                                   Long Integer                           510
+
+                  AllowZeroLength:           False
+                  Attributes:                Fixed Size
+                  Collating Order:           General
+
+                  Data Updatable:            False
+                  Ordinal Position:          7
+                  Required:                  False
+
+
+
+
+
+User Permissions
+
+         admin                      Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+
+
+
+
+Group Permissions
+
+         Admins                     Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+
+         Users                      Delete, Read Permissions, Set Permissions, Change Owner, Read
+                                    Definition, Write Definition, Read Data, Insert Data, Update Data,
+
+
+
+
+
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Database: D:\CMS\Extract\church.mdb                                                                 Page: 67
+
+
+
+Properties
+
+AccessVersion:         08.50                          Build:                 2719
+Collating Order:       General                        QueryTimeout:          60
+RecordsAffected:       0                              Transactions:          True
+
+Updatable:             True                           Version :              4.0
+
+
+
+
+
+User Permissions
+
+         admin
+
+
+
+
+Group Permissions
+
+         Admins
+         Users
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+D:\CMS\Extract\church.mdb                                                               Friday, May 23, 2014
+
+Relationships                                                                                       Page: 68
+
+
+
+
+Relationships
+
+         INVOICEINVOICEITEM
+
+
+                             INVOICE                           INVOICEITEM
+
+                    Invoice_no                          Invoice_id
+
+
+                  Attributes:                Not Enforced
+                  RelationshipType:          One-To-Many

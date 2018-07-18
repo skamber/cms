@@ -1,0 +1,66 @@
+1. Rename Table Name from CASH FLOW ITEM to CASHFLOWITEM
+2. New table CHURCH
+3. New field church_id in collection and set value to 1
+4. New field Joining_date in the member table
+5. New field Donation_type and church_id in payment table
+6. New table DONATION_TYPE 
+7. new cheque_number , church_id in receipt table
+8. Update the AllIncome query
+9. new queries Last Date of Membership payment ,MemberExpiaryDate chech this query when been used.
+10 Update the status in the member table to ACTIVE, NOT ACTIVE, DECEASED with case sensetive 
+11.Rename INVOICE ITEM TYPE to INVOICEITEMTYPE
+12.Rename INVOICE ITEM to INVOICEITEM
+----------------------------------------
+1. Payment report to include collection type as well
+2. Change Expiry Date From /To
+3. Invoice. Net Amount /GST recalculation
+4. Show church name in the status bar
+5. Adding status in the member search screen
+6. Search member updated.
+7. Fix the defect of edit payment after been saved.
+8. Adding notes to the payment reports and update the AllIncome query
+9. Adding email to the member table
+10.Adding email to child screen
+11.Adding memo to the child screen 
+12 set the child status to N which net been set
+
+
+-------------------------------------------
+1. Member Search vertical and horizantal 
+2. add the child status in the child report
+3. Adding child status to the child report
+4. create query to update member table from another table
+--------------------------------------------------
+1. Fixing defect when edit payment ,collection
+2. Adding collection search screen
+3. Resize the member search and payment search.
+4. Create query to update the member joining date
+5. Create query to update the member information from other table. 
+
+
+--------------------------------------------------------------------
+Database changes
+
+1. Rename Table Name from CASH FLOW ITEM to CASHFLOWITEM
+2. New table CHURCH
+3. New field church_id in collection and set value to 1. Use the qyery update_collection_version2_2 to do that.
+4. New field Joining_date in the member table
+5. New field Donation_type and church_id in payment table.Use the qyery update_collection_version2_2 to do that.
+6. New table DONATION_TYPE 
+7. new cheque_number , church_id in receipt table.Use the qyery update_collection_version2_2 to do that.
+8. Update the AllIncome query
+9. new queries Last Date of Membership payment ,MemberExpiaryDate chech this query when been used.
+10 Update the status in the member table to ACTIVE, NOT ACTIVE, DECEASED with case sensetive 
+11.Rename INVOICE ITEM TYPE to INVOICEITEMTYPE
+12.Rename INVOICE ITEM to INVOICEITEM
+13. Adding email to the member table
+14. create query to update member table from another table
+15. Create query to update the member joining date. To do that export First_membership_payment query yo tabler. by make it table query .
+						set the query in design mode and select table query.then link these two tables to update the member table. 
+16. Create query to update the member information from other table. 
+17. Adding email and comments to the children table
+
+---------------------------------------
+database changes for 12/11/2014
+1. Add type in the collection table
+2. Update the query AllIncome
