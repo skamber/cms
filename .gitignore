@@ -1,5 +1,4 @@
 *.dll
 *.exe
 *.exp
-
-database/church.ldb
+*.lib
