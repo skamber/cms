@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomctl.ocx"
 Begin VB.Form frmInvoiceSearch 
    ClientHeight    =   8565
    ClientLeft      =   60
@@ -173,8 +173,10 @@ InvoiceItemList.View = lvwReport
 End Sub
 
 Private Sub ListInvoiceView_Click()
-gInvoiceId = frmInvoiceSearch.ListInvoiceView.SelectedItem
-displayInvoiceSearchItemList
+If InvoiceSelected Then
+    gInvoiceId = frmInvoiceSearch.ListInvoiceView.SelectedItem
+    displayInvoiceSearchItemList
+End If
 End Sub
 
 Private Sub ListInvoiceView_ColumnClick(ByVal ColumnHeader As MSComctlLib.ColumnHeader)
