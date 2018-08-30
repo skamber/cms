@@ -30,6 +30,7 @@ Private mvarstate As String 'local copy
 Private mvarBalance As Currency 'local copy
 Private mvarPhone As String 'local copy
 Private mvarMobile As String 'local copy
+Private mvarChurchId As Long 'local copy
 Private Const DATE_FORMAT = "dd/mm/yyyy"
 Public Property Let Mobile(ByVal vData As String)
 'used when assigning a value to the property, on the left side of an assignment.
@@ -44,6 +45,19 @@ Public Property Get Mobile() As String
     Mobile = mvarMobile
 End Property
 
+
+Public Property Let ChurchId(ByVal vData As Long)
+'used when assigning a value to the property, on the left side of an assignment.
+'Syntax: X.ReceiptNo = 5
+    mvarChurchId = vData
+End Property
+
+
+Public Property Get ChurchId() As Long
+'used when retrieving value of a property, on the right side of an assignment.
+'Syntax: Debug.Print X.ReceiptNo
+    ChurchId = mvarChurchId
+End Property
 
 
 Public Property Let Phone(ByVal vData As String)

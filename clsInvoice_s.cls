@@ -87,12 +87,13 @@ On Error GoTo ErrorHandler
     
     'insert new record
     sql = "INSERT INTO INVOICE" _
-                & " (ID, Invoice_no, Ref, Name1, Name2, Address1, Address2" _
+                & " (ID, Invoice_no, church_id,Ref, Name1, Name2, Address1, Address2" _
                 & " ,Address3, Terms,Total_amount,state,Balance" _
                 & " ,Phone,Mobile,Created_date,over_due_date )" _
                 & " VALUES" _
                 & " (" & NewInvoiceId _
                 & ",'" & NewInvoiceNo & "'" _
+                & "," & objInvoice.ChurchId _
                 & ",'" & NewRefNo & "','" & objInvoice.Name1 & "'" _
                 & ",'" & objInvoice.Name2 & "','" & objInvoice.Address1 & "','" & objInvoice.Address2 & "'" _
                 & ",'" & objInvoice.Address3 & "','" & objInvoice.Terms & "'" _
@@ -129,6 +130,7 @@ On Error GoTo ErrorHandler
     
     sql = "UPDATE INVOICE SET" _
                 & " Invoice_no =" & "'" & objInvoice.Invoice_no & "'" _
+                & " ,church_id =" & objInvoice.ChurchId _
                 & " ,Ref =" & "'" & objInvoice.Ref & "'" _
                 & " ,Name1 =" & "'" & objInvoice.Name1 & "'" _
                 & " ,Name2 =" & "'" & objInvoice.Name2 & "'" _

@@ -63,14 +63,14 @@ End Function
 Public Function SaveInvoice() As Boolean
 On Error GoTo ErrorHandler
 
-    Dim objInvoice As CMSinvoice.clsInvoice
-    Dim objInvoice_s As CMSinvoice.clsInvoice_s
+    Dim objInvoice As CMSInvoice.clsInvoice
+    Dim objInvoice_s As CMSInvoice.clsInvoice_s
 
     SaveInvoice = False
                             
     'Member record
-    Set objInvoice = New CMSinvoice.clsInvoice
-    Set objInvoice_s = New CMSinvoice.clsInvoice_s
+    Set objInvoice = New CMSInvoice.clsInvoice
+    Set objInvoice_s = New CMSInvoice.clsInvoice_s
     Set objInvoice_s.DatabaseConnection = objConnection
 
 
@@ -190,7 +190,7 @@ ErrorHandler:
 
 End Function
 
-Public Function PopulateInvoiceObject(objInvoice As CMSinvoice.clsInvoice)
+Public Function PopulateInvoiceObject(objInvoice As CMSInvoice.clsInvoice)
 On Error GoTo ErrorHandler
 'save data from form to newly created object for insert or update
 
@@ -213,6 +213,7 @@ On Error GoTo ErrorHandler
         If Trim(.txtState) <> "" Then objInvoice.State = .txtState
         If Trim(.txtTotalAmount.Text) <> "" Then objInvoice.Total_Amount = .txtTotalAmount.Text
         If Trim(.cmbTerms.Text) <> "" Then objInvoice.Terms = .cmbTerms.Text
+        objInvoice.ChurchId = gChurchId
         
     End With
     
@@ -378,14 +379,14 @@ End Sub
 Public Function SaveInvoiceItem() As Boolean
 On Error GoTo ErrorHandler
 
-    Dim objInvoiceItem As CMSinvoiceItem.clsInvoiceItem
-    Dim objInvoiceItem_s As CMSinvoiceItem.clsInvoiceItem_s
+    Dim objInvoiceItem As CMSInvoiceItem.clsInvoiceItem
+    Dim objInvoiceItem_s As CMSInvoiceItem.clsInvoiceItem_s
 
     SaveInvoiceItem = False
                             
     'Member record
-    Set objInvoiceItem = New CMSinvoiceItem.clsInvoiceItem
-    Set objInvoiceItem_s = New CMSinvoiceItem.clsInvoiceItem_s
+    Set objInvoiceItem = New CMSInvoiceItem.clsInvoiceItem
+    Set objInvoiceItem_s = New CMSInvoiceItem.clsInvoiceItem_s
     Set objInvoiceItem_s.DatabaseConnection = objConnection
 
 
@@ -418,7 +419,7 @@ ErrorHandler:
     
 End Function
 
-Public Function PopulateInvoiceItemObject(objInvoiceItem As CMSinvoiceItem.clsInvoiceItem)
+Public Function PopulateInvoiceItemObject(objInvoiceItem As CMSInvoiceItem.clsInvoiceItem)
 On Error GoTo ErrorHandler
 'save data from form to newly created object for insert or update
 
@@ -445,13 +446,13 @@ Sub displayInvoiceItemList()
  On Error GoTo ErrorHandler
  
     ' Dim objFollowup_s As PACMSFollowUP.clsFollowup_s
-     Dim objInvoiceItem_s As CMSinvoiceItem.clsInvoiceItem_s
+     Dim objInvoiceItem_s As CMSInvoiceItem.clsInvoiceItem_s
      Dim rslocal As ADODB.Recordset
      Dim strId  As String
      Dim itmx As ListItem
      
      Dim TotalItemsAmount, BalanceAmount As Double
-    Set objInvoiceItem_s = New CMSinvoiceItem.clsInvoiceItem_s
+    Set objInvoiceItem_s = New CMSInvoiceItem.clsInvoiceItem_s
     Set objInvoiceItem_s.DatabaseConnection = objConnection
  
     ' Dim lngTotalProspect As Long
@@ -512,12 +513,12 @@ Sub displayInvoiceSearchItemList()
  On Error GoTo ErrorHandler
  
     ' Dim objFollowup_s As PACMSFollowUP.clsFollowup_s
-     Dim objInvoiceItem_s As CMSinvoiceItem.clsInvoiceItem_s
+     Dim objInvoiceItem_s As CMSInvoiceItem.clsInvoiceItem_s
      Dim rslocal As ADODB.Recordset
      Dim strId  As String
      Dim itmx As ListItem
      
-    Set objInvoiceItem_s = New CMSinvoiceItem.clsInvoiceItem_s
+    Set objInvoiceItem_s = New CMSInvoiceItem.clsInvoiceItem_s
     Set objInvoiceItem_s.DatabaseConnection = objConnection
  
     ' Dim lngTotalProspect As Long
@@ -573,7 +574,7 @@ End Sub
 
 Public Function DisplayInvoiceItem()
 
-    Dim objInvoiceItem_s As CMSinvoiceItem.clsInvoiceItem_s
+    Dim objInvoiceItem_s As CMSInvoiceItem.clsInvoiceItem_s
     
     Dim rslocal As ADODB.Recordset
    ' Dim intCnt As Integer
@@ -584,7 +585,7 @@ Public Function DisplayInvoiceItem()
     Call InitialiseInvoiceItem
     
     'Retrieve Prospect record and display on form
-    Set objInvoiceItem_s = New CMSinvoiceItem.clsInvoiceItem_s
+    Set objInvoiceItem_s = New CMSInvoiceItem.clsInvoiceItem_s
     Set objInvoiceItem_s.DatabaseConnection = objConnection
     Set rslocal = objInvoiceItem_s.getByInvoiceItemId(gInvoiceItemId)
 
@@ -618,7 +619,7 @@ End Function
 
 Public Function DisplayInvoice()
 
-    Dim objInvoice_s As CMSinvoice.clsInvoice_s
+    Dim objInvoice_s As CMSInvoice.clsInvoice_s
     
     Dim rslocal As ADODB.Recordset
    ' Dim intCnt As Integer
@@ -629,7 +630,7 @@ Public Function DisplayInvoice()
     Call InitialiseInvoiceItem
     
     'Retrieve Prospect record and display on form
-    Set objInvoice_s = New CMSinvoice.clsInvoice_s
+    Set objInvoice_s = New CMSInvoice.clsInvoice_s
     Set objInvoice_s.DatabaseConnection = objConnection
     Set rslocal = objInvoice_s.getByInvoiceId(gInvoiceId)
 

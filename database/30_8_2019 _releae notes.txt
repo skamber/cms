@@ -1,0 +1,2 @@
+1. Adding tite1, title2 and ABN to church table
+2. Adding church id to invoice table 
