@@ -60,7 +60,7 @@ Begin VB.Form frmAbout
       Width           =   4095
    End
    Begin VB.Label Label3 
-      Caption         =   "Version 2.2"
+      Caption         =   "Version 3"
       BeginProperty Font 
          Name            =   "Verdana"
          Size            =   9
@@ -78,7 +78,7 @@ Begin VB.Form frmAbout
       Width           =   2055
    End
    Begin VB.Label Label2 
-      Caption         =   "Developed by  Sami Kamber 2002 - 2014"
+      Caption         =   "Developed by  Sami Kamber 2002 - 2018"
       BeginProperty Font 
          Name            =   "Verdana"
          Size            =   9.75
@@ -109,6 +109,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
 Private Sub cmdOK_Click()
 Unload frmAbout
 End Sub
