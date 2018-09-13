@@ -58,7 +58,7 @@ On Error GoTo ErrorHandler
     sql = "INSERT INTO MEMBER" _
                 & " (MNo, Mr, Surname, Given_Name, Full_Name, Spouse_Name, Address1" _
                 & " ,Address2, STATE,PostCode, Phone,  comments" _
-                & " ,STATUS,Email ,joining_date,Membership_Expiary)" _
+                & " ,STATUS,Email ,joining_date,Membership_Expiary,DATE_OF_BIRTH)" _
                 & " VALUES" _
                 & " (" & NewMemberId _
                 & ",'" & objMember.Initial & "'" _
@@ -72,17 +72,23 @@ On Error GoTo ErrorHandler
                 & ",'" & objMember.Email & "'"
                 
                 If objMember.Created_Date = "" Then
-                sql = sql & ", NULL"
+                  sql = sql & ", NULL"
                 Else
-                sql = sql & ",'" & Format(objMember.Created_Date, "dd-mmm-yyyy") & "'"
+                  sql = sql & ",'" & Format(objMember.Created_Date, "dd-mmm-yyyy") & "'"
                 End If
                 
                 If objMember.MembershipExpiary = "" Then
-                sql = sql & ", NULL)"
+                  sql = sql & ", NULL"
                 Else
-                sql = sql & ",'" & Format(objMember.MembershipExpiary, "dd-mmm-yyyy") & "')"
+                  sql = sql & ",'" & Format(objMember.MembershipExpiary, "dd-mmm-yyyy") & "'"
                 End If
-    
+                
+                If objMember.DateOfBirth = "" Then
+                  sql = sql & ", NULL)"
+                Else
+                  sql = sql & ",'" & Format(objMember.DateOfBirth, "dd-mmm-yyyy") & "')"
+                End If
+    'Debug.Print (sql)
     dbConnection.Execute sql
 
 Exit Function
@@ -125,8 +131,14 @@ On Error GoTo ErrorHandler
         sql = sql & " ,Membership_Expiary = NULL "
     End If
     
-    sql = sql & " WHERE Mno = " & objMember.mno
+    If objMember.DateOfBirth <> "" Then
+        sql = sql & " ,DATE_OF_BIRTH =" & "'" & Format(objMember.DateOfBirth, "dd-mmm-yyyy") & "'"
+    Else
+        sql = sql & " ,DATE_OF_BIRTH = NULL "
+    End If
     
+    sql = sql & " WHERE Mno = " & objMember.mno
+    'Debug.Print (sql)
     dbConnection.Execute sql
 
 

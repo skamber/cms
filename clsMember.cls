@@ -28,12 +28,27 @@ Private mvarPostCode As String 'local copy
 Private mvarPhone As String 'local copy
 Private mvarMembershipExpiary As String 'local copy
 Private mvarcreated_date As String
+Private mvarDateOfBirth As String
 Private mvarcomments As String 'local copy
 Private mvarSTATUS As String 'local copy
 Private mvarEMAIL As String 'local copy
 Private Const DATE_FORMAT = "dd/mm/yyyy"
 'local variable(s) to hold property value(s)
 Private mvarInitial As String 'local copy
+
+
+Public Property Let DateOfBirth(ByVal vData As String)
+'used when assigning a value to the property, on the left side of an assignment.
+'Syntax: X.MembershipExpiary = 5
+    mvarDateOfBirth = Format(vData, DATE_FORMAT)
+End Property
+
+
+Public Property Get DateOfBirth() As String
+'used when retrieving value of a property, on the right side of an assignment.
+'Syntax: Debug.Print X.MembershipExpiary
+    DateOfBirth = Format(mvarDateOfBirth, DATE_FORMAT)
+End Property
 
 Public Property Let Created_Date(ByVal vData As String)
 'used when assigning a value to the property, on the left side of an assignment.

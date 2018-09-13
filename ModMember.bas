@@ -176,12 +176,13 @@ On Error GoTo ErrorHandler
             objMember.Comments = .txtmemo.Text
             
             'objMember.Phone = .txtMemberPhone.Text
-            objMember.postCode = .txtPostcode.Text
+            objMember.postCode = .txtPostCode.Text
             objMember.SpouseName = .txtSpouse.Text
             objMember.State = .txtState.Text
             objMember.Status = .cmbStatus.Text
             objMember.Email = .txtEmail.Text
-                        
+              
+            If .dteDateOfBirth.Text <> "" Then objMember.DateOfBirth = .dteDateOfBirth.FormattedText
             If .dteMemberPhone.Text <> "" Then objMember.Phone = .dteMemberPhone.FormattedText
             If .dteExpiryDate.Text <> "" Then objMember.MembershipExpiary = .dteExpiryDate.FormattedText
             If .dteCreateDate.Text <> "" Then objMember.Created_date = .dteCreateDate.FormattedText
@@ -281,12 +282,13 @@ Public Function DisplayMember()
         .dteMemberPhone.Text = ConvertNull(rslocal!Phone)
         .txtmemo.Text = ConvertNull(rslocal!Comments)
         .txtMno.Text = ConvertNull(rslocal!MNo)
-        .txtPostcode.Text = ConvertNull(rslocal!postCode)
+        .txtPostCode.Text = ConvertNull(rslocal!postCode)
         .txtSpouse.Text = ConvertNull(rslocal!spouse_name)
         .txtState.Text = ConvertNull(rslocal!State)
         .txtStatus.Text = ConvertNull(rslocal!Mr)
         .txtSurname.Text = ConvertNull(rslocal!surname)
         .dteExpiryDate.Text = Format(rslocal!Membership_Expiary, DATE_FORMAT)
+        .dteDateOfBirth.Text = Format(rslocal!DATE_OF_BIRTH, DATE_FORMAT)
         .cmbStatus.Text = ConvertNull(rslocal!Status)
         .dteCreateDate.Text = Format(rslocal!joining_date, DATE_FORMAT)
         .txtEmail.Text = ConvertNull(rslocal!Email)
