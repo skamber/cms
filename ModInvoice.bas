@@ -63,14 +63,14 @@ End Function
 Public Function SaveInvoice() As Boolean
 On Error GoTo ErrorHandler
 
-    Dim objInvoice As CMSInvoice.clsInvoice
-    Dim objInvoice_s As CMSInvoice.clsInvoice_s
+    Dim objInvoice As CMSinvoice.clsInvoice
+    Dim objInvoice_s As CMSinvoice.clsInvoice_s
 
     SaveInvoice = False
                             
     'Member record
-    Set objInvoice = New CMSInvoice.clsInvoice
-    Set objInvoice_s = New CMSInvoice.clsInvoice_s
+    Set objInvoice = New CMSinvoice.clsInvoice
+    Set objInvoice_s = New CMSinvoice.clsInvoice_s
     Set objInvoice_s.DatabaseConnection = objConnection
 
 
@@ -190,7 +190,7 @@ ErrorHandler:
 
 End Function
 
-Public Function PopulateInvoiceObject(objInvoice As CMSInvoice.clsInvoice)
+Public Function PopulateInvoiceObject(objInvoice As CMSinvoice.clsInvoice)
 On Error GoTo ErrorHandler
 'save data from form to newly created object for insert or update
 
@@ -206,6 +206,7 @@ On Error GoTo ErrorHandler
         If Trim(.txtAddress2.Text) <> "" Then objInvoice.address2 = .txtAddress2.Text
         If Trim(.txtPostcode.Text) <> "" Then objInvoice.Address3 = .txtPostcode.Text
         If Trim(.txtMobile.Text) <> "" Then objInvoice.Mobile = .txtMobile.Text
+        If Trim(.txtEmail.Text) <> "" Then objInvoice.Email = .txtEmail.Text
         If Trim(.txtBalance.Text) <> "" Then objInvoice.balance = .txtBalance.Text
         If .dteInvoiceDate.Text <> "" Then objInvoice.dateofInvoice = .dteInvoiceDate.FormattedText
         If .dteOverDueDate.Text <> "" Then objInvoice.over_due_date = .dteOverDueDate.FormattedText
@@ -619,7 +620,7 @@ End Function
 
 Public Function DisplayInvoice()
 
-    Dim objInvoice_s As CMSInvoice.clsInvoice_s
+    Dim objInvoice_s As CMSinvoice.clsInvoice_s
     
     Dim rslocal As ADODB.Recordset
    ' Dim intCnt As Integer
@@ -630,7 +631,7 @@ Public Function DisplayInvoice()
     Call InitialiseInvoiceItem
     
     'Retrieve Prospect record and display on form
-    Set objInvoice_s = New CMSInvoice.clsInvoice_s
+    Set objInvoice_s = New CMSinvoice.clsInvoice_s
     Set objInvoice_s.DatabaseConnection = objConnection
     Set rslocal = objInvoice_s.getByInvoiceId(gInvoiceId)
 
@@ -648,6 +649,7 @@ Public Function DisplayInvoice()
         .txtAddress2.Text = ConvertNull(rslocal!address2)
         .txtPostcode.Text = ConvertNull(rslocal!Address3)
         .txtMobile.Text = ConvertNull(rslocal!Mobile)
+        .txtEmail.Text = ConvertNull(rslocal!Email)
         .txtBalance.Text = ConvertNull(rslocal!balance)
         .dteInvoiceDate.Text = Format(rslocal!Created_date, DATE_FORMAT)
         .dtePhone.Text = ConvertNull(rslocal!Phone)

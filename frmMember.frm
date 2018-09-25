@@ -13,48 +13,6 @@ Begin VB.Form frmMember
    ScaleHeight     =   9015
    ScaleWidth      =   12600
    WindowState     =   2  'Maximized
-   Begin MSMask.MaskEdBox dteDateOfBirth 
-      Height          =   315
-      Left            =   5640
-      TabIndex        =   4
-      Top             =   1680
-      Width           =   1455
-      _ExtentX        =   2566
-      _ExtentY        =   556
-      _Version        =   393216
-      ClipMode        =   1
-      PromptInclude   =   0   'False
-      AllowPrompt     =   -1  'True
-      MaxLength       =   10
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "Verdana"
-         Size            =   9
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      Format          =   "dd/mm/yyyy"
-      Mask            =   "##/##/####"
-      PromptChar      =   "_"
-   End
-   Begin VB.TextBox txtEmail 
-      BeginProperty Font 
-         Name            =   "Verdana"
-         Size            =   9
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      Height          =   315
-      Left            =   120
-      TabIndex        =   12
-      Top             =   4080
-      Width           =   3975
-   End
    Begin VB.Frame fraMember 
       BorderStyle     =   0  'None
       Enabled         =   0   'False
@@ -63,6 +21,48 @@ Begin VB.Form frmMember
       TabIndex        =   16
       Top             =   480
       Width           =   12495
+      Begin VB.TextBox txtEmail 
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   315
+         Left            =   120
+         TabIndex        =   12
+         Top             =   3600
+         Width           =   3975
+      End
+      Begin MSMask.MaskEdBox dteDateOfBirth 
+         Height          =   315
+         Left            =   5640
+         TabIndex        =   4
+         Top             =   1200
+         Width           =   1695
+         _ExtentX        =   2990
+         _ExtentY        =   556
+         _Version        =   393216
+         ClipMode        =   1
+         PromptInclude   =   0   'False
+         AllowPrompt     =   -1  'True
+         MaxLength       =   10
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Format          =   "dd/mm/yyyy"
+         Mask            =   "##/##/####"
+         PromptChar      =   "_"
+      End
       Begin VB.TextBox txtMno 
          Enabled         =   0   'False
          BeginProperty Font 
@@ -702,6 +702,7 @@ Public Sub Form_Activate()
 
     If gRecordMode = RECORD_NEW Or gRecordMode = RECORD_EDIT Then
         fraMember.Enabled = True
+
           
     Else
         fraMember.Enabled = False

@@ -20,9 +20,25 @@ Begin VB.Form frmInvoice
       Enabled         =   0   'False
       Height          =   8895
       Left            =   0
-      TabIndex        =   12
+      TabIndex        =   13
       Top             =   480
       Width           =   13455
+      Begin VB.TextBox txtEmail 
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   315
+         Left            =   9120
+         TabIndex        =   4
+         Top             =   1200
+         Width           =   4335
+      End
       Begin VB.Frame fraInvoiceItem 
          Height          =   2415
          Left            =   120
@@ -210,7 +226,7 @@ Begin VB.Form frmInvoice
       End
       Begin MSMask.MaskEdBox dteInvoiceDate 
          Height          =   315
-         Left            =   6960
+         Left            =   5760
          TabIndex        =   30
          Top             =   360
          Width           =   1695
@@ -272,7 +288,7 @@ Begin VB.Form frmInvoice
          EndProperty
          Height          =   315
          Left            =   5400
-         TabIndex        =   6
+         TabIndex        =   7
          Top             =   2160
          Width           =   1095
       End
@@ -289,7 +305,7 @@ Begin VB.Form frmInvoice
          EndProperty
          Height          =   315
          Left            =   360
-         TabIndex        =   15
+         TabIndex        =   16
          Top             =   360
          Width           =   1575
       End
@@ -305,8 +321,8 @@ Begin VB.Form frmInvoice
             Strikethrough   =   0   'False
          EndProperty
          Height          =   315
-         Left            =   4080
-         TabIndex        =   14
+         Left            =   3240
+         TabIndex        =   15
          Top             =   360
          Width           =   2055
       End
@@ -370,7 +386,7 @@ Begin VB.Form frmInvoice
          EndProperty
          Height          =   315
          Left            =   360
-         TabIndex        =   4
+         TabIndex        =   5
          Top             =   2160
          Width           =   1815
       End
@@ -386,7 +402,7 @@ Begin VB.Form frmInvoice
          EndProperty
          Height          =   315
          Left            =   2400
-         TabIndex        =   5
+         TabIndex        =   6
          Top             =   2160
          Width           =   2175
       End
@@ -403,7 +419,7 @@ Begin VB.Form frmInvoice
          EndProperty
          Height          =   315
          Left            =   4680
-         TabIndex        =   9
+         TabIndex        =   10
          Top             =   3000
          Width           =   1695
       End
@@ -419,7 +435,7 @@ Begin VB.Form frmInvoice
          EndProperty
          Height          =   315
          Left            =   6960
-         TabIndex        =   7
+         TabIndex        =   8
          Top             =   2160
          Width           =   1455
       End
@@ -436,7 +452,7 @@ Begin VB.Form frmInvoice
          EndProperty
          Height          =   315
          Left            =   6720
-         TabIndex        =   13
+         TabIndex        =   14
          Top             =   3000
          Width           =   1575
       End
@@ -452,7 +468,7 @@ Begin VB.Form frmInvoice
          EndProperty
          Height          =   330
          Left            =   360
-         TabIndex        =   8
+         TabIndex        =   9
          Top             =   3000
          Width           =   1815
       End
@@ -526,6 +542,40 @@ Begin VB.Form frmInvoice
          Mask            =   "##/##/####"
          PromptChar      =   "_"
       End
+      Begin VB.Label Label22 
+         Caption         =   "Email"
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Left            =   9120
+         TabIndex        =   50
+         Top             =   960
+         Width           =   855
+      End
+      Begin VB.Label Label21 
+         Caption         =   "Invoice No"
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Left            =   360
+         TabIndex        =   49
+         Top             =   120
+         Width           =   855
+      End
       Begin VB.Label Label17 
          Caption         =   "Over Due Date"
          BeginProperty Font 
@@ -543,23 +593,6 @@ Begin VB.Form frmInvoice
          Top             =   2760
          Width           =   1215
       End
-      Begin VB.Label Label2 
-         Caption         =   "Invoice No"
-         BeginProperty Font 
-            Name            =   "Arial"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   195
-         Left            =   360
-         TabIndex        =   29
-         Top             =   120
-         Width           =   1095
-      End
       Begin VB.Label Label3 
          Caption         =   "Ref"
          BeginProperty Font 
@@ -572,8 +605,8 @@ Begin VB.Form frmInvoice
             Strikethrough   =   0   'False
          EndProperty
          Height          =   195
-         Left            =   4080
-         TabIndex        =   28
+         Left            =   3240
+         TabIndex        =   29
          Top             =   120
          Width           =   855
       End
@@ -589,8 +622,8 @@ Begin VB.Form frmInvoice
             Strikethrough   =   0   'False
          EndProperty
          Height          =   195
-         Left            =   6960
-         TabIndex        =   27
+         Left            =   5760
+         TabIndex        =   28
          Top             =   120
          Width           =   1215
       End
@@ -607,7 +640,7 @@ Begin VB.Form frmInvoice
          EndProperty
          Height          =   195
          Left            =   360
-         TabIndex        =   26
+         TabIndex        =   27
          Top             =   960
          Width           =   2055
       End
@@ -624,7 +657,7 @@ Begin VB.Form frmInvoice
          EndProperty
          Height          =   195
          Left            =   2640
-         TabIndex        =   25
+         TabIndex        =   26
          Top             =   960
          Width           =   1095
       End
@@ -641,7 +674,7 @@ Begin VB.Form frmInvoice
          EndProperty
          Height          =   195
          Left            =   5040
-         TabIndex        =   24
+         TabIndex        =   25
          Top             =   960
          Width           =   615
       End
@@ -658,7 +691,7 @@ Begin VB.Form frmInvoice
          EndProperty
          Height          =   195
          Left            =   7080
-         TabIndex        =   23
+         TabIndex        =   24
          Top             =   960
          Width           =   1215
       End
@@ -675,7 +708,7 @@ Begin VB.Form frmInvoice
          EndProperty
          Height          =   195
          Left            =   360
-         TabIndex        =   22
+         TabIndex        =   23
          Top             =   1920
          Width           =   1095
       End
@@ -692,7 +725,7 @@ Begin VB.Form frmInvoice
          EndProperty
          Height          =   195
          Left            =   2400
-         TabIndex        =   21
+         TabIndex        =   22
          Top             =   1920
          Width           =   975
       End
@@ -709,7 +742,7 @@ Begin VB.Form frmInvoice
          EndProperty
          Height          =   195
          Left            =   5400
-         TabIndex        =   20
+         TabIndex        =   21
          Top             =   1920
          Width           =   615
       End
@@ -726,7 +759,7 @@ Begin VB.Form frmInvoice
          EndProperty
          Height          =   195
          Left            =   6960
-         TabIndex        =   19
+         TabIndex        =   20
          Top             =   1920
          Width           =   975
       End
@@ -743,7 +776,7 @@ Begin VB.Form frmInvoice
          EndProperty
          Height          =   195
          Left            =   6720
-         TabIndex        =   18
+         TabIndex        =   19
          Top             =   2760
          Width           =   735
       End
@@ -760,7 +793,7 @@ Begin VB.Form frmInvoice
          EndProperty
          Height          =   195
          Left            =   360
-         TabIndex        =   17
+         TabIndex        =   18
          Top             =   2760
          Width           =   615
       End
@@ -777,7 +810,7 @@ Begin VB.Form frmInvoice
          EndProperty
          Height          =   195
          Left            =   4680
-         TabIndex        =   16
+         TabIndex        =   17
          Top             =   2760
          Width           =   1335
       End
@@ -791,7 +824,7 @@ Begin VB.Form frmInvoice
       Left            =   0
       ScaleHeight     =   435
       ScaleWidth      =   13500
-      TabIndex        =   10
+      TabIndex        =   11
       Top             =   0
       Width           =   13560
       Begin VB.Label Label1 
@@ -809,10 +842,27 @@ Begin VB.Form frmInvoice
          ForeColor       =   &H80000014&
          Height          =   375
          Left            =   0
-         TabIndex        =   11
+         TabIndex        =   12
          Top             =   0
          Width           =   1575
       End
+   End
+   Begin VB.Label Label2 
+      Caption         =   "Ref"
+      BeginProperty Font 
+         Name            =   "Arial"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   195
+      Left            =   0
+      TabIndex        =   48
+      Top             =   1000
+      Width           =   855
    End
 End
 Attribute VB_Name = "frmInvoice"
@@ -820,6 +870,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
 Private Sub cmbTerms_LostFocus()
        Select Case cmbTerms.Text
         Case "7 Days":  dteOverDueDate.Text = Format(Date + 7, DATE_FORMAT)
@@ -940,10 +991,8 @@ Public Sub Form_Activate()
 
     If gRecordMode = RECORD_NEW Or gRecordMode = RECORD_EDIT Then
         fraInvoice.Enabled = True
-          
     Else
         fraInvoice.Enabled = False
-        
     End If
  gRecordType = INVOICE
 End Sub

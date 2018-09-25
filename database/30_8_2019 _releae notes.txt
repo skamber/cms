@@ -1,2 +1,4 @@
 1. Adding tite1, title2 and ABN to church table
-2. Adding church id to invoice table 
+2. Adding church id to invoice tabll
+3. Adding Date of birth to member table
+4. Adding Bank account Name, BSB number and account no

@@ -89,7 +89,7 @@ On Error GoTo ErrorHandler
     sql = "INSERT INTO INVOICE" _
                 & " (ID, Invoice_no, church_id,Ref, Name1, Name2, Address1, Address2" _
                 & " ,Address3, Terms,Total_amount,state,Balance" _
-                & " ,Phone,Mobile,Created_date,over_due_date )" _
+                & " ,Phone,Mobile,email,Created_date,over_due_date )" _
                 & " VALUES" _
                 & " (" & NewInvoiceId _
                 & ",'" & NewInvoiceNo & "'" _
@@ -101,8 +101,8 @@ On Error GoTo ErrorHandler
                 & ",'" & objInvoice.state & "'" _
                 & "," & objInvoice.Balance _
                 & ",'" & objInvoice.Phone & "'" _
-                & ",'" & objInvoice.Mobile & "'"
-
+                & ",'" & objInvoice.Mobile & "'" _
+                & ",'" & objInvoice.Email & "'"
                 If objInvoice.dateofInvoice = "" Then
                 sql = sql & ", NULL"
                 Else
@@ -114,6 +114,7 @@ On Error GoTo ErrorHandler
                 Else
                 sql = sql & ",'" & Format(objInvoice.over_due_date, "dd-mmm-yyyy") & "')"
                 End If
+    Debug.Print (sql)
     dbConnection.Execute sql
 
 Exit Function
@@ -142,7 +143,8 @@ On Error GoTo ErrorHandler
                 & " ,state =" & "'" & objInvoice.state & "'" _
                 & " ,Balance =" & objInvoice.Balance _
                 & " ,Phone =" & "'" & objInvoice.Phone & "'" _
-                & " ,Mobile =" & "'" & objInvoice.Mobile & "'"
+                & " ,Mobile =" & "'" & objInvoice.Mobile & "'" _
+                & " ,Email =" & "'" & objInvoice.Email & "'"
     If objInvoice.dateofInvoice <> "" Then
         sql = sql & " ,Created_date =" & "'" & Format(objInvoice.dateofInvoice, "dd-mmm-yyyy") & "'"
     Else
@@ -156,7 +158,7 @@ On Error GoTo ErrorHandler
     End If
     
     sql = sql & " WHERE ID = " & objInvoice.ID
-    
+    Debug.Print (sql)
     dbConnection.Execute sql
 
 

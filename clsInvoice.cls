@@ -31,7 +31,21 @@ Private mvarBalance As Currency 'local copy
 Private mvarPhone As String 'local copy
 Private mvarMobile As String 'local copy
 Private mvarChurchId As Long 'local copy
+Private mvarEmail As String 'local copy
 Private Const DATE_FORMAT = "dd/mm/yyyy"
+
+Public Property Let Email(ByVal vData As String)
+'used when assigning a value to the property, on the left side of an assignment.
+'Syntax: X.Mobile = 5
+    mvarEmail = vData
+End Property
+
+Public Property Get Email() As String
+'used when retrieving value of a property, on the right side of an assignment.
+'Syntax: Debug.Print X.Mobile
+    Email = mvarEmail
+End Property
+
 Public Property Let Mobile(ByVal vData As String)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.Mobile = 5
