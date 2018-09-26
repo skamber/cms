@@ -235,6 +235,8 @@ Private Sub cmdOK_Click()
     Dim strNewPassword As String
     Dim strConfirmPassword As String
     Dim sql As String
+    Dim encryptedpass As String
+
     Dim objRecordset As Recordset
     
 
@@ -284,11 +286,12 @@ Private Sub cmdOK_Click()
             txtNewPassword.SetFocus
             Exit Sub
        End If
-       
+       encryptedpass = encryptPassword(strNewPassword)
+       encryptedpass = Replace(encryptedpass, "'", "''")
         objConnection.BeginTrans
                 
                 sql = "UPDATE Users SET" _
-                            & " Logon_Password =" & "'" & EncryptPassword(strNewPassword) & "'" _
+                            & " Logon_Password =" & "'" & encryptedpass & "'" _
                             & " ,Password_Last_Update =" & "'" & Format(Date, "dd-mmm-yyyy") & "'"
                            
                             

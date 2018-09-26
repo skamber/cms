@@ -114,7 +114,7 @@ On Error GoTo ErrorHandler
                 Else
                 sql = sql & ",'" & Format(objInvoice.over_due_date, "dd-mmm-yyyy") & "')"
                 End If
-    Debug.Print (sql)
+    'Debug.Print (sql)
     dbConnection.Execute sql
 
 Exit Function
@@ -158,7 +158,7 @@ On Error GoTo ErrorHandler
     End If
     
     sql = sql & " WHERE ID = " & objInvoice.ID
-    Debug.Print (sql)
+    'Debug.Print (sql)
     dbConnection.Execute sql
 
 

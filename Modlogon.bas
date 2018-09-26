@@ -135,8 +135,8 @@ ErrorHandler:
 
 End Function
 
-Public Function EncryptPassword(s As String) As String
-EncryptPassword = EDS(s)
+Public Function encryptPassword(s As String) As String
+encryptPassword = EDS(s)
 End Function
 
 Public Function DecryptPassword(s As String) As String
@@ -164,6 +164,7 @@ For i = 1 To Len(s)
 Mid(s, i, 1) = Chr(Asc(Mid(s, i, 1)) Xor encrypt(i))
 Next i
 EDS = s
+
 End Function
 
 
