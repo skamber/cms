@@ -17,9 +17,16 @@ Begin VB.Form frmReceipt
       Enabled         =   0   'False
       Height          =   8055
       Left            =   0
-      TabIndex        =   4
+      TabIndex        =   5
       Top             =   480
       Width           =   11415
+      Begin VB.TextBox txtmemo 
+         Height          =   1455
+         Left            =   360
+         TabIndex        =   2
+         Top             =   3360
+         Width           =   6375
+      End
       Begin VB.TextBox txtChequeNo 
          BeginProperty Font 
             Name            =   "Verdana"
@@ -32,7 +39,7 @@ Begin VB.Form frmReceipt
          EndProperty
          Height          =   315
          Left            =   4680
-         TabIndex        =   18
+         TabIndex        =   19
          Top             =   1800
          Width           =   2000
       End
@@ -49,7 +56,7 @@ Begin VB.Form frmReceipt
          EndProperty
          Height          =   315
          Left            =   2520
-         TabIndex        =   16
+         TabIndex        =   17
          Top             =   1080
          Width           =   1395
       End
@@ -57,7 +64,7 @@ Begin VB.Form frmReceipt
          Enabled         =   0   'False
          Height          =   315
          Left            =   2520
-         TabIndex        =   15
+         TabIndex        =   16
          Top             =   360
          Width           =   1815
       End
@@ -74,7 +81,7 @@ Begin VB.Form frmReceipt
          EndProperty
          Height          =   315
          Left            =   360
-         TabIndex        =   8
+         TabIndex        =   9
          Top             =   360
          Width           =   1035
       End
@@ -107,7 +114,7 @@ Begin VB.Form frmReceipt
          EndProperty
          Height          =   315
          Left            =   360
-         TabIndex        =   7
+         TabIndex        =   8
          Top             =   1800
          Width           =   1515
       End
@@ -124,7 +131,7 @@ Begin VB.Form frmReceipt
          EndProperty
          Height          =   315
          Left            =   2460
-         TabIndex        =   6
+         TabIndex        =   7
          Top             =   1800
          Width           =   2000
       End
@@ -147,7 +154,7 @@ Begin VB.Form frmReceipt
       Begin MSMask.MaskEdBox dteDate 
          Height          =   315
          Left            =   4260
-         TabIndex        =   5
+         TabIndex        =   6
          Top             =   1080
          Width           =   1815
          _ExtentX        =   3201
@@ -184,6 +191,23 @@ Begin VB.Form frmReceipt
          WindowShowCloseBtn=   -1  'True
          WindowShowPrintSetupBtn=   -1  'True
       End
+      Begin VB.Label Label10 
+         Caption         =   "Comments:"
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Left            =   360
+         TabIndex        =   21
+         Top             =   3120
+         Width           =   1215
+      End
       Begin VB.Label Label8 
          Caption         =   "Cheque Number:"
          BeginProperty Font 
@@ -197,7 +221,7 @@ Begin VB.Form frmReceipt
          EndProperty
          Height          =   195
          Left            =   4680
-         TabIndex        =   19
+         TabIndex        =   20
          Top             =   1560
          Width           =   1815
       End
@@ -214,7 +238,7 @@ Begin VB.Form frmReceipt
          EndProperty
          Height          =   195
          Left            =   2520
-         TabIndex        =   17
+         TabIndex        =   18
          Top             =   840
          Width           =   1095
       End
@@ -231,7 +255,7 @@ Begin VB.Form frmReceipt
          EndProperty
          Height          =   195
          Left            =   360
-         TabIndex        =   14
+         TabIndex        =   15
          Top             =   120
          Width           =   1095
       End
@@ -248,7 +272,7 @@ Begin VB.Form frmReceipt
          EndProperty
          Height          =   195
          Left            =   360
-         TabIndex        =   13
+         TabIndex        =   14
          Top             =   840
          Width           =   1575
       End
@@ -265,7 +289,7 @@ Begin VB.Form frmReceipt
          EndProperty
          Height          =   195
          Left            =   360
-         TabIndex        =   12
+         TabIndex        =   13
          Top             =   1560
          Width           =   855
       End
@@ -282,7 +306,7 @@ Begin VB.Form frmReceipt
          EndProperty
          Height          =   195
          Left            =   4260
-         TabIndex        =   11
+         TabIndex        =   12
          Top             =   840
          Width           =   855
       End
@@ -299,7 +323,7 @@ Begin VB.Form frmReceipt
          EndProperty
          Height          =   195
          Left            =   2460
-         TabIndex        =   10
+         TabIndex        =   11
          Top             =   1560
          Width           =   975
       End
@@ -316,7 +340,7 @@ Begin VB.Form frmReceipt
          EndProperty
          Height          =   195
          Left            =   360
-         TabIndex        =   9
+         TabIndex        =   10
          Top             =   2280
          Width           =   1455
       End
@@ -330,7 +354,7 @@ Begin VB.Form frmReceipt
       Left            =   0
       ScaleHeight     =   435
       ScaleWidth      =   11325
-      TabIndex        =   2
+      TabIndex        =   3
       Top             =   0
       Width           =   11385
       Begin VB.Label Label1 
@@ -348,7 +372,7 @@ Begin VB.Form frmReceipt
          ForeColor       =   &H80000014&
          Height          =   375
          Left            =   0
-         TabIndex        =   3
+         TabIndex        =   4
          Top             =   0
          Width           =   1815
       End
