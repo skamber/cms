@@ -1,0 +1,14 @@
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `church`.`allincome` AS select `allpayment`.`church_id` AS `church_id`,`allpayment`.`payment` AS `payment`,`allpayment`.`type` AS `type`,`allpayment`.`date_of_payment` AS `date_of_payment`,`allpayment`.`receipt_no` AS `receipt_no`,`allpayment`.`User_name` AS `User_name`,`allpayment`.`Amount` AS `Amount`,`allpayment`.`Member_Effective` AS `Member_Effective`,`allpayment`.`Member_Expiary` AS `Member_Expiary`,`allpayment`.`mno` AS `mno`,`allpayment`.`COMMENTS` AS `COMMENTS` from (select `church`.`collection`.`CHURCH_ID` AS `church_id`,`church`.`collection`.`PAYMENT` AS `payment`,`church`.`collection`.`TYPE` AS `type`,`church`.`collection`.`DATE_OF_COLLECTION` AS `date_of_payment`,`church`.`collection`.`COL_ID` AS `receipt_no`,`church`.`collection`.`USER_NAME` AS `User_name`,`church`.`collection`.`AMOUNT` AS `Amount`,NULL AS `Member_Effective`,NULL AS `Member_Expiary`,NULL AS `mno`,`church`.`collection`.`COMMENTS` AS `COMMENTS` from `church`.`collection` union select `church`.`receipt`.`church_id` AS `church_id`,'Receipt' AS `payment`,NULL AS `type`,`church`.`receipt`.`Date_Of_Receipt` AS `date_of_payment`,`church`.`receipt`.`ID` AS `Receipt_no`,`church`.`receipt`.`User_Name` AS `user_name`,`church`.`receipt`.`amount` AS `amount`,NULL AS `member_effective`,NULL AS `member_expiary`,`church`.`receipt`.`cheque_Number` AS `mno`,NULL AS `COMMENTS` from `church`.`receipt` union select `church`.`payment`.`CHURCH_ID` AS `church_id`,`church`.`payment`.`PAYMENT` AS `payment`,`church`.`payment`.`TYPE` AS `type`,`church`.`payment`.`DATE_OF_PAYMENT` AS `date_of_payment`,`church`.`payment`.`RECEIPT_NO` AS `receipt_no`,`church`.`payment`.`USER_NAME` AS `User_Name`,`church`.`payment`.`AMOUNT` AS `amount`,`church`.`payment`.`MEMBER_EFFECTIVE` AS `Member_Effective`,`church`.`payment`.`MEMBER_EXPIARY` AS `Member_Expiary`,`church`.`payment`.`MNo` AS `mno`,`church`.`payment`.`COMMENTS` AS `COMMENTS` from `church`.`payment`) `allpayment` order by `allpayment`.`church_id`,`allpayment`.`payment`;
+
+
+// change the column type
+ALTER TABLE payment CHANGE DATE_OF_PAYMENT DATE_OF_PAYMENT DATE;
+
+// turning logs on 
+SET GLOBAL general_log = 'ON';
+
+
+SET GLOBAL general_log_file = 'c:/cms/sql_logs.txt';
+
+SET GLOBAL general_log = 'OFF';
+

@@ -1,0 +1,15 @@
+VBGROUP 5.0
+StartupProject=CMS.vbp
+Project=PACMSErrorHandler.vbp
+Project=CMSMember.vbp
+Project=CMSOrganisation.vbp
+Project=CMSPayment.vbp
+Project=CMSCollection.vbp
+Project=CMSInvoice.vbp
+Project=CMSReceipt.vbp
+Project=CMSCashIn.vbp
+Project=CMSCashOut.vbp
+Project=CMSChildren.vbp
+Project=CMSInvoiceItem.vbp
+Project=CMSCashFlowItem.vbp
+Project=CMSUser.vbp

@@ -1,0 +1,19 @@
+C:\Program Files\MySQL\MySQL Server 5.7\bin\mysqld.exe, Version: 5.7.23-log (MySQL Community Server (GPL)). started with:
+TCP Port: 3306, Named Pipe: MySQL
+Time                 Id Command    Argument
+2018-10-20T22:30:01.220722Z	    3 Query	help 'set general_log_file'
+2018-10-20T22:30:02.045133Z	    4 Query	SET GLOBAL general_log_file = 'c:/cms/sql_logs.txt'
+C:\Program Files\MySQL\MySQL Server 5.7\bin\mysqld.exe, Version: 5.7.23-log (MySQL Community Server (GPL)). started with:
+TCP Port: 3306, Named Pipe: MySQL
+Time                 Id Command    Argument
+2018-10-20T22:30:28.579720Z	   23 Connect	root@localhost on church using TCP/IP
+2018-10-20T22:30:28.579957Z	   23 Query	SET NAMES latin1
+2018-10-20T22:30:28.580113Z	   23 Query	SET character_set_results = NULL
+2018-10-20T22:30:28.580424Z	   23 Query	SET SQL_AUTO_IS_NULL = 0
+2018-10-20T22:30:28.585620Z	   23 Query	SET SESSION TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
+2018-10-20T22:30:28.848635Z	   23 Prepare	SELECT AllIncome1.`church_id`, AllIncome1.`payment`, AllIncome1.`type`, AllIncome1.`date_of_payment`, AllIncome1.`receipt_no`, AllIncome1.`User_name`, AllIncome1.`Amount`, AllIncome1.`Member_Effective`, AllIncome1.`Member_Expiary`, AllIncome1.`mno`, AllIncome1.`COMMENTS`, CHURCH1.`Name` FROM { oj `AllIncome` AllIncome1 INNER JOIN `CHURCH` CHURCH1 ON AllIncome1.`church_id` = CHURCH1.`Id`} WHERE AllIncome1.`date_of_payment` >= ? AND AllIncome1.`date_of_payment` < ? ORDER BY AllIncome1.`church_id` ASC, AllIncome1.`type` ASC, AllIncome1.`payment` ASC
+2018-10-20T22:30:28.850308Z	   23 Query	set @@sql_select_limit=DEFAULT
+2018-10-20T22:30:28.850401Z	   23 Execute	SELECT AllIncome1.`church_id`, AllIncome1.`payment`, AllIncome1.`type`, AllIncome1.`date_of_payment`, AllIncome1.`receipt_no`, AllIncome1.`User_name`, AllIncome1.`Amount`, AllIncome1.`Member_Effective`, AllIncome1.`Member_Expiary`, AllIncome1.`mno`, AllIncome1.`COMMENTS`, CHURCH1.`Name` FROM { oj `AllIncome` AllIncome1 INNER JOIN `CHURCH` CHURCH1 ON AllIncome1.`church_id` = CHURCH1.`Id`} WHERE AllIncome1.`date_of_payment` >= '2018-10-15 00:00:00' AND AllIncome1.`date_of_payment` < '2018-10-22 00:00:00' ORDER BY AllIncome1.`church_id` ASC, AllIncome1.`type` ASC, AllIncome1.`payment` ASC
+2018-10-20T22:30:29.221945Z	   23 Close stmt	
+2018-10-20T22:32:13.426035Z	    3 Query	help '\'on\''
+2018-10-20T22:32:20.423097Z	    4 Query	SET GLOBAL general_log = 'OFF'
