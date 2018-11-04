@@ -2,7 +2,6 @@ Attribute VB_Name = "modMain"
 Option Explicit
 Public Const INI_FILE_NAME = "CMS.INI"
 Public Const gDatabasePassword = "WingedBull"
-Public gDatabaseType As String
 Public gmemberId As Long
 Public gchildId As Long
 Public gPaymentId As Long
@@ -14,6 +13,7 @@ Public gInvoiceItemId As Long
 Public gCashoutId As Long
 Public gCashflowItemId As Long
 Public gChurchId As Long
+Public gCityId As Long
 Public PrivilegeBookMark As Variant
 Public Userprivilege As ADODB.Recordset
 Public objConnection As ADODB.Connection
@@ -78,6 +78,7 @@ Public Const RECORD_COPY = "Copy"
 Public Const RECORD_PRINT = "Print"
 Public Const RECORD_PRIVIEW = "Preview"
 
+
 Public Enum eSortOrder
     sortAscending = 0
     sortDescending = 1
@@ -89,7 +90,6 @@ Public Enum eSortType
 End Enum
 
 
-Public gLocalDBPath As String
 Public Declare Function GetPrivateProfileString Lib "kernel32" Alias "GetPrivateProfileStringA" _
     (ByVal lpApplicationName As String, ByVal lpKeyName As Any, ByVal lpDefault As String, _
     ByVal lpReturnedString As String, ByVal nSize As Long, ByVal lpFileName As String) As Long
@@ -104,10 +104,15 @@ Public Sub CentreForm(frm As Form, intPosition As Integer)
 
 End Sub
 
-Public Function ConnectACCESS()
+Public Function ConnectDatabase()
 
     Dim sAppName As String * 100
-    Dim sKeyName As String * 100
+
+    Dim sHost As String
+    Dim sDatabaseName As String
+    Dim sUserName As String
+    Dim sPassword As String
+    
     Dim sDefault As String * 100
     Dim sRet As String * 100
     Dim lSize As Long
@@ -118,31 +123,42 @@ Public Function ConnectACCESS()
     
     ' connect to local database
     sAppName = "Connection"
-    sKeyName = "Local"
+    
+
     sDefault = ""
     sRet = ""
     lSize = 100
     sFileName = App.Path & "\" & INI_FILE_NAME
     
-    lRet = GetPrivateProfileString(sAppName, sKeyName, sDefault, sRet, lSize, sFileName)
-    gLocalDBPath = Left(sRet, InStrB(1, sRet, Chr(0)) / 2)
+    lRet = GetPrivateProfileString(sAppName, "Host", sDefault, sRet, lSize, sFileName)
+    sHost = Left(sRet, InStrB(1, sRet, Chr(0)) / 2)
     
+    lRet = GetPrivateProfileString(sAppName, "Database", sDefault, sRet, lSize, sFileName)
+    sDatabaseName = Left(sRet, InStrB(1, sRet, Chr(0)) / 2)
+    
+    lRet = GetPrivateProfileString(sAppName, "UserName", sDefault, sRet, lSize, sFileName)
+    sUserName = Left(sRet, InStrB(1, sRet, Chr(0)) / 2)
+    
+    lRet = GetPrivateProfileString(sAppName, "UserPassword", sDefault, sRet, lSize, sFileName)
+    sPassword = Left(sRet, InStrB(1, sRet, Chr(0)) / 2)
+        
+    sAppName = "Office"
+    lRet = GetPrivateProfileString(sAppName, "CityId", sDefault, sRet, lSize, sFileName)
+    gCityId = Left(sRet, InStrB(1, sRet, Chr(0)) / 2)
+            
     Set objConnection = New ADODB.Connection
     On Error Resume Next
     
     With objConnection
-          '  .Provider = "Microsoft.Jet.OLEDB.4.0;" & "Jet OLEDB:Database Password=" & gDatabasePassword
-           ' .Open gLocalDBPath, "Admin", ""
-            .Open "Driver={MySQL ODBC 5.3 ANSI Driver};Server=localhost;Database=church; User=root;Password=root;Option=3;"
+            .Open "Driver={MySQL ODBC 5.3 ANSI Driver};Server=" & sHost & ";Database=" & sDatabaseName & "; User=" & sUserName & ";Password=" & sPassword & ";Option=3;"
             
             
     End With
-    gDatabaseType = "ACCESS"
                             
 
 Exit Function
 ErrorHandler:
-    Call objError.ErrorRoutine(Err.Number, Err.Description, objConnection, "modMain", "ConnectACCESS", True)
+    Call objError.ErrorRoutine(Err.Number, Err.Description, objConnection, "modMain", "ConnectDatabase", True)
 
 End Function
 Public Function SetToolbarControl()
@@ -972,8 +988,8 @@ End Sub
 Public Sub SortListView(lvwCtrl As ListView, ColumnHeader As ColumnHeader)
 On Error GoTo ErrorHandler
 
-    If (ColumnHeader.Index - 1 <> lvwCtrl.SortKey) Then
-        lvwCtrl.SortKey = ColumnHeader.Index - 1
+    If (ColumnHeader.index - 1 <> lvwCtrl.SortKey) Then
+        lvwCtrl.SortKey = ColumnHeader.index - 1
     Else
         If (lvwCtrl.SortOrder = lvwAscending) Then
             lvwCtrl.SortOrder = lvwDescending

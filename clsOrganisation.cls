@@ -330,14 +330,14 @@ ErrorHandler:
     'Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getPaymentType", True)
 
 End Function
-Public Function getChurchName() As ADODB.Recordset
+Public Function getChurchName(ByVal lngCityID As Long) As ADODB.Recordset
 On Error GoTo ErrorHandler
 
     Dim sql As String
     Dim rsLocal As ADODB.Recordset
     
     
-    sql = "SELECT ID, Name FROM Church"
+    sql = "SELECT ID, Name FROM Church WHERE cityId = " & lngCityID
    
     Set rsLocal = New ADODB.Recordset
         rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly

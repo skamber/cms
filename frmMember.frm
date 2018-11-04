@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "msmask32.ocx"
+Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "MSMASK32.OCX"
 Begin VB.Form frmMember 
    ClientHeight    =   9015
    ClientLeft      =   285
@@ -323,7 +323,7 @@ Begin VB.Form frmMember
          PromptChar      =   "_"
       End
       Begin VB.Label label2 
-         Caption         =   "DATE OF BIRTH"
+         Caption         =   "Date Of Birth:"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25
@@ -341,7 +341,7 @@ Begin VB.Form frmMember
          Width           =   1455
       End
       Begin VB.Label Label4 
-         Caption         =   "NOTE"
+         Caption         =   "Note:"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25
@@ -358,7 +358,7 @@ Begin VB.Form frmMember
          Width           =   615
       End
       Begin VB.Label Label3 
-         Caption         =   "EMAIL"
+         Caption         =   "Email:"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25
@@ -375,7 +375,7 @@ Begin VB.Form frmMember
          Width           =   1455
       End
       Begin VB.Label label2 
-         Caption         =   "JOINING DATE"
+         Caption         =   "Joining Date:"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25
@@ -393,7 +393,7 @@ Begin VB.Form frmMember
          Width           =   1455
       End
       Begin VB.Label label2 
-         Caption         =   "INITIAL              "
+         Caption         =   "Initial:              "
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25
@@ -411,7 +411,7 @@ Begin VB.Form frmMember
          Width           =   855
       End
       Begin VB.Label label2 
-         Caption         =   "MNO"
+         Caption         =   "Mno:"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25
@@ -429,7 +429,7 @@ Begin VB.Form frmMember
          Width           =   855
       End
       Begin VB.Label label2 
-         Caption         =   "STATE"
+         Caption         =   "State:"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25
@@ -447,7 +447,7 @@ Begin VB.Form frmMember
          Width           =   1095
       End
       Begin VB.Label label2 
-         Caption         =   "PHONE"
+         Caption         =   "Phone:"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25
@@ -465,7 +465,7 @@ Begin VB.Form frmMember
          Width           =   735
       End
       Begin VB.Label label2 
-         Caption         =   "POST CODE"
+         Caption         =   "Post Code:"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25
@@ -483,7 +483,7 @@ Begin VB.Form frmMember
          Width           =   1095
       End
       Begin VB.Label label2 
-         Caption         =   "ADDRESS2"
+         Caption         =   "Address2:"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25
@@ -501,7 +501,7 @@ Begin VB.Form frmMember
          Width           =   1095
       End
       Begin VB.Label label2 
-         Caption         =   "ADDRESS1"
+         Caption         =   "Address1:"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25
@@ -519,7 +519,7 @@ Begin VB.Form frmMember
          Width           =   975
       End
       Begin VB.Label label2 
-         Caption         =   "STATUS"
+         Caption         =   "Status:"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25
@@ -537,7 +537,7 @@ Begin VB.Form frmMember
          Width           =   855
       End
       Begin VB.Label label2 
-         Caption         =   "SPOUSE"
+         Caption         =   "Spouse:"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25
@@ -555,7 +555,7 @@ Begin VB.Form frmMember
          Width           =   855
       End
       Begin VB.Label label2 
-         Caption         =   "GIVEN NAME"
+         Caption         =   "Given Name:"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25
@@ -573,7 +573,7 @@ Begin VB.Form frmMember
          Width           =   1095
       End
       Begin VB.Label label2 
-         Caption         =   "SURNAME                        "
+         Caption         =   "Surname:                        "
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25
@@ -591,7 +591,7 @@ Begin VB.Form frmMember
          Width           =   855
       End
       Begin VB.Label label2 
-         Caption         =   "EXPIRY"
+         Caption         =   "Expiry:"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25

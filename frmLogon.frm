@@ -224,11 +224,13 @@ End
 End Sub
 
 Private Sub Form_Load()
-Call ConnectACCESS
+Call ConnectDatabase
 LoadChurchComboBox
-If cmbChurchName.ListCount > 0 Then
-    cmbChurchName.ListIndex = 0
-End If
+
+'If cmbChurchName.ListCount > 0 Then
+'    cmbChurchName.
+'    cmbChurchName.ListIndex = 0
+'End If
 Call CentreForm(Me, 2)
 
 End Sub

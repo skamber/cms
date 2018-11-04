@@ -160,7 +160,6 @@ On Error GoTo ErrorHandler
     Dim strStartDate As String
     Dim strEndDate As String
     Dim intCnt As Integer
-    Dim intNoOfTables As Integer
     Dim NewDate As String
     On Error GoTo ErrorHandler
 
@@ -263,33 +262,26 @@ On Error GoTo ErrorHandler
                 End If
                 
                 End With
-                intNoOfTables = 1
-            
             
         Case 6: 'Receipt
                 
                 strReportId = "InvoiceReceipt.rpt"
                 strReportSQL = "{Receipt.ID} = " & frmReceipt.txtReceiptId.Text
             
-            intNoOfTables = 2
-            
         Case 7: 'Invoice
                 
                 strReportId = "Invoice.rpt"
                 strReportSQL = "{invoice.Invoice_no} = '" & frmInvoice.txtInvoiceNo.Text & "'"
-            
-            intNoOfTables = 1
+
         Case 9: 'MemberShip Invoice
                 
                 strReportId = "MemberShip.rpt"
                 strReportSQL = "{Payment.Receipt_No} = " & frmPayment.txtReceiptNo.Text
-            
-            intNoOfTables = 3
+
         Case 10: 'Payment
             
                 strReportId = "PaymentReceipt.rpt"
                 strReportSQL = "{Payment.Receipt_No} = " & frmPayment.txtReceiptNo.Text
-        intNoOfTables = 3
         
         Case 0:
                 strReportId = "MemberReport.rpt"
@@ -336,7 +328,7 @@ On Error GoTo ErrorHandler
                   End If
                 End If
                 End With
-                intNoOfTables = 1
+
         Case 1:
                strReportId = "PaymentReport.rpt"
                 With frmReport
@@ -384,12 +376,15 @@ On Error GoTo ErrorHandler
                 strReportSQL = "{AllIncome.Date_Of_Payment} >= " & strStartDate _
                 & " AND {AllIncome.Date_Of_Payment} <= " & strEndDate
                 End If
+                
+                strReportSQL = strReportSQL & " AND " & "{church.cityId} =" & gCityId
+                
                                 
                 'strReportSQL = "{AllIncome.Date_Of_Payment} In Date(" & Format(.dteStartDate.FormattedText, "yyyy,mm,dd") & ") To Date(" & _
                 'Format(.dteEndDate.FormattedText, "yyyy,mm,dd") & ") "
                 
                 End With
-                intNoOfTables = 1
+
         Case 2:
                 strReportId = "Children Over 18.rpt"
                 With frmReport
@@ -406,14 +401,14 @@ On Error GoTo ErrorHandler
                     End If
                 End If
                 End With
-                intNoOfTables = 1
+ 
         Case 3:
                strReportId = "InvoiceReport.rpt"
                 strStartDate = "Date(" & Format(Date, "yyyy,mm,dd") & ")"
                 'used to display "for the period..." on report
                 strReportSQL = "{invoice.over_due_date} <= " & strStartDate _
-                & " AND {Invoice.Balance} <> " & 0
-                intNoOfTables = 1
+                & " AND {Invoice.Balance} <> " & 0 & " AND " & "{church.cityId} =" & gCityId
+   
         Case 4:
                strReportId = "ReceiptReport.rpt"
                With frmReport
@@ -431,11 +426,10 @@ On Error GoTo ErrorHandler
                 strReportSQL = "{Receipt.date_of_Receipt} >= " & strStartDate _
                 & " AND {Receipt.date_of_Receipt} <= " & strEndDate
                 End If
+                strReportSQL = strReportSQL & " AND " & "{church.cityId} =" & gCityId
+              
                 End With
-                intNoOfTables = 2
-                
-                
-                
+                            
     End Select
     Select Case lngReportId
     Case 5: 'CashflowView
@@ -448,14 +442,7 @@ On Error GoTo ErrorHandler
         ElseIf strDestination = "Print" Then
             .Report.Destination = crptToPrinter
         End If
-        
-           ' For intCnt = 0 To (intNoOfTables - 1)
-           '     .Report.DataFiles(intCnt) = gLocalDBPath
-           ' Next
-        'Temporary setup for reporting
-        'Note: DSN must be setup and report attached to exact version.
-        'Further investigation warranted into OLE DB interface ....
-        
+                
         .Report.Connect = objReportConnection
         .Report.SubreportToChange = .Report.GetNthSubreportName(0)
         .Report.SelectionFormula = strReportSQLSubReport
@@ -477,13 +464,7 @@ On Error GoTo ErrorHandler
             .Report.Destination = crptToPrinter
         End If
         
-          '  For intCnt = 0 To (intNoOfTables - 1)
-          '      .Report.DataFiles(intCnt) = gLocalDBPath
-          '  Next
-        'Temporary setup for reporting
-        'Note: DSN must be setup and report attached to exact version.
-        'Further investigation warranted into OLE DB interface ....
-        
+       
         .Report.Connect = objReportConnection
         .Report.Action = 1
     End With
@@ -500,13 +481,7 @@ On Error GoTo ErrorHandler
             .Report.Destination = crptToPrinter
         End If
         
-         '   For intCnt = 0 To (intNoOfTables - 1)
-          '      .Report.DataFiles(intCnt) = gLocalDBPath
-         '   Next
-        'Temporary setup for reporting
-        'Note: DSN must be setup and report attached to exact version.
-        'Further investigation warranted into OLE DB interface ....
-        
+
         .Report.Connect = objReportConnection
         .Report.Action = 1
         
@@ -523,12 +498,6 @@ On Error GoTo ErrorHandler
             .Report.Destination = crptToPrinter
         End If
         
-          '  For intCnt = 0 To (intNoOfTables - 1)
-          '      .Report.DataFiles(intCnt) = gLocalDBPath
-          '  Next
-        'Temporary setup for reporting
-        'Note: DSN must be setup and report attached to exact version.
-        'Further investigation warranted into OLE DB interface ....
         
         .Report.Connect = objReportConnection
         .Report.Action = 1
@@ -547,12 +516,6 @@ On Error GoTo ErrorHandler
             .Report.Destination = crptToPrinter
         End If
         
-            'For intCnt = 0 To (intNoOfTables - 1)
-            '    .Report.DataFiles(intCnt) = gLocalDBPath
-            'Next
-        'Temporary setup for reporting
-        'Note: DSN must be setup and report attached to exact version.
-        'Further investigation warranted into OLE DB interface ....
         
         .Report.Connect = objReportConnection
         .Report.Action = 1

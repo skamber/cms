@@ -29,10 +29,10 @@ On Error GoTo ErrorHandler
     Dim rslocal As ADODB.Recordset
     Set objOrganisation_s = New CMSOrganisation.clsOrganisation
     Set objOrganisation_s.DatabaseConnection = objConnection
-    
+
        
      
-    Set rslocal = objOrganisation_s.getChurchName
+    Set rslocal = objOrganisation_s.getChurchName(gCityId)
 
     With frmLogon
             
@@ -45,12 +45,8 @@ On Error GoTo ErrorHandler
                 Loop
                 Set rslocal = Nothing
             End If
-            
     End With
-    
-
     Set objOrganisation_s = Nothing
-
 
 Exit Function
 ErrorHandler:
