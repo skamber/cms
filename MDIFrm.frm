@@ -222,7 +222,7 @@ Begin VB.MDIForm MDIFrm
       Width           =   10875
       _ExtentX        =   19182
       _ExtentY        =   1058
-      ButtonWidth     =   2143
+      ButtonWidth     =   2223
       ButtonHeight    =   1005
       Appearance      =   1
       Style           =   1
@@ -322,8 +322,8 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
 
-Private Sub ExitMnu_Click(Index As Integer)
-Select Case Index
+Private Sub ExitMnu_Click(index As Integer)
+Select Case index
 Case 0:     objConnection.Close
             Set objConnection = Nothing
             End
@@ -332,7 +332,7 @@ End Sub
 
 Private Sub MDIForm_Load()
 pnlStatusBar.Panels(1).Text = ""
-getChruchName
+getChruchNameById
 If Not systemManager Then MDIFrm.MnuSystemSetting.Visible = False
 End Sub
 
@@ -340,8 +340,8 @@ Private Sub MnuChangePassword_Click()
 frmPassword.Show vbModal
 End Sub
 
-Private Sub mnuHelp_Click(Index As Integer)
-Select Case Index
+Private Sub mnuHelp_Click(index As Integer)
+Select Case index
 Case 0: frmAbout.Show
 End Select
 
@@ -355,7 +355,7 @@ Private Sub SSListBar1_GroupClick(ByVal GroupClicked As Listbar.SSGroup, ByVal P
 
 'On Error GoTo ErrorHandler
 If gRecordMode = RECORD_NEW Or gRecordMode = RECORD_EDIT Then
-        SSListBar1.CurrentGroup = PreviousGroup.Index
+        SSListBar1.CurrentGroup = PreviousGroup.index
         MsgBox "Please select Save or Cancel before continuing", vbExclamation + vbOKOnly
         Exit Sub
     End If
@@ -529,7 +529,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 Call ProcessRecord(Button)
 End Sub
 
-Public Function getChruchName()
+Public Function getChruchNameById()
   On Error GoTo ErrorHandler
 
     Dim objOrganisation_s As CMSOrganisation.clsOrganisation
@@ -541,8 +541,6 @@ Public Function getChruchName()
     Set rslocal = objOrganisation_s.getChurchNameById(gChurchId)
 
     With frmCashIn
-            
-            
             If Not rslocal Is Nothing Then
              pnlStatusBar.Panels(2).Text = rslocal!Name
              Set rslocal = Nothing

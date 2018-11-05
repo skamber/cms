@@ -807,6 +807,11 @@ Public Function ProcessRecord(ByVal sFunction As String)
                                   End If
                                  End If
                     Case COLLECTION:
+                                If frmCollection.txtCollectionNo.Text = "" Then
+                                  MsgBox "Please Save the collection before print or Priview", vbInformation, "CMS - Error Continuing"
+                                Else
+                                  Call GenerateReport(11, "Print", objConnection)
+                                 End If
                           
                     Case INVOICE:
                                If frmInvoice.txtInvoiceNo.Text = "" Then
@@ -845,6 +850,11 @@ Public Function ProcessRecord(ByVal sFunction As String)
                            End If
                         End If
                    Case COLLECTION:
+                        If frmCollection.txtCollectionNo.Text = "" Then
+                            MsgBox "Please Save the collection before print or Priview", vbInformation, "CMS - Error Continuing"
+                        Else
+                            Call GenerateReport(11, "View", objConnection)
+                        End If
                           
                    Case INVOICE:
                            If frmInvoice.txtInvoiceNo.Text = "" Then

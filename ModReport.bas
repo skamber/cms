@@ -206,6 +206,7 @@ On Error GoTo ErrorHandler
         .GroupSelectionFormula = ""
         .DiscardSavedData = True
     End With
+    
     Case 9, 10: 'MemberShip Invoice
     With frmPayment.Report
         frmPayment.Report.WindowWidth = Screen.Width
@@ -218,6 +219,20 @@ On Error GoTo ErrorHandler
         .GroupSelectionFormula = ""
         .DiscardSavedData = True
     End With
+    
+    Case 11: 'Collection receipt
+    With frmCollection.Report
+        frmCollection.Report.WindowWidth = Screen.Width
+        frmCollection.Report.WindowHeight = Screen.Height
+        For intCnt = 0 To 30
+            .Formulas(intCnt) = ""
+            .DataFiles(intCnt) = ""
+        Next
+       .SelectionFormula = ""
+        .GroupSelectionFormula = ""
+        .DiscardSavedData = True
+    End With
+    
     Case 0, 1, 2, 3, 4: 'Reporting
     With frmReport.Report
         frmReport.Report.WindowWidth = Screen.Width
@@ -282,6 +297,11 @@ On Error GoTo ErrorHandler
             
                 strReportId = "PaymentReceipt.rpt"
                 strReportSQL = "{Payment.Receipt_No} = " & frmPayment.txtReceiptNo.Text
+        
+        Case 11: 'Collection
+            
+                strReportId = "CollectionReceipt.rpt"
+                strReportSQL = "{collection.COL_ID} = " & frmCollection.txtCollectionNo.Text
         
         Case 0:
                 strReportId = "MemberReport.rpt"
@@ -470,7 +490,6 @@ On Error GoTo ErrorHandler
     End With
     
     Case 7: 'Invoice
-    
     With frmInvoice
         .Report.ReportFileName = App.Path & "\Reports\" & strReportId
         .Report.SelectionFormula = strReportSQL
@@ -501,8 +520,20 @@ On Error GoTo ErrorHandler
         
         .Report.Connect = objReportConnection
         .Report.Action = 1
-                
+    End With
+    
+    Case 11: 'Collection
+    With frmCollection
+        .Report.ReportFileName = App.Path & "\Reports\" & strReportId
+        .Report.SelectionFormula = strReportSQL
         
+        If strDestination = "View" Then
+            .Report.Destination = crptToWindow
+        ElseIf strDestination = "Print" Then
+            .Report.Destination = crptToPrinter
+        End If
+        .Report.Connect = objReportConnection
+        .Report.Action = 1
     End With
     
     Case 0, 1, 2, 3, 4:

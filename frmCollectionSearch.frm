@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomctl.ocx"
-Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "msmask32.ocx"
+Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "MSMASK32.OCX"
 Begin VB.Form frmCollectionSearch 
    ClientHeight    =   8505
    ClientLeft      =   60
@@ -209,9 +209,9 @@ Select Case cmbTypeSearch.Text
         sql = "SELECT * FROM Collection WHERE COL_ID = " & txtInputText.Text
         GenerateCollectionList (sql)
     Case "Collection Date"
-        strCollectionDate = Format(dteInputText.FormattedText, "dd-mm-yyyy")
+        strCollectionDate = Format(dteInputText.FormattedText, "yyyy-mm-dd")
 
-        sql = "SELECT * FROM Collection WHERE Format(Collection.DATE_OF_COLLECTION,'dd-mm-yyyy') = '" & strCollectionDate & _
+        sql = "SELECT * FROM Collection WHERE Collection.DATE_OF_COLLECTION = '" & strCollectionDate & _
         "' ORDER BY PAYMENT"
         
         GenerateCollectionList (sql)

@@ -480,13 +480,8 @@ On Error GoTo ErrorHandler
     End With
 
     Set objReportConnection = New ADODB.Connection
-
-    'Connect to database for reporting...
-   
-        'objReportConnection = objConnection & ";PWD=" & gDatabasePassword
-        objReportConnection = objConnection
+    objReportConnection = objConnection
     Report.Connect = objReportConnection
-    
     MDIFrm.pnlStatusBar.Panels(1).Text = ""
     
     
@@ -497,9 +492,9 @@ ErrorHandler:
 End Sub
 
 
-Private Sub optReport_Click(Index As Integer)
+Private Sub optReport_Click(index As Integer)
      ReportCriteria_Reset
-    lngReportId = Index
+    lngReportId = index
     If Not CheckReportSecurity Then Exit Sub
     Call ReportCriteria_1(lngReportId)
     

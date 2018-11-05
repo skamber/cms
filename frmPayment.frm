@@ -342,7 +342,7 @@ Begin VB.Form frmPayment
          PromptChar      =   "_"
       End
       Begin VB.Label Label17 
-         Caption         =   "DONATION TYPE"
+         Caption         =   "Donation Type"
          Enabled         =   0   'False
          BeginProperty Font 
             Name            =   "Arial"
@@ -360,7 +360,7 @@ Begin VB.Form frmPayment
          Width           =   1455
       End
       Begin VB.Label Label12 
-         Caption         =   "MEMBER EXPIRY DATE"
+         Caption         =   "Member Expiry Date"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25
@@ -377,7 +377,7 @@ Begin VB.Form frmPayment
          Width           =   1815
       End
       Begin VB.Label Label11 
-         Caption         =   "PAYMENT BEING"
+         Caption         =   "Payment Been"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25
@@ -394,7 +394,7 @@ Begin VB.Form frmPayment
          Width           =   1335
       End
       Begin VB.Label Label14 
-         Caption         =   "MEMO"
+         Caption         =   "Memo"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25
@@ -411,7 +411,7 @@ Begin VB.Form frmPayment
          Width           =   615
       End
       Begin VB.Label Label2 
-         Caption         =   "DATE OF PAYMENT"
+         Caption         =   "Date Of Payment"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25
@@ -428,7 +428,7 @@ Begin VB.Form frmPayment
          Width           =   1695
       End
       Begin VB.Label Label3 
-         Caption         =   "RECEIPT NO"
+         Caption         =   "Receipt No"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25
@@ -445,7 +445,7 @@ Begin VB.Form frmPayment
          Width           =   1215
       End
       Begin VB.Label Label4 
-         Caption         =   "USER NAME"
+         Caption         =   "User Name"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25
@@ -459,10 +459,10 @@ Begin VB.Form frmPayment
          Left            =   5160
          TabIndex        =   27
          Top             =   360
-         Width           =   735
+         Width           =   1455
       End
       Begin VB.Label Label5 
-         Caption         =   "MEMBER NO."
+         Caption         =   "Member No."
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25
@@ -479,7 +479,7 @@ Begin VB.Form frmPayment
          Width           =   1215
       End
       Begin VB.Label Label6 
-         Caption         =   "GIVEN NAME"
+         Caption         =   "Given Name"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25
@@ -496,7 +496,7 @@ Begin VB.Form frmPayment
          Width           =   1215
       End
       Begin VB.Label Label7 
-         Caption         =   "SURNAME"
+         Caption         =   "Surename"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25
@@ -513,7 +513,7 @@ Begin VB.Form frmPayment
          Width           =   975
       End
       Begin VB.Label Label8 
-         Caption         =   "STATUS"
+         Caption         =   "Status"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25
@@ -530,7 +530,7 @@ Begin VB.Form frmPayment
          Width           =   1095
       End
       Begin VB.Label Label9 
-         Caption         =   "EFFECTIVE"
+         Caption         =   "Effective From Date"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25
@@ -544,10 +544,10 @@ Begin VB.Form frmPayment
          Left            =   240
          TabIndex        =   22
          Top             =   2040
-         Width           =   1095
+         Width           =   1935
       End
       Begin VB.Label Label10 
-         Caption         =   "EXPIRY"
+         Caption         =   "Expiry Date"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25
@@ -564,7 +564,7 @@ Begin VB.Form frmPayment
          Width           =   855
       End
       Begin VB.Label Label13 
-         Caption         =   "PAYEMT TYPE"
+         Caption         =   "Payment Type"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25
@@ -581,7 +581,7 @@ Begin VB.Form frmPayment
          Width           =   1455
       End
       Begin VB.Label Label15 
-         Caption         =   "AMOUNT"
+         Caption         =   "Amount"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25
@@ -598,7 +598,7 @@ Begin VB.Form frmPayment
          Width           =   855
       End
       Begin VB.Label Label16 
-         Caption         =   "AMOUNT IN WORD"
+         Caption         =   "Amount In Word"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25

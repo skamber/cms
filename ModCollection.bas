@@ -233,8 +233,6 @@ Public Sub GenerateCollectionList(sql As String)
      Dim strId  As String
      Dim itmx As ListItem
      
-    
- 
  
      Screen.MousePointer = vbHourglass
  
@@ -252,7 +250,7 @@ Public Sub GenerateCollectionList(sql As String)
                                      If Not IsNull(rslocal!Payment) Then itmx.SubItems(1) = CStr(rslocal!Payment)
                                      If Not IsNull(rslocal!DATE_OF_COLLECTION) Then itmx.SubItems(2) = CStr(rslocal!DATE_OF_COLLECTION)
                                      If Not IsNull(rslocal!Amount) Then itmx.SubItems(3) = CStr(rslocal!Amount)
-                                     If Not IsNull(rslocal!Comments) Then itmx.SubItems(4) = CStr(rslocal!Comments)
+                                     itmx.SubItems(4) = "" & rslocal!Comments
                      Set itmx = Nothing
                      rslocal.MoveNext
                      
