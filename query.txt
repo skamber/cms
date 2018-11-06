@@ -12,3 +12,13 @@ SET GLOBAL general_log_file = 'c:/cms/sql_logs.txt';
 
 SET GLOBAL general_log = 'OFF';
 
+
+CREATE USER 'cms'@'%' IDENTIFIED BY 'SAMI7611';
+ALTER USER 'cms'@'%' IDENTIFIED BY 'SAMI7611';
+GRANT ALL ON church.* TO 'cms'@'%';
+flush privileges;
+
+
+SELECT Host, User FROM mysql.user;
+
+DROP USER 'cms'@'localhost';

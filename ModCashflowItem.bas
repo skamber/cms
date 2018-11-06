@@ -226,7 +226,7 @@ Public Sub LoadCashflowItemList()
          '==============================================================================
         
             Set rslocal = New ADODB.Recordset
-            sql = "SELECT * FROM CASHFLOWITEM"
+            sql = "SELECT * FROM cashflowitem"
             rslocal.Open sql, objConnection, adOpenForwardOnly, adLockReadOnly
              If Not rslocal Is Nothing Then
                  Do While Not rslocal.EOF

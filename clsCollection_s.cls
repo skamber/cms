@@ -45,7 +45,7 @@ On Error GoTo ErrorHandler
     
    
         'get next number -- cannot use AutoNumber function
-        sql = "SELECT MAX(col_ID) FROM COLLECTION"
+        sql = "SELECT MAX(col_ID) FROM collection"
         Set rsLocal = New ADODB.Recordset
             rsLocal.Open sql, dbConnection
             
@@ -60,7 +60,7 @@ On Error GoTo ErrorHandler
     
     
     'insert new record
-    sql = "INSERT INTO COLLECTION" _
+    sql = "INSERT INTO collection" _
                 & " (col_ID,payment, Amount, church_id, User_Name,type,comments,Date_of_collection)" _
                 & " VALUES" _
                 & " (" & NewCollectionId _
@@ -96,7 +96,7 @@ On Error GoTo ErrorHandler
     Dim sql As String
 
     
-    sql = "UPDATE COLLECTION SET" _
+    sql = "UPDATE collection SET" _
                 & " payment =" & "'" & objCollection.payment & "'" _
                 & " ,type =" & "'" & objCollection.types & "'" _
                 & " ,church_id =" & objCollection.ChurchId _
@@ -130,7 +130,7 @@ On Error GoTo ErrorHandler
     Dim rsLocal As ADODB.Recordset
     
 
-    sql = "SELECT * FROM Collection where COL_ID = " & lngCollectionID
+    sql = "SELECT * FROM collection where COL_ID = " & lngCollectionID
     
     Set rsLocal = New ADODB.Recordset
         rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly

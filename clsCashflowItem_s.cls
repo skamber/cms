@@ -39,7 +39,7 @@ On Error GoTo ErrorHandler
         
    
         'get next number -- cannot use AutoNumber function
-        sql = "SELECT MAX(ID) FROM CASHFLOWITEM"
+        sql = "SELECT MAX(ID) FROM cashflowitem"
         Set rsLocal = New ADODB.Recordset
             rsLocal.Open sql, dbConnection
             
@@ -54,7 +54,7 @@ On Error GoTo ErrorHandler
     
     
     'insert new record
-    sql = "INSERT INTO CASHFLOWITEM" _
+    sql = "INSERT INTO cashflowitem" _
                 & " (ID, ITEMNAME, ITEMCODE, GST, type)" _
                 & " VALUES" _
                 & " (" & NewCashFlowItemId _
@@ -76,7 +76,7 @@ On Error GoTo ErrorHandler
     Dim sql As String
 
     
-    sql = "UPDATE CASHFLOWITEM SET" _
+    sql = "UPDATE cashflowitem SET" _
                 & " ITEMNAME =" & "'" & objCashflowItem.ItemName & "'" _
                 & " ,ITEMCODE =" & "'" & objCashflowItem.ItemCode & "'" _
                 & " ,GST =" & objCashflowItem.GST _
@@ -99,7 +99,7 @@ On Error GoTo ErrorHandler
     Dim rsLocal As ADODB.Recordset
     
 
-    sql = "SELECT * FROM CASHFLOWITEM WHERE ID = " & lngCashflowItemID
+    sql = "SELECT * FROM cashflowitem WHERE ID = " & lngCashflowItemID
     
     Set rsLocal = New ADODB.Recordset
         rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly

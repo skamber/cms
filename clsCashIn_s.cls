@@ -43,7 +43,7 @@ On Error GoTo ErrorHandler
         
    
         'get next number -- cannot use AutoNumber function
-        sql = "SELECT MAX(ID) FROM CASHIN"
+        sql = "SELECT MAX(ID) FROM cashin"
         Set rsLocal = New ADODB.Recordset
             rsLocal.Open sql, dbConnection
             
@@ -58,7 +58,7 @@ On Error GoTo ErrorHandler
     
     
     'insert new record
-    sql = "INSERT INTO CASHIN" _
+    sql = "INSERT INTO cashin" _
                 & " (ID, ITEM, AMOUNT, GST, Net_AMOUNT, COMMENT" _
                 & " ,DateOfCashIn )" _
                 & " VALUES" _
@@ -88,7 +88,7 @@ On Error GoTo ErrorHandler
     Dim sql As String
 
     
-    sql = "UPDATE CASHIN SET" _
+    sql = "UPDATE cashin SET" _
                 & " ITEM =" & "'" & objCashIn.ITEM & "'" _
                 & " ,AMOUNT =" & objCashIn.Amount _
                 & " ,GST =" & objCashIn.GST _
@@ -120,7 +120,7 @@ On Error GoTo ErrorHandler
     Dim rsLocal As ADODB.Recordset
     
 
-    sql = "SELECT * FROM CASHIN WHERE ID = " & lngCashInID
+    sql = "SELECT * FROM cashin WHERE ID = " & lngCashInID
     
     Set rsLocal = New ADODB.Recordset
         rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly

@@ -42,7 +42,7 @@ On Error GoTo ErrorHandler
     
    
         'get next number -- cannot use AutoNumber function
-        sql = "SELECT MAX(Receipt_No) FROM PAYMENT"
+        sql = "SELECT MAX(Receipt_No) FROM payment"
         Set rsLocal = New ADODB.Recordset
             rsLocal.Open sql, dbConnection
             
@@ -57,7 +57,7 @@ On Error GoTo ErrorHandler
     
     
     'insert new record
-    sql = "INSERT INTO PAYMENT" _
+    sql = "INSERT INTO payment" _
                 & " (MNo, type,Payment, donation_type,Amount_in_Words, church_id,Amount" _
                 & ", Receipt_No, user_name, comments,Member_Effective, Member_Expiary" _
                 & ", Date_Of_Payment)" _
@@ -109,7 +109,7 @@ On Error GoTo ErrorHandler
     Dim sql As String
 
     
-    sql = "UPDATE PAYMENT SET" _
+    sql = "UPDATE payment SET" _
                 & " MNo =" & objpayment.MNo _
                 & " ,church_id =" & objpayment.ChurchId _
                 & " ,Payment =" & "'" & objpayment.PaymentType & "'" _
@@ -162,7 +162,7 @@ On Error GoTo ErrorHandler
     Dim rsLocal As ADODB.Recordset
     
 
-    sql = "SELECT * FROM PAYMENT WHERE Receipt_No = " & lngPaymentID
+    sql = "SELECT * FROM payment WHERE Receipt_No = " & lngPaymentID
     
     Set rsLocal = New ADODB.Recordset
         rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly

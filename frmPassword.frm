@@ -250,7 +250,7 @@ Private Sub cmdOK_Click()
         Exit Sub
     End If
     
-        sql = "SELECT * FROM Users WHERE Id = " & UserId
+        sql = "SELECT * FROM users WHERE Id = " & UserId
         
         Set objRecordset = New ADODB.Recordset
             objRecordset.Open sql, objConnection, adOpenForwardOnly, adLockOptimistic

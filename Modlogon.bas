@@ -66,7 +66,7 @@ On Error GoTo ErrorHandler
     Dim Ctr As Integer
     CheckLogonId = False
          
-    sql = "SELECT * FROM USERS WHERE Logon_ID = '" & strLogonID & "'" & " AND cityId =" & gCityId
+    sql = "SELECT * FROM users WHERE Logon_ID = '" & strLogonID & "'" & " AND cityId =" & gCityId
     
     Set rslocal = New ADODB.Recordset
         rslocal.Open sql, objConnection, adOpenForwardOnly, adLockReadOnly

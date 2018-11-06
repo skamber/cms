@@ -613,7 +613,7 @@ Private Sub LoadCashInList()
          '==============================================================================
         
             Set rslocal = New ADODB.Recordset
-            sql = "SELECT * FROM CASHIN Where DateOFCashIn between #" & Format(frmCashFlowView.dteFromDate.FormattedText, "yyyy-mm-dd") & _
+            sql = "SELECT * FROM cashin Where DateOFCashIn between #" & Format(frmCashFlowView.dteFromDate.FormattedText, "yyyy-mm-dd") & _
             "# AND #" & Format(frmCashFlowView.dteToDate.FormattedText, "yyyy-mm-dd") & "#"
             rslocal.Open sql, objConnection, adOpenForwardOnly, adLockReadOnly
              If Not rslocal Is Nothing Then
@@ -672,7 +672,7 @@ Private Sub LoadcashOutList()
          '==============================================================================
         
             Set rslocal = New ADODB.Recordset
-            sql = "SELECT * FROM CASHOUT Where DateOFCashOut between #" & Format(frmCashFlowView.dteFromDate.FormattedText, "yyyy-mm-dd") & _
+            sql = "SELECT * FROM cashout Where DateOFCashOut between #" & Format(frmCashFlowView.dteFromDate.FormattedText, "yyyy-mm-dd") & _
             "# AND #" & Format(frmCashFlowView.dteToDate.FormattedText, "yyyy-mm-dd") & "#"
             rslocal.Open sql, objConnection, adOpenForwardOnly, adLockReadOnly
              If Not rslocal Is Nothing Then

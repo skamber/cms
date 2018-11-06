@@ -26,7 +26,7 @@ On Error GoTo ErrorHandler
     Dim rsLocal As ADODB.Recordset
     
     
-    sql = "SELECT Action_Id, Action_name FROM Actions " _
+    sql = "SELECT Action_Id, Action_name FROM actions " _
             & "WHERE Action_name = " & "'" & strActionName & "'"
 
     Set rsLocal = New ADODB.Recordset
@@ -54,7 +54,7 @@ On Error GoTo ErrorHandler
     Dim rsLocal As ADODB.Recordset
     
     
-    sql = "SELECT Id, Payment_type FROM Type"
+    sql = "SELECT Id, Payment_type FROM type"
    
     Set rsLocal = New ADODB.Recordset
         rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly
@@ -82,7 +82,7 @@ On Error GoTo ErrorHandler
     Dim rsLocal As ADODB.Recordset
     
     
-    sql = "SELECT ID, Payment FROM Payment_type"
+    sql = "SELECT ID, Payment FROM payment_type"
    
     Set rsLocal = New ADODB.Recordset
         rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly
@@ -110,7 +110,7 @@ On Error GoTo ErrorHandler
     Dim rsLocal As ADODB.Recordset
     
     
-    sql = "SELECT ID, AmountInWord FROM WordAmount"
+    sql = "SELECT ID, AmountInWord FROM wordamount"
    
     Set rsLocal = New ADODB.Recordset
         rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly
@@ -138,7 +138,7 @@ On Error GoTo ErrorHandler
     Dim rsLocal As ADODB.Recordset
     
     
-    sql = "SELECT Id, Collection_type FROM CollectionType"
+    sql = "SELECT Id, Collection_type FROM collectiontype"
    
     Set rsLocal = New ADODB.Recordset
         rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly
@@ -168,8 +168,8 @@ On Error GoTo ErrorHandler
     
     Select Case CashFlowType
     
-    Case "CASHIN": sql = "SELECT Id, itemName FROM CashflowItem where type ='CASHIN'"
-    Case "CASHOUT": sql = "SELECT Id, itemName FROM CashflowItem where type ='CASHOUT'"
+    Case "CASHIN": sql = "SELECT Id, itemName FROM cashflowitem where type ='CASHIN'"
+    Case "CASHOUT": sql = "SELECT Id, itemName FROM cashflowitem where type ='CASHOUT'"
     End Select
     Set rsLocal = New ADODB.Recordset
         rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly
@@ -197,7 +197,7 @@ On Error GoTo ErrorHandler
     Dim rsLocal As ADODB.Recordset
     
     
-    sql = "SELECT ItemCode, GST FROM CashflowItem WHERE ItemName ='" & lngItem & "'"
+    sql = "SELECT ItemCode, GST FROM cashflowitem WHERE ItemName ='" & lngItem & "'"
    
     Set rsLocal = New ADODB.Recordset
         rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly
@@ -227,7 +227,7 @@ On Error GoTo ErrorHandler
     Dim rsLocal As ADODB.Recordset
     
     
-    sql = "SELECT ID, TermName FROM Term"
+    sql = "SELECT ID, TermName FROM term"
    
     Set rsLocal = New ADODB.Recordset
         rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly
@@ -255,7 +255,7 @@ On Error GoTo ErrorHandler
     Dim rsLocal As ADODB.Recordset
     
     
-    sql = "SELECT Action_id, Action_Name FROM Actions"
+    sql = "SELECT Action_id, Action_Name FROM actions"
 
     Set rsLocal = New ADODB.Recordset
         rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly
@@ -282,7 +282,7 @@ On Error GoTo ErrorHandler
     Dim rsLocal As ADODB.Recordset
     
     
-    sql = "SELECT ID, Descriprtion ,GST FROM InvoiceItemType"
+    sql = "SELECT ID, Descriprtion ,GST FROM invoiceitemtype"
    
     Set rsLocal = New ADODB.Recordset
         rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly
@@ -310,7 +310,7 @@ On Error GoTo ErrorHandler
     Dim rsLocal As ADODB.Recordset
     
     
-    sql = "SELECT ID, Donation FROM Donation_type"
+    sql = "SELECT ID, Donation FROM donation_type"
    
     Set rsLocal = New ADODB.Recordset
         rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly
@@ -337,7 +337,7 @@ On Error GoTo ErrorHandler
     Dim rsLocal As ADODB.Recordset
     
     
-    sql = "SELECT ID, Name FROM Church WHERE cityId = " & lngCityID
+    sql = "SELECT ID, Name FROM church WHERE cityId = " & lngCityID
    
     Set rsLocal = New ADODB.Recordset
         rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly
@@ -367,7 +367,7 @@ On Error GoTo ErrorHandler
     Dim rsLocal As ADODB.Recordset
     
     
-    sql = "SELECT Name FROM Church WHERE id =" & lngId
+    sql = "SELECT Name FROM church WHERE id =" & lngId
    
     Set rsLocal = New ADODB.Recordset
         rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly

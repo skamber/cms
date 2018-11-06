@@ -43,7 +43,7 @@ On Error GoTo ErrorHandler
         
    
         'get next number -- cannot use AutoNumber function
-        sql = "SELECT MAX(ID) FROM RECEIPT"
+        sql = "SELECT MAX(ID) FROM receipt"
         Set rsLocal = New ADODB.Recordset
             rsLocal.Open sql, dbConnection
             
@@ -58,7 +58,7 @@ On Error GoTo ErrorHandler
     
     
     'insert new record
-    sql = "INSERT INTO RECEIPT" _
+    sql = "INSERT INTO receipt" _
                 & " (ID, INV_ID,INV_NO, church_id, amount,user_Name, Cheque_number,Date_Of_Receipt)" _
                 & " VALUES" _
                 & " (" & NewReceiptId _
@@ -88,7 +88,7 @@ On Error GoTo ErrorHandler
     Dim sql As String
 
     
-    sql = "UPDATE RECEIPT SET " _
+    sql = "UPDATE receipt SET " _
                 & "INV_NO =" & "'" & objReceipt.INV_NO & "'" _
                 & " ,INV_ID =" & objReceipt.INV_ID _
                 & " ,church_id =" & objReceipt.ChurchId _
@@ -119,7 +119,7 @@ On Error GoTo ErrorHandler
     Dim rsLocal As ADODB.Recordset
     
 
-    sql = "SELECT * FROM Receipt WHERE INV_ID = " & lngInvoiceid
+    sql = "SELECT * FROM receipt WHERE INV_ID = " & lngInvoiceid
     
     Set rsLocal = New ADODB.Recordset
         rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly

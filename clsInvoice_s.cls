@@ -69,7 +69,7 @@ On Error GoTo ErrorHandler
     
    
         'get next number -- cannot use AutoNumber function
-        sql = "SELECT MAX(ID) FROM INVOICE"
+        sql = "SELECT MAX(ID) FROM invoice"
         Set rsLocal = New ADODB.Recordset
             rsLocal.Open sql, dbConnection
             
@@ -86,7 +86,7 @@ On Error GoTo ErrorHandler
         Set rsLocal = Nothing
     
     'insert new record
-    sql = "INSERT INTO INVOICE" _
+    sql = "INSERT INTO invoice" _
                 & " (ID, Invoice_no, church_id,Ref, Name1, Name2, Address1, Address2" _
                 & " ,Address3, Terms,Total_amount,state,Balance" _
                 & " ,Phone,Mobile,email,Created_date,over_due_date )" _
@@ -130,7 +130,7 @@ On Error GoTo ErrorHandler
     Dim sql As String
 
     
-    sql = "UPDATE INVOICE SET" _
+    sql = "UPDATE invoice SET" _
                 & " Invoice_no =" & "'" & objInvoice.Invoice_no & "'" _
                 & " ,church_id =" & objInvoice.ChurchId _
                 & " ,Ref =" & "'" & objInvoice.Ref & "'" _
@@ -176,7 +176,7 @@ On Error GoTo ErrorHandler
     Dim rsLocal As ADODB.Recordset
     
 
-    sql = "SELECT * FROM Invoice WHERE id = " & lngInvoiceID
+    sql = "SELECT * FROM invoice WHERE id = " & lngInvoiceID
     
     Set rsLocal = New ADODB.Recordset
         rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly
@@ -203,7 +203,7 @@ On Error GoTo ErrorHandler
     Dim rsLocal As ADODB.Recordset
     
 
-    sql = "SELECT * FROM Invoice WHERE Invoice_no = '" & lngInvoiceNo & "'"
+    sql = "SELECT * FROM invoice WHERE Invoice_no = '" & lngInvoiceNo & "'"
     
     Set rsLocal = New ADODB.Recordset
         rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly
@@ -229,7 +229,7 @@ On Error GoTo ErrorHandler
     Dim sql As String
 
     
-    sql = "UPDATE Invoice SET"
+    sql = "UPDATE invoice SET"
     sql = sql & " Balance =" & Balance
     sql = sql & " WHERE ID = " & InvoiceId
     dbConnection.Execute sql

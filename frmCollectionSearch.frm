@@ -206,12 +206,12 @@ Private Sub ShowDetais()
 Select Case cmbTypeSearch.Text
     
     Case "Collection Number"
-        sql = "SELECT * FROM Collection WHERE COL_ID = " & txtInputText.Text
+        sql = "SELECT * FROM collection WHERE COL_ID = " & txtInputText.Text
         GenerateCollectionList (sql)
     Case "Collection Date"
         strCollectionDate = Format(dteInputText.FormattedText, "yyyy-mm-dd")
 
-        sql = "SELECT * FROM Collection WHERE Collection.DATE_OF_COLLECTION = '" & strCollectionDate & _
+        sql = "SELECT * FROM collection WHERE Collection.DATE_OF_COLLECTION = '" & strCollectionDate & _
         "' ORDER BY PAYMENT"
         
         GenerateCollectionList (sql)

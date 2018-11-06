@@ -485,7 +485,7 @@ On Error GoTo ErrorHandler
     Dim sql As String
     Dim Count As Byte
     Count = 1
-    sql = "SELECT * FROM PRIVILEGE WHERE User_Id = " & UserId
+    sql = "SELECT * FROM privilege WHERE User_Id = " & UserId
     sql = sql & " Order by Action_Id"
     Set Userprivilege = New ADODB.Recordset
         Userprivilege.Open sql, objConnection, adOpenForwardOnly, adLockReadOnly
@@ -518,7 +518,7 @@ On Error GoTo ErrorHandler
     Dim sql As String
     Dim Count As Byte
     Count = 1
-    sql = "SELECT * FROM PRIVILEGE WHERE User_Id = " & UserId
+    sql = "SELECT * FROM privilege WHERE User_Id = " & UserId
     sql = sql & " Order by Action_Id"
     Set Userprivilege = New ADODB.Recordset
         Userprivilege.Open sql, objConnection, adOpenForwardOnly, adLockReadOnly

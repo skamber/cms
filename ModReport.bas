@@ -281,7 +281,7 @@ On Error GoTo ErrorHandler
         Case 6: 'Receipt
                 
                 strReportId = "InvoiceReceipt.rpt"
-                strReportSQL = "{Receipt.ID} = " & frmReceipt.txtReceiptId.Text
+                strReportSQL = "{receipt.ID} = " & frmReceipt.txtReceiptId.Text
             
         Case 7: 'Invoice
                 
@@ -291,12 +291,12 @@ On Error GoTo ErrorHandler
         Case 9: 'MemberShip Invoice
                 
                 strReportId = "MemberShip.rpt"
-                strReportSQL = "{Payment.Receipt_No} = " & frmPayment.txtReceiptNo.Text
+                strReportSQL = "{payment.Receipt_No} = " & frmPayment.txtReceiptNo.Text
 
         Case 10: 'Payment
             
                 strReportId = "PaymentReceipt.rpt"
-                strReportSQL = "{Payment.Receipt_No} = " & frmPayment.txtReceiptNo.Text
+                strReportSQL = "{payment.Receipt_No} = " & frmPayment.txtReceiptNo.Text
         
         Case 11: 'Collection
             
@@ -307,14 +307,14 @@ On Error GoTo ErrorHandler
                 strReportId = "MemberReport.rpt"
                 With frmReport
                 If .cboReportCriteria1.Text <> "All" Then
-                   strReportSQL = "{Member.PostCode} = '" & .cboReportCriteria1.Text & "'"
+                   strReportSQL = "{member.PostCode} = '" & .cboReportCriteria1.Text & "'"
                 End If
                 
                 If .cboReportCriteria2.Text <> "All" Then
                    If strReportSQL <> "" Then
-                     strReportSQL = strReportSQL & "AND" & "{Member.status} = '" & .cboReportCriteria2.Text & "'"
+                     strReportSQL = strReportSQL & "AND" & "{member.status} = '" & .cboReportCriteria2.Text & "'"
                    Else
-                    strReportSQL = "{Member.status} = '" & .cboReportCriteria2.Text & "'"
+                    strReportSQL = "{member.status} = '" & .cboReportCriteria2.Text & "'"
                    End If
                 End If
                 
@@ -340,11 +340,11 @@ On Error GoTo ErrorHandler
                 .Report.Formulas(0) = "STARTDATE= " & strStartDate
                 .Report.Formulas(1) = "ENDDATE= " & strEndDate
                   If strReportSQL <> "" Then
-                     strReportSQL = strReportSQL & "AND" & "{Member.Membership_Expiary} >= " & strStartDate _
-                     & " AND {Member.Membership_Expiary} <= " & strEndDate
+                     strReportSQL = strReportSQL & "AND" & "{member.Membership_Expiary} >= " & strStartDate _
+                     & " AND {member.Membership_Expiary} <= " & strEndDate
                   Else
-                    strReportSQL = "{Member.Membership_Expiary} >= " & strStartDate _
-                    & " AND {Member.Membership_Expiary} <= " & strEndDate
+                    strReportSQL = "{member.Membership_Expiary} >= " & strStartDate _
+                    & " AND {member.Membership_Expiary} <= " & strEndDate
                   End If
                 End If
                 End With
@@ -353,30 +353,30 @@ On Error GoTo ErrorHandler
                strReportId = "PaymentReport.rpt"
                 With frmReport
                 If .cboReportCriteria1.Text <> "All" Then
-                   strReportSQL = "{AllIncome.User_Name} = '" & .cboReportCriteria1.Text & "'"
+                   strReportSQL = "{allincome.User_Name} = '" & .cboReportCriteria1.Text & "'"
                 End If
 
                 If .cboReportCriteria2.Text <> "All" Then
                    If strReportSQL <> "" Then
-                     strReportSQL = strReportSQL & " AND " & "{AllIncome.Payment} = '" & .cboReportCriteria2.Text & "'"
+                     strReportSQL = strReportSQL & " AND " & "{allincome.Payment} = '" & .cboReportCriteria2.Text & "'"
                    Else
-                    strReportSQL = "{AllIncome.Payment} = '" & .cboReportCriteria2.Text & "'"
+                    strReportSQL = "{allincome.Payment} = '" & .cboReportCriteria2.Text & "'"
                    End If
                 End If
                 
                 If .cboReportCriteria3.Text <> "All" Then
                    If strReportSQL <> "" Then
-                     strReportSQL = strReportSQL & " AND " & "{AllIncome.type} = '" & .cboReportCriteria3.Text & "'"
+                     strReportSQL = strReportSQL & " AND " & "{allincome.type} = '" & .cboReportCriteria3.Text & "'"
                    Else
-                    strReportSQL = "{AllIncome.type} = '" & .cboReportCriteria3.Text & "'"
+                    strReportSQL = "{allincome.type} = '" & .cboReportCriteria3.Text & "'"
                    End If
                 End If
                 
                 If .txtMemberRno.Text <> "" Then
                     If strReportSQL <> "" Then
-                     strReportSQL = strReportSQL & " AND " & "{AllIncome.Mno} = " & .txtMemberRno.Text
+                     strReportSQL = strReportSQL & " AND " & "{allincome.Mno} = " & .txtMemberRno.Text
                    Else
-                    strReportSQL = "{AllIncome.Mno} = " & .txtMemberRno.Text
+                    strReportSQL = "{allincome.Mno} = " & .txtMemberRno.Text
                    End If
                  End If
                 
@@ -390,17 +390,17 @@ On Error GoTo ErrorHandler
                 .Report.Formulas(0) = "STARTDATE= " & strStartDate
                 .Report.Formulas(1) = "ENDDATE= " & strEndDate
                 If strReportSQL <> "" Then
-                strReportSQL = strReportSQL & " AND " & "{AllIncome.Date_Of_Payment} >= " & strStartDate _
-                & " AND {AllIncome.Date_Of_Payment} <= " & strEndDate
+                strReportSQL = strReportSQL & " AND " & "{allincome.Date_Of_Payment} >= " & strStartDate _
+                & " AND {allincome.Date_Of_Payment} <= " & strEndDate
                 Else
-                strReportSQL = "{AllIncome.Date_Of_Payment} >= " & strStartDate _
-                & " AND {AllIncome.Date_Of_Payment} <= " & strEndDate
+                strReportSQL = "{allincome.Date_Of_Payment} >= " & strStartDate _
+                & " AND {allincome.Date_Of_Payment} <= " & strEndDate
                 End If
                 
                 strReportSQL = strReportSQL & " AND " & "{church.cityId} =" & gCityId
                 
                                 
-                'strReportSQL = "{AllIncome.Date_Of_Payment} In Date(" & Format(.dteStartDate.FormattedText, "yyyy,mm,dd") & ") To Date(" & _
+                'strReportSQL = "{Allincome.Date_Of_Payment} In Date(" & Format(.dteStartDate.FormattedText, "yyyy,mm,dd") & ") To Date(" & _
                 'Format(.dteEndDate.FormattedText, "yyyy,mm,dd") & ") "
                 
                 End With
@@ -412,12 +412,12 @@ On Error GoTo ErrorHandler
 
                 strStartDate = "Date(" & Format(NewDate, "yyyy,mm,dd") & ")"
                 'used to display "for the period..." on report
-                strReportSQL = "{Children.Birth_Date} <= " & strStartDate
+                strReportSQL = "{children.Birth_Date} <= " & strStartDate
                 If .cboReportCriteria2.Text <> "All" Then
                     If .cboReportCriteria2.Text = "Member" Then
-                       strReportSQL = strReportSQL & " AND {Children.MEMBER} ='Y'"
+                       strReportSQL = strReportSQL & " AND {children.MEMBER} ='Y'"
                     Else
-                       strReportSQL = strReportSQL & " AND {Children.MEMBER} ='N'"
+                       strReportSQL = strReportSQL & " AND {children.MEMBER} ='N'"
                     End If
                 End If
                 End With
@@ -427,7 +427,7 @@ On Error GoTo ErrorHandler
                 strStartDate = "Date(" & Format(Date, "yyyy,mm,dd") & ")"
                 'used to display "for the period..." on report
                 strReportSQL = "{invoice.over_due_date} <= " & strStartDate _
-                & " AND {Invoice.Balance} <> " & 0 & " AND " & "{church.cityId} =" & gCityId
+                & " AND {invoice.Balance} <> " & 0 & " AND " & "{church.cityId} =" & gCityId
    
         Case 4:
                strReportId = "ReceiptReport.rpt"
@@ -440,11 +440,11 @@ On Error GoTo ErrorHandler
                 .Report.Formulas(0) = "STARTDATE= " & strStartDate
                 .Report.Formulas(1) = "ENDDATE= " & strEndDate
                 If strReportSQL <> "" Then
-                strReportSQL = strReportSQL & " AND " & "{Receipt.date_of_Receipt} >= " & strStartDate _
-                & " AND {Receipt.date_of_Receipt} <= " & strEndDate
+                strReportSQL = strReportSQL & " AND " & "{receipt.date_of_Receipt} >= " & strStartDate _
+                & " AND {receipt.date_of_Receipt} <= " & strEndDate
                 Else
-                strReportSQL = "{Receipt.date_of_Receipt} >= " & strStartDate _
-                & " AND {Receipt.date_of_Receipt} <= " & strEndDate
+                strReportSQL = "{receipt.date_of_Receipt} >= " & strStartDate _
+                & " AND {receipt.date_of_Receipt} <= " & strEndDate
                 End If
                 strReportSQL = strReportSQL & " AND " & "{church.cityId} =" & gCityId
               

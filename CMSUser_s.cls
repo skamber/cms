@@ -53,7 +53,7 @@ On Error GoTo ErrorHandler
     Dim rsLocal As ADODB.Recordset
     
 
-    sql = "SELECT Id, FULL_NAME FROM Users " _
+    sql = "SELECT Id, FULL_NAME FROM users " _
         & "WHERE Id = " & lngUserID
         
     Set rsLocal = New ADODB.Recordset
@@ -85,7 +85,7 @@ On Error GoTo ErrorHandler
     Dim rsLocal As ADODB.Recordset
     
 
-    sql = "SELECT Id, Full_name FROM Users "
+    sql = "SELECT Id, Full_name FROM users "
         
         
     Set rsLocal = New ADODB.Recordset
@@ -114,7 +114,7 @@ On Error GoTo ErrorHandler
     Dim rsLocal As ADODB.Recordset
     
 
-    sql = "SELECT * FROM Users " _
+    sql = "SELECT * FROM users " _
         & "WHERE Id =" & lngUserID
         
     Set rsLocal = New ADODB.Recordset
@@ -144,7 +144,7 @@ On Error GoTo ErrorHandler
     Dim sql As String
 
     
-    sql = "UPDATE USERS SET" _
+    sql = "UPDATE users SET" _
                 & " Full_Name =" & "'" & objUser.Username & "'" _
                 & " ,LOGON_ID =" & "'" & objUser.LogonId & "'" _
                 & " ,SYSTEM_MANAGER =" & "'" & objUser.SystemManager & "'" _
@@ -172,7 +172,7 @@ On Error GoTo ErrorHandler
            
    
         'get next number -- cannot use AutoNumber function
-        sql = "SELECT MAX(ID) FROM Users"
+        sql = "SELECT MAX(ID) FROM users"
         Set rsLocal = New ADODB.Recordset
             rsLocal.Open sql, dbConnection
             
@@ -187,7 +187,7 @@ On Error GoTo ErrorHandler
     
     
     'insert new record
-    sql = "INSERT INTO Users" _
+    sql = "INSERT INTO users" _
                 & " (Id, Full_Name, LOGON_ID,LOGON_PASSWORD,SYSTEM_MANAGER,REPORT_VIEW,PASSWORD_LAST_UPDATE)" _
                 & " VALUES" _
                 & " (" & NewUserId _
@@ -215,7 +215,7 @@ On Error GoTo ErrorHandler
     Dim sql As String
 
 
-    sql = "DELETE FROM Users" _
+    sql = "DELETE FROM users" _
         & " WHERE Id = " & lngUserID
     
     dbConnection.Execute sql

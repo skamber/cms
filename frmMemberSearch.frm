@@ -285,12 +285,12 @@ Private Sub ShowDetais()
 Select Case cmbTypeSearch.Text
     
     Case "Name"
-        sql = "SELECT * FROM Member WHERE Given_Name >= '" & txtInputText.Text & "' AND " & _
+        sql = "SELECT * FROM member WHERE Given_Name >= '" & txtInputText.Text & "' AND " & _
               " Given_Name < '" & get_MoreThanAndLessThan(txtInputText.Text) & "'" & _
               " ORDER BY Given_name"
         GenerateMemberList (sql)
     Case "Surname"
-        sql = "SELECT * FROM Member WHERE Surname >= '" & txtInputText.Text & "' AND " & _
+        sql = "SELECT * FROM member WHERE Surname >= '" & txtInputText.Text & "' AND " & _
         " Surname < '" & get_MoreThanAndLessThan(txtInputText.Text) & "'" & _
         " ORDER BY Surname"
         GenerateMemberList (sql)
@@ -300,7 +300,7 @@ Select Case cmbTypeSearch.Text
           MsgBox "Member Number has to be Numeric Value.", vbExclamation
           Exit Sub
         End If
-        sql = "SELECT * FROM Member WHERE Mno >=" & txtInputText.Text & _
+        sql = "SELECT * FROM member WHERE Mno >=" & txtInputText.Text & _
         " ORDER BY mno"
         GenerateMemberList (sql)
     Case "Post Code"
@@ -309,7 +309,7 @@ Select Case cmbTypeSearch.Text
           MsgBox "Post Code has to be Numeric Value.", vbExclamation
           Exit Sub
         End If
-        sql = "SELECT * FROM Member WHERE postCode = '" & txtInputText.Text & "'"
+        sql = "SELECT * FROM member WHERE postCode = '" & txtInputText.Text & "'"
         GenerateMemberList (sql)
     End Select
     
@@ -323,7 +323,7 @@ Private Sub SearchDetais()
     Dim linkSql As String
         
     
-    sql = "SELECT * FROM Member WHERE"
+    sql = "SELECT * FROM member WHERE"
     check = False
     linkSql = ""
         

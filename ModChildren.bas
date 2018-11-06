@@ -166,7 +166,7 @@ Public Sub GenerateChildrenList(memberNumber As Long)
          '==============================================================================
         
             Set rslocal = New ADODB.Recordset
-            sql = "SELECT * FROM CHILDREN WHERE MNo =" & memberNumber
+            sql = "SELECT * FROM children WHERE MNo =" & memberNumber
             rslocal.Open sql, objConnection, adOpenForwardOnly, adLockReadOnly
              If Not rslocal.EOF Then
                  Do While Not rslocal.EOF

@@ -40,7 +40,7 @@ On Error GoTo ErrorHandler
         
    
         'get next number -- cannot use AutoNumber function
-        sql = "SELECT MAX(MNO) FROM MEMBER"
+        sql = "SELECT MAX(MNO) FROM member"
         Set rsLocal = New ADODB.Recordset
             rsLocal.Open sql, dbConnection
             
@@ -55,7 +55,7 @@ On Error GoTo ErrorHandler
     
     
     'insert new record
-    sql = "INSERT INTO MEMBER" _
+    sql = "INSERT INTO member" _
                 & " (MNo, Mr, Surname, Given_Name, Full_Name, Spouse_Name, Address1" _
                 & " ,Address2, STATE,PostCode, Phone,  comments" _
                 & " ,STATUS,Email ,joining_date,Membership_Expiary,DATE_OF_BIRTH)" _
@@ -104,7 +104,7 @@ On Error GoTo ErrorHandler
     Dim sql As String
 
     
-    sql = "UPDATE MEMBER SET" _
+    sql = "UPDATE member SET" _
                 & " Mr =" & "'" & objMember.Initial & "'" _
                 & " ,Surname =" & "'" & objMember.Surname & "'" _
                 & " ,Given_Name =" & "'" & objMember.GivenName & "'" _
@@ -155,7 +155,7 @@ On Error GoTo ErrorHandler
     Dim sql As String
 
     
-    sql = "UPDATE MEMBER SET" _
+    sql = "UPDATE member SET" _
                 
                 
     If ExparyDate <> "" Then
@@ -181,7 +181,7 @@ On Error GoTo ErrorHandler
     Dim rsLocal As ADODB.Recordset
     
 
-    sql = "SELECT * FROM Member WHERE Mno = " & lngMemberID
+    sql = "SELECT * FROM member WHERE Mno = " & lngMemberID
     
     Set rsLocal = New ADODB.Recordset
         rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly
@@ -209,7 +209,7 @@ On Error GoTo ErrorHandler
     Dim rsLocal As ADODB.Recordset
     
 
-    sql = "SELECT Distinct postCode FROM Member"
+    sql = "SELECT distinct postCode FROM member"
 
     Set rsLocal = New ADODB.Recordset
         rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly
@@ -235,7 +235,7 @@ On Error GoTo ErrorHandler
     Dim sql As String
 
     
-    sql = "UPDATE MEMBER SET" _
+    sql = "UPDATE member SET" _
                 
                 
     If STATUS <> "" Then

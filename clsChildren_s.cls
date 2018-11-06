@@ -43,7 +43,7 @@ On Error GoTo ErrorHandler
         
    
         'get next number -- cannot use AutoNumber function
-        sql = "SELECT MAX(ID) FROM CHILDREN"
+        sql = "SELECT MAX(ID) FROM children"
         
         Set rsLocal = New ADODB.Recordset
             rsLocal.Open sql, dbConnection
@@ -122,7 +122,7 @@ On Error GoTo ErrorHandler
     Dim rsLocal As ADODB.Recordset
     
 
-    sql = "SELECT * FROM CHILDREN WHERE Id = " & lngChildID
+    sql = "SELECT * FROM children WHERE Id = " & lngChildID
     
     Set rsLocal = New ADODB.Recordset
         rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly

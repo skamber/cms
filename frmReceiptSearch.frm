@@ -155,10 +155,10 @@ Private Sub ShowDetais()
 Select Case cmbTypeSearch.Text
     
     Case "Receipt Number"
-        sql = "SELECT * FROM Receipt WHERE ID = " & txtInputText.Text
+        sql = "SELECT * FROM receipt WHERE ID = " & txtInputText.Text
         GenerateReceiptList (sql)
     Case "Invoice Number"
-        sql = "SELECT * FROM Receipt WHERE INV_NO = '" & txtInputText.Text & "'" & _
+        sql = "SELECT * FROM receipt WHERE INV_NO = '" & txtInputText.Text & "'" & _
         " ORDER BY ID"
         GenerateReceiptList (sql)
     End Select

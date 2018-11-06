@@ -405,9 +405,9 @@ Public Sub GeneratePaymentList(ByVal memberNumber As Long)
         
             Set rslocal = New ADODB.Recordset
             If frmPaymentSearch.cmbType.Text = "All" Or frmPaymentSearch.cmbType.Text = "" Then
-            sql = "SELECT * FROM PAYMENT WHERE MNo =" & memberNumber
+            sql = "SELECT * FROM payment WHERE MNo =" & memberNumber
             Else
-            sql = "SELECT * FROM PAYMENT WHERE MNo =" & memberNumber
+            sql = "SELECT * FROM payment WHERE MNo =" & memberNumber
             sql = sql & " AND PAYMENT ='" & frmPaymentSearch.cmbType.Text & "'"
             End If
             rslocal.Open sql, objConnection, adOpenForwardOnly, adLockReadOnly

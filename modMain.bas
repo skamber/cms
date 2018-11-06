@@ -141,7 +141,7 @@ Public Function ConnectDatabase()
     
     lRet = GetPrivateProfileString(sAppName, "UserPassword", sDefault, sRet, lSize, sFileName)
     sPassword = Left(sRet, InStrB(1, sRet, Chr(0)) / 2)
-        
+    sPassword = DecryptPassword(sPassword)
     sAppName = "Office"
     lRet = GetPrivateProfileString(sAppName, "CityId", sDefault, sRet, lSize, sFileName)
     gCityId = Left(sRet, InStrB(1, sRet, Chr(0)) / 2)
