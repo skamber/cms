@@ -35,6 +35,9 @@ Private mvarEMAIL As String 'local copy
 Private Const DATE_FORMAT = "dd/mm/yyyy"
 'local variable(s) to hold property value(s)
 Private mvarInitial As String 'local copy
+Private mvarCityId As Long
+
+
 
 
 Public Property Let DateOfBirth(ByVal vData As String)
@@ -287,3 +290,15 @@ Public Property Get Email() As String
     Email = mvarEMAIL
 End Property
 
+Public Property Let cityId(ByVal vData As Long)
+'used when assigning a value to the property, on the left side of an assignment.
+'Syntax: X.mno = 5
+    mvarCityId = vData
+End Property
+
+
+Public Property Get cityId() As Long
+'used when retrieving value of a property, on the right side of an assignment.
+'Syntax: Debug.Print X.mno
+    cityId = mvarCityId
+End Property

@@ -14,6 +14,7 @@ Public gCashoutId As Long
 Public gCashflowItemId As Long
 Public gChurchId As Long
 Public gCityId As Long
+Public gCityName As String
 Public PrivilegeBookMark As Variant
 Public Userprivilege As ADODB.Recordset
 Public objConnection As ADODB.Connection
@@ -112,6 +113,7 @@ Public Function ConnectDatabase()
     Dim sDatabaseName As String
     Dim sUserName As String
     Dim sPassword As String
+    Dim sCertPath As String
     
     Dim sDefault As String * 100
     Dim sRet As String * 100
@@ -145,12 +147,18 @@ Public Function ConnectDatabase()
     sAppName = "Office"
     lRet = GetPrivateProfileString(sAppName, "CityId", sDefault, sRet, lSize, sFileName)
     gCityId = Left(sRet, InStrB(1, sRet, Chr(0)) / 2)
+    
+    lRet = GetPrivateProfileString(sAppName, "CertPath", sDefault, sRet, lSize, sFileName)
+    sCertPath = Left(sRet, InStrB(1, sRet, Chr(0)) / 2)
+    
             
     Set objConnection = New ADODB.Connection
     On Error Resume Next
     
     With objConnection
-            .Open "Driver={MySQL ODBC 5.3 ANSI Driver};Server=" & sHost & ";Database=" & sDatabaseName & "; User=" & sUserName & ";Password=" & sPassword & ";Option=3;"
+            .Open "Driver={MySQL ODBC 5.3 ANSI Driver};Server=" & sHost & ";Database=" & _
+            sDatabaseName & "; User=" & sUserName & ";Password=" & sPassword & _
+            ";sslca=" & sCertPath & "; sslverify=1; Option=3;"
             
             
     End With
@@ -1209,3 +1217,16 @@ End If
 End Function
 
 
+Public Function FindCBIndex(ByRef cbComboBox As ComboBox, ByRef strSearchValue As String) As Integer
+    Dim n As Integer
+    For n = 0 To cbComboBox.ListCount - 1
+        If cbComboBox.List(n) = strSearchValue Then
+          ' // Return the found index
+            FindCBIndex = n
+          ' // and exit
+            Exit Function
+        End If
+    Next
+  ' // Set not found value
+    FindCBIndex = -1
+End Function

@@ -687,11 +687,9 @@ gRecordMode = RECORD_READ
      gRecordType = MEMBER
      gRecordMode = RECORD_READ
      SetToolbarControl
-     
      MDIFrm.pnlStatusBar.Panels(1).Text = ""
      DoEvents
- 
- 
+     
  Exit Sub
 ErrorHandler:
      Call objError.ErrorRoutine(Err.Number, Err.Description, objConnection, "frmMember", "Form_Load", True)

@@ -88,6 +88,8 @@ On Error GoTo ErrorHandler
             objChild.surname = .txtSurname.Text
             objChild.Email = .txtEmail.Text
             objChild.Memo = .txtMemo.Text
+            objChild.cityId = gCityId
+            
             
             
             

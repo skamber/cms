@@ -288,12 +288,12 @@ Select Case cmbTypeSearch.Text
         sql = "SELECT * FROM member WHERE Given_Name >= '" & txtInputText.Text & "' AND " & _
               " Given_Name < '" & get_MoreThanAndLessThan(txtInputText.Text) & "'" & _
               " ORDER BY Given_name"
-        GenerateMemberList (sql)
+
     Case "Surname"
         sql = "SELECT * FROM member WHERE Surname >= '" & txtInputText.Text & "' AND " & _
         " Surname < '" & get_MoreThanAndLessThan(txtInputText.Text) & "'" & _
         " ORDER BY Surname"
-        GenerateMemberList (sql)
+
     Case "Member Number"
         s = Val(txtInputText.Text)
         If s = 0 Then
@@ -302,7 +302,7 @@ Select Case cmbTypeSearch.Text
         End If
         sql = "SELECT * FROM member WHERE Mno >=" & txtInputText.Text & _
         " ORDER BY mno"
-        GenerateMemberList (sql)
+
     Case "Post Code"
         s = Val(txtInputText.Text)
         If s = 0 Then
@@ -310,9 +310,12 @@ Select Case cmbTypeSearch.Text
           Exit Sub
         End If
         sql = "SELECT * FROM member WHERE postCode = '" & txtInputText.Text & "'"
-        GenerateMemberList (sql)
+        
     End Select
-    
+    If sql <> "" Then
+    sql = sql & " AND CITY_ID = " & gCityId
+      GenerateMemberList (sql)
+    End If
     
 End Sub
 Private Sub SearchDetais()
@@ -404,6 +407,7 @@ Private Sub SearchDetais()
        End Select
         
     If check = True Then
+       sql = sql & " AND CITY_ID = " & gCityId
        GenerateMemberList (sql)
     End If
         

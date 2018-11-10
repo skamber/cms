@@ -22,3 +22,10 @@ flush privileges;
 SELECT Host, User FROM mysql.user;
 
 DROP USER 'cms'@'localhost';
+
+ALTER USER 'cms'@'%' REQUIRE SSL;  
+
+// remove the same updater mode
+SET SQL_SAFE_UPDATES = 0;
+
+CREATE DATABASE rubixsport CHARACTER SET utf8 COLLATE utf8_unicode_ci;

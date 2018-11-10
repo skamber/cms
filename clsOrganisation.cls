@@ -360,6 +360,66 @@ ErrorHandler:
 
 End Function
 
+Public Function getCities() As ADODB.Recordset
+On Error GoTo ErrorHandler
+
+    Dim sql As String
+    Dim rsLocal As ADODB.Recordset
+    
+    
+    sql = "SELECT ID, CityName, CountryId FROM city"
+   
+    Set rsLocal = New ADODB.Recordset
+        rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly
+
+    If rsLocal.EOF = True Then
+        'MsgBox "No records found for Office.", vbExclamation
+        Set getCities = Nothing
+    Else
+        Set getCities = rsLocal
+    End If
+    
+    Set rsLocal = Nothing
+
+
+Exit Function
+ErrorHandler:
+       
+   Debug.Print (Err.Description)
+   ' Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getCities", True)
+
+End Function
+
+Public Function getCityNameById(ByVal cityId As Long) As ADODB.Recordset
+On Error GoTo ErrorHandler
+
+    Dim sql As String
+    Dim rsLocal As ADODB.Recordset
+    
+    
+    sql = "SELECT CityName FROM city WHERE ID =" & cityId
+   
+    Set rsLocal = New ADODB.Recordset
+        rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly
+
+    If rsLocal.EOF = True Then
+        'MsgBox "No records found for Office.", vbExclamation
+        Set getCityNameById = Nothing
+    Else
+        Set getCityNameById = rsLocal
+    End If
+    
+    Set rsLocal = Nothing
+
+
+Exit Function
+ErrorHandler:
+       
+   Debug.Print (Err.Description)
+   ' Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getCities", True)
+
+End Function
+
 Public Function getChurchNameById(ByVal lngId As Long) As ADODB.Recordset
 On Error GoTo ErrorHandler
 

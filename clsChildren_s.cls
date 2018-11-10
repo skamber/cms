@@ -59,11 +59,12 @@ On Error GoTo ErrorHandler
     
     
     'insert new record
-    sql = "INSERT INTO CHILDREN" _
-                & " (MNo, ID, First_Name, Surname, Email,COMMENTS,Genda, Member, Birth_Date)" _
+    sql = "INSERT INTO children" _
+                & " (MNo, ID, CITY_ID, First_Name, Surname, Email,COMMENTS,Genda, Member, Birth_Date)" _
                 & " VALUES" _
                 & " (" & objChild.MNo _
                 & "," & NewChildId _
+                & "," & objChild.cityId _
                 & ",'" & objChild.FirstName & "','" & objChild.Surname & "'" _
                 & ",'" & objChild.Email & "','" & objChild.Memo & "'" _
                 & ",'" & objChild.Genda & "','" & objChild.Member & "'"
@@ -78,7 +79,8 @@ On Error GoTo ErrorHandler
 
 Exit Function
 ErrorHandler:
-    'Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsmember_s", "Insertmember", True)
+    
+    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsmember_s", "Insertmember", True)
 
 End Function
 
@@ -88,7 +90,7 @@ On Error GoTo ErrorHandler
     Dim sql As String
 
     
-    sql = "UPDATE CHILDREN SET" _
+    sql = "UPDATE children SET" _
                 & " MNo =" & objChild.MNo _
                 & " ,First_Name =" & "'" & objChild.FirstName & "'" _
                 & " ,Surname =" & "'" & objChild.Surname & "'" _

@@ -181,6 +181,8 @@ On Error GoTo ErrorHandler
             objMember.State = .txtState.Text
             objMember.Status = .cmbStatus.Text
             objMember.Email = .txtEmail.Text
+            objMember.cityId = gCityId
+            
               
             If .dteDateOfBirth.Text <> "" Then objMember.DateOfBirth = .dteDateOfBirth.FormattedText
             If .dteMemberPhone.Text <> "" Then objMember.Phone = .dteMemberPhone.FormattedText
@@ -210,6 +212,8 @@ Public Sub GenerateMemberList(sql As String)
  
  
      Screen.MousePointer = vbHourglass
+     
+     
  
      With frmMemberSearch
              .ListMemberView.ListItems.Clear
@@ -358,3 +362,5 @@ With frmMember
 End With
 
 End Function
+
+

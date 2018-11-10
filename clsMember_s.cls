@@ -56,14 +56,15 @@ On Error GoTo ErrorHandler
     
     'insert new record
     sql = "INSERT INTO member" _
-                & " (MNo, Mr, Surname, Given_Name, Full_Name, Spouse_Name, Address1" _
+                & " (MNo, Mr, Surname, Given_Name, Full_Name, Spouse_Name, Address1, CITY_ID" _
                 & " ,Address2, STATE,PostCode, Phone,  comments" _
                 & " ,STATUS,Email ,joining_date,Membership_Expiary,DATE_OF_BIRTH)" _
                 & " VALUES" _
                 & " (" & NewMemberId _
                 & ",'" & objMember.Initial & "'" _
                 & ",'" & objMember.Surname & "','" & objMember.GivenName & "'" _
-                & ",'" & objMember.FullName & "','" & objMember.SpouseName & "','" & objMember.Address1 & "'" _
+                & ",'" & objMember.FullName & "','" & objMember.SpouseName & "','" _
+                & objMember.Address1 & "'," & objMember.cityId _
                 & ",'" & objMember.Address2 & "','" & objMember.State & "'" _
                 & ",'" & objMember.PostCode & "'" _
                 & ",'" & objMember.Phone & "'" _
@@ -93,7 +94,7 @@ On Error GoTo ErrorHandler
 
 Exit Function
 ErrorHandler:
-    Debug.Print (Err.Description)
+   
     'Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsmember_s", "Insertmember", True)
 
 End Function

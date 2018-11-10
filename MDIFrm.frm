@@ -272,12 +272,14 @@ Begin VB.MDIForm MDIFrm
       _ExtentY        =   661
       _Version        =   393216
       BeginProperty Panels {8E3867A5-8586-11D1-B16A-00C0F0283628} 
-         NumPanels       =   2
+         NumPanels       =   3
          BeginProperty Panel1 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Object.Width           =   18699
             MinWidth        =   18699
          EndProperty
          BeginProperty Panel2 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
+         EndProperty
+         BeginProperty Panel3 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Object.Width           =   8469
             MinWidth        =   8469
          EndProperty
@@ -333,6 +335,7 @@ End Sub
 Private Sub MDIForm_Load()
 pnlStatusBar.Panels(1).Text = ""
 getChruchNameById
+getCityNameById
 If Not systemManager Then MDIFrm.MnuSystemSetting.Visible = False
 End Sub
 
@@ -543,6 +546,8 @@ Public Function getChruchNameById()
     With frmCashIn
             If Not rslocal Is Nothing Then
              pnlStatusBar.Panels(2).Text = rslocal!Name
+              pnlStatusBar.Panels(2).Width = 5000
+              
              Set rslocal = Nothing
             End If
                    
@@ -554,3 +559,27 @@ ErrorHandler:
 
 End Function
 
+Public Function getCityNameById()
+  On Error GoTo ErrorHandler
+
+    Dim objOrganisation_s As CMSOrganisation.clsOrganisation
+    Dim rslocal As ADODB.Recordset
+    Set objOrganisation_s = New CMSOrganisation.clsOrganisation
+    Set objOrganisation_s.DatabaseConnection = objConnection
+    Set rslocal = objOrganisation_s.getCityNameById(gCityId)
+    
+    With frmCashIn
+            If Not rslocal Is Nothing Then
+             pnlStatusBar.Panels(3).Text = rslocal!CityName
+             pnlStatusBar.Panels(3).Width = 4000
+             Set rslocal = Nothing
+            End If
+                   
+    End With
+ 
+    Set objOrganisation_s = Nothing
+Exit Function
+ErrorHandler:
+    Call objError.ErrorRoutine(Err.Number, Err.Description, objConnection, "modCashIn", "LoadCashInComboBox", True)
+
+End Function
