@@ -22,6 +22,36 @@ ErrorHandler:
 
 End Function
 
+Public Function LoadCityNamesComboBox()
+On Error GoTo ErrorHandler
+
+    Dim objOrganisation_s As CMSOrganisation.clsOrganisation
+    Dim rslocal As ADODB.Recordset
+    Set objOrganisation_s = New CMSOrganisation.clsOrganisation
+    Set objOrganisation_s.DatabaseConnection = objConnection
+
+    Set rslocal = objOrganisation_s.getCities()
+
+    With frmLogon
+            
+            .cmbCityName.Clear
+            If Not rslocal Is Nothing Then
+                Do Until rslocal.EOF
+                    .cmbCityName.AddItem rslocal!CityName
+                    .cmbCityName.ItemData(.cmbCityName.NewIndex) = rslocal!ID
+                    rslocal.MoveNext
+                Loop
+                Set rslocal = Nothing
+            End If
+    End With
+    Set objOrganisation_s = Nothing
+
+Exit Function
+ErrorHandler:
+    'Call objError.ErrorRoutine(Err.Number, Err.Description, objConnection, "modlogon", "LoadChurchComboBox", True)
+
+End Function
+
 Public Function LoadChurchComboBox()
 On Error GoTo ErrorHandler
 
@@ -40,7 +70,7 @@ On Error GoTo ErrorHandler
             If Not rslocal Is Nothing Then
                 Do Until rslocal.EOF
                     .cmbChurchName.AddItem rslocal!Name
-                    .cmbChurchName.ItemData(.cmbChurchName.NewIndex) = rslocal!Id
+                    .cmbChurchName.ItemData(.cmbChurchName.NewIndex) = rslocal!ID
                     rslocal.MoveNext
                 Loop
                 Set rslocal = Nothing
@@ -94,14 +124,14 @@ On Error GoTo ErrorHandler
         Exit Function
     End If
     End If
-    If getUserPriveleges(rslocal!Id) Then
+    If getUserPriveleges(rslocal!ID) Then
               CheckLogonId = True
     Else
         CheckLogonId = False
         
     End If
     UserName = rslocal!Full_Name
-    UserId = rslocal!Id
+    UserId = rslocal!ID
     dtePasswordLastUpdate = rslocal!Password_Last_Update
     checkSystemManager = rslocal!SYSTEM_MANAGER
     checkReportView = rslocal!Report_View

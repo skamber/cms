@@ -281,41 +281,39 @@ Private Sub ShowDetais()
     Dim retuns As String
     Dim s As Long
     
+    sql = "SELECT * FROM member WHERE CITY_ID = " & gCityId
     
-Select Case cmbTypeSearch.Text
+    Select Case cmbTypeSearch.Text
+
+        Case "Name"
+            sql = sql & " AND  Given_Name >= '" & txtInputText.Text & "' AND " & _
+                  " Given_Name < '" & get_MoreThanAndLessThan(txtInputText.Text) & "'" & _
+                  " ORDER BY Given_name"
     
-    Case "Name"
-        sql = "SELECT * FROM member WHERE Given_Name >= '" & txtInputText.Text & "' AND " & _
-              " Given_Name < '" & get_MoreThanAndLessThan(txtInputText.Text) & "'" & _
-              " ORDER BY Given_name"
-
-    Case "Surname"
-        sql = "SELECT * FROM member WHERE Surname >= '" & txtInputText.Text & "' AND " & _
-        " Surname < '" & get_MoreThanAndLessThan(txtInputText.Text) & "'" & _
-        " ORDER BY Surname"
-
-    Case "Member Number"
-        s = Val(txtInputText.Text)
-        If s = 0 Then
-          MsgBox "Member Number has to be Numeric Value.", vbExclamation
-          Exit Sub
-        End If
-        sql = "SELECT * FROM member WHERE Mno >=" & txtInputText.Text & _
-        " ORDER BY mno"
-
-    Case "Post Code"
-        s = Val(txtInputText.Text)
-        If s = 0 Then
-          MsgBox "Post Code has to be Numeric Value.", vbExclamation
-          Exit Sub
-        End If
-        sql = "SELECT * FROM member WHERE postCode = '" & txtInputText.Text & "'"
+        Case "Surname"
+            sql = sql & " AND Surname >= '" & txtInputText.Text & "' AND " & _
+            " Surname < '" & get_MoreThanAndLessThan(txtInputText.Text) & "'" & _
+            " ORDER BY Surname"
+    
+        Case "Member Number"
+            s = Val(txtInputText.Text)
+            If s = 0 Then
+              MsgBox "Member Number has to be Numeric Value.", vbExclamation
+              Exit Sub
+            End If
+            sql = sql & " AND Mno >=" & txtInputText.Text & _
+            " ORDER BY mno"
+    
+        Case "Post Code"
+            s = Val(txtInputText.Text)
+            If s = 0 Then
+              MsgBox "Post Code has to be Numeric Value.", vbExclamation
+              Exit Sub
+            End If
+            sql = sql & " AND postCode = '" & txtInputText.Text & "'"
         
     End Select
-    If sql <> "" Then
-    sql = sql & " AND CITY_ID = " & gCityId
-      GenerateMemberList (sql)
-    End If
+    GenerateMemberList (sql)
     
 End Sub
 Private Sub SearchDetais()
@@ -326,11 +324,11 @@ Private Sub SearchDetais()
     Dim linkSql As String
         
     
-    sql = "SELECT * FROM member WHERE"
+    sql = "SELECT * FROM member WHERE CITY_ID = " & gCityId & " AND "
     check = False
     linkSql = ""
         
-        Select Case cmbTypeSearch.Text
+    Select Case cmbTypeSearch.Text
              
          Case "Name"
             If txtInputText.Text <> "" Then
@@ -364,13 +362,13 @@ Private Sub SearchDetais()
             sql = sql & " postCode = '" & txtInputText.Text & "'"
             check = True
             End If
-        End Select
+    End Select
         
-        If check = True Then
-           linkSql = " and "
-        End If
+    If check = True Then
+        linkSql = " and "
+    End If
         
-       Select Case cmbTypeSearch1.Text
+    Select Case cmbTypeSearch1.Text
              
         Case "Name"
             If txtInputText1.Text <> "" Then
@@ -404,10 +402,9 @@ Private Sub SearchDetais()
             sql = sql & linkSql & " postCode = '" & txtInputText1.Text & "'"
             check = True
             End If
-       End Select
+    End Select
         
     If check = True Then
-       sql = sql & " AND CITY_ID = " & gCityId
        GenerateMemberList (sql)
     End If
         

@@ -144,9 +144,7 @@ Public Function ConnectDatabase()
     lRet = GetPrivateProfileString(sAppName, "UserPassword", sDefault, sRet, lSize, sFileName)
     sPassword = Left(sRet, InStrB(1, sRet, Chr(0)) / 2)
     sPassword = DecryptPassword(sPassword)
-    sAppName = "Office"
-    lRet = GetPrivateProfileString(sAppName, "CityId", sDefault, sRet, lSize, sFileName)
-    gCityId = Left(sRet, InStrB(1, sRet, Chr(0)) / 2)
+
     
     lRet = GetPrivateProfileString(sAppName, "CertPath", sDefault, sRet, lSize, sFileName)
     sCertPath = Left(sRet, InStrB(1, sRet, Chr(0)) / 2)
@@ -424,10 +422,10 @@ Public Function ProcessRecord(ByVal sFunction As String)
         
         
         Case RECORD_DELETE
-'                     If User.Manager = "N" Then
-'                        MsgBox "Delete function restricted to Manager access level.", vbExclamation
-'                        Exit Function
-'                     End If
+                    ' If User.Manager = "N" Then
+                    '    MsgBox "Delete function restricted to Manager access level.", vbExclamation
+                    '    Exit Function
+                    ' End If
                     Select Case gRecordType
                     
                     Case MEMBER:
