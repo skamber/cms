@@ -37,8 +37,14 @@ On Error GoTo ErrorHandler
             .cmbCityName.Clear
             If Not rslocal Is Nothing Then
                 Do Until rslocal.EOF
-                    .cmbCityName.AddItem rslocal!CityName
-                    .cmbCityName.ItemData(.cmbCityName.NewIndex) = rslocal!ID
+                    .cmbCityName.AddItem rslocal!cityName
+                    .cmbCityName.ItemData(.cmbCityName.NewIndex) = rslocal!id
+                    Dim cityName As String
+                    Dim cityId As String
+                    cityName = rslocal!cityName
+                    cityId = rslocal!id
+                    Cities.Add cityName, cityId
+                    
                     rslocal.MoveNext
                 Loop
                 Set rslocal = Nothing
@@ -46,11 +52,15 @@ On Error GoTo ErrorHandler
     End With
     Set objOrganisation_s = Nothing
 
+
 Exit Function
 ErrorHandler:
     'Call objError.ErrorRoutine(Err.Number, Err.Description, objConnection, "modlogon", "LoadChurchComboBox", True)
 
 End Function
+
+
+
 
 Public Function LoadChurchComboBox()
 On Error GoTo ErrorHandler
@@ -70,7 +80,7 @@ On Error GoTo ErrorHandler
             If Not rslocal Is Nothing Then
                 Do Until rslocal.EOF
                     .cmbChurchName.AddItem rslocal!Name
-                    .cmbChurchName.ItemData(.cmbChurchName.NewIndex) = rslocal!ID
+                    .cmbChurchName.ItemData(.cmbChurchName.NewIndex) = rslocal!id
                     rslocal.MoveNext
                 Loop
                 Set rslocal = Nothing
@@ -124,14 +134,14 @@ On Error GoTo ErrorHandler
         Exit Function
     End If
     End If
-    If getUserPriveleges(rslocal!ID) Then
+    If getUserPriveleges(rslocal!id) Then
               CheckLogonId = True
     Else
         CheckLogonId = False
         
     End If
     UserName = rslocal!Full_Name
-    UserId = rslocal!ID
+    UserId = rslocal!id
     dtePasswordLastUpdate = rslocal!Password_Last_Update
     checkSystemManager = rslocal!SYSTEM_MANAGER
     checkReportView = rslocal!Report_View

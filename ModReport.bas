@@ -336,16 +336,21 @@ On Error GoTo ErrorHandler
                 If .dteStartDate.Text = "" Then strStartDate = "Date(1970,01,01)"
                 If .dteEndDate.Text = "" Then strEndDate = "Date(2070,01,01)"
                 If .dteStartDate.Text <> "" And .dteEndDate.Text <> "" Then
-                'used to display "for the period..." on report
-                .Report.Formulas(0) = "STARTDATE= " & strStartDate
-                .Report.Formulas(1) = "ENDDATE= " & strEndDate
-                  If strReportSQL <> "" Then
-                     strReportSQL = strReportSQL & "AND" & "{member.Membership_Expiary} >= " & strStartDate _
-                     & " AND {member.Membership_Expiary} <= " & strEndDate
-                  Else
-                    strReportSQL = "{member.Membership_Expiary} >= " & strStartDate _
-                    & " AND {member.Membership_Expiary} <= " & strEndDate
-                  End If
+                    'used to display "for the period..." on report
+                    .Report.Formulas(0) = "STARTDATE= " & strStartDate
+                    .Report.Formulas(1) = "ENDDATE= " & strEndDate
+                      If strReportSQL <> "" Then
+                         strReportSQL = strReportSQL & "AND" & "{member.Membership_Expiary} >= " & strStartDate _
+                         & " AND {member.Membership_Expiary} <= " & strEndDate
+                      Else
+                        strReportSQL = "{member.Membership_Expiary} >= " & strStartDate _
+                        & " AND {member.Membership_Expiary} <= " & strEndDate
+                      End If
+                End If
+                If strReportSQL <> "" Then
+                  strReportSQL = strReportSQL & " AND {member.CITY_ID} =" & gCityId
+                Else
+                  strReportSQL = "{member.CITY_ID} =" & gCityId
                 End If
                 End With
 
@@ -420,6 +425,7 @@ On Error GoTo ErrorHandler
                        strReportSQL = strReportSQL & " AND {children.MEMBER} ='N'"
                     End If
                 End If
+                strReportSQL = strReportSQL & " AND {children.CITY_ID} =" & gCityId
                 End With
  
         Case 3:

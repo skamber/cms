@@ -149,7 +149,8 @@ On Error GoTo ErrorHandler
                 & " ,LOGON_ID =" & "'" & objUser.LogonId & "'" _
                 & " ,SYSTEM_MANAGER =" & "'" & objUser.SystemManager & "'" _
                 & " ,LOGON_PASSWORD =" & "'" & objUser.LogonPassword & "'" _
-                & " ,Report_View =" & "'" & objUser.ReportView & "'"
+                & " ,Report_View =" & "'" & objUser.ReportView & "'" _
+                & " ,CityId =" & objUser.cityId
         sql = sql & " ,PASSWORD_LAST_UPDATE =" & "'" & Format(objUser.PasswordLastChange, "yyyy-mm-dd") & "'"
     
     sql = sql & " WHERE ID = " & objUser.UserId
@@ -188,9 +189,10 @@ On Error GoTo ErrorHandler
     
     'insert new record
     sql = "INSERT INTO users" _
-                & " (Id, Full_Name, LOGON_ID,LOGON_PASSWORD,SYSTEM_MANAGER,REPORT_VIEW,PASSWORD_LAST_UPDATE)" _
+                & " (Id, CityId, Full_Name, LOGON_ID,LOGON_PASSWORD,SYSTEM_MANAGER,REPORT_VIEW,PASSWORD_LAST_UPDATE)" _
                 & " VALUES" _
                 & " (" & NewUserId _
+                & "," & objUser.cityId _
                 & ",'" & objUser.Username & "'" _
                 & ",'" & objUser.LogonId & "'" _
                 & ",'" & objUser.LogonPassword & "'" _

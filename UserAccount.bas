@@ -81,7 +81,7 @@ On Error GoTo ErrorHandler
             If Not rslocal Is Nothing Then
                 Do Until rslocal.EOF
                     .CboUserName.AddItem rslocal!Full_Name
-                    .CboUserName.ItemData(.CboUserName.NewIndex) = rslocal!Id
+                    .CboUserName.ItemData(.CboUserName.NewIndex) = rslocal!id
                     rslocal.MoveNext
                 Loop
                 Set rslocal = Nothing
@@ -170,9 +170,12 @@ Public Function DisplayUserAccount()
         Exit Function
         End If
       With frmUserAccount
-        .txtUserId = rslocal!Id
+        .txtUserId = rslocal!id
         .txtUserName = rslocal!Full_Name
         .txtLogonId = rslocal!Logon_Id
+        Dim CityId As String
+        CityId = ConvertNull(rslocal!CityId)
+        .cmbCity.Text = Cities.Item(CityId)
         .txtPassword = rslocal!Logon_Password
         checkSystemManager = rslocal!SYSTEM_MANAGER
         checkReportView = rslocal!Report_View
@@ -312,6 +315,9 @@ Public Sub UserAccountActivate()
         .listActions.Enabled = True
         .chkSystemManager.Enabled = True
         .chkReportView.Enabled = True
+        .cmbCity.Enabled = True
+        
+        
 '        .cboOffice.Enabled = True
 '        .lstPractice.ListIndex = -1
 '        .lstPrivilege.ListIndex = -1
@@ -328,6 +334,7 @@ Public Sub UserAccountActivate()
         .fram1.Enabled = False
         .chkSystemManager.Enabled = False
         .chkReportView.Enabled = False
+        .cmbCity.Enabled = False
         
         .listActions.Enabled = True
 '        .cboOffice.Enabled = False
@@ -405,6 +412,7 @@ On Error GoTo ErrorHandler
     With frmUserAccount
 
             If Trim(.txtUserName.Text) <> "" Then objUser.UserName = UCase(.txtUserName.Text)
+            If Trim(.cmbCity.Text) <> "" Then objUser.CityId = .cmbCity.ItemData(.cmbCity.ListIndex)
             If Trim(.txtLogonId.Text) <> "" Then objUser.LogonId = UCase(.txtLogonId.Text)
             If Trim(.txtPassword.Text) <> "" Then objUser.LogonPassword = .txtPassword.Text
             If .chkSystemManager.Value = 1 Then
@@ -655,5 +663,35 @@ On Error GoTo ErrorHandler
 Exit Function
 ErrorHandler:
     Call objError.ErrorRoutine(Err.Number, Err.Description, objConnection, "modUserAccount", "InitialiseUserAccount", True)
+
+End Function
+
+Public Function LoadCityNames()
+On Error GoTo ErrorHandler
+
+    Dim objOrganisation_s As CMSOrganisation.clsOrganisation
+    Dim rslocal As ADODB.Recordset
+    Set objOrganisation_s = New CMSOrganisation.clsOrganisation
+    Set objOrganisation_s.DatabaseConnection = objConnection
+
+    Set rslocal = objOrganisation_s.getCities()
+
+    With frmUserAccount
+            
+            .cmbCity.Clear
+            If Not rslocal Is Nothing Then
+                Do Until rslocal.EOF
+                    .cmbCity.AddItem rslocal!cityName
+                    .cmbCity.ItemData(.cmbCity.NewIndex) = rslocal!id
+                    rslocal.MoveNext
+                Loop
+                Set rslocal = Nothing
+            End If
+    End With
+    Set objOrganisation_s = Nothing
+
+Exit Function
+ErrorHandler:
+    'Call objError.ErrorRoutine(Err.Number, Err.Description, objConnection, "modlogon", "LoadChurchComboBox", True)
 
 End Function

@@ -290,7 +290,7 @@ Private Sub cmdOK_Click()
        encryptedpass = Replace(encryptedpass, "'", "''")
         objConnection.BeginTrans
                 
-                sql = "UPDATE Users SET" _
+                sql = "UPDATE users SET" _
                             & " Logon_Password =" & "'" & encryptedpass & "'" _
                             & " ,Password_Last_Update =" & "'" & Format(Date, "yyyy-mm-dd") & "'"
                            

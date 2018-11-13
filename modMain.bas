@@ -36,6 +36,7 @@ Public CompulsoryChangePassword As Boolean
 Public UserName As String
 Public Permissions(1 To 20, 1 To 4) As String
 Public LoadPermissions(1 To 20, 1 To 4) As String
+Public Cities As New COLLECTION
 Public UserId As Long
 Public Const DATE_FORMAT = "dd/mm/yyyy"
 Public Const DATE_TIME_FORMAT = "yyyy/mm/dd hh:mm:ss"
@@ -1215,16 +1216,32 @@ End If
 End Function
 
 
-Public Function FindCBIndex(ByRef cbComboBox As ComboBox, ByRef strSearchValue As String) As Integer
+Public Function FindCBIndexByName(ByRef cbComboBox As ComboBox, ByRef strSearchValue As String) As Integer
     Dim n As Integer
     For n = 0 To cbComboBox.ListCount - 1
         If cbComboBox.List(n) = strSearchValue Then
           ' // Return the found index
-            FindCBIndex = n
+            FindCBIndexByName = n
           ' // and exit
             Exit Function
         End If
     Next
   ' // Set not found value
-    FindCBIndex = -1
+    FindCBIndexByName = -1
 End Function
+
+
+Public Function FindCBIndexById(ByRef cbComboBox As ComboBox, ByRef id As Long) As Integer
+    Dim n As Integer
+    For n = 0 To cbComboBox.ListCount - 1
+        If cbComboBox.ItemData(n) = id Then
+          ' // Return the found index
+            FindCBIndexById = n
+          ' // and exit
+            Exit Function
+        End If
+    Next
+  ' // Set not found value
+    FindCBIndexById = -1
+End Function
+

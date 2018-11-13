@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomctl.ocx"
 Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "MSMASK32.OCX"
 Begin VB.Form frmUserAccount 
    BorderStyle     =   1  'Fixed Single
@@ -14,6 +14,23 @@ Begin VB.Form frmUserAccount
    MinButton       =   0   'False
    ScaleHeight     =   7290
    ScaleWidth      =   7560
+   Begin VB.ComboBox cmbCity 
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   330
+      Left            =   4680
+      TabIndex        =   23
+      Text            =   "cmbCity"
+      Top             =   2040
+      Width           =   2655
+   End
    Begin VB.CheckBox chkReportView 
       Caption         =   "REPORT VIEW"
       BeginProperty Font 
@@ -212,7 +229,7 @@ Begin VB.Form frmUserAccount
       EndProperty
       Height          =   315
       Left            =   1560
-      TabIndex        =   2
+      TabIndex        =   3
       Top             =   2160
       Width           =   1815
    End
@@ -228,7 +245,7 @@ Begin VB.Form frmUserAccount
       EndProperty
       Height          =   315
       Left            =   1560
-      TabIndex        =   1
+      TabIndex        =   2
       Top             =   1680
       Width           =   1815
    End
@@ -245,7 +262,7 @@ Begin VB.Form frmUserAccount
       EndProperty
       Height          =   315
       Left            =   1560
-      TabIndex        =   3
+      TabIndex        =   1
       Top             =   1200
       Width           =   1815
    End
@@ -534,6 +551,7 @@ Private Sub Form_Load()
  On Error GoTo ErrorHandler
 
 LoadUserAccountComboBox
+LoadCityNames
 'InitialiseUserAccount
 gRecordUserType = RECORD_READ
 SetToolbarUserAccountControl
