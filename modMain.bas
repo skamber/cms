@@ -39,6 +39,7 @@ Public LoadPermissions(1 To 20, 1 To 4) As String
 Public Cities As New COLLECTION
 Public UserId As Long
 Public Const DATE_FORMAT = "dd/mm/yyyy"
+Public Const VERSION = "3.0.1"
 Public Const DATE_TIME_FORMAT = "yyyy/mm/dd hh:mm:ss"
 Public Const NUMERIC_FORMAT = "###,###,###,##0.00"
 Public Const MEMBER = "Member"
@@ -155,13 +156,10 @@ Public Function ConnectDatabase()
     On Error Resume Next
     
     With objConnection
-            .Open "Driver={MySQL ODBC 5.3 ANSI Driver};Server=" & sHost & ";Database=" & _
+            .Open "Driver={MySQL ODBC 5.3 Unicode Driver};Server=" & sHost & ";Database=" & _
             sDatabaseName & "; User=" & sUserName & ";Password=" & sPassword & _
             ";sslca=" & sCertPath & "; sslverify=1; Option=3;"
-            
-            
     End With
-                            
 
 Exit Function
 ErrorHandler:

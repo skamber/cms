@@ -114,3 +114,7 @@ Private Sub cmdOK_Click()
 Unload frmAbout
 End Sub
 
+Private Sub Form_Load()
+Label3.Caption = VERSION
+End Sub
+

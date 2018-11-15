@@ -230,7 +230,6 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
-
 Private Sub cmbCityName_Click()
    If cmbCityName.ListIndex >= 0 Then
       gCityId = cmbCityName.ItemData(cmbCityName.ListIndex)
@@ -242,6 +241,10 @@ Private Sub cmdEnter_Click()
     Dim sLogonID As String
     Dim sLogonPassword As String
     Dim dtePasswordLastUpdate As String
+    
+    If Not validateApplicationVersion Then
+        Exit Sub
+    End If
     
     sLogonID = UCase(Trim(txtLogonId.Text))
     sLogonPassword = UCase(Trim(txtPassword.Text))
@@ -270,6 +273,7 @@ End Sub
 
 Private Sub Form_Load()
 Call ConnectDatabase
+
 LoadCityNamesComboBox
 'LoadChurchComboBox
 

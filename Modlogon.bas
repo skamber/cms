@@ -40,10 +40,10 @@ On Error GoTo ErrorHandler
                     .cmbCityName.AddItem rslocal!cityName
                     .cmbCityName.ItemData(.cmbCityName.NewIndex) = rslocal!id
                     Dim cityName As String
-                    Dim cityId As String
+                    Dim CityId As String
                     cityName = rslocal!cityName
-                    cityId = rslocal!id
-                    Cities.Add cityName, cityId
+                    CityId = rslocal!id
+                    Cities.Add cityName, CityId
                     
                     rslocal.MoveNext
                 Loop
@@ -58,9 +58,6 @@ ErrorHandler:
     'Call objError.ErrorRoutine(Err.Number, Err.Description, objConnection, "modlogon", "LoadChurchComboBox", True)
 
 End Function
-
-
-
 
 Public Function LoadChurchComboBox()
 On Error GoTo ErrorHandler
@@ -94,6 +91,30 @@ ErrorHandler:
 
 End Function
 
+Public Function validateApplicationVersion()
+On Error GoTo ErrorHandler
+
+    Dim sql As String
+    Dim rslocal As ADODB.Recordset
+
+     validateApplicationVersion = False
+         
+    sql = "SELECT * FROM app WHERE version=  '" & VERSION & "'"
+    Set rslocal = New ADODB.Recordset
+        rslocal.Open sql, objConnection, adOpenForwardOnly, adLockReadOnly
+
+    If rslocal.EOF = True Then
+        MsgBox "Invalid application version number " & VERSION & ".  Please contact the systems administration.", vbExclamation
+        frmLogon.txtLogonId.SetFocus
+        Exit Function
+    End If
+    validateApplicationVersion = True
+    
+Exit Function
+ErrorHandler:
+    Call objError.ErrorRoutine(Err.Number, Err.Description, objConnection, "modLogon", "CheckLogonId", True)
+
+End Function
 
 Public Function CheckLogonId(ByVal strLogonID As String, ByVal strLogonPassword As String)
 On Error GoTo ErrorHandler
@@ -160,10 +181,6 @@ On Error GoTo ErrorHandler
       ReportView = False
     End If
     Set rslocal = Nothing
-    
-   
-    
-
 
 Exit Function
 ErrorHandler:
