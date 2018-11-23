@@ -250,7 +250,7 @@ On Error GoTo ErrorHandler
     
     End Select
     Select Case lngReportId
-        Case 5: 'sashflowview
+        Case 5: 'cashflowview
                 With frmCashFlowView
                 strReportId = "CashIn and Cashout Repoert.rpt"
                 strStartDate = "Date(" & Format(.dteFromDate.FormattedText, "yyyy,mm,dd") & ")"
@@ -352,6 +352,7 @@ On Error GoTo ErrorHandler
                 Else
                   strReportSQL = "{member.CITY_ID} =" & gCityId
                 End If
+                
                 End With
 
         Case 1:
@@ -404,6 +405,9 @@ On Error GoTo ErrorHandler
                 
                 strReportSQL = strReportSQL & " AND " & "{church.cityId} =" & gCityId
                 
+                If gChurchRestriction <> 0 Then
+                  strReportSQL = strReportSQL & " AND " & "{church.Id} =" & gChurchRestriction
+                End If
                                 
                 'strReportSQL = "{Allincome.Date_Of_Payment} In Date(" & Format(.dteStartDate.FormattedText, "yyyy,mm,dd") & ") To Date(" & _
                 'Format(.dteEndDate.FormattedText, "yyyy,mm,dd") & ") "
@@ -425,7 +429,7 @@ On Error GoTo ErrorHandler
                        strReportSQL = strReportSQL & " AND {children.MEMBER} ='N'"
                     End If
                 End If
-                strReportSQL = strReportSQL & " AND {children.CITY_ID} =" & gCityId
+                strReportSQL = strReportSQL & " AND {member.CITY_ID} =" & gCityId
                 End With
  
         Case 3:
@@ -434,6 +438,10 @@ On Error GoTo ErrorHandler
                 'used to display "for the period..." on report
                 strReportSQL = "{invoice.over_due_date} <= " & strStartDate _
                 & " AND {invoice.Balance} <> " & 0 & " AND " & "{church.cityId} =" & gCityId
+                
+                If gChurchRestriction <> 0 Then
+                  strReportSQL = strReportSQL & " AND " & "{church.Id} =" & gChurchRestriction
+                End If
    
         Case 4:
                strReportId = "ReceiptReport.rpt"
@@ -453,6 +461,10 @@ On Error GoTo ErrorHandler
                 & " AND {receipt.date_of_Receipt} <= " & strEndDate
                 End If
                 strReportSQL = strReportSQL & " AND " & "{church.cityId} =" & gCityId
+                
+                If gChurchRestriction <> 0 Then
+                  strReportSQL = strReportSQL & " AND " & "{church.Id} =" & gChurchRestriction
+                End If
               
                 End With
                             

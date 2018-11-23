@@ -334,7 +334,7 @@ End Sub
 
 Private Sub MDIForm_Load()
 pnlStatusBar.Panels(1).Text = ""
-getChruchNameById
+getChruchNameById (gChurchId)
 getCityNameById
 If Not systemManager Then MDIFrm.MnuSystemSetting.Visible = False
 End Sub
@@ -532,7 +532,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 Call ProcessRecord(Button)
 End Sub
 
-Public Function getChruchNameById()
+Public Function getChruchNameById(ByVal churchId As Long)
   On Error GoTo ErrorHandler
 
     Dim objOrganisation_s As CMSOrganisation.clsOrganisation
@@ -541,7 +541,7 @@ Public Function getChruchNameById()
     Set objOrganisation_s.DatabaseConnection = objConnection
     
     'Payment
-    Set rslocal = objOrganisation_s.getChurchNameById(gChurchId)
+    Set rslocal = objOrganisation_s.getChurchNameById(churchId)
 
     With frmCashIn
             If Not rslocal Is Nothing Then
@@ -570,7 +570,7 @@ Public Function getCityNameById()
     
     With frmCashIn
             If Not rslocal Is Nothing Then
-             pnlStatusBar.Panels(3).Text = rslocal!CityName
+             pnlStatusBar.Panels(3).Text = rslocal!cityName
              pnlStatusBar.Panels(3).Width = 4000
              Set rslocal = Nothing
             End If

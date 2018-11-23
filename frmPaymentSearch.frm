@@ -381,9 +381,9 @@ Private Sub txtmno_KeyPress(KeyAscii As Integer)
  
  
     If KeyAscii = 13 And txtMno.Text <> "" Then
-      GenerateMemberInfo (txtMno.Text)
-      
-      GeneratePaymentList (txtMno.Text)
+      If GenerateMemberInfo(txtMno.Text) Then
+        GeneratePaymentList (txtMno.Text)
+      End If
     End If
     
 End Sub

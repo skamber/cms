@@ -71,7 +71,7 @@ On Error GoTo ErrorHandler
 
 Exit Function
 ErrorHandler:
-'    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsUser_s", "getUserName", True)
+    'Call ObjError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsUser_s", "getUserName", True)
 
 End Function
 
@@ -103,7 +103,7 @@ On Error GoTo ErrorHandler
 
 Exit Function
 ErrorHandler:
-'    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsUser_s", "getAllUserName", True)
+    'Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsUser_s", "getAllUserName", True)
 
 End Function
 
@@ -132,7 +132,7 @@ On Error GoTo ErrorHandler
 
 Exit Function
 ErrorHandler:
-'    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsUser_s", "getUserAccountRecord", True)
+   'Call ObjError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsUser_s", "getUserAccountRecord", True)
 
 End Function
 
@@ -150,7 +150,9 @@ On Error GoTo ErrorHandler
                 & " ,SYSTEM_MANAGER =" & "'" & objUser.SystemManager & "'" _
                 & " ,LOGON_PASSWORD =" & "'" & objUser.LogonPassword & "'" _
                 & " ,Report_View =" & "'" & objUser.ReportView & "'" _
-                & " ,CityId =" & objUser.cityId
+                & " ,City_Id =" & objUser.CityId _
+                & " ,Church_Id =" & objUser.ChurchId
+                
         sql = sql & " ,PASSWORD_LAST_UPDATE =" & "'" & Format(objUser.PasswordLastChange, "yyyy-mm-dd") & "'"
     
     sql = sql & " WHERE ID = " & objUser.UserId
@@ -160,7 +162,7 @@ On Error GoTo ErrorHandler
 
 Exit Function
 ErrorHandler:
-    '    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsUser_s", "UpdateUser", True)
+        'Call ObjError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsUser_s", "UpdateUser", True)
 
 End Function
 
@@ -189,10 +191,11 @@ On Error GoTo ErrorHandler
     
     'insert new record
     sql = "INSERT INTO users" _
-                & " (Id, CityId, Full_Name, LOGON_ID,LOGON_PASSWORD,SYSTEM_MANAGER,REPORT_VIEW,PASSWORD_LAST_UPDATE)" _
+                & " (Id, City_Id, church_id, Full_Name, LOGON_ID,LOGON_PASSWORD,SYSTEM_MANAGER,REPORT_VIEW,PASSWORD_LAST_UPDATE)" _
                 & " VALUES" _
                 & " (" & NewUserId _
-                & "," & objUser.cityId _
+                & "," & objUser.CityId _
+                & "," & objUser.ChurchId _
                 & ",'" & objUser.Username & "'" _
                 & ",'" & objUser.LogonId & "'" _
                 & ",'" & objUser.LogonPassword & "'" _
@@ -207,7 +210,7 @@ On Error GoTo ErrorHandler
 Exit Function
 ErrorHandler:
        
-    'Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsUser_s", "InsertUser", True)
+    'Call ObjError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsUser_s", "InsertUser", True)
 
 End Function
 
@@ -225,7 +228,7 @@ On Error GoTo ErrorHandler
 
 Exit Function
 ErrorHandler:
-    'Call objError.ErrorRoutine(Err.Number, Err.Description, objConnection, "clsUser_s", "DeleteUser", True)
+    'Call ObjError.ErrorRoutine(Err.Number, Err.Description, objConnection, "clsUser_s", "DeleteUser", True)
     
 End Function
 

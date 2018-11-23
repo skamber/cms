@@ -252,14 +252,15 @@ Private Sub cmdEnter_Click()
     If Not ValidateLogon(sLogonID, sLogonPassword, sChurchName) Then
         Exit Sub
     End If
+
+    'gChurchId = cmbChurchName.ListIndex
+    gChurchId = cmbChurchName.ItemData(cmbChurchName.ListIndex)
     
     If Not CheckLogonId(sLogonID, sLogonPassword) Then Exit Sub
     If Not CheckPasswordChange Then
         frmPassword.Show vbModal
     End If
 
-    'gChurchId = cmbChurchName.ListIndex
-    gChurchId = cmbChurchName.ItemData(cmbChurchName.ListIndex)
     
     Unload frmLogon
     frmMember.Show

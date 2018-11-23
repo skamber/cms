@@ -151,14 +151,13 @@ Private Sub ShowDetais()
     Dim retuns As String
     Dim s As Long
     
-    
+    sql = "SELECT receipt.* FROM receipt , church where receipt.church_id = church.Id & church.cityId =" & gCityId
 Select Case cmbTypeSearch.Text
-    
     Case "Receipt Number"
-        sql = "SELECT * FROM receipt WHERE ID = " & txtInputText.Text
+        sql = sql & " AND receipt.ID = " & txtInputText.Text
         GenerateReceiptList (sql)
     Case "Invoice Number"
-        sql = "SELECT * FROM receipt WHERE INV_NO = '" & txtInputText.Text & "'" & _
+        sql = sql & " AND INV_NO = '" & txtInputText.Text & "'" & _
         " ORDER BY ID"
         GenerateReceiptList (sql)
     End Select

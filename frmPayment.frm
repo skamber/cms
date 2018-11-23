@@ -262,7 +262,7 @@ Begin VB.Form frmPayment
       End
       Begin MSMask.MaskEdBox dteExpiryDate 
          Height          =   315
-         Left            =   2640
+         Left            =   2160
          TabIndex        =   2
          Top             =   2280
          Width           =   1575
@@ -558,7 +558,7 @@ Begin VB.Form frmPayment
             Strikethrough   =   0   'False
          EndProperty
          Height          =   195
-         Left            =   2640
+         Left            =   2160
          TabIndex        =   21
          Top             =   2040
          Width           =   855

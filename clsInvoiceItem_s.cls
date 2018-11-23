@@ -125,7 +125,7 @@ On Error GoTo ErrorHandler
 
 Exit Function
 ErrorHandler:
-'    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsMember_s", "getByMemberId", True)
+'    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsInvoiceItem_s", "getByInvoiceId", True)
 
 End Function
 
@@ -152,7 +152,7 @@ On Error GoTo ErrorHandler
 
 Exit Function
 ErrorHandler:
-'    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsMember_s", "getByMemberId", True)
+'    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsInvoiceItem_s", "getByInvoiceItemId", True)
 
 End Function
 

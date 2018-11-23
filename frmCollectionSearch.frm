@@ -203,17 +203,16 @@ Private Sub ShowDetais()
     Dim s As Long
      Dim strCollectionDate As String
     
-Select Case cmbTypeSearch.Text
-    
+
+    sql = "SELECT collection.* FROM collection , church  WHERE  collection.CHURCH_ID = church.Id AND church.CityId = " & gCityId
+    Select Case cmbTypeSearch.Text
     Case "Collection Number"
-        sql = "SELECT * FROM collection WHERE COL_ID = " & txtInputText.Text
+        sql = sql & " AND COL_ID=" & txtInputText.Text
         GenerateCollectionList (sql)
     Case "Collection Date"
         strCollectionDate = Format(dteInputText.FormattedText, "yyyy-mm-dd")
-
-        sql = "SELECT * FROM collection WHERE Collection.DATE_OF_COLLECTION = '" & strCollectionDate & _
+        sql = sql + " AND DATE_OF_COLLECTION = '" & strCollectionDate & _
         "' ORDER BY PAYMENT"
-        
         GenerateCollectionList (sql)
     End Select
  

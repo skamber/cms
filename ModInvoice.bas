@@ -86,7 +86,7 @@ On Error GoTo ErrorHandler
         
     ElseIf (gRecordMode = RECORD_EDIT) Or (gRecordMode = RECORD_READ) Then
         
-        objInvoice.Id = gInvoiceId
+        objInvoice.id = gInvoiceId
         objInvoice_s.UpdateInvoice objInvoice
         
     
@@ -162,7 +162,7 @@ On Error GoTo ErrorHandler
             If Not rslocal Is Nothing Then
                 Do Until rslocal.EOF
                     .cmbTerms.AddItem rslocal!TermName
-                    .cmbTerms.ItemData(.cmbTerms.NewIndex) = rslocal!Id
+                    .cmbTerms.ItemData(.cmbTerms.NewIndex) = rslocal!id
                     rslocal.MoveNext
                 Loop
                 Set rslocal = Nothing
@@ -172,7 +172,7 @@ On Error GoTo ErrorHandler
             If Not rslocal Is Nothing Then
                 Do Until rslocal.EOF
                     .CmbItemDescription.AddItem rslocal!Descriprtion
-                    .CmbItemDescription.ItemData(.CmbItemDescription.NewIndex) = rslocal!Id
+                    .CmbItemDescription.ItemData(.CmbItemDescription.NewIndex) = rslocal!id
                     rslocal.MoveNext
                 Loop
                 Set rslocal = Nothing
@@ -214,7 +214,7 @@ On Error GoTo ErrorHandler
         If Trim(.txtState) <> "" Then objInvoice.State = .txtState
         If Trim(.txtTotalAmount.Text) <> "" Then objInvoice.Total_Amount = .txtTotalAmount.Text
         If Trim(.cmbTerms.Text) <> "" Then objInvoice.Terms = .cmbTerms.Text
-        objInvoice.ChurchId = gChurchId
+        objInvoice.churchId = gChurchId
         
     End With
     
@@ -228,16 +228,10 @@ End Function
 Public Sub GenerateInvoiceList(sql As String)
  On Error GoTo ErrorHandler
  
-    ' Dim objFollowup_s As PACMSFollowUP.clsFollowup_s
      Dim rslocal As ADODB.Recordset
      Dim strId  As String
      Dim itmx As ListItem
-     
-    ' Dim lngTotalProspect As Long
-    ' Dim lngTotalPlanning As Long
-    ' Dim lngTotalCoaching As Long
- 
- 
+      
      Screen.MousePointer = vbHourglass
  
      With frmInvoiceSearch
@@ -249,10 +243,10 @@ Public Sub GenerateInvoiceList(sql As String)
             rslocal.Open sql, objConnection, adOpenForwardOnly, adLockReadOnly
              If Not rslocal.EOF Then
                  Do While Not rslocal.EOF
-                     strId = CStr(rslocal!Id)
+                     strId = CStr(rslocal!id)
                      Set itmx = .ListInvoiceView.ListItems.Add()
                                      itmx.Key = "#" & strId
-                                     itmx.Text = CStr(rslocal!Id)
+                                     itmx.Text = CStr(rslocal!id)
                                      If Not IsNull(rslocal!Invoice_no) Then itmx.SubItems(1) = CStr(rslocal!Invoice_no)
                                      If Not IsNull(rslocal!Ref) Then itmx.SubItems(2) = CStr(rslocal!Ref)
                                      If Not IsNull(rslocal!Name1) Then itmx.SubItems(3) = CStr(rslocal!Name1)
@@ -446,7 +440,6 @@ End Function
 Sub displayInvoiceItemList()
  On Error GoTo ErrorHandler
  
-    ' Dim objFollowup_s As PACMSFollowUP.clsFollowup_s
      Dim objInvoiceItem_s As CMSInvoiceItem.clsInvoiceItem_s
      Dim rslocal As ADODB.Recordset
      Dim strId  As String
@@ -456,9 +449,6 @@ Sub displayInvoiceItemList()
     Set objInvoiceItem_s = New CMSInvoiceItem.clsInvoiceItem_s
     Set objInvoiceItem_s.DatabaseConnection = objConnection
  
-    ' Dim lngTotalProspect As Long
-    ' Dim lngTotalPlanning As Long
-    ' Dim lngTotalCoaching As Long
  Set rslocal = objInvoiceItem_s.getByInvoiceId(gInvoiceId)
      TotalItemsAmount = 0
      Screen.MousePointer = vbHourglass
@@ -513,7 +503,6 @@ End Sub
 Sub displayInvoiceSearchItemList()
  On Error GoTo ErrorHandler
  
-    ' Dim objFollowup_s As PACMSFollowUP.clsFollowup_s
      Dim objInvoiceItem_s As CMSInvoiceItem.clsInvoiceItem_s
      Dim rslocal As ADODB.Recordset
      Dim strId  As String
@@ -521,10 +510,7 @@ Sub displayInvoiceSearchItemList()
      
     Set objInvoiceItem_s = New CMSInvoiceItem.clsInvoiceItem_s
     Set objInvoiceItem_s.DatabaseConnection = objConnection
- 
-    ' Dim lngTotalProspect As Long
-    ' Dim lngTotalPlanning As Long
-    ' Dim lngTotalCoaching As Long
+
  Set rslocal = objInvoiceItem_s.getByInvoiceId(gInvoiceId)
     
      Screen.MousePointer = vbHourglass

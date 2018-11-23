@@ -591,15 +591,11 @@ Private Sub LoadCashInList()
 
  On Error GoTo ErrorHandler
  
-    ' Dim objFollowup_s As PACMSFollowUP.clsFollowup_s
      Dim rslocal As ADODB.Recordset
      Dim strId  As String
      Dim itmx As ListItem
      Dim sql As String
-     
-    ' Dim lngTotalProspect As Long
-    ' Dim lngTotalPlanning As Long
-    ' Dim lngTotalCoaching As Long
+
  TotalCashIn_GST = 0
  TotalCashin_Netamount = 0
  TotalCashin_Amount = 0
@@ -619,7 +615,7 @@ Private Sub LoadCashInList()
              If Not rslocal Is Nothing Then
                  Do While Not rslocal.EOF
                      
-                     Set itmx = .ListCashInView.ListItems.Add(, , CStr(rslocal!Id))
+                     Set itmx = .ListCashInView.ListItems.Add(, , CStr(rslocal!id))
                                     
                                      If Not IsNull(rslocal!Item) Then itmx.SubItems(1) = CStr(rslocal!Item)
                                      If Not IsNull(rslocal!DateOfCashin) Then itmx.SubItems(2) = CStr(rslocal!DateOfCashin)
@@ -650,15 +646,11 @@ Private Sub LoadcashOutList()
 
  On Error GoTo ErrorHandler
  
-    ' Dim objFollowup_s As PACMSFollowUP.clsFollowup_s
      Dim rslocal As ADODB.Recordset
      Dim strId  As String
      Dim itmx As ListItem
      Dim sql As String
      
-    ' Dim lngTotalProspect As Long
-    ' Dim lngTotalPlanning As Long
-    ' Dim lngTotalCoaching As Long
  TotalCashOut_GST = 0
  TotalCashOut_Netamount = 0
  TotalCashOut_Amount = 0
@@ -678,7 +670,7 @@ Private Sub LoadcashOutList()
              If Not rslocal Is Nothing Then
                  Do While Not rslocal.EOF
                      
-                     Set itmx = .ListCashOutView.ListItems.Add(, , CStr(rslocal!Id))
+                     Set itmx = .ListCashOutView.ListItems.Add(, , CStr(rslocal!id))
                                     
                                      If Not IsNull(rslocal!Item) Then itmx.SubItems(1) = CStr(rslocal!Item)
                                      If Not IsNull(rslocal!DateOfCashOut) Then itmx.SubItems(2) = CStr(rslocal!DateOfCashOut)

@@ -131,7 +131,7 @@ On Error GoTo ErrorHandler
             objPayment.PaymentType = .cmbPaymentType.Text
             objPayment.DonationType = .cmbDonationType.Text
             'objPayment.ReceiptNo = .txtReceiptNo.Text
-            objPayment.ChurchId = gChurchId
+            objPayment.churchId = gChurchId
             
             If .dteDateofPayment.Text <> "" Then objPayment.DateofPayment = .dteDateofPayment.FormattedText
             If .dteEfectiveDate.Text <> "" Then objPayment.MemberEffective = .dteEfectiveDate.FormattedText
@@ -160,7 +160,7 @@ On Error GoTo ErrorHandler
     'Retrieve Member record and display on form
     Set objMember_s = New CMSMember.clsMember_s
     Set objMember_s.DatabaseConnection = objConnection
-    Set rslocal = objMember_s.getByMemberId(MemberNo)
+    Set rslocal = objMember_s.getByMemberId(MemberNo, gCityId)
     
 
     If rslocal Is Nothing Then
@@ -203,7 +203,7 @@ On Error GoTo ErrorHandler
             If Not rslocal Is Nothing Then
                 Do Until rslocal.EOF
                     .cmbPaymentKind.AddItem rslocal!Payment_type
-                    .cmbPaymentKind.ItemData(.cmbPaymentKind.NewIndex) = rslocal!Id
+                    .cmbPaymentKind.ItemData(.cmbPaymentKind.NewIndex) = rslocal!id
                     rslocal.MoveNext
                 Loop
                 Set rslocal = Nothing
@@ -221,7 +221,7 @@ On Error GoTo ErrorHandler
             If Not rslocal Is Nothing Then
                 Do Until rslocal.EOF
                     .cmbPaymentType.AddItem rslocal!Payment
-                    .cmbPaymentType.ItemData(.cmbPaymentType.NewIndex) = rslocal!Id
+                    .cmbPaymentType.ItemData(.cmbPaymentType.NewIndex) = rslocal!id
                     rslocal.MoveNext
                 Loop
                 Set rslocal = Nothing
@@ -237,7 +237,7 @@ On Error GoTo ErrorHandler
             If Not rslocal Is Nothing Then
                 Do Until rslocal.EOF
                     .cmbDonationType.AddItem rslocal!Donation
-                    .cmbDonationType.ItemData(.cmbDonationType.NewIndex) = rslocal!Id
+                    .cmbDonationType.ItemData(.cmbDonationType.NewIndex) = rslocal!id
                     rslocal.MoveNext
                 Loop
                 Set rslocal = Nothing
@@ -255,7 +255,7 @@ On Error GoTo ErrorHandler
             If Not rslocal Is Nothing Then
                 Do Until rslocal.EOF
                     .cmbAmountInWord.AddItem rslocal!AmountInWord
-                    .cmbAmountInWord.ItemData(.cmbAmountInWord.NewIndex) = rslocal!Id
+                    .cmbAmountInWord.ItemData(.cmbAmountInWord.NewIndex) = rslocal!id
                     rslocal.MoveNext
                 Loop
                 Set rslocal = Nothing
@@ -292,7 +292,7 @@ On Error GoTo ErrorHandler
             If Not rslocal Is Nothing Then
                 Do Until rslocal.EOF
                     .cmbType.AddItem rslocal!Payment
-                    .cmbType.ItemData(.cmbType.NewIndex) = rslocal!Id
+                    .cmbType.ItemData(.cmbType.NewIndex) = rslocal!id
                     rslocal.MoveNext
                 Loop
                 Set rslocal = Nothing
@@ -385,16 +385,11 @@ End Function
 
 Public Sub GeneratePaymentList(ByVal memberNumber As Long)
  On Error GoTo ErrorHandler
- 
-    ' Dim objFollowup_s As PACMSFollowUP.clsFollowup_s
+
      Dim rslocal As ADODB.Recordset
      Dim strId  As String
      Dim itmx As ListItem
      Dim sql As String
-    ' Dim lngTotalProspect As Long
-    ' Dim lngTotalPlanning As Long
-    ' Dim lngTotalCoaching As Long
- 
  
      Screen.MousePointer = vbHourglass
  
@@ -404,11 +399,9 @@ Public Sub GeneratePaymentList(ByVal memberNumber As Long)
          '==============================================================================
         
             Set rslocal = New ADODB.Recordset
-            If frmPaymentSearch.cmbType.Text = "All" Or frmPaymentSearch.cmbType.Text = "" Then
-            sql = "SELECT * FROM payment WHERE MNo =" & memberNumber
-            Else
-            sql = "SELECT * FROM payment WHERE MNo =" & memberNumber
-            sql = sql & " AND PAYMENT ='" & frmPaymentSearch.cmbType.Text & "'"
+            sql = "SELECT payment.* FROM payment, church  WHERE  payment.CHURCH_ID = church.Id AND MNo =" & memberNumber & " AND church.CityId = " & gCityId
+            If frmPaymentSearch.cmbType.Text <> "All" And frmPaymentSearch.cmbType.Text <> "" Then
+               sql = sql & " AND PAYMENT ='" & frmPaymentSearch.cmbType.Text & "'"
             End If
             rslocal.Open sql, objConnection, adOpenForwardOnly, adLockReadOnly
              If Not rslocal.EOF Then
@@ -441,7 +434,7 @@ ErrorHandler:
  
  End Sub
 
-Public Sub GenerateMemberInfo(MemberNo As Long)
+Public Function GenerateMemberInfo(MemberNo As Long)
 On Error GoTo ErrorHandler
  Dim objMember_s As CMSMember.clsMember_s
     
@@ -449,17 +442,17 @@ On Error GoTo ErrorHandler
     On Error GoTo ErrorHandler
     frmPaymentSearch.txtGivenName = ""
     frmPaymentSearch.txtSurname = ""
-    
+    GenerateMemberInfo = False
     'Retrieve Member record and display on form
     Set objMember_s = New CMSMember.clsMember_s
     Set objMember_s.DatabaseConnection = objConnection
-    Set rslocal = objMember_s.getByMemberId(MemberNo)
+    Set rslocal = objMember_s.getByMemberId(MemberNo, gCityId)
     
 
     If rslocal Is Nothing Then
           MsgBox "Invalid access - No such Member.", vbExclamation
-                Exit Sub
-        Exit Sub
+                Exit Function
+        Exit Function
     End If
 
     Screen.MousePointer = vbHourglass
@@ -471,14 +464,15 @@ On Error GoTo ErrorHandler
     End With
    Set objMember_s = Nothing
    Screen.MousePointer = vbDefault
-Exit Sub
+   GenerateMemberInfo = True
+Exit Function
 
 
-Exit Sub
+Exit Function
 ErrorHandler:
     Call objError.ErrorRoutine(Err.Number, Err.Description, objConnection, "modPayment", "GenerateMemberInfo", True)
 
-End Sub
+End Function
 
 Public Function DisplayPayment()
 

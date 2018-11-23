@@ -40,10 +40,10 @@ On Error GoTo ErrorHandler
                     .cmbCityName.AddItem rslocal!cityName
                     .cmbCityName.ItemData(.cmbCityName.NewIndex) = rslocal!id
                     Dim cityName As String
-                    Dim CityId As String
+                    Dim cityId As String
                     cityName = rslocal!cityName
-                    CityId = rslocal!id
-                    Cities.Add cityName, CityId
+                    cityId = rslocal!id
+                    Cities.Add cityName, cityId
                     
                     rslocal.MoveNext
                 Loop
@@ -127,7 +127,7 @@ On Error GoTo ErrorHandler
     Dim Ctr As Integer
     CheckLogonId = False
          
-    sql = "SELECT * FROM users WHERE Logon_ID = '" & strLogonID & "'" & " AND cityId =" & gCityId
+    sql = "SELECT * FROM users WHERE Logon_ID = '" & strLogonID & "'" & " AND city_Id =" & gCityId
     
     Set rslocal = New ADODB.Recordset
         rslocal.Open sql, objConnection, adOpenForwardOnly, adLockReadOnly
@@ -155,6 +155,15 @@ On Error GoTo ErrorHandler
         Exit Function
     End If
     End If
+    
+    gChurchRestriction = rslocal!Church_Id
+    If gChurchRestriction <> 0 And gChurchRestriction <> gChurchId Then
+         MsgBox "You don't have access to this church.  Access has been denied.", vbExclamation
+         CheckLogonId = False
+         Exit Function
+    End If
+     
+    
     If getUserPriveleges(rslocal!id) Then
               CheckLogonId = True
     Else
@@ -166,6 +175,7 @@ On Error GoTo ErrorHandler
     dtePasswordLastUpdate = rslocal!Password_Last_Update
     checkSystemManager = rslocal!SYSTEM_MANAGER
     checkReportView = rslocal!Report_View
+   
     CheckPasword = rslocal!Logon_Password
     If checkSystemManager = "Y" Then
       systemManager = True

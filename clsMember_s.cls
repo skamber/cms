@@ -175,20 +175,19 @@ ErrorHandler:
     'Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsMember_s", "UpdateExparydate", True)
 
 End Function
-Public Function getByMemberId(ByVal lngMemberID As Long) As ADODB.Recordset
+Public Function getByMemberId(ByVal lngMemberID As Long, lngCityId As Long) As ADODB.Recordset
 On Error GoTo ErrorHandler
 
     Dim sql As String
     Dim rsLocal As ADODB.Recordset
     
 
-    sql = "SELECT * FROM member WHERE Mno = " & lngMemberID
+    sql = "SELECT * FROM member WHERE Mno = " & lngMemberID & " AND CITY_ID =  " & lngCityId
     
     Set rsLocal = New ADODB.Recordset
         rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly
     
     If rsLocal.EOF = True Then
-        MsgBox "No records found for This Member.", vbExclamation
         Set getByMemberId = Nothing
     Else
         Set getByMemberId = rsLocal

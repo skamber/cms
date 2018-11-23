@@ -35,7 +35,10 @@ On Error GoTo ErrorHandler
     For Each ctrl In frmUserAccount.Controls
         
         If TypeOf ctrl Is TextBox Then ctrl.Text = ""
-        If TypeOf ctrl Is ComboBox Then ctrl.ListIndex = -1
+        If TypeOf ctrl Is ComboBox Then
+            ctrl.ListIndex = -1
+            'ctrl.Text = ""
+        End If
         If TypeOf ctrl Is MaskEdBox Then ctrl.Text = ""
         Set ctrl = Nothing
         
@@ -173,9 +176,16 @@ Public Function DisplayUserAccount()
         .txtUserId = rslocal!id
         .txtUserName = rslocal!Full_Name
         .txtLogonId = rslocal!Logon_Id
-        Dim CityId As String
-        CityId = ConvertNull(rslocal!CityId)
-        .cmbCity.Text = Cities.Item(CityId)
+        Dim cityId As Long
+        Dim churchId As Long
+        cityId = ConvertNull(rslocal!City_Id)
+        .cmbCity.Text = Cities.Item(cityId)
+        LoadChurchComboBoxWithAll (cityId)
+        churchId = ConvertNull(rslocal!Church_Id)
+        Dim index As Long
+        index = FindCBIndexById(.cmbChurch, churchId)
+        .cmbChurch.Text = .cmbChurch.List(index)
+        
         .txtPassword = rslocal!Logon_Password
         checkSystemManager = rslocal!SYSTEM_MANAGER
         checkReportView = rslocal!Report_View
@@ -316,6 +326,7 @@ Public Sub UserAccountActivate()
         .chkSystemManager.Enabled = True
         .chkReportView.Enabled = True
         .cmbCity.Enabled = True
+        .cmbChurch.Enabled = True
         
         
 '        .cboOffice.Enabled = True
@@ -335,7 +346,7 @@ Public Sub UserAccountActivate()
         .chkSystemManager.Enabled = False
         .chkReportView.Enabled = False
         .cmbCity.Enabled = False
-        
+        .cmbChurch.Enabled = False
         .listActions.Enabled = True
 '        .cboOffice.Enabled = False
 '        .lstPractice.ListIndex = -1
@@ -366,12 +377,15 @@ On Error GoTo ErrorHandler
     Set objUserPermission_s = New CMSUser.clsUserPermissions_s
     Set objUserPermission_s.DatabaseConnection = objConnection
 
-    PopulateUserAccountObject objUser
+    If Not PopulateUserAccountObject(objUser) Then
+     MsgBox "Invalid data entry.", vbExclamation
+     Exit Function
+    End If
     
     'Insert or Update record
     Select Case gRecordUserType
 Case RECORD_NEW:
-             
+
         objuser_s.insertUser objUser
         objUser.UserId = objuser_s.NewUserId
         gUserAccountId = objUser.UserId
@@ -405,14 +419,31 @@ ErrorHandler:
     
 End Function
 
+
+
 Public Function PopulateUserAccountObject(objUser As CMSUser.clsUser)
 
 On Error GoTo ErrorHandler
-
+PopulateUserAccountObject = False
     With frmUserAccount
-
+    
             If Trim(.txtUserName.Text) <> "" Then objUser.UserName = UCase(.txtUserName.Text)
-            If Trim(.cmbCity.Text) <> "" Then objUser.CityId = .cmbCity.ItemData(.cmbCity.ListIndex)
+            If Trim(.cmbCity.Text) <> "" Then
+            .cmbCity.ListIndex = FindCBIndexByName(.cmbCity, .cmbCity.Text)
+              objUser.cityId = .cmbCity.ItemData(.cmbCity.ListIndex)
+            Else
+            MsgBox "Invalid city selection.", vbExclamation
+            Exit Function
+            End If
+            
+            If Trim(.cmbChurch.Text) <> "" Then
+            .cmbChurch.ListIndex = FindCBIndexByName(.cmbChurch, .cmbChurch.Text)
+              objUser.churchId = .cmbChurch.ItemData(.cmbChurch.ListIndex)
+            Else
+            MsgBox "Invalid Church selection.", vbExclamation
+            Exit Function
+            End If
+            
             If Trim(.txtLogonId.Text) <> "" Then objUser.LogonId = UCase(.txtLogonId.Text)
             If Trim(.txtPassword.Text) <> "" Then objUser.LogonPassword = .txtPassword.Text
             If .chkSystemManager.Value = 1 Then
@@ -426,6 +457,7 @@ On Error GoTo ErrorHandler
                objUser.ReportView = "N"
             End If
             If .dtePasswordLastUpdate.Text <> "" Then objUser.PasswordLastChange = .dtePasswordLastUpdate.FormattedText
+            PopulateUserAccountObject = True
      End With
     
 Exit Function
@@ -693,5 +725,40 @@ On Error GoTo ErrorHandler
 Exit Function
 ErrorHandler:
     'Call objError.ErrorRoutine(Err.Number, Err.Description, objConnection, "modlogon", "LoadChurchComboBox", True)
+
+End Function
+
+
+
+
+Public Function LoadChurchComboBoxWithAll(ByVal sCity As Long)
+On Error GoTo ErrorHandler
+
+    Dim objOrganisation_s As CMSOrganisation.clsOrganisation
+    Dim rslocal As ADODB.Recordset
+    Set objOrganisation_s = New CMSOrganisation.clsOrganisation
+    Set objOrganisation_s.DatabaseConnection = objConnection
+
+    Set rslocal = objOrganisation_s.getChurchName(sCity)
+
+    With frmUserAccount
+            
+            .cmbChurch.Clear
+            .cmbChurch.AddItem "ALL"
+            .cmbChurch.ItemData(.cmbChurch.NewIndex) = 0
+            If Not rslocal Is Nothing Then
+                Do Until rslocal.EOF
+                    .cmbChurch.AddItem rslocal!Name
+                    .cmbChurch.ItemData(.cmbChurch.NewIndex) = rslocal!id
+                    rslocal.MoveNext
+                Loop
+                Set rslocal = Nothing
+            End If
+    End With
+    Set objOrganisation_s = Nothing
+
+Exit Function
+ErrorHandler:
+    Call objError.ErrorRoutine(Err.Number, Err.Description, objConnection, "modUserAccount", "LoadChurchComboBoxWithAll", True)
 
 End Function

@@ -200,21 +200,22 @@ Private Sub ShowDetais()
     Dim sql As String
     Dim retuns As String
     
+    sql = "SELECT invoice.* FROM invoice , church WHERE invoice.CHURCH_ID = church.Id AND church.cityId = " & gCityId
     
-Select Case cmbTypeSearch.Text
+    Select Case cmbTypeSearch.Text
     
     Case "Invoice Number"
-        sql = "SELECT * FROM invoice WHERE Invoice_No >= '" & txtInputText.Text & "' AND " & _
+        sql = sql & " AND Invoice_No >= '" & txtInputText.Text & "' AND " & _
               " Invoice_No < '" & get_MoreThanAndLessThan(txtInputText.Text) & "'" & _
               " ORDER BY Invoice_No"
         GenerateInvoiceList (sql)
     Case "Reference Number"
-        sql = "SELECT * FROM invoice WHERE Ref >= '" & txtInputText.Text & "' AND " & _
+        sql = sql & " AND  Ref >= '" & txtInputText.Text & "' AND " & _
         " Ref < '" & get_MoreThanAndLessThan(txtInputText.Text) & "'" & _
         " ORDER BY Ref"
         GenerateInvoiceList (sql)
     Case "Surname"
-        sql = "SELECT * FROM invoice WHERE Name2 >='" & txtInputText.Text & "' AND " & _
+        sql = sql & " AND  Name2 >='" & txtInputText.Text & "' AND " & _
         " Name2 < '" & get_MoreThanAndLessThan(txtInputText.Text) & "'" & _
         " ORDER BY Name2"
         GenerateInvoiceList (sql)

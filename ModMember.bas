@@ -200,16 +200,11 @@ End Function
 
 Public Sub GenerateMemberList(sql As String)
  On Error GoTo ErrorHandler
- 
-    ' Dim objFollowup_s As PACMSFollowUP.clsFollowup_s
+
      Dim rslocal As ADODB.Recordset
      Dim strId  As String
      Dim itmx As ListItem
      
-    ' Dim lngTotalProspect As Long
-    ' Dim lngTotalPlanning As Long
-    ' Dim lngTotalCoaching As Long
- 
  
      Screen.MousePointer = vbHourglass
      
@@ -270,9 +265,10 @@ Public Function DisplayMember()
     'Retrieve Prospect record and display on form
     Set objMember_s = New CMSMember.clsMember_s
     Set objMember_s.DatabaseConnection = objConnection
-    Set rslocal = objMember_s.getByMemberId(gmemberId)
+    Set rslocal = objMember_s.getByMemberId(gmemberId, gCityId)
 
     If rslocal Is Nothing Then
+        MsgBox "No records found for This Member.", vbExclamation
         Exit Function
     End If
 

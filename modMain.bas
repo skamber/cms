@@ -32,6 +32,7 @@ Public CashOutSelected As Boolean
 Public CashflowItemSelected As Boolean
 Public systemManager As Boolean
 Public ReportView As Boolean
+Public gChurchRestriction As Long
 Public CompulsoryChangePassword As Boolean
 Public UserName As String
 Public Permissions(1 To 20, 1 To 4) As String

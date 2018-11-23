@@ -126,7 +126,7 @@ On Error GoTo ErrorHandler
         
     ElseIf gRecordMode = RECORD_EDIT Then
         
-        objCashflowItem.Id = gCashflowItemId
+        objCashflowItem.id = gCashflowItemId
         objCashflowItem_s.UpdateCashflowItem objCashflowItem
         
     
@@ -191,7 +191,7 @@ Public Function DispayCashflowItem()
     With frmCashFlowItem
         
         .txtGSTRate.Text = Format(rslocal!gst, NUMERIC_FORMAT)
-        .txtId.Text = ConvertNull(rslocal!Id)
+        .txtId.Text = ConvertNull(rslocal!id)
         .txtItemCode.Text = ConvertNull(rslocal!ITEMCODE)
         .txtItemName.Text = ConvertNull(rslocal!ITEMNAME)
         .cmbItemType.Text = ConvertNull(rslocal!Type)
@@ -211,7 +211,6 @@ Public Sub LoadCashflowItemList()
 
  On Error GoTo ErrorHandler
  
-    ' Dim objFollowup_s As PACMSFollowUP.clsFollowup_s
      Dim rslocal As ADODB.Recordset
      Dim strId  As String
      Dim itmx As ListItem
@@ -231,7 +230,7 @@ Public Sub LoadCashflowItemList()
              If Not rslocal Is Nothing Then
                  Do While Not rslocal.EOF
                      
-                     Set itmx = .ListCashflowItemView.ListItems.Add(, , CStr(rslocal!Id))
+                     Set itmx = .ListCashflowItemView.ListItems.Add(, , CStr(rslocal!id))
                                     
                                      If Not IsNull(rslocal!ITEMNAME) Then itmx.SubItems(1) = CStr(rslocal!ITEMNAME)
                                      If Not IsNull(rslocal!ITEMCODE) Then itmx.SubItems(2) = CStr(rslocal!ITEMCODE)
