@@ -20,8 +20,42 @@ Begin VB.Form frmAbout
       Height          =   375
       Left            =   3120
       TabIndex        =   1
-      Top             =   2640
+      Top             =   3240
       Width           =   1095
+   End
+   Begin VB.Label Label3 
+      Caption         =   "Label3"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   275
+      Left            =   3480
+      TabIndex        =   5
+      Top             =   1320
+      Width           =   1335
+   End
+   Begin VB.Label Label1 
+      Caption         =   "Version:"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   275
+      Left            =   2400
+      TabIndex        =   4
+      Top             =   1320
+      Width           =   855
    End
    Begin VB.Label Label5 
       Caption         =   "CMS"
@@ -60,7 +94,7 @@ Begin VB.Form frmAbout
       Width           =   4095
    End
    Begin VB.Label Label2 
-      Caption         =   "Developed by  Sami Kamber 2002 - 2018  Email : sami.kamber2@gmail.com          Mobile : (61) 413533732  "
+      Caption         =   $"frmAbout.frx":0000
       BeginProperty Font 
          Name            =   "Verdana"
          Size            =   9.75
@@ -71,16 +105,16 @@ Begin VB.Form frmAbout
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00000000&
-      Height          =   735
+      Height          =   1215
       Left            =   2280
       TabIndex        =   0
-      Top             =   1320
+      Top             =   1800
       Width           =   4215
    End
    Begin VB.Image Image1 
       Height          =   2100
       Left            =   120
-      Picture         =   "frmAbout.frx":0000
+      Picture         =   "frmAbout.frx":009B
       Stretch         =   -1  'True
       Top             =   120
       Width           =   2055

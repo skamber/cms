@@ -700,6 +700,9 @@ Private Sub cmbStatus_LostFocus()
 Call UpdateMemberStatus
 End Sub
 
+
+
+
 Private Sub dteEfectiveDate_LostFocus()
  Call ValidDateEntry(dteEfectiveDate)
 End Sub
@@ -757,11 +760,11 @@ End Sub
 
 Public Sub txtmemberNo_LostFocus()
 If gRecordMode = RECORD_NEW Then
-    If txtmemberNo.Text = "" Or Not IsNumeric(txtmemberNo.Text) Then
+    If txtMemberNo.Text = "" Or Not IsNumeric(txtMemberNo.Text) Then
         MsgBox "Please Enter Member Number.", vbExclamation
-        txtmemberNo.SetFocus
+        txtMemberNo.SetFocus
         Exit Sub
-    ElseIf Not GetMemberInfo(txtmemberNo.Text) Then txtmemberNo.SetFocus
+    ElseIf Not GetMemberInfo(txtMemberNo.Text) Then txtMemberNo.SetFocus
     End If
 End If
 End Sub

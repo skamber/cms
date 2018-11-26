@@ -66,7 +66,7 @@ On Error GoTo ErrorHandler
 
 Exit Function
 ErrorHandler:
-    'Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsCashIn_s", "InsertCasiIn", True)
+    'Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsCashFlowItem_s", "InsertCashflowItem", True)
 
 End Function
 

@@ -71,6 +71,7 @@ On Error GoTo ErrorHandler
 
 Exit Function
 ErrorHandler:
+
     'Call ObjError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsUser_s", "getUserName", True)
 
 End Function

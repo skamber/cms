@@ -495,7 +495,14 @@ Select Case ItemClicked.Key
                        displayInvoiceItemList
                      End If
     Case Invoice_search: frmInvoiceSearch.Show: DoEvents: frmInvoiceSearch.ZOrder 0
-    Case Receipt_information: frmReceipt.Show: DoEvents: frmReceipt.ZOrder 0
+    Case Receipt_information:
+                        frmReceipt.Show
+                        DoEvents
+                      '  frmReceipt.ZOrder 0
+                      '  If ReceiptSelected Then
+                      '      gReceiptId = frmReceiptSearch.ListReceiptView.SelectedItem
+                      '      DisplayReceipt
+                      '  End If
     Case receipt_search: frmReceiptSearch.Show: DoEvents: frmReceiptSearch.ZOrder 0
     Case CASHFLOW_VIEW: frmCashFlowView.Show: DoEvents: frmCashFlowView.ZOrder 0
     Case CASHOUT:

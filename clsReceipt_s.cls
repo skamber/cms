@@ -140,6 +140,33 @@ ErrorHandler:
 End Function
 
 
+Public Function getByReceiptId(ByVal lngReceiptID As Long) As ADODB.Recordset
+On Error GoTo ErrorHandler
+
+    Dim sql As String
+    Dim rsLocal As ADODB.Recordset
+    
+
+    sql = "SELECT * FROM receipt where ID = " & lngReceiptID
+    
+    Set rsLocal = New ADODB.Recordset
+        rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly
+    
+    If rsLocal.EOF = True Then
+        MsgBox "No records found for This Receipt.", vbExclamation
+        Set getByReceiptId = Nothing
+    Else
+        Set getByReceiptId = rsLocal
+    End If
+    
+    Set rsLocal = Nothing
+
+
+Exit Function
+ErrorHandler:
+'    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsCollection_s", "getByCollectionId", True)
+
+End Function
 
 
 

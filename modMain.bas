@@ -34,7 +34,7 @@ Public systemManager As Boolean
 Public ReportView As Boolean
 Public gChurchRestriction As Long
 Public CompulsoryChangePassword As Boolean
-Public UserName As String
+Public userName As String
 Public Permissions(1 To 20, 1 To 4) As String
 Public LoadPermissions(1 To 20, 1 To 4) As String
 Public Cities As New COLLECTION
@@ -1244,3 +1244,47 @@ Public Function FindCBIndexById(ByRef cbComboBox As ComboBox, ByRef id As Long) 
     FindCBIndexById = -1
 End Function
 
+Public Function SendEmail(ByVal from As String, ByVal recipient As String, ByVal subject As String, _
+ByVal message As String, ByVal userName As String, ByVal password As String)
+
+Dim oSmtp As New EASendMailObjLib.Mail
+    oSmtp.LicenseCode = "TryIt"
+
+    ' Set your Gmail email address
+    oSmtp.FromAddr = from
+
+    ' Add recipient email address
+    oSmtp.AddRecipientEx recipient, 0
+
+    ' Set email subject
+    oSmtp.subject = subject
+
+    ' Set email body
+    oSmtp.BodyText = message
+
+    ' Gmail SMTP server address
+    oSmtp.ServerAddr = "smtp.gmail.com"
+
+    ' If you want to use direct SSL 465 port,
+    ' Please add this line, otherwise TLS will be used.
+    oSmtp.ServerPort = 465
+
+    ' set 25 or 587 port
+    'oSmtp.ServerPort = 25
+
+    ' detect SSL/TLS automatically
+    oSmtp.SSL_init
+
+    ' Gmail user authentication should use your
+    ' Gmail email address as the user name.
+    ' For example: your email is "gmailid@gmail.com", then the user should be "gmailid@gmail.com"
+    oSmtp.userName = userName
+    oSmtp.password = password  '"Dyana7611!"
+
+    If oSmtp.SendMail() = 0 Then
+        MsgBox "email was sent successfully!"
+    Else
+        MsgBox "failed to send email with the following error:" & oSmtp.GetLastErrDescription()
+    End If
+
+End Function

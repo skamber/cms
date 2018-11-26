@@ -43,8 +43,8 @@ On Error GoTo ErrorHandler
 
 Exit Function
 ErrorHandler:
-   ' Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getPracticeName", True)
 
+    'Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getPracticeName", True)
 End Function
 
 Public Function getPayment() As ADODB.Recordset
@@ -71,7 +71,7 @@ On Error GoTo ErrorHandler
 
 Exit Function
 ErrorHandler:
-'    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getPayment", True)
+    'Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getPayment", True)
 
 End Function
 
@@ -127,7 +127,7 @@ On Error GoTo ErrorHandler
 
 Exit Function
 ErrorHandler:
-'    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getPaymentType", True)
+    'Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getPaymentType", True)
 
 End Function
 
@@ -155,7 +155,7 @@ On Error GoTo ErrorHandler
 
 Exit Function
 ErrorHandler:
-'    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getPayment", True)
+    'Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getPayment", True)
 
 End Function
 
@@ -186,7 +186,7 @@ On Error GoTo ErrorHandler
 
 Exit Function
 ErrorHandler:
-'    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getPayment", True)
+   ' Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getPayment", True)
 
 End Function
 
@@ -244,7 +244,7 @@ On Error GoTo ErrorHandler
 
 Exit Function
 ErrorHandler:
-'    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getPayment", True)
+  ' Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getPayment", True)
 
 End Function
 
@@ -271,7 +271,7 @@ On Error GoTo ErrorHandler
 
 Exit Function
 ErrorHandler:
-'    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getPracticeName", True)
+    'Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getPracticeName", True)
 
 End Function
 
@@ -299,7 +299,7 @@ On Error GoTo ErrorHandler
 
 Exit Function
 ErrorHandler:
-'    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getPayment", True)
+  ' Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getPayment", True)
 
 End Function
 
@@ -327,7 +327,7 @@ On Error GoTo ErrorHandler
 
 Exit Function
 ErrorHandler:
-    'Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getPaymentType", True)
+   ' Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getPaymentType", True)
 
 End Function
 Public Function getChurchName(ByVal lngCityID As Long) As ADODB.Recordset
@@ -355,8 +355,8 @@ On Error GoTo ErrorHandler
 Exit Function
 ErrorHandler:
        
-   Debug.Print (Err.Description)
-   ' Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getChurchName", True)
+   'Debug.Print (Err.Description)
+    'Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getChurchName", True)
 
 End Function
 
@@ -385,7 +385,7 @@ On Error GoTo ErrorHandler
 Exit Function
 ErrorHandler:
        
-   Debug.Print (Err.Description)
+   'Debug.Print (Err.Description)
    ' Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getCities", True)
 
 End Function
@@ -415,7 +415,7 @@ On Error GoTo ErrorHandler
 Exit Function
 ErrorHandler:
        
-   Debug.Print (Err.Description)
+   'Debug.Print (Err.Description)
    ' Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getCities", True)
 
 End Function

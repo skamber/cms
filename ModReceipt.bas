@@ -99,17 +99,17 @@ End Function
 Public Function SaveReceipt() As Boolean
 On Error GoTo ErrorHandler
 
-    Dim objReceipt As CMSreceipt.clsReceipt
+    Dim objReceipt As CMSReceipt.clsReceipt
     
-    Dim objreceipt_s As CMSreceipt.clsReceipt_s
+    Dim objreceipt_s As CMSReceipt.clsReceipt_s
     
 
 
     SaveReceipt = False
                             
     'Receipt record
-    Set objReceipt = New CMSreceipt.clsReceipt
-    Set objreceipt_s = New CMSreceipt.clsReceipt_s
+    Set objReceipt = New CMSReceipt.clsReceipt
+    Set objreceipt_s = New CMSReceipt.clsReceipt_s
     Set objreceipt_s.DatabaseConnection = objConnection
 
 
@@ -143,7 +143,7 @@ ErrorHandler:
     
 End Function
 
-Public Function PopulateReceiptObject(objReceipt As CMSreceipt.clsReceipt)
+Public Function PopulateReceiptObject(objReceipt As CMSReceipt.clsReceipt)
 On Error GoTo ErrorHandler
 'save data from form to newly created object for insert or update
 
@@ -156,7 +156,7 @@ On Error GoTo ErrorHandler
             
             If .dteDate.Text <> "" Then objReceipt.DateOfReceipt = .dteDate.FormattedText
             objReceipt.INV_NO = .txtInvoiceNo.Text
-            objReceipt.Amount = .txtAmountToPay.Text
+            objReceipt.amount = .txtAmountToPay.Text
             objReceipt.Accountname = .txtUser.Text
             objReceipt.INV_ID = .txtInvoiceID.Text
             objReceipt.ChequeNumber = .txtChequeNo.Text
@@ -224,10 +224,10 @@ End Sub
 Public Function getReceiptAmount(InvoiceId As Long) As Double
   On Error GoTo ErrorHandler
  
-     Dim objreceipt_s As CMSreceipt.clsReceipt_s
+     Dim objreceipt_s As CMSReceipt.clsReceipt_s
      Dim rslocal As ADODB.Recordset
      Dim TotalAmount As Double
-    Set objreceipt_s = New CMSreceipt.clsReceipt_s
+    Set objreceipt_s = New CMSReceipt.clsReceipt_s
     Set objreceipt_s.DatabaseConnection = objConnection
  
  Set rslocal = objreceipt_s.getByInvoiceId(InvoiceId)
@@ -235,7 +235,7 @@ Public Function getReceiptAmount(InvoiceId As Long) As Double
      Screen.MousePointer = vbHourglass
              If Not rslocal Is Nothing Then
                  Do While Not rslocal.EOF
-                     TotalAmount = TotalAmount + rslocal!Amount
+                     TotalAmount = TotalAmount + rslocal!amount
                      rslocal.MoveNext
              Loop
              End If
@@ -272,7 +272,7 @@ Public Sub GenerateReceiptList(sql As String)
                                      itmx.Text = CStr(rslocal!id)
                                      If Not IsNull(rslocal!INV_ID) Then itmx.SubItems(1) = CStr(rslocal!INV_ID)
                                      If Not IsNull(rslocal!INV_NO) Then itmx.SubItems(2) = CStr(rslocal!INV_NO)
-                                     If Not IsNull(rslocal!Amount) Then itmx.SubItems(3) = CStr(rslocal!Amount)
+                                     If Not IsNull(rslocal!amount) Then itmx.SubItems(3) = CStr(rslocal!amount)
                                      If Not IsNull(rslocal!Date_Of_Receipt) Then itmx.SubItems(4) = CStr(rslocal!Date_Of_Receipt)
                      Set itmx = Nothing
                      rslocal.MoveNext
@@ -324,3 +324,43 @@ ErrorHandler:
      Call objError.ErrorRoutine(Err.Number, Err.Description, objConnection, "modReceipt", "UpdateInvoiceBalance", True)
  
 End Sub
+
+Public Function DisplayReceipt()
+
+    Dim objreceipt_s As CMSReceipt.clsReceipt_s
+    
+    Dim rslocal As ADODB.Recordset
+    
+    On Error GoTo ErrorHandler
+    
+    Call InitialiseReceipt
+    
+    'Retrieve Prospect record and display on form
+    Set objreceipt_s = New CMSReceipt.clsReceipt_s
+    Set objreceipt_s.DatabaseConnection = objConnection
+    Set rslocal = objreceipt_s.getByReceiptId(gReceiptId)
+
+    If rslocal Is Nothing Then
+        Exit Function
+    End If
+
+    Screen.MousePointer = vbHourglass
+
+    With frmReceipt
+        
+        .txtChequeNo.Text = ConvertNull(rslocal!cheque_Number)
+        .txtInvoiceID.Text = ConvertNull(rslocal!INV_NO)
+        .txtReceiptId.Text = ConvertNull(rslocal!id)
+        .txtAmountToPay.Text = ConvertNull(rslocal!amount)
+    End With
+   Set objreceipt_s = Nothing
+   Screen.MousePointer = vbDefault
+Exit Function
+
+ErrorHandler:
+
+    'Call objError.ErrorRoutine(Err.Number, Err.Description, objConnection, "modReceipt", "DisplayCollection", True)
+
+End Function
+
+

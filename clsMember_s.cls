@@ -95,7 +95,7 @@ On Error GoTo ErrorHandler
 Exit Function
 ErrorHandler:
    
-    'Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsmember_s", "Insertmember", True)
+    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsmember_s", "Insertmember", True)
 
 End Function
 
@@ -172,7 +172,7 @@ On Error GoTo ErrorHandler
 
 Exit Function
 ErrorHandler:
-    'Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsMember_s", "UpdateExparydate", True)
+    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsMember_s", "UpdateExparydate", True)
 
 End Function
 Public Function getByMemberId(ByVal lngMemberID As Long, lngCityId As Long) As ADODB.Recordset
@@ -198,7 +198,7 @@ On Error GoTo ErrorHandler
 
 Exit Function
 ErrorHandler:
-'    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsMember_s", "getByMemberId", True)
+    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsMember_s", "getByMemberId", True)
 
 End Function
 
@@ -225,7 +225,7 @@ On Error GoTo ErrorHandler
 
 Exit Function
 ErrorHandler:
-'    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsMember_s", "GetPostCode", True)
+    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsMember_s", "GetPostCode", True)
 
 End Function
 
@@ -251,7 +251,7 @@ On Error GoTo ErrorHandler
 
 Exit Function
 ErrorHandler:
-    'Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsMember_s", "UpdateExparydate", True)
+    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsMember_s", "UpdateExparydate", True)
 
 End Function
 
