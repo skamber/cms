@@ -173,10 +173,10 @@ On Error GoTo ErrorHandler
             objMember.Initial = .txtStatus.Text
             objMember.address1 = .txtAddress1.Text
             objMember.address2 = .txtAddress2.Text
-            objMember.Comments = .txtMemo.Text
+            objMember.Comments = .txtmemo.Text
             
             'objMember.Phone = .txtMemberPhone.Text
-            objMember.postCode = .txtPostcode.Text
+            objMember.postCode = .txtPostCode.Text
             objMember.SpouseName = .txtSpouse.Text
             objMember.State = .txtState.Text
             objMember.Status = .cmbStatus.Text
@@ -186,6 +186,7 @@ On Error GoTo ErrorHandler
               
             If .dteDateOfBirth.Text <> "" Then objMember.DateOfBirth = .dteDateOfBirth.FormattedText
             If .dteMemberPhone.Text <> "" Then objMember.Phone = .dteMemberPhone.FormattedText
+            If .dteMemberMobile.Text <> "" Then objMember.Mobile = .dteMemberMobile.FormattedText
             If .dteExpiryDate.Text <> "" Then objMember.MembershipExpiary = .dteExpiryDate.FormattedText
             If .dteCreateDate.Text <> "" Then objMember.Created_date = .dteCreateDate.FormattedText
 
@@ -280,9 +281,10 @@ Public Function DisplayMember()
         .txtAddress2.Text = ConvertNull(rslocal!address2)
         .txtGivenName.Text = ConvertNull(rslocal!Given_name)
         .dteMemberPhone.Text = ConvertNull(rslocal!Phone)
-        .txtMemo.Text = "" & rslocal!Comments
+        .dteMemberMobile.Text = ConvertNull(rslocal!Mobile)
+        .txtmemo.Text = "" & rslocal!Comments
         .txtMno.Text = ConvertNull(rslocal!MNo)
-        .txtPostcode.Text = ConvertNull(rslocal!postCode)
+        .txtPostCode.Text = ConvertNull(rslocal!postCode)
         .txtSpouse.Text = ConvertNull(rslocal!spouse_name)
         .txtState.Text = ConvertNull(rslocal!State)
         .txtStatus.Text = ConvertNull(rslocal!Mr)

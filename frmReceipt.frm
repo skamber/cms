@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "msmask32.ocx"
+Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "MSMASK32.OCX"
 Object = "{00025600-0000-0000-C000-000000000046}#5.2#0"; "crystl32.ocx"
 Begin VB.Form frmReceipt 
    ClientHeight    =   8520
@@ -20,6 +20,24 @@ Begin VB.Form frmReceipt
       TabIndex        =   4
       Top             =   480
       Width           =   11415
+      Begin VB.TextBox txtComment 
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   2175
+         Left            =   260
+         MultiLine       =   -1  'True
+         ScrollBars      =   2  'Vertical
+         TabIndex        =   20
+         Top             =   3360
+         Width           =   8400
+      End
       Begin VB.TextBox txtChequeNo 
          BeginProperty Font 
             Name            =   "Verdana"
@@ -55,6 +73,15 @@ Begin VB.Form frmReceipt
       End
       Begin VB.TextBox txtUser 
          Enabled         =   0   'False
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   315
          Left            =   2520
          TabIndex        =   15
@@ -183,6 +210,23 @@ Begin VB.Form frmReceipt
          PrintFileLinesPerPage=   60
          WindowShowCloseBtn=   -1  'True
          WindowShowPrintSetupBtn=   -1  'True
+      End
+      Begin VB.Label Label10 
+         Caption         =   "Memo:"
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Left            =   360
+         TabIndex        =   21
+         Top             =   3000
+         Width           =   1335
       End
       Begin VB.Label Label8 
          Caption         =   "Cheque Number:"

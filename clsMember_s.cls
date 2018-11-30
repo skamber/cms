@@ -57,7 +57,7 @@ On Error GoTo ErrorHandler
     'insert new record
     sql = "INSERT INTO member" _
                 & " (MNo, Mr, Surname, Given_Name, Full_Name, Spouse_Name, Address1, CITY_ID" _
-                & " ,Address2, STATE,PostCode, Phone,  comments" _
+                & " ,Address2, STATE,PostCode, Phone,  mobile, comments" _
                 & " ,STATUS,Email ,joining_date,Membership_Expiary,DATE_OF_BIRTH)" _
                 & " VALUES" _
                 & " (" & NewMemberId _
@@ -68,6 +68,7 @@ On Error GoTo ErrorHandler
                 & ",'" & objMember.Address2 & "','" & objMember.State & "'" _
                 & ",'" & objMember.PostCode & "'" _
                 & ",'" & objMember.Phone & "'" _
+                & ",'" & objMember.Mobile & "'" _
                 & ",'" & objMember.comments & "'" _
                 & ",'" & objMember.STATUS & "'" _
                 & ",'" & objMember.Email & "'"
@@ -116,6 +117,7 @@ On Error GoTo ErrorHandler
                 & " ,STATE =" & "'" & objMember.State & "'" _
                 & " ,PostCode =" & "'" & objMember.PostCode & "'" _
                 & " ,Phone =" & "'" & objMember.Phone & "'" _
+                & " ,Mobile =" & "'" & objMember.Mobile & "'" _
                 & " ,comments =" & "'" & objMember.comments & "'" _
                 & " ,STATUS =" & "'" & objMember.STATUS & "'" _
                 & " ,EMAIL =" & "'" & objMember.Email & "'"

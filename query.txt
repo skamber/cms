@@ -1,31 +1,151 @@
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `church`.`allincome` AS select `allpayment`.`church_id` AS `church_id`,`allpayment`.`payment` AS `payment`,`allpayment`.`type` AS `type`,`allpayment`.`date_of_payment` AS `date_of_payment`,`allpayment`.`receipt_no` AS `receipt_no`,`allpayment`.`User_name` AS `User_name`,`allpayment`.`Amount` AS `Amount`,`allpayment`.`Member_Effective` AS `Member_Effective`,`allpayment`.`Member_Expiary` AS `Member_Expiary`,`allpayment`.`mno` AS `mno`,`allpayment`.`COMMENTS` AS `COMMENTS` from (select `church`.`collection`.`CHURCH_ID` AS `church_id`,`church`.`collection`.`PAYMENT` AS `payment`,`church`.`collection`.`TYPE` AS `type`,`church`.`collection`.`DATE_OF_COLLECTION` AS `date_of_payment`,`church`.`collection`.`COL_ID` AS `receipt_no`,`church`.`collection`.`USER_NAME` AS `User_name`,`church`.`collection`.`AMOUNT` AS `Amount`,NULL AS `Member_Effective`,NULL AS `Member_Expiary`,NULL AS `mno`,`church`.`collection`.`COMMENTS` AS `COMMENTS` from `church`.`collection` union select `church`.`receipt`.`church_id` AS `church_id`,'Receipt' AS `payment`,NULL AS `type`,`church`.`receipt`.`Date_Of_Receipt` AS `date_of_payment`,`church`.`receipt`.`ID` AS `Receipt_no`,`church`.`receipt`.`User_Name` AS `user_name`,`church`.`receipt`.`amount` AS `amount`,NULL AS `member_effective`,NULL AS `member_expiary`,`church`.`receipt`.`cheque_Number` AS `mno`,NULL AS `COMMENTS` from `church`.`receipt` union select `church`.`payment`.`CHURCH_ID` AS `church_id`,`church`.`payment`.`PAYMENT` AS `payment`,`church`.`payment`.`TYPE` AS `type`,`church`.`payment`.`DATE_OF_PAYMENT` AS `date_of_payment`,`church`.`payment`.`RECEIPT_NO` AS `receipt_no`,`church`.`payment`.`USER_NAME` AS `User_Name`,`church`.`payment`.`AMOUNT` AS `amount`,`church`.`payment`.`MEMBER_EFFECTIVE` AS `Member_Effective`,`church`.`payment`.`MEMBER_EXPIARY` AS `Member_Expiary`,`church`.`payment`.`MNo` AS `mno`,`church`.`payment`.`COMMENTS` AS `COMMENTS` from `church`.`payment`) `allpayment` order by `allpayment`.`church_id`,`allpayment`.`payment`;
+1. create new database in mysql
+CREATE DATABASE cms_test CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 
-// change the column type
+SET SQL_SAFE_UPDATES = 0;
+
+
+to Fix ms access for migration
+1. fix the payment table run this query
+
+SELECT receipt_no, payment, type 
+FROM PAYMENT
+WHERE payment is null
+or type is null;
+
+and fix them
+
+
+
+
+
+----------------------------------------------------------------------------------------------------------
+2. create the view
+
+CREATE  VIEW `allincome` AS select `allpayment`.`church_id` AS `church_id`,`allpayment`.`payment` AS `payment`,`allpayment`.`type` AS `type`,
+`allpayment`.`date_of_payment` AS `date_of_payment`,`allpayment`.`receipt_no` AS `receipt_no`,`allpayment`.`User_name` AS `User_name`,
+`allpayment`.`Amount` AS `Amount`,`allpayment`.`Member_Effective` AS `Member_Effective`,`allpayment`.`Member_Expiary` AS `Member_Expiary`,
+`allpayment`.`mno` AS `mno`,`allpayment`.`COMMENTS` AS `COMMENTS` 
+from (select `collection`.`CHURCH_ID` AS `church_id`,`collection`.`PAYMENT` AS `payment`,`collection`.`TYPE` AS `type`,`collection`.`DATE_OF_COLLECTION` AS `date_of_payment`,`collection`.`COL_ID` AS `receipt_no`,`collection`.`USER_NAME` AS `User_name`,`collection`.`AMOUNT` AS `Amount`,NULL AS `Member_Effective`,NULL AS `Member_Expiary`,NULL AS `mno`,`collection`.`COMMENTS` AS `COMMENTS` from `collection` union select `receipt`.`church_id` AS `church_id`,'Receipt' AS `payment`,NULL AS `type`,`receipt`.`DATE_OF_receipt` AS `date_of_payment`,`receipt`.`ID` AS `Receipt_no`,`receipt`.`User_Name` AS `user_name`,`receipt`.`amount` AS `amount`,NULL AS `member_effective`,NULL AS `member_expiary`,`receipt`.`cheque_Number` AS `mno`,NULL AS `COMMENTS` from `receipt` union select `payment`.`CHURCH_ID` AS `church_id`,`payment`.`PAYMENT` AS `payment`,`payment`.`TYPE` AS `type`,`payment`.`DATE_OF_PAYMENT` AS `date_of_payment`,`payment`.`RECEIPT_NO` AS `receipt_no`,`payment`.`USER_NAME` AS `User_Name`,`payment`.`AMOUNT` AS `amount`,`payment`.`MEMBER_EFFECTIVE` AS `Member_Effective`,`payment`.`MEMBER_EXPIARY` AS `Member_Expiary`,`payment`.`MNo` AS `mno`,`payment`.`COMMENTS` AS `COMMENTS` from `payment`) `allpayment` order by `allpayment`.`church_id`,`allpayment`.`payment`;
+
+
+-----------------------------------
+
+
+CREATE TABLE `app` (
+  `date_updated` datetime DEFAULT NULL,
+  `version` varchar(45) DEFAULT NULL
+) ;
+INSERT INTO `app` (`date_updated`,`version`) VALUES ('2018-11-14 00:00:00','3.0.1');
+
+
+CREATE TABLE `country` (
+  `ID` int(11) NOT NULL,
+  `CountryName` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `ID_UNIQUE` (`ID`)
+) ;
+INSERT INTO `country` (`ID`,`CountryName`) VALUES (1,'Australia');
+
+
+CREATE TABLE `city` (
+  `ID` int(11) NOT NULL,
+  `CountryId` int(11) NOT NULL,
+  `CityName` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FK_CountryId_idx` (`CountryId`),
+  CONSTRAINT `FK_CountryId` FOREIGN KEY (`CountryId`) REFERENCES `country` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ;
+INSERT INTO `city` (`ID`,`CountryId`,`CityName`) VALUES (1,1,'Melbourne');
+INSERT INTO `city` (`ID`,`CountryId`,`CityName`) VALUES (2,1,'Sydney');
+
+
+
+
+ALTER TABLE `children` ADD COLUMN `CITY_ID` INT NOT NULL ;
+
+update children set CITY_ID = 1
+
+ALTER TABLE `church` ADD COLUMN `CityId` INT NOT NULL ;
+
+update church set CityId= 1;
+
+
+ALTER TABLE collection CHANGE DATE_OF_COLLECTION DATE_OF_COLLECTION DATE;
+
+ALTER TABLE member ADD COLUMN `CITY_ID` INT NOT NULL ;
+
+update member  set CITY_ID = 1
+ALTER TABLE `member` 
+ADD INDEX `CITY_ID` (`CITY_ID` ASC);
+
+
+
 ALTER TABLE payment CHANGE DATE_OF_PAYMENT DATE_OF_PAYMENT DATE;
-
-// turning logs on 
-SET GLOBAL general_log = 'ON';
-
-
-SET GLOBAL general_log_file = 'c:/cms/sql_logs.txt';
-
-SET GLOBAL general_log = 'OFF';
+ALTER TABLE payment 
+CHANGE COLUMN `MNo` `MNo` INT(11) NOT NULL DEFAULT '0' ;
 
 
-CREATE USER 'cms'@'%' IDENTIFIED BY 'SAMI7611';
-ALTER USER 'cms'@'%' IDENTIFIED BY 'SAMI7611';
+
+ALTER TABLE receipt CHANGE Date_Of_Receipt Date_Of_Receipt DATE;
+
+
+ALTER TABLE users ADD COLUMN City_Id  INT NOT NULL ;
+
+ALTER TABLE users ADD COLUMN Church_Id INT NOT NULL ;
+
+update users set City_Id  = 1;
+update users set Church_Id = 0;
+
+ALTER TABLE `users` 
+CHANGE COLUMN `Logon_Id` `Logon_Id` VARCHAR(20) NOT NULL ,
+CHANGE COLUMN `Full_Name` `Full_Name` VARCHAR(50) NOT NULL ,
+CHANGE COLUMN `Logon_password` `Logon_password` VARCHAR(50) NOT NULL ,
+CHANGE COLUMN `SYSTEM_MANAGER` `SYSTEM_MANAGER` VARCHAR(1) NOT NULL ,
+CHANGE COLUMN `Report_View` `Report_View` VARCHAR(1) NOT NULL ;
+
+
+ALTER TABLE `member` 
+ADD COLUMN MOBILE VARCHAR(15) NULL;
+
+DELETE FROM `users` WHERE `ID`='10';
+
+
+ALTER TABLE `users` 
+ADD UNIQUE INDEX `Logon_Id_UNIQUE` (`Logon_Id` ASC);
+
+
+UPDATE member AS m1
+INNER JOIN member AS m2  ON m1.mno =m2.mno
+SET m1.mobile  = m2.phone
+where 
+m2.phone is not null
+and m2.phone like '(04)%';
+
+update member set phone =null where
+phone is not null
+and phone like '(04)%';
+---------------------------------------------------------------------------
+
+
+CREATE USER 'cms'@'%' IDENTIFIED BY 'SAMI7611';   // create user with password SAMI7611
+ALTER USER 'cms'@'%' IDENTIFIED BY 'SAMI7611';   //change user passowrd
 GRANT ALL ON church.* TO 'cms'@'%';
 flush privileges;
 
 
 SELECT Host, User FROM mysql.user;
-
-DROP USER 'cms'@'localhost';
-
-ALTER USER 'cms'@'%' REQUIRE SSL;  
+DROP USER 'cms'@'localhost';    ///delete user
+ALTER USER 'cms'@'%' REQUIRE SSL;  // only via secure connection 
 
 // remove the same updater mode
 SET SQL_SAFE_UPDATES = 0;
-
 CREATE DATABASE rubixsport CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+
+
+// turning logs on 
+SET GLOBAL general_log = 'ON';
+SET GLOBAL general_log_file = 'c:/cms/sql_logs.txt';
+SET GLOBAL general_log = 'OFF';
+------------------------------------------------------------------------
+ 

@@ -21,6 +21,31 @@ Begin VB.Form frmMember
       TabIndex        =   16
       Top             =   480
       Width           =   12495
+      Begin MSMask.MaskEdBox dteMemberMobile 
+         Height          =   315
+         Left            =   4440
+         TabIndex        =   36
+         Top             =   3600
+         Width           =   2055
+         _ExtentX        =   3625
+         _ExtentY        =   556
+         _Version        =   393216
+         ClipMode        =   1
+         PromptInclude   =   0   'False
+         AllowPrompt     =   -1  'True
+         MaxLength       =   13
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Mask            =   "##########"
+         PromptChar      =   "_"
+      End
       Begin VB.TextBox txtEmail 
          BeginProperty Font 
             Name            =   "Verdana"
@@ -273,9 +298,9 @@ Begin VB.Form frmMember
       End
       Begin MSMask.MaskEdBox dteMemberPhone 
          Height          =   315
-         Left            =   7920
+         Left            =   6600
          TabIndex        =   11
-         Top             =   2760
+         Top             =   3600
          Width           =   1695
          _ExtentX        =   2990
          _ExtentY        =   556
@@ -321,6 +346,23 @@ Begin VB.Form frmMember
          Format          =   "dd/mm/yyyy"
          Mask            =   "##/##/####"
          PromptChar      =   "_"
+      End
+      Begin VB.Label Label5 
+         Caption         =   "Mobile"
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Left            =   4440
+         TabIndex        =   37
+         Top             =   3360
+         Width           =   735
       End
       Begin VB.Label label2 
          Caption         =   "Date Of Birth"
@@ -459,9 +501,9 @@ Begin VB.Form frmMember
          EndProperty
          Height          =   195
          Index           =   5
-         Left            =   7920
+         Left            =   6600
          TabIndex        =   27
-         Top             =   2520
+         Top             =   3360
          Width           =   735
       End
       Begin VB.Label label2 
@@ -670,6 +712,10 @@ Private Sub dteExpiryDate_LostFocus()
 End Sub
 
 
+
+Private Sub dteMemberPhone_Change()
+
+End Sub
 
 Private Sub Form_Load()
 

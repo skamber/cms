@@ -760,11 +760,11 @@ End Sub
 
 Public Sub txtmemberNo_LostFocus()
 If gRecordMode = RECORD_NEW Then
-    If txtMemberNo.Text = "" Or Not IsNumeric(txtMemberNo.Text) Then
+    If txtmemberNo.Text = "" Or Not IsNumeric(txtmemberNo.Text) Then
         MsgBox "Please Enter Member Number.", vbExclamation
-        txtMemberNo.SetFocus
+        txtmemberNo.SetFocus
         Exit Sub
-    ElseIf Not GetMemberInfo(txtMemberNo.Text) Then txtMemberNo.SetFocus
+    ElseIf Not GetMemberInfo(txtmemberNo.Text) Then txtmemberNo.SetFocus
     End If
 End If
 End Sub

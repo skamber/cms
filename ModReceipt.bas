@@ -156,11 +156,12 @@ On Error GoTo ErrorHandler
             
             If .dteDate.Text <> "" Then objReceipt.DateOfReceipt = .dteDate.FormattedText
             objReceipt.INV_NO = .txtInvoiceNo.Text
-            objReceipt.amount = .txtAmountToPay.Text
+            objReceipt.Amount = .txtAmountToPay.Text
             objReceipt.Accountname = .txtUser.Text
             objReceipt.INV_ID = .txtInvoiceID.Text
             objReceipt.ChequeNumber = .txtChequeNo.Text
             objReceipt.churchId = gChurchId
+            objReceipt.Comments = .txtComment.Text
             
             
     End With
@@ -176,7 +177,7 @@ Public Function LoadReceiptDefualtValue()
 
 With frmReceipt
        .dteDate.Text = Format(Now(), DATE_FORMAT)
-       .txtUser.Text = UserName
+       .txtUser.Text = userName
        
 End With
 
@@ -203,12 +204,12 @@ Sub GetInvoiceInfo()
          Screen.MousePointer = vbDefault
          Exit Sub
          Else
-          .txtName.Text = rslocal!Name1
-          .txtSurname.Text = rslocal!name2
-          .txtInvoiceID.Text = rslocal!id
-          .txtAmountToPay.Text = rslocal!balance
-          mReceiptAmountAlocated = rslocal!balance
-          Call ValidNumericEntry(.txtAmountToPay)
+         .txtName.Text = rslocal!Name1
+         .txtSurname.Text = rslocal!name2
+         .txtInvoiceID.Text = rslocal!id
+         .txtAmountToPay.Text = rslocal!balance
+         mReceiptAmountAlocated = rslocal!balance
+         Call ValidNumericEntry(.txtAmountToPay)
          End If
      End With
      
@@ -235,7 +236,7 @@ Public Function getReceiptAmount(InvoiceId As Long) As Double
      Screen.MousePointer = vbHourglass
              If Not rslocal Is Nothing Then
                  Do While Not rslocal.EOF
-                     TotalAmount = TotalAmount + rslocal!amount
+                     TotalAmount = TotalAmount + rslocal!Amount
                      rslocal.MoveNext
              Loop
              End If
@@ -272,7 +273,7 @@ Public Sub GenerateReceiptList(sql As String)
                                      itmx.Text = CStr(rslocal!id)
                                      If Not IsNull(rslocal!INV_ID) Then itmx.SubItems(1) = CStr(rslocal!INV_ID)
                                      If Not IsNull(rslocal!INV_NO) Then itmx.SubItems(2) = CStr(rslocal!INV_NO)
-                                     If Not IsNull(rslocal!amount) Then itmx.SubItems(3) = CStr(rslocal!amount)
+                                     If Not IsNull(rslocal!Amount) Then itmx.SubItems(3) = CStr(rslocal!Amount)
                                      If Not IsNull(rslocal!Date_Of_Receipt) Then itmx.SubItems(4) = CStr(rslocal!Date_Of_Receipt)
                      Set itmx = Nothing
                      rslocal.MoveNext
@@ -351,7 +352,8 @@ Public Function DisplayReceipt()
         .txtChequeNo.Text = ConvertNull(rslocal!cheque_Number)
         .txtInvoiceID.Text = ConvertNull(rslocal!INV_NO)
         .txtReceiptId.Text = ConvertNull(rslocal!id)
-        .txtAmountToPay.Text = ConvertNull(rslocal!amount)
+        .txtAmountToPay.Text = ConvertNull(rslocal!Amount)
+        .txtComment.Text = "" & rslocal!Comments
     End With
    Set objreceipt_s = Nothing
    Screen.MousePointer = vbDefault
