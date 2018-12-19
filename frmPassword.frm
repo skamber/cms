@@ -240,9 +240,9 @@ Private Sub cmdOK_Click()
     Dim objRecordset As Recordset
     
 
-    strOldPassword = UCase(Trim(txtOldPassword.Text))
-    strNewPassword = UCase(Trim(txtNewPassword.Text))
-    strConfirmPassword = UCase(Trim(txtConfirmPassword.Text))
+    strOldPassword = Trim(txtOldPassword.Text)
+    strNewPassword = Trim(txtNewPassword.Text)
+    strConfirmPassword = Trim(txtConfirmPassword.Text)
     
     If (strOldPassword = "") Or (strNewPassword = "") Or (strConfirmPassword = "") Then
         MsgBox "Required field missing - All Password details must be entered.", vbExclamation
@@ -261,7 +261,7 @@ Private Sub cmdOK_Click()
         End If
          
         If objRecordset!Logon_Password = strOldPassword Then
-         ElseIf DecryptPassword(objRecordset!Logon_Password) <> strOldPassword Then
+         ElseIf cmdDecrypt(objRecordset!Logon_Password) <> strOldPassword Then
             MsgBox "Password details entered are invalid.  Password update unsuccessful.", vbInformation
             txtOldPassword.SetFocus
             Exit Sub
@@ -286,8 +286,8 @@ Private Sub cmdOK_Click()
             txtNewPassword.SetFocus
             Exit Sub
        End If
-       encryptedpass = encryptPassword(strNewPassword)
-       encryptedpass = Replace(encryptedpass, "'", "''")
+       encryptedpass = cmdEncrypt(strNewPassword)
+       'encryptedpass = Replace(encryptedpass, "'", "''")
         objConnection.BeginTrans
                 
                 sql = "UPDATE users SET" _

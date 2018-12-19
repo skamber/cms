@@ -18,13 +18,13 @@ Begin VB.Form frmMember
       Enabled         =   0   'False
       Height          =   8415
       Left            =   0
-      TabIndex        =   16
+      TabIndex        =   17
       Top             =   480
       Width           =   12495
       Begin MSMask.MaskEdBox dteMemberMobile 
          Height          =   315
          Left            =   4440
-         TabIndex        =   36
+         TabIndex        =   12
          Top             =   3600
          Width           =   2055
          _ExtentX        =   3625
@@ -58,7 +58,7 @@ Begin VB.Form frmMember
          EndProperty
          Height          =   315
          Left            =   120
-         TabIndex        =   12
+         TabIndex        =   11
          Top             =   3600
          Width           =   3975
       End
@@ -101,7 +101,7 @@ Begin VB.Form frmMember
          EndProperty
          Height          =   315
          Left            =   120
-         TabIndex        =   18
+         TabIndex        =   19
          Top             =   360
          Width           =   735
       End
@@ -266,14 +266,14 @@ Begin VB.Form frmMember
          Left            =   120
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
-         TabIndex        =   13
+         TabIndex        =   14
          Top             =   4440
          Width           =   9615
       End
       Begin MSMask.MaskEdBox dteExpiryDate 
          Height          =   315
          Left            =   3960
-         TabIndex        =   17
+         TabIndex        =   18
          Top             =   1920
          Width           =   1455
          _ExtentX        =   2566
@@ -299,7 +299,7 @@ Begin VB.Form frmMember
       Begin MSMask.MaskEdBox dteMemberPhone 
          Height          =   315
          Left            =   6600
-         TabIndex        =   11
+         TabIndex        =   13
          Top             =   3600
          Width           =   1695
          _ExtentX        =   2990
@@ -324,7 +324,7 @@ Begin VB.Form frmMember
       Begin MSMask.MaskEdBox dteCreateDate 
          Height          =   315
          Left            =   1080
-         TabIndex        =   31
+         TabIndex        =   32
          Top             =   360
          Width           =   1455
          _ExtentX        =   2566
@@ -378,7 +378,7 @@ Begin VB.Form frmMember
          Height          =   195
          Index           =   14
          Left            =   5640
-         TabIndex        =   35
+         TabIndex        =   36
          Top             =   960
          Width           =   1455
       End
@@ -395,7 +395,7 @@ Begin VB.Form frmMember
          EndProperty
          Height          =   255
          Left            =   120
-         TabIndex        =   34
+         TabIndex        =   35
          Top             =   4200
          Width           =   615
       End
@@ -412,7 +412,7 @@ Begin VB.Form frmMember
          EndProperty
          Height          =   255
          Left            =   120
-         TabIndex        =   33
+         TabIndex        =   34
          Top             =   3360
          Width           =   1455
       End
@@ -430,7 +430,7 @@ Begin VB.Form frmMember
          Height          =   195
          Index           =   13
          Left            =   1080
-         TabIndex        =   32
+         TabIndex        =   33
          Top             =   120
          Width           =   1455
       End
@@ -448,7 +448,7 @@ Begin VB.Form frmMember
          Height          =   195
          Index           =   4
          Left            =   120
-         TabIndex        =   30
+         TabIndex        =   31
          Top             =   960
          Width           =   855
       End
@@ -466,7 +466,7 @@ Begin VB.Form frmMember
          Height          =   195
          Index           =   0
          Left            =   120
-         TabIndex        =   29
+         TabIndex        =   30
          Top             =   120
          Width           =   855
       End
@@ -484,7 +484,7 @@ Begin VB.Form frmMember
          Height          =   195
          Index           =   1
          Left            =   6360
-         TabIndex        =   28
+         TabIndex        =   29
          Top             =   2520
          Width           =   1095
       End
@@ -502,7 +502,7 @@ Begin VB.Form frmMember
          Height          =   195
          Index           =   5
          Left            =   6600
-         TabIndex        =   27
+         TabIndex        =   28
          Top             =   3360
          Width           =   735
       End
@@ -520,7 +520,7 @@ Begin VB.Form frmMember
          Height          =   195
          Index           =   6
          Left            =   4800
-         TabIndex        =   26
+         TabIndex        =   27
          Top             =   2520
          Width           =   1095
       End
@@ -538,7 +538,7 @@ Begin VB.Form frmMember
          Height          =   195
          Index           =   7
          Left            =   2400
-         TabIndex        =   25
+         TabIndex        =   26
          Top             =   2520
          Width           =   1095
       End
@@ -556,7 +556,7 @@ Begin VB.Form frmMember
          Height          =   195
          Index           =   8
          Left            =   120
-         TabIndex        =   24
+         TabIndex        =   25
          Top             =   2520
          Width           =   975
       End
@@ -574,7 +574,7 @@ Begin VB.Form frmMember
          Height          =   195
          Index           =   9
          Left            =   2160
-         TabIndex        =   23
+         TabIndex        =   24
          Top             =   1680
          Width           =   855
       End
@@ -592,7 +592,7 @@ Begin VB.Form frmMember
          Height          =   195
          Index           =   10
          Left            =   120
-         TabIndex        =   22
+         TabIndex        =   23
          Top             =   1680
          Width           =   1695
       End
@@ -610,7 +610,7 @@ Begin VB.Form frmMember
          Height          =   195
          Index           =   11
          Left            =   3360
-         TabIndex        =   21
+         TabIndex        =   22
          Top             =   960
          Width           =   1095
       End
@@ -628,7 +628,7 @@ Begin VB.Form frmMember
          Height          =   195
          Index           =   12
          Left            =   1320
-         TabIndex        =   20
+         TabIndex        =   21
          Top             =   960
          Width           =   855
       End
@@ -646,7 +646,7 @@ Begin VB.Form frmMember
          Height          =   195
          Index           =   3
          Left            =   3960
-         TabIndex        =   19
+         TabIndex        =   20
          Top             =   1680
          Width           =   1215
       End
@@ -679,7 +679,7 @@ Begin VB.Form frmMember
          Height          =   375
          Index           =   0
          Left            =   0
-         TabIndex        =   14
+         TabIndex        =   15
          Top             =   0
          Width           =   2175
       End
@@ -688,7 +688,7 @@ Begin VB.Form frmMember
       Height          =   255
       Index           =   2
       Left            =   0
-      TabIndex        =   15
+      TabIndex        =   16
       Top             =   0
       Width           =   855
    End
@@ -712,10 +712,6 @@ Private Sub dteExpiryDate_LostFocus()
 End Sub
 
 
-
-Private Sub dteMemberPhone_Change()
-
-End Sub
 
 Private Sub Form_Load()
 

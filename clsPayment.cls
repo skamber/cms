@@ -29,6 +29,8 @@ Private mvarAccountname As String 'local copy
 Private Const DATE_FORMAT = "dd/mm/yyyy"
 Private mvarChurchId As Long 'local copy
 
+
+
 Public Property Let Accountname(ByVal vData As String)
 'used when assigning a value to the property, on the left side of an assignment.
 'Syntax: X.Accountname = 5
@@ -221,6 +223,4 @@ Public Property Get MNo() As Long
 'Syntax: Debug.Print X.MNo
     MNo = mvarMNo
 End Property
-
-
 

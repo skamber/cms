@@ -89,7 +89,7 @@ On Error GoTo ErrorHandler
     sql = "INSERT INTO invoice" _
                 & " (ID, Invoice_no, church_id,Ref, Name1, Name2, Address1, Address2" _
                 & " ,Address3, Terms,Total_amount,state,Balance" _
-                & " ,Phone,Mobile,email,Created_date,over_due_date )" _
+                & " ,Phone,Mobile,USER_NAME,email,Created_date,over_due_date,UPDATE_DATE)" _
                 & " VALUES" _
                 & " (" & NewInvoiceId _
                 & ",'" & NewInvoiceNo & "'" _
@@ -102,6 +102,7 @@ On Error GoTo ErrorHandler
                 & "," & objInvoice.Balance _
                 & ",'" & objInvoice.Phone & "'" _
                 & ",'" & objInvoice.Mobile & "'" _
+                & ",'" & objInvoice.Accountname & "'" _
                 & ",'" & objInvoice.Email & "'"
                 If objInvoice.dateofInvoice = "" Then
                 sql = sql & ", NULL"
@@ -112,8 +113,9 @@ On Error GoTo ErrorHandler
                 If objInvoice.over_due_date = "" Then
                 sql = sql & ", NULL)"
                 Else
-                sql = sql & ",'" & Format(objInvoice.over_due_date, "yyyy-mm-dd") & "')"
+                sql = sql & ",'" & Format(objInvoice.over_due_date, "yyyy-mm-dd") & "'"
                 End If
+                sql = sql & ",'" & Format(Now(), "yyyy-mm-dd hh:mm:ss") & "')"
     'Debug.Print (sql)
     dbConnection.Execute sql
 
@@ -145,6 +147,7 @@ On Error GoTo ErrorHandler
                 & " ,Balance =" & objInvoice.Balance _
                 & " ,Phone =" & "'" & objInvoice.Phone & "'" _
                 & " ,Mobile =" & "'" & objInvoice.Mobile & "'" _
+                & " ,USER_NAME =" & "'" & objInvoice.Accountname & "'" _
                 & " ,Email =" & "'" & objInvoice.Email & "'"
     If objInvoice.dateofInvoice <> "" Then
         sql = sql & " ,Created_date =" & "'" & Format(objInvoice.dateofInvoice, "yyyy-mm-dd") & "'"
@@ -157,7 +160,7 @@ On Error GoTo ErrorHandler
     Else
         sql = sql & " ,over_due_date = NULL "
     End If
-    
+     sql = sql & " ,UPDATE_DATE =" & "'" & Format(Now(), "yyyy-mm-dd hh:mm:ss") & "'"
     sql = sql & " WHERE ID = " & objInvoice.ID
     'Debug.Print (sql)
     dbConnection.Execute sql

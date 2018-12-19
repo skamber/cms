@@ -59,7 +59,7 @@ On Error GoTo ErrorHandler
     
     'insert new record
     sql = "INSERT INTO receipt" _
-                & " (ID, INV_ID,INV_NO, church_id, amount,user_Name, Cheque_number,Date_Of_Receipt,COMMENTS)" _
+                & " (ID, INV_ID,INV_NO, church_id, amount,user_Name, Cheque_number,Date_Of_Receipt,COMMENTS, UPDATE_DATE)" _
                 & " VALUES" _
                 & " (" & NewReceiptId _
                 & "," & objReceipt.INV_ID _
@@ -77,7 +77,8 @@ On Error GoTo ErrorHandler
                 If objReceipt.comments = "" Then
                 sql = sql & ", NULL)"
                 Else
-                sql = sql & ",'" & objReceipt.comments & "')"
+                sql = sql & ",'" & objReceipt.comments & "'"
+                sql = sql & ",'" & Format(Now(), "yyyy-mm-dd hh:mm:ss") & "')"
                 End If
     
     dbConnection.Execute sql
@@ -106,7 +107,7 @@ On Error GoTo ErrorHandler
     Else
         sql = sql & " ,Date_Of_Receipt = NULL "
     End If
-    
+    sql = sql & " ,UPDATE_DATE =" & "'" & Format(Now(), "yyyy-mm-dd hh:mm:ss") & "'"
     sql = sql & " WHERE ID = " & objReceipt.ID
     
     dbConnection.Execute sql

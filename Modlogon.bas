@@ -144,7 +144,7 @@ On Error GoTo ErrorHandler
     If (rslocal!Logon_Password = "WELCOME") And (strLogonPassword = "WELCOME") Then
         
     Else
-      If DecryptPassword(rslocal!Logon_Password) <> strLogonPassword Then
+      If cmdDecrypt(rslocal!Logon_Password) <> strLogonPassword Then
         MsgBox "Logon Password is invalid.  Access has been denied.", vbExclamation
         frmLogon.txtPassword.SetFocus
         NumLogIN = NumLogIN + 1
@@ -170,7 +170,7 @@ On Error GoTo ErrorHandler
         CheckLogonId = False
         
     End If
-    UserName = rslocal!Full_Name
+    gUserFullName = rslocal!Full_Name
     UserId = rslocal!id
     dtePasswordLastUpdate = rslocal!Password_Last_Update
     checkSystemManager = rslocal!SYSTEM_MANAGER
@@ -229,6 +229,75 @@ Next i
 EDS = s
 
 End Function
+
+Public Function cmdEncrypt(txtText As String)
+    ' You can encrypt twice for extra security
+    cmdEncrypt = EncryptText((txtText), SALT_PASSWORD)
+    cmdEncrypt = EncryptText((cmdEncrypt), SALT_PASSWORD)
+End Function
+
+Public Function cmdDecrypt(txtText As String)
+    cmdDecrypt = DecryptText((txtText), SALT_PASSWORD)
+    cmdDecrypt = DecryptText((cmdDecrypt), SALT_PASSWORD)
+End Function
+
+Public Function cmdDecryptLicence(txtText As String)
+    cmdDecryptLicence = DecryptText((txtText), SALT_LICENCE)
+    cmdDecryptLicence = DecryptText((cmdDecryptLicence), SALT_LICENCE)
+End Function
+
+'Encrypt text
+Private Function EncryptText(strText As String, ByVal strPwd As String)
+    Dim i As Integer, c As Integer
+    Dim strBuff As String
+
+#If Not CASE_SENSITIVE_PASSWORD Then
+
+    'Convert password to upper case
+    'if not case-sensitive
+    strPwd = UCase$(strPwd)
+
+#End If
+
+    'Encrypt string
+    If Len(strPwd) Then
+        For i = 1 To Len(strText)
+            c = Asc(Mid$(strText, i, 1))
+            c = c + Asc(Mid$(strPwd, (i Mod Len(strPwd)) + 1, 1))
+            strBuff = strBuff & Chr$(c And &HFF)
+        Next i
+    Else
+        strBuff = strText
+    End If
+    EncryptText = strBuff
+End Function
+
+'Decrypt text encrypted with EncryptText
+Private Function DecryptText(strText As String, ByVal strPwd As String)
+    Dim i As Integer, c As Integer
+    Dim strBuff As String
+
+#If Not CASE_SENSITIVE_PASSWORD Then
+
+    'Convert password to upper case
+    'if not case-sensitive
+    strPwd = UCase$(strPwd)
+
+#End If
+
+    'Decrypt string
+    If Len(strPwd) Then
+        For i = 1 To Len(strText)
+            c = Asc(Mid$(strText, i, 1))
+            c = c - Asc(Mid$(strPwd, (i Mod Len(strPwd)) + 1, 1))
+            strBuff = strBuff & Chr$(c And &HFF)
+        Next i
+    Else
+        strBuff = strText
+    End If
+    DecryptText = strBuff
+End Function
+       
 
 
 Public Function LockUser(strLogonID As String)

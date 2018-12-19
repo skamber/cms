@@ -4,7 +4,7 @@ Begin VB.Form frmMemberSearch
    ClientHeight    =   8970
    ClientLeft      =   660
    ClientTop       =   2040
-   ClientWidth     =   16515
+   ClientWidth     =   12840
    ControlBox      =   0   'False
    BeginProperty Font 
       Name            =   "Times New Roman"
@@ -20,7 +20,7 @@ Begin VB.Form frmMemberSearch
    MinButton       =   0   'False
    Moveable        =   0   'False
    ScaleHeight     =   8970
-   ScaleWidth      =   16515
+   ScaleWidth      =   12840
    WindowState     =   2  'Maximized
    Begin VB.CommandButton cmdSearch 
       Caption         =   "Search"
@@ -118,10 +118,10 @@ Begin VB.Form frmMemberSearch
       Height          =   495
       Left            =   0
       ScaleHeight     =   435
-      ScaleWidth      =   16455
+      ScaleWidth      =   12780
       TabIndex        =   4
       Top             =   0
-      Width           =   16515
+      Width           =   12840
       Begin VB.Label Label1 
          BackColor       =   &H00800000&
          Caption         =   "MEMBER SEARCH"

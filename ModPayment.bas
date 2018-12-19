@@ -123,7 +123,7 @@ On Error GoTo ErrorHandler
 
             'Push recordset results to form fields
             objPayment.MNo = .txtmemberNo.Text
-            objPayment.Accountname = .txtUser.Text
+            objPayment.Accountname = gUserFullName
             objPayment.Amount = .txtAmount.Text
             objPayment.AmountinWords = .cmbAmountInWord.Text
             objPayment.Comments = .txtComment.Text
@@ -378,7 +378,7 @@ Public Function LoadPaymentDefualtValue()
 
 With frmPayment
        .dteDateofPayment.Text = Format(Now(), DATE_FORMAT)
-       .txtUser.Text = UserName
+       .txtUser.Text = gUserFullName
 End With
 
 End Function

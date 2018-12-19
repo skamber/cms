@@ -37,8 +37,21 @@ Private Const DATE_FORMAT = "dd/mm/yyyy"
 Private mvarInitial As String 'local copy
 Private mvarCityId As Long
 Private mvarMobile As String 'local copy
+Private mvarAccountname As String 'local copy
 
 
+Public Property Let Accountname(ByVal vData As String)
+'used when assigning a value to the property, on the left side of an assignment.
+'Syntax: X.Accountname = 5
+    mvarAccountname = vData
+End Property
+
+
+Public Property Get Accountname() As String
+'used when retrieving value of a property, on the right side of an assignment.
+'Syntax: Debug.Print X.Accountname
+    Accountname = mvarAccountname
+End Property
 
 
 Public Property Let DateOfBirth(ByVal vData As String)

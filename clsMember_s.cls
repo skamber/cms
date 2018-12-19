@@ -58,7 +58,7 @@ On Error GoTo ErrorHandler
     sql = "INSERT INTO member" _
                 & " (MNo, Mr, Surname, Given_Name, Full_Name, Spouse_Name, Address1, CITY_ID" _
                 & " ,Address2, STATE,PostCode, Phone,  mobile, comments" _
-                & " ,STATUS,Email ,joining_date,Membership_Expiary,DATE_OF_BIRTH)" _
+                & " ,STATUS,USER_NAME, Email ,joining_date,Membership_Expiary,DATE_OF_BIRTH, UPDATE_DATE)" _
                 & " VALUES" _
                 & " (" & NewMemberId _
                 & ",'" & objMember.Initial & "'" _
@@ -71,6 +71,7 @@ On Error GoTo ErrorHandler
                 & ",'" & objMember.Mobile & "'" _
                 & ",'" & objMember.comments & "'" _
                 & ",'" & objMember.STATUS & "'" _
+                & ",'" & objMember.Accountname & "'" _
                 & ",'" & objMember.Email & "'"
                 
                 If objMember.Created_Date = "" Then
@@ -88,9 +89,10 @@ On Error GoTo ErrorHandler
                 If objMember.DateOfBirth = "" Then
                   sql = sql & ", NULL)"
                 Else
-                  sql = sql & ",'" & Format(objMember.DateOfBirth, "yyyy-mm-dd") & "')"
+                  sql = sql & ",'" & Format(objMember.DateOfBirth, "yyyy-mm-dd") & "'"
                 End If
-    Debug.Print (sql)
+                sql = sql & ",'" & Format(Now(), "yyyy-mm-dd hh:mm:ss") & "')"
+    'Debug.Print (sql)
     dbConnection.Execute sql
 
 Exit Function
@@ -120,6 +122,7 @@ On Error GoTo ErrorHandler
                 & " ,Mobile =" & "'" & objMember.Mobile & "'" _
                 & " ,comments =" & "'" & objMember.comments & "'" _
                 & " ,STATUS =" & "'" & objMember.STATUS & "'" _
+                & " ,USER_NAME =" & "'" & objMember.Accountname & "'" _
                 & " ,EMAIL =" & "'" & objMember.Email & "'"
                 
     If objMember.Created_Date <> "" Then
@@ -140,7 +143,7 @@ On Error GoTo ErrorHandler
     Else
         sql = sql & " ,DATE_OF_BIRTH = NULL "
     End If
-    
+     sql = sql & " ,UPDATE_DATE =" & "'" & Format(Now(), "yyyy-mm-dd hh:mm:ss") & "'"
     sql = sql & " WHERE Mno = " & objMember.mno
     'Debug.Print (sql)
     dbConnection.Execute sql

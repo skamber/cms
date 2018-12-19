@@ -125,6 +125,318 @@ and m2.phone like '(04)%';
 update member set phone =null where
 phone is not null
 and phone like '(04)%';
+
+
+INSERT INTO `church` (`Id`,`Name`,`Diocese`,`Address1`,`Address2`,`post_code`,`state`,`Telphone`,`email`,`title1`,`title2`,`ABN`,`BANK_ACCOUNT_NAME`,`BSB_NUMBER`,`ACCOUNT_NO`,`CityId`) VALUES (3,'St Hurmizd Cathedral','Diocese of Australia & NZ','7-9 Greenfield Rd, Greenfield Park ',NULL,'2176','NSW','(02) 9610 8680',NULL,'jyrwtjd jxndmd yqylwtq jtxylfw jtfydq jtdv','Holy Apostolic Catholic Assyrian Church of the East','29361083483','Holy Apostolic Catholic Assyrian Church of the East','063135','10508637',2);
+INSERT INTO `church` (`Id`,`Name`,`Diocese`,`Address1`,`Address2`,`post_code`,`state`,`Telphone`,`email`,`title1`,`title2`,`ABN`,`BANK_ACCOUNT_NAME`,`BSB_NUMBER`,`ACCOUNT_NO`,`CityId`) VALUES (4,'St Mary\'s','Diocese of Australia & NZ',' 94 Polding St, Smithfield',NULL,'2164','NSW','(02) 9726 6309',NULL,'jyrwtjd jxndmd yqylwtq jtxylfw jtfydq jtdv','Holy Apostolic Catholic Assyrian Church of the East','29361083483','Holy Apostolic Catholic Assyrian Church of the East','063135','10508637',2);
+INSERT INTO `church` (`Id`,`Name`,`Diocese`,`Address1`,`Address2`,`post_code`,`state`,`Telphone`,`email`,`title1`,`title2`,`ABN`,`BANK_ACCOUNT_NAME`,`BSB_NUMBER`,`ACCOUNT_NO`,`CityId`) VALUES (5,'Saints Peter and Paul','Diocese of Australia & NZ','32-40 Kosovich Pl, Cecil Park',NULL,'2178','NSW','0406 117 773',NULL,'jyrwtjd jxndmd yqylwtq jtxylfw jtfydq jtdv','Holy Apostolic Catholic Assyrian Church of the East','29361083483','Holy Apostolic Catholic Assyrian Church of the East','063135','10508637',2);
+INSERT INTO `church` (`Id`,`Name`,`Diocese`,`Address1`,`Address2`,`post_code`,`state`,`Telphone`,`email`,`title1`,`title2`,`ABN`,`BANK_ACCOUNT_NAME`,`BSB_NUMBER`,`ACCOUNT_NO`,`CityId`) VALUES (6,'Assyrian Church','Diocese of Australia & NZ','Bunnerong Rd & Beauchamp Rd',NULL,'2036','NSW',NULL,NULL,'jyrwtjd jxndmd yqylwtq jtxylfw jtfydq jtdv','Holy Apostolic Catholic Assyrian Church of the East','29361083483','Holy Apostolic Catholic Assyrian Church of the East','063135','10508637',2);
+
+
+INSERT INTO `country` (`ID`, `CountryName`) VALUES ('2', 'New Zealand');
+INSERT INTO `city` (`ID`, `CountryId`, `CityName`) VALUES ('3', '2', 'Auckland');
+
+
+INSERT INTO `church`.`church` (`Name`, `Diocese`, `Address1`, `post_code`, `state`, `title1`, `title2`, `CityId`) VALUES ('St Marys', 'Diocese of Australia & NZ', '20 Maich Rd, Manurewa', '2102', 'NZ', 'jyrwtjd jxndmd yqylwtq jtxylfw jtfydq jtdv', 'Holy Apostolic Catholic Assyrian Church of the East', '3');
+
+
+update users set logon_password ='WELCOME';
+
+
+
+ALTER TABLE `member` ADD COLUMN `UPDATE_DATE` DATETIME NULL ;
+ALTER TABLE `payment` ADD COLUMN `UPDATE_DATE` DATETIME NULL ;
+ALTER TABLE `collection` ADD COLUMN `UPDATE_DATE` DATETIME NULL ;
+ALTER TABLE `receipt` ADD COLUMN `UPDATE_DATE` DATETIME NULL ;
+ALTER TABLE `invoice` ADD COLUMN `UPDATE_DATE` DATETIME NULL ;
+
+ALTER TABLE `member` ADD COLUMN `USER_NAME` VARCHAR(45) NULL;
+ALTER TABLE `invoice` ADD COLUMN `USER_NAME` VARCHAR(45) NULL;
+
+CREATE TABLE `member_audit` (
+  `MNo` int(11) NOT NULL DEFAULT '0',
+  `Mr` varchar(4) DEFAULT 'Mr.',
+  `SURNAME` varchar(20) NOT NULL,
+  `GIVEN_NAME` varchar(20) NOT NULL,
+  `FULL_NAME` varchar(50) DEFAULT NULL,
+  `SPOUSE_NAME` varchar(20) DEFAULT NULL,
+  `ADDRESS1` varchar(100) DEFAULT NULL,
+  `ADDRESS2` varchar(20) DEFAULT NULL,
+  `STATE` varchar(3) DEFAULT 'VIC',
+  `POSTCODE` varchar(4) DEFAULT NULL,
+  `PHONE` varchar(15) DEFAULT NULL,
+  `MEMBERSHIP_EXPIARY` datetime DEFAULT NULL,
+  `COMMENTS` longtext,
+  `STATUS` varchar(50) DEFAULT NULL,
+  `JOINING_DATE` datetime DEFAULT NULL,
+  `EMAIL` varchar(80) DEFAULT NULL,
+  `DATE_OF_BIRTH` datetime DEFAULT NULL,
+  `CITY_ID` int(11) NOT NULL,
+  `MOBILE` varchar(15) DEFAULT NULL,
+  `UPDATE_DATE` datetime DEFAULT NULL,
+  `USER_NAME` varchar(45) DEFAULT NULL
+
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `paymen_audit` (
+  `MNo` int(11) NOT NULL DEFAULT '0',
+  `PAYMENT` varchar(10) NOT NULL,
+  `DETAILS` varchar(200) DEFAULT NULL,
+  `TYPE` varchar(6) NOT NULL,
+  `MEMBER_EFFECTIVE` datetime DEFAULT NULL,
+  `MEMBER_EXPIARY` datetime DEFAULT NULL,
+  `DATE_OF_PAYMENT` date DEFAULT NULL,
+  `AMOUNT_IN_WORDS` varchar(60) DEFAULT NULL,
+  `AMOUNT` double DEFAULT '0',
+  `COMMENTS` longtext,
+  `RECEIPT_NO` int(11) DEFAULT '0',
+  `USER_NAME` varchar(50) DEFAULT NULL,
+  `DONATION_TYPE` varchar(30) DEFAULT NULL,
+  `CHURCH_ID` int(11) DEFAULT '0',
+  `UPDATE_DATE` datetime DEFAULT NULL
+  
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `collection_audit` (
+  `PAYMENT` varchar(20) DEFAULT NULL,
+  `DATE_OF_COLLECTION` date DEFAULT NULL,
+  `AMOUNT_IN_WORDS` varchar(60) DEFAULT NULL,
+  `AMOUNT` double DEFAULT '0',
+  `COMMENTS` longtext,
+  `COL_ID` int(11) NOT NULL DEFAULT '0',
+  `USER_NAME` varchar(50) DEFAULT NULL,
+  `CHURCH_ID` int(11) DEFAULT '0',
+  `TYPE` varchar(10) DEFAULT NULL,
+  `UPDATE_DATE` datetime DEFAULT NULL
+
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `invoice_audit` (
+  `ID` int(11) NOT NULL DEFAULT '0',
+  `Invoice_no` varchar(20) DEFAULT NULL,
+  `Ref` varchar(20) DEFAULT NULL,
+  `Created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `over_due_date` datetime DEFAULT NULL,
+  `Name1` varchar(40) DEFAULT NULL,
+  `Name2` varchar(20) DEFAULT NULL,
+  `Address1` varchar(20) DEFAULT NULL,
+  `Address2` varchar(20) DEFAULT NULL,
+  `Address3` varchar(50) DEFAULT NULL,
+  `Terms` varchar(20) DEFAULT NULL,
+  `Total_amount` double DEFAULT '0',
+  `state` varchar(4) DEFAULT NULL,
+  `Balance` double DEFAULT '0',
+  `Phone` varchar(15) DEFAULT NULL,
+  `Mobile` varchar(12) DEFAULT NULL,
+  `CHURCH_ID` int(11) DEFAULT NULL,
+  `EMAIL` varchar(100) DEFAULT NULL,
+  `UPDATE_DATE` datetime DEFAULT NULL,
+  `USER_NAME` varchar(45) DEFAULT NULL
+
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `receipt_audit` (
+  `ID` int(11) NOT NULL,
+  `INV_ID` int(11) DEFAULT '0',
+  `INV_NO` varchar(12) DEFAULT NULL,
+  `amount` double DEFAULT '0',
+  `DATE_OF_receipt` date DEFAULT NULL,
+  `User_Name` varchar(30) DEFAULT NULL,
+  `cheque_Number` varchar(20) DEFAULT NULL,
+  `church_id` int(11) NOT NULL DEFAULT '0',
+  `COMMENTS` longtext,
+  `UPDATE_DATE` datetime DEFAULT NULL
+
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+ALTER TABLE `member_audit` ADD COLUMN `audit_type` VARCHAR(45) NULL;
+ALTER TABLE `paymen_auditt` ADD COLUMN `audit_type` VARCHAR(45) NULL;
+ALTER TABLE `collection_audit` ADD COLUMN `audit_type` VARCHAR(45) NULL;
+ALTER TABLE `invoice_audit` ADD COLUMN `audit_type` VARCHAR(45) NULL;
+ALTER TABLE `receipt_audit` ADD COLUMN `audit_type` VARCHAR(45) NULL;
+ 
+
+DELIMITER //
+create 
+    trigger trigger_update_audit_member after update 
+ on member
+FOR EACH ROW BEGIN
+        
+  insert into member_audit 
+  (MNo, Mr ,SURNAME ,GIVEN_NAME ,FULL_NAME ,SPOUSE_NAME ,ADDRESS1 ,ADDRESS2
+  ,STATE ,POSTCODE,PHONE,MEMBERSHIP_EXPIARY,COMMENTS,STATUS,JOINING_DATE 
+  ,EMAIL,DATE_OF_BIRTH ,CITY_ID,MOBILE ,UPDATE_DATE ,USER_NAME,audit_type )
+  VALUES 
+  (NEW.MNo, NEW.Mr ,NEW.SURNAME ,NEW.GIVEN_NAME ,NEW.FULL_NAME ,NEW.SPOUSE_NAME ,NEW.ADDRESS1 ,NEW.ADDRESS2
+  ,NEW.STATE ,NEW.POSTCODE,NEW.PHONE,NEW.MEMBERSHIP_EXPIARY,NEW.COMMENTS,NEW.STATUS,NEW.JOINING_DATE 
+  ,NEW.EMAIL,NEW.DATE_OF_BIRTH ,NEW.CITY_ID,NEW.MOBILE ,NEW.UPDATE_DATE ,NEW.USER_NAME, 'UPDATE');
+
+end//
+DELIMITER ;
+
+
+DELIMITER //
+create 
+    trigger trigger_insert_audit_member after insert 
+ on member
+FOR EACH ROW BEGIN
+        
+  insert into member_audit 
+  (MNo, Mr ,SURNAME ,GIVEN_NAME ,FULL_NAME ,SPOUSE_NAME ,ADDRESS1 ,ADDRESS2
+  ,STATE ,POSTCODE,PHONE,MEMBERSHIP_EXPIARY,COMMENTS,STATUS,JOINING_DATE 
+  ,EMAIL,DATE_OF_BIRTH ,CITY_ID,MOBILE ,UPDATE_DATE ,USER_NAME,audit_type )
+  VALUES 
+  (NEW.MNo, NEW.Mr ,NEW.SURNAME ,NEW.GIVEN_NAME ,NEW.FULL_NAME ,NEW.SPOUSE_NAME ,NEW.ADDRESS1 ,NEW.ADDRESS2
+  ,NEW.STATE ,NEW.POSTCODE,NEW.PHONE,NEW.MEMBERSHIP_EXPIARY,NEW.COMMENTS,NEW.STATUS,NEW.JOINING_DATE 
+  ,NEW.EMAIL,NEW.DATE_OF_BIRTH ,NEW.CITY_ID,NEW.MOBILE ,NEW.UPDATE_DATE ,NEW.USER_NAME, 'INSERT');
+
+end//
+DELIMITER ;
+
+
+DELIMITER //
+DROP TRIGGER IF EXISTS trigger_update_audit_payment//
+create 
+    trigger trigger_update_audit_payment after update 
+ on payment
+FOR EACH ROW BEGIN
+        
+  insert into payment_audit 
+(MNo,PAYMENT,DETAILS,TYPE,MEMBER_EFFECTIVE,MEMBER_EXPIARY,DATE_OF_PAYMENT,AMOUNT_IN_WORDS,
+AMOUNT,COMMENTS,RECEIPT_NO,USER_NAME,DONATION_TYPE,CHURCH_ID,UPDATE_DATE,audit_type)
+  VALUES 
+(NEW.MNo,NEW.PAYMENT,NEW.DETAILS,NEW.TYPE,NEW.MEMBER_EFFECTIVE,NEW.MEMBER_EXPIARY,NEW.DATE_OF_PAYMENT,NEW.AMOUNT_IN_WORDS,
+NEW.AMOUNT,NEW.COMMENTS,NEW.RECEIPT_NO,NEW.USER_NAME,NEW.DONATION_TYPE,NEW.CHURCH_ID,NEW.UPDATE_DATE,'UPDATE');
+
+END//
+DELIMITER ;
+
+
+DELIMITER //
+DROP TRIGGER IF EXISTS trigger_insert_audit_payment//
+create 
+    trigger trigger_insert_audit_payment after insert 
+ on payment
+FOR EACH ROW BEGIN
+        
+  insert into payment_audit 
+(MNo,PAYMENT,DETAILS,TYPE,MEMBER_EFFECTIVE,MEMBER_EXPIARY,DATE_OF_PAYMENT,AMOUNT_IN_WORDS,
+AMOUNT,COMMENTS,RECEIPT_NO,USER_NAME,DONATION_TYPE,CHURCH_ID,UPDATE_DATE,audit_type)
+  VALUES 
+(NEW.MNo,NEW.PAYMENT,NEW.DETAILS,NEW.TYPE,NEW.MEMBER_EFFECTIVE,NEW.MEMBER_EXPIARY,NEW.DATE_OF_PAYMENT,NEW.AMOUNT_IN_WORDS,
+NEW.AMOUNT,NEW.COMMENTS,NEW.RECEIPT_NO,NEW.USER_NAME,NEW.DONATION_TYPE,NEW.CHURCH_ID,NEW.UPDATE_DATE,'INSERT');
+
+END//
+DELIMITER ;
+
+
+
+DELIMITER //
+DROP TRIGGER IF EXISTS trigger_update_audit_collection//
+create 
+    trigger trigger_update_audit_collection after update 
+ on collection
+FOR EACH ROW BEGIN
+        
+  insert into collection_audit 
+(PAYMENT,DATE_OF_COLLECTION,AMOUNT_IN_WORDS,AMOUNT,COMMENTS,COL_ID,USER_NAME,CHURCH_ID,TYPE,UPDATE_DATE,audit_type)
+  VALUES 
+(NEW.PAYMENT,NEW.DATE_OF_COLLECTION,NEW.AMOUNT_IN_WORDS,NEW.AMOUNT,NEW.COMMENTS,NEW.COL_ID,NEW.USER_NAME,NEW.CHURCH_ID,NEW.TYPE,NEW.UPDATE_DATE,'UPDATE');
+
+END//
+DELIMITER ;
+
+
+DELIMITER //
+DROP TRIGGER IF EXISTS trigger_insert_audit_collection//
+create 
+    trigger trigger_insert_audit_insert after insert
+ on collection
+FOR EACH ROW BEGIN
+        
+  insert into collection_audit 
+(PAYMENT,DATE_OF_COLLECTION,AMOUNT_IN_WORDS,AMOUNT,COMMENTS,COL_ID,USER_NAME,CHURCH_ID,TYPE,UPDATE_DATE,audit_type)
+  VALUES 
+(NEW.PAYMENT,NEW.DATE_OF_COLLECTION,NEW.AMOUNT_IN_WORDS,NEW.AMOUNT,NEW.COMMENTS,NEW.COL_ID,NEW.USER_NAME,NEW.CHURCH_ID,NEW.TYPE,NEW.UPDATE_DATE,'INSERT');
+
+END//
+DELIMITER ;
+
+
+
+DELIMITER //
+DROP TRIGGER IF EXISTS trigger_update_audit_invoice//
+create 
+    trigger trigger_update_audit_invoice after update 
+ on invoice
+FOR EACH ROW BEGIN
+        
+  insert into invoice_audit 
+ (ID,Invoice_no,Ref,Created_date,over_due_date,Name1,Name2,Address1,Address2,Address3,
+  Terms,Total_amount,state,Balance,Phone,Mobile,CHURCH_ID,EMAIL,UPDATE_DATE,USER_NAME,audit_type) 
+  VALUES 
+ (NEW.ID,NEW.Invoice_no,NEW.Ref,NEW.Created_date,NEW.over_due_date,NEW.Name1,NEW.Name2,NEW.Address1,NEW.Address2,NEW.Address3,
+  NEW.Terms,NEW.Total_amount,NEW.state,NEW.Balance,NEW.Phone,NEW.Mobile,NEW.CHURCH_ID,NEW.EMAIL,NEW.UPDATE_DATE,NEW.USER_NAME,'UPDATE');
+
+END//
+DELIMITER ;
+
+DELIMITER //
+DROP TRIGGER IF EXISTS trigger_insert_audit_invoice//
+create 
+    trigger trigger_insert_audit_invoice after insert
+ on invoice
+FOR EACH ROW BEGIN
+        
+  insert into invoice_audit 
+ (ID,Invoice_no,Ref,Created_date,over_due_date,Name1,Name2,Address1,Address2,Address3,
+  Terms,Total_amount,state,Balance,Phone,Mobile,CHURCH_ID,EMAIL,UPDATE_DATE,USER_NAME,audit_type) 
+  VALUES 
+ (NEW.ID,NEW.Invoice_no,NEW.Ref,NEW.Created_date,NEW.over_due_date,NEW.Name1,NEW.Name2,NEW.Address1,NEW.Address2,NEW.Address3,
+  NEW.Terms,NEW.Total_amount,NEW.state,NEW.Balance,NEW.Phone,NEW.Mobile,NEW.CHURCH_ID,NEW.EMAIL,NEW.UPDATE_DATE,NEW.USER_NAME,'INSERT') ;
+
+END//
+DELIMITER ;
+
+
+
+
+DELIMITER //
+DROP TRIGGER IF EXISTS trigger_update_audit_receipt//
+create 
+    trigger trigger_update_audit_receipt after update 
+ on receipt
+FOR EACH ROW BEGIN
+        
+  insert into receipt_audit 
+ (ID,INV_ID,INV_NO,amount,DATE_OF_receipt,User_Name,cheque_Number,church_id,COMMENTS,UPDATE_DATE,audit_type)
+  VALUES 
+ (ID,INV_ID,INV_NO,amount,DATE_OF_receipt,User_Name,cheque_Number,church_id,COMMENTS,UPDATE_DATE,'UPDATE');
+
+END//
+DELIMITER ;
+
+
+DELIMITER //
+DROP TRIGGER IF EXISTS trigger_insert_audit_receipt//
+create 
+    trigger trigger_insert_audit_receipt after insert 
+ on receipt
+FOR EACH ROW BEGIN
+        
+  insert into receipt_audit 
+ (ID,INV_ID,INV_NO,amount,DATE_OF_receipt,User_Name,cheque_Number,church_id,COMMENTS,UPDATE_DATE,audit_type)
+  VALUES 
+ (ID,INV_ID,INV_NO,amount,DATE_OF_receipt,User_Name,cheque_Number,church_id,COMMENTS,UPDATE_DATE,'INSERT');
+
+END//
+DELIMITER ;
+
 ---------------------------------------------------------------------------
 
 
@@ -148,4 +460,135 @@ SET GLOBAL general_log = 'ON';
 SET GLOBAL general_log_file = 'c:/cms/sql_logs.txt';
 SET GLOBAL general_log = 'OFF';
 ------------------------------------------------------------------------
- 
+//to check the connection  
+
+select  tmp.ipAddress from (
+SELECT LEFT( pl.host, ( LOCATE( ':', pl.host ) - 1 ) ) AS ipAddress   FROM INFORMATION_SCHEMA.PROCESSLIST as pl where user= 'cms' and DB='church'
+) as tmp
+group by tmp.ipAddress
+
+
+„√ÈÀ”»Õª
+
+
+
+-------------------------
+
+
+Private Sub Command1_Click()
+        Text3.Text = cmdEncrypt(Text1.Text, Text2.Text)
+End Sub
+
+Private Sub Command2_Click()
+  Text1 = cmdDecrypt(Text3.Text, Text2.Text)
+        
+End Sub
+
+
+
+'Set to True to make the password case-sensitive
+#Const CASE_SENSITIVE_PASSWORD = False
+
+Private Function cmdEncrypt(txtText As String, txtPassword As String)
+    ' You can encrypt twice for extra security
+    cmdEncrypt = EncryptText((txtText), txtPassword)
+    cmdEncrypt = EncryptText((cmdEncrypt), txtPassword)
+End Function
+
+Private Function cmdDecrypt(txtText As String, txtPassword As String)
+    cmdDecrypt = DecryptText((txtText), txtPassword)
+    cmdDecrypt = DecryptText((cmdDecrypt), txtPassword)
+End Function
+
+'Encrypt text
+Private Function EncryptText(strText As String, ByVal strPwd As String)
+    Dim i As Integer, c As Integer
+    Dim strBuff As String
+
+#If Not CASE_SENSITIVE_PASSWORD Then
+
+    'Convert password to upper case
+    'if not case-sensitive
+    strPwd = UCase$(strPwd)
+
+#End If
+
+    'Encrypt string
+    If Len(strPwd) Then
+        For i = 1 To Len(strText)
+            c = Asc(Mid$(strText, i, 1))
+            c = c + Asc(Mid$(strPwd, (i Mod Len(strPwd)) + 1, 1))
+            strBuff = strBuff & Chr$(c And &HFF)
+        Next i
+    Else
+        strBuff = strText
+    End If
+    EncryptText = strBuff
+End Function
+
+'Decrypt text encrypted with EncryptText
+Private Function DecryptText(strText As String, ByVal strPwd As String)
+    Dim i As Integer, c As Integer
+    Dim strBuff As String
+
+#If Not CASE_SENSITIVE_PASSWORD Then
+
+    'Convert password to upper case
+    'if not case-sensitive
+    strPwd = UCase$(strPwd)
+
+#End If
+
+    'Decrypt string
+    If Len(strPwd) Then
+        For i = 1 To Len(strText)
+            c = Asc(Mid$(strText, i, 1))
+            c = c - Asc(Mid$(strPwd, (i Mod Len(strPwd)) + 1, 1))
+            strBuff = strBuff & Chr$(c And &HFF)
+        Next i
+    Else
+        strBuff = strText
+    End If
+    DecryptText = strBuff
+End Function
+       
+
+----------------
+
+
+DELIMITER //
+create 
+    trigger trigger_update_audit_member after update 
+ on member
+FOR EACH ROW BEGIN
+        
+  insert into member_audit 
+  (MNo, Mr ,SURNAME ,GIVEN_NAME ,FULL_NAME ,SPOUSE_NAME ,ADDRESS1 ,ADDRESS2
+  ,STATE ,POSTCODE,PHONE,MEMBERSHIP_EXPIARY,COMMENTS,STATUS,JOINING_DATE 
+  ,EMAIL,DATE_OF_BIRTH ,CITY_ID,MOBILE ,UPDATE_DATE ,USER_NAME,audit_type )
+  VALUES 
+  (NEW.MNo, NEW.Mr ,NEW.SURNAME ,NEW.GIVEN_NAME ,NEW.FULL_NAME ,NEW.SPOUSE_NAME ,NEW.ADDRESS1 ,NEW.ADDRESS2
+  ,NEW.STATE ,NEW.POSTCODE,NEW.PHONE,NEW.MEMBERSHIP_EXPIARY,NEW.COMMENTS,NEW.STATUS,NEW.JOINING_DATE 
+  ,NEW.EMAIL,NEW.DATE_OF_BIRTH ,NEW.CITY_ID,NEW.MOBILE ,NEW.UPDATE_DATE ,NEW.USER_NAME, 'UPDATE');
+
+end//
+DELIMITER ;
+
+
+DELIMITER //
+create 
+    trigger trigger_insert_audit_member after insert 
+ on member
+FOR EACH ROW BEGIN
+        
+  insert into member_audit 
+  (MNo, Mr ,SURNAME ,GIVEN_NAME ,FULL_NAME ,SPOUSE_NAME ,ADDRESS1 ,ADDRESS2
+  ,STATE ,POSTCODE,PHONE,MEMBERSHIP_EXPIARY,COMMENTS,STATUS,JOINING_DATE 
+  ,EMAIL,DATE_OF_BIRTH ,CITY_ID,MOBILE ,UPDATE_DATE ,USER_NAME,audit_type )
+  VALUES 
+  (NEW.MNo, NEW.Mr ,NEW.SURNAME ,NEW.GIVEN_NAME ,NEW.FULL_NAME ,NEW.SPOUSE_NAME ,NEW.ADDRESS1 ,NEW.ADDRESS2
+  ,NEW.STATE ,NEW.POSTCODE,NEW.PHONE,NEW.MEMBERSHIP_EXPIARY,NEW.COMMENTS,NEW.STATUS,NEW.JOINING_DATE 
+  ,NEW.EMAIL,NEW.DATE_OF_BIRTH ,NEW.CITY_ID,NEW.MOBILE ,NEW.UPDATE_DATE ,NEW.USER_NAME, 'INSERT');
+
+end//
+DELIMITER ;

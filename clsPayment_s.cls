@@ -60,7 +60,7 @@ On Error GoTo ErrorHandler
     sql = "INSERT INTO payment" _
                 & " (MNo, type,Payment, donation_type,Amount_in_Words, church_id,Amount" _
                 & ", Receipt_No, user_name, comments,Member_Effective, Member_Expiary" _
-                & ", Date_Of_Payment)" _
+                & ", Date_Of_Payment, UPDATE_DATE)" _
                 & " VALUES" _
                 & " (" & objpayment.MNo _
                 & ",'" & objpayment.Payment & "'" _
@@ -92,8 +92,10 @@ On Error GoTo ErrorHandler
                 If objpayment.DateofPayment = "" Then
                 sql = sql & ", NULL)"
                 Else
-                sql = sql & ",'" & Format(objpayment.DateofPayment, "yyyy-mm-dd") & "')"
+                sql = sql & ",'" & Format(objpayment.DateofPayment, "yyyy-mm-dd") & "'"
                 End If
+                
+                sql = sql & ",'" & Format(Now(), "yyyy-mm-dd hh:mm:ss") & "')"
                 
     dbConnection.Execute sql
 
@@ -142,6 +144,8 @@ On Error GoTo ErrorHandler
     Else
         sql = sql & " ,Date_Of_Payment = NULL "
     End If
+    
+    sql = sql & " ,UPDATE_DATE =" & "'" & Format(Now(), "yyyy-mm-dd hh:mm:ss") & "'"
     
     sql = sql & " WHERE Receipt_No = " & objpayment.ReceiptNo
     

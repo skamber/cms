@@ -15,6 +15,13 @@ Public gCashflowItemId As Long
 Public gChurchId As Long
 Public gCityId As Long
 Public gCityName As String
+Public gHost As String
+Public gDatabaseName As String
+Public gUserName As String
+Public gUserFullName As String
+Public gPassword As String
+Public gCertPath As String
+Public gLicenseLimit As String
 Public PrivilegeBookMark As Variant
 Public Userprivilege As ADODB.Recordset
 Public objConnection As ADODB.Connection
@@ -34,12 +41,12 @@ Public systemManager As Boolean
 Public ReportView As Boolean
 Public gChurchRestriction As Long
 Public CompulsoryChangePassword As Boolean
-Public userName As String
 Public Permissions(1 To 20, 1 To 4) As String
 Public LoadPermissions(1 To 20, 1 To 4) As String
 Public Cities As New COLLECTION
 Public UserId As Long
 Public Const DATE_FORMAT = "dd/mm/yyyy"
+Public Const DATE_FORMAT1 = "ddmmyyyy"
 Public Const VERSION = "3.0.1"
 Public Const DATE_TIME_FORMAT = "yyyy/mm/dd hh:mm:ss"
 Public Const NUMERIC_FORMAT = "###,###,###,##0.00"
@@ -81,6 +88,8 @@ Public Const RECORD_REMOVE = "Remove"
 Public Const RECORD_COPY = "Copy"
 Public Const RECORD_PRINT = "Print"
 Public Const RECORD_PRIVIEW = "Preview"
+Public Const SALT_PASSWORD = "Shana&Nineb"
+Public Const SALT_LICENCE = "Nineb&Shana"
 
 
 Public Enum eSortOrder
@@ -108,16 +117,10 @@ Public Sub CentreForm(frm As Form, intPosition As Integer)
 
 End Sub
 
-Public Function ConnectDatabase()
+
+Public Function LoadSetting()
 
     Dim sAppName As String * 100
-
-    Dim sHost As String
-    Dim sDatabaseName As String
-    Dim sUserName As String
-    Dim sPassword As String
-    Dim sCertPath As String
-    
     Dim sDefault As String * 100
     Dim sRet As String * 100
     Dim lSize As Long
@@ -128,38 +131,46 @@ Public Function ConnectDatabase()
     
     ' connect to local database
     sAppName = "Connection"
-    
-
     sDefault = ""
     sRet = ""
     lSize = 100
     sFileName = App.Path & "\" & INI_FILE_NAME
     
     lRet = GetPrivateProfileString(sAppName, "Host", sDefault, sRet, lSize, sFileName)
-    sHost = Left(sRet, InStrB(1, sRet, Chr(0)) / 2)
+    gHost = Left(sRet, InStrB(1, sRet, Chr(0)) / 2)
     
     lRet = GetPrivateProfileString(sAppName, "Database", sDefault, sRet, lSize, sFileName)
-    sDatabaseName = Left(sRet, InStrB(1, sRet, Chr(0)) / 2)
+    gDatabaseName = Left(sRet, InStrB(1, sRet, Chr(0)) / 2)
     
     lRet = GetPrivateProfileString(sAppName, "UserName", sDefault, sRet, lSize, sFileName)
-    sUserName = Left(sRet, InStrB(1, sRet, Chr(0)) / 2)
+    gUserName = Left(sRet, InStrB(1, sRet, Chr(0)) / 2)
     
     lRet = GetPrivateProfileString(sAppName, "UserPassword", sDefault, sRet, lSize, sFileName)
-    sPassword = Left(sRet, InStrB(1, sRet, Chr(0)) / 2)
-    sPassword = DecryptPassword(sPassword)
+    gPassword = Left(sRet, InStrB(1, sRet, Chr(0)) / 2)
+    gPassword = cmdDecrypt(gPassword)
 
-    
     lRet = GetPrivateProfileString(sAppName, "CertPath", sDefault, sRet, lSize, sFileName)
-    sCertPath = Left(sRet, InStrB(1, sRet, Chr(0)) / 2)
+    gCertPath = Left(sRet, InStrB(1, sRet, Chr(0)) / 2)
     
-            
+    sAppName = "Licence"
+    lRet = GetPrivateProfileString(sAppName, "LicenseLimit", sDefault, sRet, lSize, sFileName)
+    gLicenseLimit = Left(sRet, InStrB(1, sRet, Chr(0)) / 2)
+    
+Exit Function
+ErrorHandler:
+    Call objError.ErrorRoutine(Err.Number, Err.Description, objConnection, "modMain", "ConnectDatabase", True)
+
+End Function
+
+Public Function ConnectDatabase()
+         
     Set objConnection = New ADODB.Connection
     On Error Resume Next
     
     With objConnection
-            .Open "Driver={MySQL ODBC 5.3 Unicode Driver};Server=" & sHost & ";Database=" & _
-            sDatabaseName & "; User=" & sUserName & ";Password=" & sPassword & _
-            ";sslca=" & sCertPath & "; sslverify=1; Option=3;"
+            .Open "Driver={MySQL ODBC 5.3 Unicode Driver};Server=" & gHost & ";Database=" & _
+            gDatabaseName & "; User=" & gUserName & ";Password=" & gPassword & _
+            ";sslca=" & gCertPath & "; sslverify=1; Option=3;"
     End With
 
 Exit Function
@@ -912,6 +923,43 @@ ErrorHandler:
 
 End Function
 
+
+Public Function ValidConnectionCount() As Boolean
+
+Dim objOrganisation As CMSOrganisation.clsOrganisation
+Dim ConnCount As Long
+Dim sLicenceCount As String
+Dim lLicenceCount As Long
+On Error GoTo ErrorHandler
+
+
+Set objOrganisation = New CMSOrganisation.clsOrganisation
+Set objOrganisation.DatabaseConnection = objConnection
+ConnCount = objOrganisation.getConnectionCounts(gDatabaseName, gUserName)
+
+sLicenceCount = cmdDecryptLicence(gLicenseLimit)
+
+lLicenceCount = Right(sLicenceCount, 1)
+
+' the licene should be number with length of 10
+If Not IsNumeric(sLicenceCount) And Len(sLicenceCount) <> 10 Then
+        MsgBox "You have invalid licence. Please contact the systems administration.", vbExclamation
+        frmLogon.txtLogonId.SetFocus
+    ValidConnectionCount = False
+End If
+
+If ConnCount > lLicenceCount Then
+      MsgBox "You have exceeded connection count. Please contact the systems administration.", vbExclamation
+        frmLogon.txtLogonId.SetFocus
+    ValidConnectionCount = False
+Else
+  ValidConnectionCount = True
+End If
+Exit Function
+ErrorHandler:
+    Call objError.ErrorRoutine(Err.Number, Err.Description, objConnection, "modMain", "ValidConnectionCount", True)
+
+End Function
 Public Function ValidDateEntry(ctrl As MaskEdBox)
 On Error GoTo ErrorHandler
 '==============================================================================

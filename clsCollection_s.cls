@@ -61,7 +61,7 @@ On Error GoTo ErrorHandler
     
     'insert new record
     sql = "INSERT INTO collection" _
-                & " (col_ID,payment, Amount, church_id, User_Name,type,comments,Date_of_collection)" _
+                & " (col_ID,payment, Amount, church_id, User_Name,type,comments,Date_of_collection,UPDATE_DATE)" _
                 & " VALUES" _
                 & " (" & NewCollectionId _
                 & ",'" & objCollection.payment & "'" _
@@ -79,8 +79,9 @@ On Error GoTo ErrorHandler
                 If objCollection.Dateofcollection = "" Then
                 sql = sql & ", NULL)"
                 Else
-                sql = sql & ",'" & Format(objCollection.Dateofcollection, "yyyy-mm-dd") & "')"
+                sql = sql & ",'" & Format(objCollection.Dateofcollection, "yyyy-mm-dd") & "'"
                 End If
+                sql = sql & ",'" & Format(Now(), "yyyy-mm-dd hh:mm:ss") & "')"
     
     dbConnection.Execute sql
 
@@ -110,6 +111,7 @@ On Error GoTo ErrorHandler
     Else
         sql = sql & " ,Date_of_collection = NULL "
     End If
+    sql = sql & " ,UPDATE_DATE =" & "'" & Format(Now(), "yyyy-mm-dd hh:mm:ss") & "'"
     
     sql = sql & " WHERE col_ID = " & objCollection.col_ID
     

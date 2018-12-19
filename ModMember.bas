@@ -173,10 +173,10 @@ On Error GoTo ErrorHandler
             objMember.Initial = .txtStatus.Text
             objMember.address1 = .txtAddress1.Text
             objMember.address2 = .txtAddress2.Text
-            objMember.Comments = .txtmemo.Text
-            
+            objMember.Comments = .txtMemo.Text
+            objMember.Accountname = gUserFullName
             'objMember.Phone = .txtMemberPhone.Text
-            objMember.postCode = .txtPostCode.Text
+            objMember.postCode = .txtPostcode.Text
             objMember.SpouseName = .txtSpouse.Text
             objMember.State = .txtState.Text
             objMember.Status = .cmbStatus.Text
@@ -282,9 +282,9 @@ Public Function DisplayMember()
         .txtGivenName.Text = ConvertNull(rslocal!Given_name)
         .dteMemberPhone.Text = ConvertNull(rslocal!Phone)
         .dteMemberMobile.Text = ConvertNull(rslocal!Mobile)
-        .txtmemo.Text = "" & rslocal!Comments
+        .txtMemo.Text = "" & rslocal!Comments
         .txtMno.Text = ConvertNull(rslocal!MNo)
-        .txtPostCode.Text = ConvertNull(rslocal!postCode)
+        .txtPostcode.Text = ConvertNull(rslocal!postCode)
         .txtSpouse.Text = ConvertNull(rslocal!spouse_name)
         .txtState.Text = ConvertNull(rslocal!State)
         .txtStatus.Text = ConvertNull(rslocal!Mr)

@@ -242,12 +242,15 @@ Private Sub cmdEnter_Click()
     Dim sLogonPassword As String
     Dim dtePasswordLastUpdate As String
     
+    If Not ValidConnectionCount Then
+      Exit Sub
+    End If
     If Not validateApplicationVersion Then
         Exit Sub
     End If
     
     sLogonID = UCase(Trim(txtLogonId.Text))
-    sLogonPassword = UCase(Trim(txtPassword.Text))
+    sLogonPassword = Trim(txtPassword.Text)
     sChurchName = UCase(Trim(cmbChurchName.Text))
     If Not ValidateLogon(sLogonID, sLogonPassword, sChurchName) Then
         Exit Sub
@@ -273,8 +276,8 @@ End
 End Sub
 
 Private Sub Form_Load()
+LoadSetting
 Call ConnectDatabase
-
 LoadCityNamesComboBox
 'LoadChurchComboBox
 

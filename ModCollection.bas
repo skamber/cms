@@ -117,8 +117,8 @@ On Error GoTo ErrorHandler
             objcollection.Comments = .txtComments.Text
             objcollection.Payment = .cmbType.Text
             objcollection.types = .cmbTypes.Text
-            objcollection.UserName = .txtUserName.Text
-            objcollection.ChurchId = gChurchId
+            objcollection.userName = gUserFullName
+            objcollection.churchId = gChurchId
             
             If .dteDateofPayment <> "" Then objcollection.Dateofcollection = .dteDateofPayment.FormattedText
 
@@ -151,7 +151,7 @@ On Error GoTo ErrorHandler
             If Not rslocal Is Nothing Then
                 Do Until rslocal.EOF
                     .cmbType.AddItem rslocal!Collection_Type
-                    .cmbType.ItemData(.cmbType.NewIndex) = rslocal!Id
+                    .cmbType.ItemData(.cmbType.NewIndex) = rslocal!id
                     rslocal.MoveNext
                 Loop
                 Set rslocal = Nothing
@@ -161,7 +161,7 @@ On Error GoTo ErrorHandler
             If Not rslocal1 Is Nothing Then
                 Do Until rslocal1.EOF
                     .cmbTypes.AddItem rslocal1!Payment_type
-                    .cmbTypes.ItemData(.cmbTypes.NewIndex) = rslocal1!Id
+                    .cmbTypes.ItemData(.cmbTypes.NewIndex) = rslocal1!id
                     rslocal1.MoveNext
                 Loop
                 Set rslocal1 = Nothing
@@ -183,7 +183,7 @@ Public Function LoadcollectionDefualtValue()
 
 With frmCollection
        .dteDateofPayment.Text = Format(Now(), DATE_FORMAT)
-       .txtUserName.Text = UserName
+       .txtUserName.Text = gUserName
 End With
 
 End Function

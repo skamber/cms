@@ -157,7 +157,7 @@ On Error GoTo ErrorHandler
             If .dteDate.Text <> "" Then objReceipt.DateOfReceipt = .dteDate.FormattedText
             objReceipt.INV_NO = .txtInvoiceNo.Text
             objReceipt.Amount = .txtAmountToPay.Text
-            objReceipt.Accountname = .txtUser.Text
+            objReceipt.Accountname = gUserFullName
             objReceipt.INV_ID = .txtInvoiceID.Text
             objReceipt.ChequeNumber = .txtChequeNo.Text
             objReceipt.churchId = gChurchId
@@ -177,7 +177,7 @@ Public Function LoadReceiptDefualtValue()
 
 With frmReceipt
        .dteDate.Text = Format(Now(), DATE_FORMAT)
-       .txtUser.Text = userName
+       .txtUser.Text = gUserName
        
 End With
 
@@ -186,10 +186,10 @@ End Function
 Sub GetInvoiceInfo()
  On Error GoTo ErrorHandler
  
-     Dim objInvoice_s As CMSinvoice.clsInvoice_s
+     Dim objInvoice_s As CMSInvoice.clsInvoice_s
      Dim rslocal As ADODB.Recordset
      
-    Set objInvoice_s = New CMSinvoice.clsInvoice_s
+    Set objInvoice_s = New CMSInvoice.clsInvoice_s
     Set objInvoice_s.DatabaseConnection = objConnection
  
    
@@ -299,11 +299,11 @@ Public Sub UpdateInvoiceBalance(InvoiceId As Long)
     Dim TotalAmount As Double
     Dim TotalReceiptAmount As Double
     Dim AmountBalance As Double
-    Dim objInvoice_s As CMSinvoice.clsInvoice_s
+    Dim objInvoice_s As CMSInvoice.clsInvoice_s
     Dim rslocal As ADODB.Recordset
     On Error GoTo ErrorHandler
    
-    Set objInvoice_s = New CMSinvoice.clsInvoice_s
+    Set objInvoice_s = New CMSInvoice.clsInvoice_s
     Set objInvoice_s.DatabaseConnection = objConnection
     Set rslocal = objInvoice_s.getByInvoiceId(InvoiceId)
     If rslocal Is Nothing Then
@@ -315,7 +315,7 @@ Public Sub UpdateInvoiceBalance(InvoiceId As Long)
     TotalReceiptAmount = getReceiptAmount(InvoiceId)
     AmountBalance = TotalAmount - TotalReceiptAmount
     
-    Set objInvoice_s = New CMSinvoice.clsInvoice_s
+    Set objInvoice_s = New CMSInvoice.clsInvoice_s
     Set objInvoice_s.DatabaseConnection = objConnection
     objInvoice_s.UpdateBalance InvoiceId, AmountBalance
     Set objInvoice_s = Nothing

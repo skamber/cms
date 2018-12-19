@@ -20,10 +20,10 @@ Begin VB.Form frmPayment
       Enabled         =   0   'False
       Height          =   8415
       Left            =   0
-      TabIndex        =   11
+      TabIndex        =   12
       Top             =   480
       Width           =   12255
-      Begin VB.ComboBox cmbDonationType 
+      Begin VB.ComboBox cmbMembershipTerm 
          Enabled         =   0   'False
          BeginProperty Font 
             Name            =   "Verdana"
@@ -36,17 +36,37 @@ Begin VB.Form frmPayment
          EndProperty
          Height          =   330
          ItemData        =   "frmPayment.frx":0000
-         Left            =   6960
-         List            =   "frmPayment.frx":0002
-         TabIndex        =   4
+         Left            =   5640
+         List            =   "frmPayment.frx":000A
+         Style           =   2  'Dropdown List
+         TabIndex        =   3
+         Top             =   2160
+         Width           =   2295
+      End
+      Begin VB.ComboBox cmbDonationType 
+         Enabled         =   0   'False
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   330
+         ItemData        =   "frmPayment.frx":0023
+         Left            =   2640
+         List            =   "frmPayment.frx":0025
+         TabIndex        =   2
          Text            =   "cmbDonationType"
-         Top             =   2280
+         Top             =   2160
          Width           =   2535
       End
       Begin MSMask.MaskEdBox dteMemberExpiry 
          Height          =   315
          Left            =   7920
-         TabIndex        =   32
+         TabIndex        =   33
          Top             =   1320
          Width           =   1575
          _ExtentX        =   2778
@@ -80,11 +100,11 @@ Begin VB.Form frmPayment
             Strikethrough   =   0   'False
          EndProperty
          Height          =   330
-         ItemData        =   "frmPayment.frx":0004
+         ItemData        =   "frmPayment.frx":0027
          Left            =   6960
-         List            =   "frmPayment.frx":0006
+         List            =   "frmPayment.frx":0029
          Style           =   2  'Dropdown List
-         TabIndex        =   7
+         TabIndex        =   8
          Top             =   3120
          Width           =   1935
       End
@@ -101,7 +121,7 @@ Begin VB.Form frmPayment
          EndProperty
          Height          =   315
          Left            =   2640
-         TabIndex        =   17
+         TabIndex        =   18
          Top             =   600
          Width           =   1815
       End
@@ -118,7 +138,7 @@ Begin VB.Form frmPayment
          EndProperty
          Height          =   315
          Left            =   5160
-         TabIndex        =   16
+         TabIndex        =   17
          Top             =   600
          Width           =   1695
       End
@@ -135,7 +155,7 @@ Begin VB.Form frmPayment
          EndProperty
          Height          =   315
          Left            =   1800
-         TabIndex        =   15
+         TabIndex        =   16
          Top             =   1320
          Width           =   1815
       End
@@ -168,7 +188,7 @@ Begin VB.Form frmPayment
          EndProperty
          Height          =   315
          Left            =   3960
-         TabIndex        =   14
+         TabIndex        =   15
          Top             =   1320
          Width           =   1815
       End
@@ -184,7 +204,7 @@ Begin VB.Form frmPayment
          EndProperty
          Height          =   315
          Left            =   240
-         TabIndex        =   5
+         TabIndex        =   6
          Top             =   3120
          Width           =   1455
       End
@@ -199,11 +219,11 @@ Begin VB.Form frmPayment
             Strikethrough   =   0   'False
          EndProperty
          Height          =   330
-         ItemData        =   "frmPayment.frx":0008
+         ItemData        =   "frmPayment.frx":002B
          Left            =   6240
-         List            =   "frmPayment.frx":0015
+         List            =   "frmPayment.frx":0038
          Style           =   2  'Dropdown List
-         TabIndex        =   13
+         TabIndex        =   14
          Top             =   1320
          Width           =   1455
       End
@@ -218,12 +238,12 @@ Begin VB.Form frmPayment
             Strikethrough   =   0   'False
          EndProperty
          Height          =   330
-         ItemData        =   "frmPayment.frx":0037
-         Left            =   4560
-         List            =   "frmPayment.frx":0039
+         ItemData        =   "frmPayment.frx":005A
+         Left            =   240
+         List            =   "frmPayment.frx":005C
          Style           =   2  'Dropdown List
-         TabIndex        =   3
-         Top             =   2280
+         TabIndex        =   1
+         Top             =   2160
          Width           =   2175
       End
       Begin VB.ComboBox cmbAmountInWord 
@@ -238,7 +258,7 @@ Begin VB.Form frmPayment
          EndProperty
          Height          =   330
          Left            =   2280
-         TabIndex        =   6
+         TabIndex        =   7
          Top             =   3120
          Width           =   4335
       End
@@ -256,15 +276,15 @@ Begin VB.Form frmPayment
          Left            =   240
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
-         TabIndex        =   8
+         TabIndex        =   9
          Top             =   3960
          Width           =   9615
       End
       Begin MSMask.MaskEdBox dteExpiryDate 
          Height          =   315
-         Left            =   2160
-         TabIndex        =   2
-         Top             =   2280
+         Left            =   10320
+         TabIndex        =   5
+         Top             =   2160
          Width           =   1575
          _ExtentX        =   2778
          _ExtentY        =   556
@@ -273,6 +293,7 @@ Begin VB.Form frmPayment
          PromptInclude   =   0   'False
          AllowPrompt     =   -1  'True
          AutoTab         =   -1  'True
+         Enabled         =   0   'False
          MaxLength       =   10
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "Verdana"
@@ -289,9 +310,9 @@ Begin VB.Form frmPayment
       End
       Begin MSMask.MaskEdBox dteEfectiveDate 
          Height          =   315
-         Left            =   240
-         TabIndex        =   1
-         Top             =   2280
+         Left            =   8400
+         TabIndex        =   4
+         Top             =   2160
          Width           =   1455
          _ExtentX        =   2566
          _ExtentY        =   556
@@ -300,6 +321,7 @@ Begin VB.Form frmPayment
          PromptInclude   =   0   'False
          AllowPrompt     =   -1  'True
          AutoTab         =   -1  'True
+         Enabled         =   0   'False
          MaxLength       =   10
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "Verdana"
@@ -317,10 +339,10 @@ Begin VB.Form frmPayment
       Begin MSMask.MaskEdBox dteDateOfPayment 
          Height          =   315
          Left            =   240
-         TabIndex        =   12
+         TabIndex        =   13
          Top             =   600
-         Width           =   1335
-         _ExtentX        =   2355
+         Width           =   1575
+         _ExtentX        =   2778
          _ExtentY        =   556
          _Version        =   393216
          ClipMode        =   1
@@ -341,6 +363,24 @@ Begin VB.Form frmPayment
          Mask            =   "##/##/####"
          PromptChar      =   "_"
       End
+      Begin VB.Label Label18 
+         Caption         =   "Membership Term"
+         Enabled         =   0   'False
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Left            =   5640
+         TabIndex        =   36
+         Top             =   1920
+         Width           =   1815
+      End
       Begin VB.Label Label17 
          Caption         =   "Donation Type"
          Enabled         =   0   'False
@@ -354,9 +394,9 @@ Begin VB.Form frmPayment
             Strikethrough   =   0   'False
          EndProperty
          Height          =   195
-         Left            =   6960
-         TabIndex        =   34
-         Top             =   2040
+         Left            =   2640
+         TabIndex        =   35
+         Top             =   1920
          Width           =   1455
       End
       Begin VB.Label Label12 
@@ -372,7 +412,7 @@ Begin VB.Form frmPayment
          EndProperty
          Height          =   255
          Left            =   7920
-         TabIndex        =   33
+         TabIndex        =   34
          Top             =   1080
          Width           =   1815
       End
@@ -388,9 +428,9 @@ Begin VB.Form frmPayment
             Strikethrough   =   0   'False
          EndProperty
          Height          =   195
-         Left            =   4560
-         TabIndex        =   31
-         Top             =   2040
+         Left            =   240
+         TabIndex        =   32
+         Top             =   1920
          Width           =   1335
       End
       Begin VB.Label Label14 
@@ -406,7 +446,7 @@ Begin VB.Form frmPayment
          EndProperty
          Height          =   195
          Left            =   240
-         TabIndex        =   30
+         TabIndex        =   31
          Top             =   3720
          Width           =   615
       End
@@ -423,7 +463,7 @@ Begin VB.Form frmPayment
          EndProperty
          Height          =   195
          Left            =   240
-         TabIndex        =   29
+         TabIndex        =   30
          Top             =   360
          Width           =   1695
       End
@@ -440,7 +480,7 @@ Begin VB.Form frmPayment
          EndProperty
          Height          =   195
          Left            =   2640
-         TabIndex        =   28
+         TabIndex        =   29
          Top             =   360
          Width           =   1215
       End
@@ -457,7 +497,7 @@ Begin VB.Form frmPayment
          EndProperty
          Height          =   195
          Left            =   5160
-         TabIndex        =   27
+         TabIndex        =   28
          Top             =   360
          Width           =   1455
       End
@@ -474,7 +514,7 @@ Begin VB.Form frmPayment
          EndProperty
          Height          =   195
          Left            =   240
-         TabIndex        =   26
+         TabIndex        =   27
          Top             =   1080
          Width           =   1215
       End
@@ -491,7 +531,7 @@ Begin VB.Form frmPayment
          EndProperty
          Height          =   195
          Left            =   1800
-         TabIndex        =   25
+         TabIndex        =   26
          Top             =   1080
          Width           =   1215
       End
@@ -508,7 +548,7 @@ Begin VB.Form frmPayment
          EndProperty
          Height          =   195
          Left            =   3960
-         TabIndex        =   24
+         TabIndex        =   25
          Top             =   1080
          Width           =   975
       End
@@ -524,13 +564,14 @@ Begin VB.Form frmPayment
             Strikethrough   =   0   'False
          EndProperty
          Height          =   195
-         Left            =   6360
-         TabIndex        =   23
+         Left            =   6240
+         TabIndex        =   24
          Top             =   1080
          Width           =   1095
       End
       Begin VB.Label Label9 
          Caption         =   "Effective From Date"
+         Enabled         =   0   'False
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25
@@ -541,13 +582,14 @@ Begin VB.Form frmPayment
             Strikethrough   =   0   'False
          EndProperty
          Height          =   195
-         Left            =   240
-         TabIndex        =   22
-         Top             =   2040
+         Left            =   8400
+         TabIndex        =   23
+         Top             =   1920
          Width           =   1935
       End
       Begin VB.Label Label10 
          Caption         =   "Expiry Date"
+         Enabled         =   0   'False
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25
@@ -558,9 +600,9 @@ Begin VB.Form frmPayment
             Strikethrough   =   0   'False
          EndProperty
          Height          =   195
-         Left            =   2160
-         TabIndex        =   21
-         Top             =   2040
+         Left            =   10320
+         TabIndex        =   22
+         Top             =   1920
          Width           =   855
       End
       Begin VB.Label Label13 
@@ -576,7 +618,7 @@ Begin VB.Form frmPayment
          EndProperty
          Height          =   195
          Left            =   6960
-         TabIndex        =   20
+         TabIndex        =   21
          Top             =   2880
          Width           =   1455
       End
@@ -593,7 +635,7 @@ Begin VB.Form frmPayment
          EndProperty
          Height          =   195
          Left            =   240
-         TabIndex        =   19
+         TabIndex        =   20
          Top             =   2880
          Width           =   855
       End
@@ -610,7 +652,7 @@ Begin VB.Form frmPayment
          EndProperty
          Height          =   195
          Left            =   2280
-         TabIndex        =   18
+         TabIndex        =   19
          Top             =   2880
          Width           =   1695
       End
@@ -624,7 +666,7 @@ Begin VB.Form frmPayment
       Left            =   0
       ScaleHeight     =   435
       ScaleWidth      =   12195
-      TabIndex        =   9
+      TabIndex        =   10
       Top             =   0
       Width           =   12255
       Begin VB.Label Label1 
@@ -642,7 +684,7 @@ Begin VB.Form frmPayment
          ForeColor       =   &H80000014&
          Height          =   375
          Left            =   0
-         TabIndex        =   10
+         TabIndex        =   11
          Top             =   0
          Width           =   1455
       End
@@ -684,6 +726,30 @@ Else
 End If
 End Sub
 
+Private Sub cmbMembershipTerm_LostFocus()
+Dim memberExpirtDate As Date
+Dim fromDate As Date
+Dim toDate As Date
+If dteMemberExpiry.Text <> "" Then
+  memberExpirtDate = Format(dteMemberExpiry.FormattedText, DATE_FORMAT)
+  fromDate = DateAdd("d", 1, memberExpirtDate)
+  If cmbMembershipTerm.Text = "6 Months" Then
+    toDate = DateAdd("m", 6, memberExpirtDate)
+  ElseIf cmbMembershipTerm.Text = "12 Months" Then
+    toDate = DateAdd("m", 12, memberExpirtDate)
+  End If
+Else
+  fromDate = DateAdd("d", 1, Now())
+  If cmbMembershipTerm.Text = "6 Months" Then
+    toDate = DateAdd("m", 6, Now())
+  ElseIf cmbMembershipTerm.Text = "12 Months" Then
+    toDate = DateAdd("m", 12, Now())
+  End If
+End If
+  dteEfectiveDate.Text = Format(fromDate, DATE_FORMAT)
+  dteExpiryDate.Text = Format(toDate, DATE_FORMAT)
+End Sub
+
 Private Sub cmbPaymentType_LostFocus()
  If cmbPaymentType.Text = "Donation" Then
  cmbDonationType.Enabled = True
@@ -694,7 +760,36 @@ Private Sub cmbPaymentType_LostFocus()
  cmbDonationType.Text = ""
  Label17.Enabled = False
  End If
+ 
+ If cmbPaymentType.Text = "Membership" Then
+   cmbMembershipTerm.Enabled = True
+   Label18.Enabled = True
+   cmbMembershipTerm.SetFocus
+   dteEfectiveDate.Enabled = True
+   dteExpiryDate.Enabled = True
+   Label9.Enabled = True
+   Label10.Enabled = True
+ Else
+   cmbMembershipTerm.ListIndex = -1
+   cmbMembershipTerm.Enabled = False
+
+   Label18.Enabled = False
+   Dim strMask As String
+   strMask = dteEfectiveDate.Mask
+   dteEfectiveDate.Mask = ""
+   dteExpiryDate.Mask = ""
+   dteEfectiveDate.Text = ""
+   dteExpiryDate.Text = ""
+   dteEfectiveDate.Mask = strMask
+   dteExpiryDate.Mask = strMask
+   dteEfectiveDate.Enabled = False
+   dteExpiryDate.Enabled = False
+   Label9.Enabled = False
+   Label10.Enabled = False
+ End If
+ 
 End Sub
+
 
 Private Sub cmbStatus_LostFocus()
 Call UpdateMemberStatus
@@ -760,11 +855,11 @@ End Sub
 
 Public Sub txtmemberNo_LostFocus()
 If gRecordMode = RECORD_NEW Then
-    If txtmemberNo.Text = "" Or Not IsNumeric(txtmemberNo.Text) Then
+    If txtMemberNo.Text = "" Or Not IsNumeric(txtMemberNo.Text) Then
         MsgBox "Please Enter Member Number.", vbExclamation
-        txtmemberNo.SetFocus
+        txtMemberNo.SetFocus
         Exit Sub
-    ElseIf Not GetMemberInfo(txtmemberNo.Text) Then txtmemberNo.SetFocus
+    ElseIf Not GetMemberInfo(txtMemberNo.Text) Then txtMemberNo.SetFocus
     End If
 End If
 End Sub

@@ -367,7 +367,7 @@ On Error GoTo ErrorHandler
     Dim rsLocal As ADODB.Recordset
     
     
-    sql = "SELECT ID, CityName, CountryId FROM city"
+    sql = "SELECT ID, CityName, CountryId FROM city order by CityName"
    
     Set rsLocal = New ADODB.Recordset
         rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly
@@ -395,7 +395,6 @@ On Error GoTo ErrorHandler
 
     Dim sql As String
     Dim rsLocal As ADODB.Recordset
-    
     
     sql = "SELECT CityName FROM city WHERE ID =" & cityId
    
@@ -447,3 +446,33 @@ ErrorHandler:
     'Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getChurchName", True)
 
 End Function
+
+
+Public Function getConnectionCounts(sDatabase As String, sUser As String) As Long
+On Error GoTo ErrorHandler
+
+    Dim sql As String
+    Dim rsLocal As ADODB.Recordset
+    sql = "select count(*) as conCount from (" & _
+          "select  tmp.ipAddress from (" & _
+          "SELECT LEFT(pl.host,(LOCATE(':',pl.host) - 1)) AS ipAddress FROM INFORMATION_SCHEMA.PROCESSLIST as pl where user='" & sUser & "' and DB='" & sDatabase & "' " & _
+          ") as tmp group by tmp.ipAddress ) as tmp1"
+    
+   
+    Set rsLocal = New ADODB.Recordset
+        rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly
+    
+    If rsLocal.EOF = True Then
+        getConnectionCounts = 0
+    Else
+        getConnectionCounts = rsLocal!conCount
+    End If
+    
+    Set rsLocal = Nothing
+
+Exit Function
+ErrorHandler:
+    'Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getChurchName", True)
+
+End Function
+
