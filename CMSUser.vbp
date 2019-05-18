@@ -12,6 +12,7 @@ Reference=*\G{A2E0F918-DE4D-481B-A282-F638872FA8DF}#2.0#0#CMSMember.dll#
 Reference=*\G{B748EDD1-C4EE-4016-A1E3-E56BA27A2882}#2.1#0#CMSOrganisation.dll#
 Reference=*\G{5560C0A3-4A6A-40E2-9F62-31A8DA3AF717}#1.0#0#CMSPayment.dll#
 Reference=*\G{882601FF-2671-4F48-A401-C58F6D3F553C}#1.0#0#CMSReceipt.dll#
+Reference=*\G{D0183078-F5AD-440E-9947-8E89BFF81AB5}#1.0#0#SMS.exe#SMS
 Class=clsUser; CMSUser.cls
 Class=clsUser_s; CMSUser_s.cls
 Class=clsUserPermissions; CMSUserPermissions.cls

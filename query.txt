@@ -1,7 +1,6 @@
 1. create new database in mysql
 CREATE DATABASE cms_test CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
-
 SET SQL_SAFE_UPDATES = 0;
 
 
@@ -14,6 +13,8 @@ WHERE payment is null
 or type is null;
 
 and fix them
+
+do the import data using Bullzip MS Access to Mysql
 
 
 
@@ -63,8 +64,8 @@ INSERT INTO `city` (`ID`,`CountryId`,`CityName`) VALUES (2,1,'Sydney');
 
 
 ALTER TABLE `children` ADD COLUMN `CITY_ID` INT NOT NULL ;
-
-update children set CITY_ID = 1
+ALTER TABLE `children` ADD COLUMN `MOBILE` VARCHAR(45) NULL;
+update children set CITY_ID = 1;
 
 ALTER TABLE `church` ADD COLUMN `CityId` INT NOT NULL ;
 
@@ -72,10 +73,13 @@ update church set CityId= 1;
 
 
 ALTER TABLE collection CHANGE DATE_OF_COLLECTION DATE_OF_COLLECTION DATE;
+ALTER TABLE member CHANGE MEMBERSHIP_EXPIARY MEMBERSHIP_EXPIARY DATE;
+ALTER TABLE children CHANGE BIRTH_DATE BIRTH_DATE DATE;
+
 
 ALTER TABLE member ADD COLUMN `CITY_ID` INT NOT NULL ;
 
-update member  set CITY_ID = 1
+update member  set CITY_ID = 1;
 ALTER TABLE `member` 
 ADD INDEX `CITY_ID` (`CITY_ID` ASC);
 
@@ -87,7 +91,8 @@ CHANGE COLUMN `MNo` `MNo` INT(11) NOT NULL DEFAULT '0' ;
 
 
 
-ALTER TABLE receipt CHANGE Date_Of_Receipt Date_Of_Receipt DATE;
+ALTER TABLE receipt CHANGE Date_Of_Receipt DATE_OF_receipt DATE;
+ALTER TABLE receipt ADD COLUMN`COMMENTS` longtext;
 
 
 ALTER TABLE users ADD COLUMN City_Id  INT NOT NULL ;
@@ -137,7 +142,7 @@ INSERT INTO `country` (`ID`, `CountryName`) VALUES ('2', 'New Zealand');
 INSERT INTO `city` (`ID`, `CountryId`, `CityName`) VALUES ('3', '2', 'Auckland');
 
 
-INSERT INTO `church`.`church` (`Name`, `Diocese`, `Address1`, `post_code`, `state`, `title1`, `title2`, `CityId`) VALUES ('St Marys', 'Diocese of Australia & NZ', '20 Maich Rd, Manurewa', '2102', 'NZ', 'jyrwtjd jxndmd yqylwtq jtxylfw jtfydq jtdv', 'Holy Apostolic Catholic Assyrian Church of the East', '3');
+INSERT INTO `church` (`Id`, `Name`, `Diocese`, `Address1`, `post_code`, `state`, `title1`, `title2`, `CityId`) VALUES (7,'St Marys', 'Diocese of Australia & NZ', '20 Maich Rd, Manurewa', '2102', 'NZ', 'jyrwtjd jxndmd yqylwtq jtxylfw jtfydq jtdv', 'Holy Apostolic Catholic Assyrian Church of the East', '3');
 
 
 update users set logon_password ='WELCOME';
@@ -179,7 +184,7 @@ CREATE TABLE `member_audit` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
-CREATE TABLE `paymen_audit` (
+CREATE TABLE `payment_audit` (
   `MNo` int(11) NOT NULL DEFAULT '0',
   `PAYMENT` varchar(10) NOT NULL,
   `DETAILS` varchar(200) DEFAULT NULL,
@@ -255,7 +260,7 @@ CREATE TABLE `receipt_audit` (
 
 
 ALTER TABLE `member_audit` ADD COLUMN `audit_type` VARCHAR(45) NULL;
-ALTER TABLE `paymen_auditt` ADD COLUMN `audit_type` VARCHAR(45) NULL;
+ALTER TABLE `payment_audit` ADD COLUMN `audit_type` VARCHAR(45) NULL;
 ALTER TABLE `collection_audit` ADD COLUMN `audit_type` VARCHAR(45) NULL;
 ALTER TABLE `invoice_audit` ADD COLUMN `audit_type` VARCHAR(45) NULL;
 ALTER TABLE `receipt_audit` ADD COLUMN `audit_type` VARCHAR(45) NULL;
@@ -438,10 +443,16 @@ END//
 DELIMITER ;
 
 ---------------------------------------------------------------------------
+// create user cms with password SAMI7611 add grand select, insert, delete for user cms for database cms_test2
+CREATE USER 'cms'@'localhost' IDENTIFIED BY 'SAMI7611';
+
+GRANT SELECT, INSERT, DELETE, UPDATE ON church.* TO cms@'localhost';
+flush privileges;
 
 
-CREATE USER 'cms'@'%' IDENTIFIED BY 'SAMI7611';   // create user with password SAMI7611
-ALTER USER 'cms'@'%' IDENTIFIED BY 'SAMI7611';   //change user passowrd
+CREATE USER 'cms'@'localhost' IDENTIFIED BY 'SAMI7611'; // create user in locall box 
+CREATE USER 'cms'@'%' IDENTIFIED BY 'SAMI7611';   // create user with password SAMI7611 for remore database
+ALTER USER 'cms'@'%' IDENTIFIED BY 'SAMI7611';   //change user passowrd for remore database
 GRANT ALL ON church.* TO 'cms'@'%';
 flush privileges;
 

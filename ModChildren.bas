@@ -90,10 +90,8 @@ On Error GoTo ErrorHandler
             objChild.Memo = .txtMemo.Text
             objChild.cityId = gCityId
             
-            
-            
-            
             If .dteBirthDate.Text <> "" Then objChild.BirthDate = .dteBirthDate.FormattedText
+            If .dteMemberMobile.Text <> "" Then objChild.Mobile = .dteMemberMobile.FormattedText
     End With
     
     
@@ -147,28 +145,26 @@ ErrorHandler:
 
 End Function
 
-Public Sub GenerateChildrenList(memberNumber As Long)
+Public Sub GenerateChildrenList(sql As String, Form As Object)
  On Error GoTo ErrorHandler
  
      Dim rslocal As ADODB.Recordset
      Dim strId  As String
      Dim itmx As ListItem
-     Dim sql As String
- 
+     
      Screen.MousePointer = vbHourglass
  
-     With frmChildSearch
-             .ListChildrenView.ListItems.Clear
+     With Form
+             .ListView.ListItems.Clear
      
          '==============================================================================
         
             Set rslocal = New ADODB.Recordset
-            sql = "SELECT * FROM children WHERE MNo =" & memberNumber & " AND CITY_ID =" & gCityId
             rslocal.Open sql, objConnection, adOpenForwardOnly, adLockReadOnly
              If Not rslocal.EOF Then
                  Do While Not rslocal.EOF
                      
-                     Set itmx = .ListChildrenView.ListItems.Add(, , CStr(rslocal!id))
+                     Set itmx = .ListView.ListItems.Add(, , CStr(rslocal!id))
                                     
                                      If Not IsNull(rslocal!childno) Then itmx.SubItems(1) = CStr(rslocal!MNo)
                                      If Not IsNull(rslocal!first_name) Then itmx.SubItems(2) = CStr(rslocal!first_name)
@@ -176,6 +172,8 @@ Public Sub GenerateChildrenList(memberNumber As Long)
                                      If Not IsNull(rslocal!Genda) Then itmx.SubItems(4) = CStr(rslocal!Genda)
                                      If Not IsNull(rslocal!birth_date) Then itmx.SubItems(5) = CStr(rslocal!birth_date)
                                      If Not IsNull(rslocal!MEMBER) Then itmx.SubItems(6) = CStr(rslocal!MEMBER)
+                                     If Not IsNull(rslocal!Mobile) Then itmx.SubItems(7) = CStr(rslocal!Mobile)
+                                     If Not IsNull(rslocal!Email) Then itmx.SubItems(8) = CStr(rslocal!Email)
                      Set itmx = Nothing
                      rslocal.MoveNext
                      
@@ -228,6 +226,7 @@ Public Function DisplayChild()
         .cmbMemberStatus.Text = ConvertNull(rslocal!MEMBER)
         .txtMemberMno.Text = ConvertNull(rslocal!MNo)
         .txtEmail.Text = ConvertNull(rslocal!Email)
+        .dteMemberMobile.Text = ConvertNull(rslocal!Mobile)
         .dteBirthDate.Text = Format(rslocal!birth_date, DATE_FORMAT)
         .txtMemo = "" & rslocal!Comments
         GetMemberName (.txtMemberMno.Text)

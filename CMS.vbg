@@ -13,3 +13,4 @@ Project=CMSChildren.vbp
 Project=CMSInvoiceItem.vbp
 Project=CMSCashFlowItem.vbp
 Project=CMSUser.vbp
+Project=SMS.vbp

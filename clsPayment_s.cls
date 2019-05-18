@@ -97,6 +97,7 @@ On Error GoTo ErrorHandler
                 
                 sql = sql & ",'" & Format(Now(), "yyyy-mm-dd hh:mm:ss") & "')"
                 
+          'Debug.Print (sql)
     dbConnection.Execute sql
 
 Exit Function

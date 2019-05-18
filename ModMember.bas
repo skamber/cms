@@ -199,7 +199,7 @@ ErrorHandler:
 
 End Function
 
-Public Sub GenerateMemberList(sql As String)
+Public Sub GenerateMemberList(sql As String, Form As Object)
  On Error GoTo ErrorHandler
 
      Dim rslocal As ADODB.Recordset
@@ -208,11 +208,9 @@ Public Sub GenerateMemberList(sql As String)
      
  
      Screen.MousePointer = vbHourglass
-     
-     
- 
-     With frmMemberSearch
-             .ListMemberView.ListItems.Clear
+    
+     With Form
+             .ListView.ListItems.Clear
      
          '==============================================================================
          'get Prospect list
@@ -221,7 +219,7 @@ Public Sub GenerateMemberList(sql As String)
              If Not rslocal.EOF Then
                  Do While Not rslocal.EOF
                      strId = CStr(rslocal!MNo)
-                     Set itmx = .ListMemberView.ListItems.Add()
+                     Set itmx = .ListView.ListItems.Add()
                                      itmx.Key = "#" & strId
                                      itmx.Text = CStr(rslocal!MNo)
                                      If Not IsNull(rslocal!Given_name) Then itmx.SubItems(1) = CStr(rslocal!Given_name)
@@ -229,8 +227,10 @@ Public Sub GenerateMemberList(sql As String)
                                      If Not IsNull(rslocal!address1) Then itmx.SubItems(3) = CStr(rslocal!address1)
                                      If Not IsNull(rslocal!address2) Then itmx.SubItems(4) = CStr(rslocal!address2)
                                      If Not IsNull(rslocal!Membership_Expiary) Then itmx.SubItems(5) = CStr(rslocal!Membership_Expiary)
-                                     If Not IsNull(rslocal!address2) Then itmx.SubItems(6) = CStr(rslocal!Status)
+                                     If Not IsNull(rslocal!Status) Then itmx.SubItems(6) = CStr(rslocal!Status)
                                      If Not IsNull(rslocal!Phone) Then itmx.SubItems(7) = CStr(rslocal!Phone)
+                                     If Not IsNull(rslocal!Mobile) Then itmx.SubItems(8) = CStr(rslocal!Mobile)
+                                     If Not IsNull(rslocal!Email) Then itmx.SubItems(9) = CStr(rslocal!Email)
                      Set itmx = Nothing
                      rslocal.MoveNext
                      

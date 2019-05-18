@@ -60,13 +60,15 @@ On Error GoTo ErrorHandler
     
     'insert new record
     sql = "INSERT INTO children" _
-                & " (MNo, ID, CITY_ID, First_Name, Surname, Email,COMMENTS,Genda, Member, Birth_Date)" _
+                & " (MNo, ID, CITY_ID, First_Name, Surname, Email,mobile, COMMENTS,Genda, Member, Birth_Date)" _
                 & " VALUES" _
                 & " (" & objChild.MNo _
                 & "," & NewChildId _
                 & "," & objChild.cityId _
                 & ",'" & objChild.FirstName & "','" & objChild.Surname & "'" _
-                & ",'" & objChild.Email & "','" & objChild.Memo & "'" _
+                & ",'" & objChild.Email & "'" _
+                & ",'" & objChild.Mobile & "'" _
+                & ",'" & objChild.Memo & "'" _
                 & ",'" & objChild.Genda & "','" & objChild.Member & "'"
                 
                 If objChild.BirthDate = "" Then
@@ -95,6 +97,7 @@ On Error GoTo ErrorHandler
                 & " ,First_Name =" & "'" & objChild.FirstName & "'" _
                 & " ,Surname =" & "'" & objChild.Surname & "'" _
                 & " ,Email =" & "'" & objChild.Email & "'" _
+                & " ,Mobile =" & "'" & objChild.Mobile & "'" _
                 & " ,COMMENTS =" & "'" & objChild.Memo & "'" _
                 & " ,Member =" & "'" & objChild.Member & "'" _
                 & " ,Genda =" & "'" & objChild.Genda & "'" _

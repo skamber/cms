@@ -51,10 +51,10 @@ On Error GoTo ErrorHandler
     LoadPermissions(Ctr, 3) = "N"
     LoadPermissions(Ctr, 4) = "N"
     Next Ctr
-    frmUserAccount.chkDelete.Value = 0
-    frmUserAccount.chkInsert.Value = 0
-    frmUserAccount.chkRead.Value = 0
-    frmUserAccount.chkUpdate.Value = 0
+    frmUserAccount.chkDelete.value = 0
+    frmUserAccount.chkInsert.value = 0
+    frmUserAccount.chkRead.value = 0
+    frmUserAccount.chkUpdate.value = 0
     
     
 Exit Function
@@ -178,11 +178,12 @@ Public Function DisplayUserAccount()
         .txtLogonId = rslocal!Logon_Id
         Dim cityId As Long
         Dim churchId As Long
+        Dim index As Long
         cityId = ConvertNull(rslocal!City_Id)
-        .cmbCity.Text = Cities.Item(cityId)
+        index = FindCBIndexById(.cmbCity, cityId)
+        .cmbCity.Text = .cmbCity.List(index)
         LoadChurchComboBoxWithAll (cityId)
         churchId = ConvertNull(rslocal!Church_Id)
-        Dim index As Long
         index = FindCBIndexById(.cmbChurch, churchId)
         .cmbChurch.Text = .cmbChurch.List(index)
         
@@ -190,15 +191,15 @@ Public Function DisplayUserAccount()
         checkSystemManager = rslocal!SYSTEM_MANAGER
         checkReportView = rslocal!Report_View
         If checkSystemManager = "Y" Then
-            .chkSystemManager.Value = 1
+            .chkSystemManager.value = 1
          Else
-         .chkSystemManager.Value = 0
+         .chkSystemManager.value = 0
         End If
         
         If checkReportView = "Y" Then
-            .chkReportView.Value = 1
+            .chkReportView.value = 1
          Else
-         .chkReportView.Value = 0
+         .chkReportView.value = 0
         End If
         
         .dtePasswordLastUpdate = Format(rslocal!Password_Last_Update, DATE_FORMAT) & ""
@@ -389,7 +390,7 @@ Case RECORD_NEW:
         objuser_s.insertUser objUser
         objUser.UserId = objuser_s.NewUserId
         gUserAccountId = objUser.UserId
-        gUserAccountName = objUser.UserName
+        gUserAccountName = objUser.userName
         frmUserAccount.CboUserName.AddItem gUserAccountName
         frmUserAccount.CboUserName.ItemData(frmUserAccount.CboUserName.NewIndex) = gUserAccountId
         frmUserAccount.txtUserId = objuser_s.NewUserId
@@ -427,7 +428,7 @@ On Error GoTo ErrorHandler
 PopulateUserAccountObject = False
     With frmUserAccount
     
-            If Trim(.txtUserName.Text) <> "" Then objUser.UserName = UCase(.txtUserName.Text)
+            If Trim(.txtUserName.Text) <> "" Then objUser.userName = UCase(.txtUserName.Text)
             If Trim(.cmbCity.Text) <> "" Then
             .cmbCity.ListIndex = FindCBIndexByName(.cmbCity, .cmbCity.Text)
               objUser.cityId = .cmbCity.ItemData(.cmbCity.ListIndex)
@@ -446,12 +447,12 @@ PopulateUserAccountObject = False
             
             If Trim(.txtLogonId.Text) <> "" Then objUser.LogonId = UCase(.txtLogonId.Text)
             If Trim(.txtPassword.Text) <> "" Then objUser.LogonPassword = .txtPassword.Text
-            If .chkSystemManager.Value = 1 Then
+            If .chkSystemManager.value = 1 Then
                 objUser.systemManager = "Y"
             Else
                objUser.systemManager = "N"
             End If
-            If .chkReportView.Value = 1 Then
+            If .chkReportView.value = 1 Then
                 objUser.ReportView = "Y"
             Else
                objUser.ReportView = "N"
@@ -595,25 +596,25 @@ If frmUserAccount.listActions.ListIndex = -1 Then Exit Sub
 Select Case Item
 
 Case 1:
-        If .chkRead.Value = 1 Then
+        If .chkRead.value = 1 Then
         LoadPermissions(frmUserAccount.listActions.ItemData(frmUserAccount.listActions.ListIndex), 1) = "Y"
         Else
         LoadPermissions(frmUserAccount.listActions.ItemData(frmUserAccount.listActions.ListIndex), 1) = "N"
         End If
 Case 2:
-        If .chkInsert.Value = 1 Then
+        If .chkInsert.value = 1 Then
         LoadPermissions(frmUserAccount.listActions.ItemData(frmUserAccount.listActions.ListIndex), 2) = "Y"
         Else
         LoadPermissions(frmUserAccount.listActions.ItemData(frmUserAccount.listActions.ListIndex), 2) = "N"
         End If
 Case 3:
-        If .chkUpdate.Value = 1 Then
+        If .chkUpdate.value = 1 Then
         LoadPermissions(frmUserAccount.listActions.ItemData(frmUserAccount.listActions.ListIndex), 3) = "Y"
         Else
         LoadPermissions(frmUserAccount.listActions.ItemData(frmUserAccount.listActions.ListIndex), 3) = "N"
         End If
 Case 4:
-        If .chkDelete.Value = 1 Then
+        If .chkDelete.value = 1 Then
         LoadPermissions(frmUserAccount.listActions.ItemData(frmUserAccount.listActions.ListIndex), 4) = "Y"
         Else
         LoadPermissions(frmUserAccount.listActions.ItemData(frmUserAccount.listActions.ListIndex), 4) = "N"
@@ -636,25 +637,25 @@ With frmUserAccount
 
 
 If LoadPermissions(Item, 1) = "Y" Then
-        .chkRead.Value = 1
+        .chkRead.value = 1
 Else
-.chkRead.Value = 0
+.chkRead.value = 0
 End If
 
 If LoadPermissions(Item, 2) = "Y" Then
-        .chkInsert.Value = 1
+        .chkInsert.value = 1
 Else
-.chkInsert.Value = 0
+.chkInsert.value = 0
 End If
 If LoadPermissions(Item, 3) = "Y" Then
-        .chkUpdate.Value = 1
+        .chkUpdate.value = 1
 Else
-.chkUpdate.Value = 0
+.chkUpdate.value = 0
 End If
 If LoadPermissions(Item, 4) = "Y" Then
-        .chkDelete.Value = 1
+        .chkDelete.value = 1
 Else
-.chkDelete.Value = 0
+.chkDelete.value = 0
 End If
 End With
 
@@ -686,10 +687,10 @@ On Error GoTo ErrorHandler
     LoadPermissions(Ctr, 3) = "N"
     LoadPermissions(Ctr, 4) = "N"
     Next Ctr
-    frmUserAccount.chkDelete.Value = 0
-    frmUserAccount.chkInsert.Value = 0
-    frmUserAccount.chkRead.Value = 0
-    frmUserAccount.chkUpdate.Value = 0
+    frmUserAccount.chkDelete.value = 0
+    frmUserAccount.chkInsert.value = 0
+    frmUserAccount.chkRead.value = 0
+    frmUserAccount.chkUpdate.value = 0
     
     
 Exit Function

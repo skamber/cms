@@ -177,7 +177,7 @@ Public Function LoadReceiptDefualtValue()
 
 With frmReceipt
        .dteDate.Text = Format(Now(), DATE_FORMAT)
-       .txtUser.Text = gUserName
+       .txtUser.Text = gUserFullName
        
 End With
 

@@ -183,7 +183,7 @@ Public Function LoadcollectionDefualtValue()
 
 With frmCollection
        .dteDateofPayment.Text = Format(Now(), DATE_FORMAT)
-       .txtUserName.Text = gUserName
+       .txtUserName.Text = gUserFullName
 End With
 
 End Function

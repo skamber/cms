@@ -58,6 +58,7 @@ Form=frmPassword.frm
 Form=frmReceiptSearch.frm
 Form=UserAccount.frm
 Form=frmCollectionSearch.frm
+Form=frmSms.frm
 IconForm="frmLogon"
 Startup="frmLogon"
 HelpFile=""

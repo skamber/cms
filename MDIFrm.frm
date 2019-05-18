@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{15138B51-7EB6-11D0-9BB7-0000C0F04C96}#1.0#0"; "SSLstBar.ocx"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomctl.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "mscomctl.OCX"
 Begin VB.MDIForm MDIFrm 
    BackColor       =   &H8000000C&
    Caption         =   "CMS"
@@ -44,44 +44,47 @@ Begin VB.MDIForm MDIFrm
       OLEDragMode     =   1
       OLEDropMode     =   2
       GroupCount      =   7
-      IconsLargeCount =   12
+      IconsLargeCount =   13
       Image(1).Index  =   1
       Image(1).Picture=   "MDIFrm.frx":355C
       Image(1).Key    =   "Child"
       Image(2).Index  =   2
       Image(2).Picture=   "MDIFrm.frx":3878
-      Image(2).Key    =   "Item"
+      Image(2).Key    =   "Sms"
       Image(3).Index  =   3
-      Image(3).Picture=   "MDIFrm.frx":3B92
-      Image(3).Key    =   "Cashout"
+      Image(3).Picture=   "MDIFrm.frx":44CA
+      Image(3).Key    =   "Item"
       Image(4).Index  =   4
-      Image(4).Picture=   "MDIFrm.frx":3EAC
-      Image(4).Key    =   "Cashin"
+      Image(4).Picture=   "MDIFrm.frx":47E4
+      Image(4).Key    =   "Cashout"
       Image(5).Index  =   5
-      Image(5).Picture=   "MDIFrm.frx":41C6
-      Image(5).Key    =   "Receipt"
+      Image(5).Picture=   "MDIFrm.frx":4AFE
+      Image(5).Key    =   "Cashin"
       Image(6).Index  =   6
-      Image(6).Picture=   "MDIFrm.frx":44E2
-      Image(6).Key    =   "Reprt"
+      Image(6).Picture=   "MDIFrm.frx":4E18
+      Image(6).Key    =   "Receipt"
       Image(7).Index  =   7
-      Image(7).Picture=   "MDIFrm.frx":47FE
-      Image(7).Key    =   "Search"
+      Image(7).Picture=   "MDIFrm.frx":5134
+      Image(7).Key    =   "Reprt"
       Image(8).Index  =   8
-      Image(8).Picture=   "MDIFrm.frx":4B1A
-      Image(8).Key    =   "Member"
+      Image(8).Picture=   "MDIFrm.frx":5450
+      Image(8).Key    =   "Search"
       Image(9).Index  =   9
-      Image(9).Picture=   "MDIFrm.frx":4E36
-      Image(9).Key    =   "Invoice"
+      Image(9).Picture=   "MDIFrm.frx":576C
+      Image(9).Key    =   "Member"
       Image(10).Index =   10
-      Image(10).Picture=   "MDIFrm.frx":5152
-      Image(10).Key   =   "Collection"
+      Image(10).Picture=   "MDIFrm.frx":5A88
+      Image(10).Key   =   "Invoice"
       Image(11).Index =   11
-      Image(11).Picture=   "MDIFrm.frx":546E
-      Image(11).Key   =   "Search1"
+      Image(11).Picture=   "MDIFrm.frx":5DA4
+      Image(11).Key   =   "Collection"
       Image(12).Index =   12
-      Image(12).Picture=   "MDIFrm.frx":578A
-      Image(12).Key   =   "Payment"
-      Groups(1).ItemCount=   4
+      Image(12).Picture=   "MDIFrm.frx":60C0
+      Image(12).Key   =   "Search1"
+      Image(13).Index =   13
+      Image(13).Picture=   "MDIFrm.frx":63DC
+      Image(13).Key   =   "Payment"
+      Groups(1).ItemCount=   5
       Groups(1).PictureBackgroundStyle=   1
       Groups(1).CurrentGroup=   -1  'True
       Groups(1).Caption=   "Member"
@@ -100,6 +103,10 @@ Begin VB.MDIForm MDIFrm
       Groups(1).ListItems(4).Text=   "Search Children"
       Groups(1).ListItems(4).Key=   "SearchChildren"
       Groups(1).ListItems(4).IconLarge=   "Search"
+      Groups(1).ListItems(5).Index=   5
+      Groups(1).ListItems(5).Text=   "Send SMS"
+      Groups(1).ListItems(5).Key=   "SendSms"
+      Groups(1).ListItems(5).IconLarge=   "Sms"
       Groups(2).Index =   2
       Groups(2).ItemCount=   2
       Groups(2).PictureBackgroundStyle=   1
@@ -184,31 +191,31 @@ Begin VB.MDIForm MDIFrm
       BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
          NumListImages   =   7
          BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "MDIFrm.frx":5AA6
+            Picture         =   "MDIFrm.frx":66F8
             Key             =   "update"
          EndProperty
          BeginProperty ListImage2 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "MDIFrm.frx":5DC2
+            Picture         =   "MDIFrm.frx":6A14
             Key             =   "insert"
          EndProperty
          BeginProperty ListImage3 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "MDIFrm.frx":60DE
+            Picture         =   "MDIFrm.frx":6D30
             Key             =   "save"
          EndProperty
          BeginProperty ListImage4 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "MDIFrm.frx":63FA
+            Picture         =   "MDIFrm.frx":704C
             Key             =   "delete"
          EndProperty
          BeginProperty ListImage5 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "MDIFrm.frx":6716
+            Picture         =   "MDIFrm.frx":7368
             Key             =   "cancle"
          EndProperty
          BeginProperty ListImage6 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "MDIFrm.frx":6A32
+            Picture         =   "MDIFrm.frx":7684
             Key             =   "Print"
          EndProperty
          BeginProperty ListImage7 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "MDIFrm.frx":6D4E
+            Picture         =   "MDIFrm.frx":79A0
             Key             =   "Preview"
          EndProperty
       EndProperty
@@ -368,9 +375,11 @@ Select Case PreviousGroup.Caption
                 Unload frmChildren
                 Unload frmMemberSearch
                 Unload frmChildSearch
+                Unload frmSms
                 Set frmMember = Nothing
                 Set frmChildren = Nothing
                 Set frmMemberSearch = Nothing
+                Set frmSms = Nothing
                 MemberSelected = False
                 ChildSelected = False
     Case "Payment":
@@ -450,7 +459,7 @@ Select Case ItemClicked.Key
                      DoEvents
                      frmMember.ZOrder 0
                      If MemberSelected Then
-                       gmemberId = frmMemberSearch.ListMemberView.SelectedItem
+                       gmemberId = frmMemberSearch.ListView.SelectedItem
                        DisplayMember
                      End If
                      gRecordType = MEMBER
@@ -461,11 +470,12 @@ Select Case ItemClicked.Key
                      DoEvents
                      frmChildren.ZOrder 0
                      If ChildSelected Then
-                       gchildId = frmChildSearch.ListChildrenView.SelectedItem
+                       gchildId = frmChildSearch.ListView.SelectedItem
                        DisplayChild
                      End If
                      clearAllSelection
     Case Child_Search: frmChildSearch.Show: DoEvents: frmChildSearch.ZOrder 0
+    Case Send_Sms: frmSms.Show: DoEvents: frmSms.ZOrder 0
     Case Payment_information:
                     frmPayment.Show
                     DoEvents

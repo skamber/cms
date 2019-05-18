@@ -63,6 +63,7 @@ Public Const RECEIPT = "Receipt"
 Public Const REPORTING = "Reporting"
 Public Const Member_information = "MemberMenu"
 Public Const Member_Search = "SearchMembers"
+Public Const Send_Sms = "SendSms"
 Public Const Child_Search = "SearchChildren"
 Public Const Children_information = "ChildrenMenu"
 Public Const Payment_information = "PaymentMenu"
@@ -165,12 +166,20 @@ End Function
 Public Function ConnectDatabase()
          
     Set objConnection = New ADODB.Connection
-    On Error Resume Next
+    Dim connection_string As String
     
-    With objConnection
-            .Open "Driver={MySQL ODBC 5.3 Unicode Driver};Server=" & gHost & ";Database=" & _
+    On Error Resume Next
+    If gCertPath = "" Then
+    connection_string = "Driver={MySQL ODBC 5.3 Unicode Driver};Server=" & gHost & ";Database=" & _
+            gDatabaseName & "; User=" & gUserName & ";Password=" & gPassword & _
+            "; Option=3;"
+    Else
+    connection_string = "Driver={MySQL ODBC 5.3 Unicode Driver};Server=" & gHost & ";Database=" & _
             gDatabaseName & "; User=" & gUserName & ";Password=" & gPassword & _
             ";sslca=" & gCertPath & "; sslverify=1; Option=3;"
+    End If
+    With objConnection
+            .Open connection_string
     End With
 
 Exit Function

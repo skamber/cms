@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "msmask32.ocx"
+Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "MSMASK32.OCX"
 Begin VB.Form frmChildren 
    ClientHeight    =   8865
    ClientLeft      =   435
@@ -25,7 +25,7 @@ Begin VB.Form frmChildren
       EndProperty
       Height          =   315
       Left            =   4080
-      TabIndex        =   20
+      TabIndex        =   21
       Top             =   1200
       Width           =   3255
    End
@@ -33,8 +33,8 @@ Begin VB.Form frmChildren
       BorderStyle     =   0  'None
       Enabled         =   0   'False
       Height          =   8295
-      Left            =   120
-      TabIndex        =   10
+      Left            =   -120
+      TabIndex        =   11
       Top             =   600
       Width           =   12735
       Begin VB.TextBox txtMemo 
@@ -51,9 +51,9 @@ Begin VB.Form frmChildren
          Left            =   600
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
-         TabIndex        =   7
+         TabIndex        =   8
          Top             =   2880
-         Width           =   8415
+         Width           =   10695
       End
       Begin VB.TextBox txtEmail 
          BeginProperty Font 
@@ -84,7 +84,7 @@ Begin VB.Form frmChildren
          EndProperty
          Height          =   315
          Left            =   2400
-         TabIndex        =   17
+         TabIndex        =   18
          Top             =   600
          Width           =   975
       End
@@ -200,6 +200,48 @@ Begin VB.Form frmChildren
          Mask            =   "##/##/####"
          PromptChar      =   "_"
       End
+      Begin MSMask.MaskEdBox dteMemberMobile 
+         Height          =   315
+         Left            =   9240
+         TabIndex        =   7
+         Top             =   2040
+         Width           =   2055
+         _ExtentX        =   3625
+         _ExtentY        =   556
+         _Version        =   393216
+         ClipMode        =   1
+         PromptInclude   =   0   'False
+         AllowPrompt     =   -1  'True
+         MaxLength       =   13
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Mask            =   "##########"
+         PromptChar      =   "_"
+      End
+      Begin VB.Label Label12 
+         Caption         =   "Mobile"
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Left            =   9240
+         TabIndex        =   24
+         Top             =   1800
+         Width           =   735
+      End
       Begin VB.Label Label11 
          Caption         =   "Note"
          BeginProperty Font 
@@ -213,7 +255,7 @@ Begin VB.Form frmChildren
          EndProperty
          Height          =   255
          Left            =   600
-         TabIndex        =   22
+         TabIndex        =   23
          Top             =   2640
          Width           =   1095
       End
@@ -230,7 +272,7 @@ Begin VB.Form frmChildren
          EndProperty
          Height          =   255
          Left            =   3960
-         TabIndex        =   21
+         TabIndex        =   22
          Top             =   360
          Width           =   1455
       End
@@ -247,7 +289,7 @@ Begin VB.Form frmChildren
          EndProperty
          Height          =   255
          Left            =   4800
-         TabIndex        =   19
+         TabIndex        =   20
          Top             =   1800
          Width           =   975
       End
@@ -264,7 +306,7 @@ Begin VB.Form frmChildren
          EndProperty
          Height          =   195
          Left            =   2400
-         TabIndex        =   18
+         TabIndex        =   19
          Top             =   360
          Width           =   975
       End
@@ -281,7 +323,7 @@ Begin VB.Form frmChildren
          EndProperty
          Height          =   195
          Left            =   600
-         TabIndex        =   16
+         TabIndex        =   17
          Top             =   360
          Width           =   1215
       End
@@ -298,7 +340,7 @@ Begin VB.Form frmChildren
          EndProperty
          Height          =   195
          Left            =   600
-         TabIndex        =   15
+         TabIndex        =   16
          Top             =   1080
          Width           =   975
       End
@@ -315,7 +357,7 @@ Begin VB.Form frmChildren
          EndProperty
          Height          =   195
          Left            =   2400
-         TabIndex        =   14
+         TabIndex        =   15
          Top             =   1080
          Width           =   1095
       End
@@ -332,7 +374,7 @@ Begin VB.Form frmChildren
          EndProperty
          Height          =   195
          Left            =   4200
-         TabIndex        =   13
+         TabIndex        =   14
          Top             =   1080
          Width           =   735
       End
@@ -349,12 +391,12 @@ Begin VB.Form frmChildren
          EndProperty
          Height          =   195
          Left            =   600
-         TabIndex        =   12
+         TabIndex        =   13
          Top             =   1800
          Width           =   1095
       End
       Begin VB.Label Label7 
-         Caption         =   "Child Member Status"
+         Caption         =   "Child Status"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25
@@ -366,7 +408,7 @@ Begin VB.Form frmChildren
          EndProperty
          Height          =   195
          Left            =   2760
-         TabIndex        =   11
+         TabIndex        =   12
          Top             =   1800
          Width           =   1815
       End
@@ -380,7 +422,7 @@ Begin VB.Form frmChildren
       Left            =   0
       ScaleHeight     =   435
       ScaleWidth      =   12765
-      TabIndex        =   8
+      TabIndex        =   9
       Top             =   0
       Width           =   12825
       Begin VB.Label Label1 
@@ -398,7 +440,7 @@ Begin VB.Form frmChildren
          ForeColor       =   &H80000014&
          Height          =   375
          Left            =   0
-         TabIndex        =   9
+         TabIndex        =   10
          Top             =   0
          Width           =   1695
       End
