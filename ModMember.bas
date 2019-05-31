@@ -179,7 +179,7 @@ On Error GoTo ErrorHandler
             objMember.postCode = .txtPostcode.Text
             objMember.SpouseName = .txtSpouse.Text
             objMember.State = .txtState.Text
-            objMember.Status = .cmbStatus.Text
+            objMember.status = .cmbStatus.Text
             objMember.Email = .txtEmail.Text
             objMember.cityId = gCityId
             
@@ -227,7 +227,7 @@ Public Sub GenerateMemberList(sql As String, Form As Object)
                                      If Not IsNull(rslocal!address1) Then itmx.SubItems(3) = CStr(rslocal!address1)
                                      If Not IsNull(rslocal!address2) Then itmx.SubItems(4) = CStr(rslocal!address2)
                                      If Not IsNull(rslocal!Membership_Expiary) Then itmx.SubItems(5) = CStr(rslocal!Membership_Expiary)
-                                     If Not IsNull(rslocal!Status) Then itmx.SubItems(6) = CStr(rslocal!Status)
+                                     If Not IsNull(rslocal!status) Then itmx.SubItems(6) = CStr(rslocal!status)
                                      If Not IsNull(rslocal!Phone) Then itmx.SubItems(7) = CStr(rslocal!Phone)
                                      If Not IsNull(rslocal!Mobile) Then itmx.SubItems(8) = CStr(rslocal!Mobile)
                                      If Not IsNull(rslocal!Email) Then itmx.SubItems(9) = CStr(rslocal!Email)
@@ -291,7 +291,7 @@ Public Function DisplayMember()
         .txtSurname.Text = ConvertNull(rslocal!surname)
         .dteExpiryDate.Text = Format(rslocal!Membership_Expiary, DATE_FORMAT)
         .dteDateOfBirth.Text = Format(rslocal!DATE_OF_BIRTH, DATE_FORMAT)
-        .cmbStatus.Text = ConvertNull(rslocal!Status)
+        .cmbStatus.Text = ConvertNull(rslocal!status)
         .dteCreateDate.Text = Format(rslocal!joining_date, DATE_FORMAT)
         .txtEmail.Text = ConvertNull(rslocal!Email)
         

@@ -92,6 +92,9 @@ Public Const RECORD_PRIVIEW = "Preview"
 Public Const SALT_PASSWORD = "Shana&Nineb"
 Public Const SALT_LICENCE = "Nineb&Shana"
 
+Public gSmsUserName As String
+Public gSmsPassword As String
+Public gSmsMessageFrom As String
 
 Public Enum eSortOrder
     sortAscending = 0
@@ -156,6 +159,17 @@ Public Function LoadSetting()
     sAppName = "Licence"
     lRet = GetPrivateProfileString(sAppName, "LicenseLimit", sDefault, sRet, lSize, sFileName)
     gLicenseLimit = Left(sRet, InStrB(1, sRet, Chr(0)) / 2)
+    
+    sAppName = "SMS"
+    lRet = GetPrivateProfileString(sAppName, "UserName", sDefault, sRet, lSize, sFileName)
+    gSmsUserName = Left(sRet, InStrB(1, sRet, Chr(0)) / 2)
+    
+    lRet = GetPrivateProfileString(sAppName, "Password", sDefault, sRet, lSize, sFileName)
+    gSmsPassword = Left(sRet, InStrB(1, sRet, Chr(0)) / 2)
+    
+    lRet = GetPrivateProfileString(sAppName, "MessageFrom", sDefault, sRet, lSize, sFileName)
+    gSmsMessageFrom = Left(sRet, InStrB(1, sRet, Chr(0)) / 2)
+    
     
 Exit Function
 ErrorHandler:

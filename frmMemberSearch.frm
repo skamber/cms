@@ -255,7 +255,6 @@ ListView.ColumnHeaders.Add , , "STATUS", ListView.Width / 7
 ListView.ColumnHeaders.Add , , "PHONE", ListView.Width / 7
 ListView.ColumnHeaders.Add , , "MOBILE", ListView.Width / 7
 ListView.ColumnHeaders.Add , , "EMAIL", ListView.Width / 5
-
 ListView.View = lvwReport
 
 
