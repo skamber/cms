@@ -271,7 +271,7 @@ Begin VB.Form frmChildren
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Left            =   3960
+         Left            =   4200
          TabIndex        =   22
          Top             =   360
          Width           =   1455

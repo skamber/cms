@@ -131,19 +131,6 @@ update member set phone =null where
 phone is not null
 and phone like '(04)%';
 
-UPDATE member AS m1 
-
-INNER JOIN member AS m2  
-ON m1.mno =m2.mno
-
-SET m1.mobile  = REPLACE( REPLACE( REPLACE(m2.mobile ,'(',''),')',''),'-','')
-
-where 
-m2.mobile is not null
-
-and m2.mobile like '(04)%';
-
-
 
 INSERT INTO `church` (`Id`,`Name`,`Diocese`,`Address1`,`Address2`,`post_code`,`state`,`Telphone`,`email`,`title1`,`title2`,`ABN`,`BANK_ACCOUNT_NAME`,`BSB_NUMBER`,`ACCOUNT_NO`,`CityId`) VALUES (3,'St Hurmizd Cathedral','Diocese of Australia & NZ','7-9 Greenfield Rd, Greenfield Park ',NULL,'2176','NSW','(02) 9610 8680',NULL,'jyrwtjd jxndmd yqylwtq jtxylfw jtfydq jtdv','Holy Apostolic Catholic Assyrian Church of the East','29361083483','Holy Apostolic Catholic Assyrian Church of the East','063135','10508637',2);
 INSERT INTO `church` (`Id`,`Name`,`Diocese`,`Address1`,`Address2`,`post_code`,`state`,`Telphone`,`email`,`title1`,`title2`,`ABN`,`BANK_ACCOUNT_NAME`,`BSB_NUMBER`,`ACCOUNT_NO`,`CityId`) VALUES (4,'St Mary\'s','Diocese of Australia & NZ',' 94 Polding St, Smithfield',NULL,'2164','NSW','(02) 9726 6309',NULL,'jyrwtjd jxndmd yqylwtq jtxylfw jtfydq jtdv','Holy Apostolic Catholic Assyrian Church of the East','29361083483','Holy Apostolic Catholic Assyrian Church of the East','063135','10508637',2);
@@ -455,7 +442,21 @@ FOR EACH ROW BEGIN
 END//
 DELIMITER ;
 
----------------------------------------------------------------------------
+
+UPDATE member AS m1 
+INNER JOIN member AS m2  
+ON m1.mno =m2.mno
+SET m1.mobile  = REPLACE( REPLACE( REPLACE(m2.mobile ,'(',''),')',''),'-','')
+where 
+m2.mobile is not null
+and m2.mobile like '(04)%';
+
+-------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------
+
 // create user cms with password SAMI7611 add grand select, insert, delete for user cms for database cms_test2
 CREATE USER 'cms'@'localhost' IDENTIFIED BY 'SAMI7611';
 

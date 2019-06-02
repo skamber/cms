@@ -1260,7 +1260,7 @@ End Function
 
 Public Sub clearAllSelection()
 MemberSelected = False
-'ChildSelected = False
+ChildSelected = False
 PaymentSelected = False
 CashInSelected = False
 CashOutSelected = False

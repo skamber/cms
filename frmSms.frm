@@ -1,7 +1,6 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "mscomctl.OCX"
 Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "MSMASK32.OCX"
-Object = "{48E59290-9880-11CF-9754-00AA00C00908}#1.0#0"; "MSINET.OCX"
 Begin VB.Form frmSms 
    ClientHeight    =   10575
    ClientLeft      =   660
@@ -25,7 +24,16 @@ Begin VB.Form frmSms
    ScaleWidth      =   15300
    WindowState     =   2  'Maximized
    Begin VB.CommandButton Command2 
-      Caption         =   "Clear Criteria"
+      Caption         =   "Clear"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
       Left            =   5880
       TabIndex        =   18
@@ -100,15 +108,17 @@ Begin VB.Form frmSms
       Top             =   1800
       Width           =   1935
    End
-   Begin InetCtlsObjects.Inet Inet1 
-      Left            =   13440
-      Top             =   8640
-      _ExtentX        =   1005
-      _ExtentY        =   1005
-      _Version        =   393216
-   End
    Begin VB.CommandButton cmdSearch 
       Caption         =   "Search"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
       Left            =   7440
       TabIndex        =   5
@@ -117,6 +127,15 @@ Begin VB.Form frmSms
    End
    Begin VB.CommandButton CmdSendSms 
       Caption         =   "Send SMS"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
       Left            =   11040
       TabIndex        =   7
@@ -334,7 +353,7 @@ Begin VB.Form frmSms
          Strikethrough   =   0   'False
       EndProperty
       Height          =   195
-      Left            =   480
+      Left            =   360
       TabIndex        =   13
       Top             =   8520
       Width           =   1935
@@ -393,8 +412,18 @@ cmbTypeSearch.ListIndex = -1
     dteExpairyDate.Text = ""
 End Sub
 
+
+
 Private Sub cmbTypeSearch_Click()
 dteExpairyDate.Text = ""
+ Select Case cmbTypeSearch.Text
+        Case "Member"
+            dteExpairyDate.Enabled = True
+            txtMnoNumber.Enabled = True
+        Case "Youth"
+            txtMnoNumber.Enabled = False
+            dteExpairyDate.Enabled = False
+    End Select
 End Sub
 
 Private Sub cmbTypeSearch_LostFocus()
@@ -403,7 +432,6 @@ Select Case cmbTypeSearch.Text
             ListView.ListItems.Clear
             ListView.ColumnHeaders.Clear
             ListView.Refresh
-            
             ListView.ColumnHeaders.Add , , "NUMBER", ListView.Width / 13
             ListView.ColumnHeaders.Add , , "NAME", ListView.Width / 13
             ListView.ColumnHeaders.Add , , "SURNAME", ListView.Width / 11
@@ -446,12 +474,14 @@ Dim message As String
 Dim Aa As String
 Dim mobileColumnId As Integer
 Dim lengthOfMessage As Integer
+Dim response As String
+Dim passSMS As Integer
 
 
-
+passSMS = 0
 Count = ListView.ListItems.Count
 lengthOfMessage = Len(txtSmsMessage.Text)
-If txtSmsMessage.Text <> "" And lengthOfMessage > 0 And Count > 0 And lengthOfMessage < 126 Then
+If txtSmsMessage.Text <> "" And lengthOfMessage > 0 And Count > 0 And lengthOfMessage < 160 Then
     Aa = MsgBox("Are you sure you want to send sms messages?", vbYesNo)
     If Aa = vbNo Then
         Exit Sub
@@ -469,8 +499,12 @@ If txtSmsMessage.Text <> "" And lengthOfMessage > 0 And Count > 0 And lengthOfMe
             mobileNumber = Replace(mobileNumber, ")", "")
             mobileNumber = Replace(mobileNumber, "(", "")
             mobileNumber = Replace(mobileNumber, "-", "")
-            sendSmsViaWebApi mobileNumber, message
+            response = sendSmsViaWebApi(mobileNumber, message)
+            If response = "OK" Then
+              passSMS = passSMS + 1
+            End If
         Next intCount
+        MsgBox "Total messages successfuly send is " & passSMS & " from total " & Count, vbExclamation + vbOKOnly
     End If
 Else
 MsgBox "Please make sure you have mobile list selected and a massage text been entered with max characters of 160", vbExclamation + vbOKOnly
@@ -497,7 +531,7 @@ dctParameters.Add "delay", "0"
 
 sPostData = GetPostDataString(dctParameters)
 url = "http://api.smsbroadcast.com.au/api-adv.php?"
-MsgBox postdata(url, sPostData)
+sendSmsViaWebApi = postdata(url, sPostData)
 End Function
 
 Function postdata(url As String, data As String) As String
@@ -511,7 +545,8 @@ Debug.Print url
 WinHttpReq.SetRequestHeader "user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)"
 
 WinHttpReq.Send
-postdata = WinHttpReq.status & " ? " & WinHttpReq.statusText & " ? " & WinHttpReq.responseText
+'postdata = WinHttpReq.status & " ? " & WinHttpReq.statusText & " ? " & WinHttpReq.responseText
+postdata = WinHttpReq.statusText
 Exit Function
 errorfound:
 postdata = Err.Description
@@ -543,14 +578,11 @@ ListView.Width = Screen.Width - 5000
 
 End Sub
 
-
-
 Private Sub ListView_ColumnClick(ByVal ColumnHeader As MSComctlLib.ColumnHeader)
 
     Call SortListView(ListView, ColumnHeader)
 
 End Sub
-
 
 Private Sub ShowDetais()
     Dim sql As String
@@ -589,6 +621,7 @@ Private Sub ShowDetais()
             'Debug.Print sql
             
             Call GenerateMemberList(sql, frm)
+            MemberSelected = False
        
         Case "Youth"
             sql = "SELECT * FROM children WHERE CITY_ID = " & gCityId
@@ -604,6 +637,7 @@ Private Sub ShowDetais()
             End If
             
         Call GenerateChildrenList(sql, frm)
+        ChildSelected = False
     End Select
 
 End Sub
