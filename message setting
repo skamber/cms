@@ -1,0 +1,99 @@
+curl --header Access-Token:o.ws8k3pOJ7VNolCaWl4deFtctjjA5L0On https://api.pushbullet.com/v2/users/me
+
+{  
+   "active":true,
+   "iden":"ujvRpovDkd2",
+   "created":1558243688.0344021,
+   "modified":1558871390.623895,
+   "email":"sami.kamber2@gmail.com",
+   "email_normalized":"samikamber2@gmail.com",
+   "name":"Sami Kamber",
+   "image_url":"https://static.pushbullet.com/google-user/2d7b4f7ff3da942a2036035b9c178ddd663625102e13ec3ab6cfdbc79e31dd0f",
+   "max_upload_size":26214400
+}
+
+
+
+
+
+curl --header Access-Token:o.ws8k3pOJ7VNolCaWl4deFtctjjA5L0On https://api.pushbullet.com/v2/devices
+
+{  
+   "accounts":[  
+
+   ],
+   "blocks":[  
+
+   ],
+   "channels":[  
+
+   ],
+   "chats":[  
+
+   ],
+   "clients":[  
+
+   ],
+   "contacts":[  
+
+   ],
+   "devices":[  
+      {  
+         "active":true,
+         "iden":"ujvRpovDkd2sjB8kXoOEJo",
+         "created":1558243693.014983,
+         "modified":1558271384.570533,
+         "type":"android",
+         "kind":"android",
+         "nickname":"Samsung SM-G950F",
+         "manufacturer":"samsung",
+         "model":"SM-G950F",
+         "app_version":256,
+         "fingerprint":"{\"android_id\":\"ce68bd2c3acb4a7e\"}",
+         "push_token":"dkyhwdknwaM:APA91bGCHQPT14hnRpJoU5DAGli0osJn6QoNj5pyrrJ-_m3rivUJ1nG-mDKUuyBw-UElh7gpPP6dT4JeQtevQPKNeFYlqSElGs1sqUhf9VOtlrL1GF1e2D5fU8GVtu0_hYqKseCYOvIu",
+         "pushable":true,
+         "has_sms":true,
+         "has_mms":true,
+         "icon":"phone",
+         "remote_files":"disabled"
+      },
+      {  
+         "active":true,
+         "iden":"ujvRpovDkd2sjAvkquSH0e",
+         "created":1558244237.739577,
+         "modified":1558244237.739585,
+         "type":"chrome",
+         "kind":"chrome",
+         "nickname":"Chrome",
+         "manufacturer":"Google",
+         "model":"Chrome",
+         "app_version":344,
+         "pushable":true,
+         "icon":"browser"
+      }
+   ],
+   "grants":[  
+
+   ],
+   "pushes":[  
+
+   ],
+   "profiles":[  
+
+   ],
+   "subscriptions":[  
+
+   ],
+   "texts":[  
+
+   ]
+}
+
+
+
+
+curl --header "Access-Token:o.ws8k3pOJ7VNolCaWl4deFtctjjA5L0On" --header "Content-Type:application/json" --data-binary "{ """push""": { """type""": """messaging_extension_reply""", """package_name""": """com.pushbullet.android""", """source_user_iden""": """ujvRpovDkd2""",  """target_device_iden""": """ujvRpovDkd2sjB8kXoOEJo""", """conversation_iden""": """0434282330""", """message""": """TestSMS"""  }, """type""": """push"""}"  --request POST https://api.pushbullet.com/v2/ephemerals
+
+
+curl --header "Access-Token:o.V2oatfjWlYWyUh6SsgrmNUbPsFFNxO8F" --header "Content-Type:application/json" --data-binary "{ """push""": { """type""": """messaging_extension_reply""", """package_name""": """com.pushbullet.android""", """source_user_iden""": """ujvRpovDkd2""",  """target_device_iden""": """ujvRpovDkd2sjxi6fjTH3I""", """conversation_iden""": """0434282330""", """message""": """TestSMS"""  }, """type""": """push"""}"  --request POST https://api.pushbullet.com/v2/ephemerals
+

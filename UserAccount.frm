@@ -583,8 +583,13 @@ Private Sub chkUpdate_Click()
     do_permissioms (3)
 End Sub
 
-Private Sub cmbCity_GotFocus()
-  If cmbCity.ListIndex >= 0 Then
+
+Private Sub cmbCity_Click()
+loadChurches
+End Sub
+
+Private Sub loadChurches()
+ If cmbCity.ListIndex >= 0 Then
    Dim sCity As Integer
     sCity = cmbCity.ItemData(cmbCity.ListIndex)
     LoadChurchComboBoxWithAll (sCity)
