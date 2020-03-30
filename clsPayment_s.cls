@@ -74,7 +74,7 @@ On Error GoTo ErrorHandler
                 If objpayment.comments = "" Then
                 sql = sql & ", NULL"
                 Else
-                sql = sql & ",'" & objpayment.comments & "'"
+                sql = sql & ",""" & objpayment.comments & """"
                 End If
                 
                 If objpayment.MemberEffective = "" Then
@@ -123,7 +123,7 @@ On Error GoTo ErrorHandler
                 & " ,user_name =" & "'" & objpayment.Accountname & "'"
                 
     If objpayment.comments <> "" Then
-       sql = sql & ", comments =" & "'" & objpayment.comments & "'"
+       sql = sql & ", comments =" & """" & objpayment.comments & """"
      Else
        sql = sql & ",comments = NULL "
     End If

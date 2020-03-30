@@ -73,7 +73,7 @@ On Error GoTo ErrorHandler
                 If objCollection.comments = "" Then
                 sql = sql & ", NULL"
                 Else
-                sql = sql & ",'" & objCollection.comments & "'"
+                sql = sql & ",""" & objCollection.comments & """"
                 End If
                 
                 If objCollection.Dateofcollection = "" Then
@@ -103,7 +103,7 @@ On Error GoTo ErrorHandler
                 & " ,church_id =" & objCollection.ChurchId _
                 & " ,Amount =" & objCollection.Amount _
                 & " ,User_Name =" & "'" & objCollection.UserName & "'" _
-                & " ,comments =" & "'" & objCollection.comments & "'"
+                & " ,comments =" & """" & objCollection.comments & """"
                
                 
     If objCollection.Dateofcollection <> "" Then

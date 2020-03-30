@@ -69,7 +69,7 @@ On Error GoTo ErrorHandler
                 & ",'" & objMember.PostCode & "'" _
                 & ",'" & objMember.Phone & "'" _
                 & ",'" & objMember.Mobile & "'" _
-                & ",'" & objMember.comments & "'" _
+                & ",""" & objMember.comments & """" _
                 & ",'" & objMember.STATUS & "'" _
                 & ",'" & objMember.Accountname & "'" _
                 & ",'" & objMember.Email & "'"
@@ -120,7 +120,7 @@ On Error GoTo ErrorHandler
                 & " ,PostCode =" & "'" & objMember.PostCode & "'" _
                 & " ,Phone =" & "'" & objMember.Phone & "'" _
                 & " ,Mobile =" & "'" & objMember.Mobile & "'" _
-                & " ,comments =" & "'" & objMember.comments & "'" _
+                & " ,comments =" & """" & objMember.comments & """" _
                 & " ,STATUS =" & "'" & objMember.STATUS & "'" _
                 & " ,USER_NAME =" & "'" & objMember.Accountname & "'" _
                 & " ,EMAIL =" & "'" & objMember.Email & "'"
