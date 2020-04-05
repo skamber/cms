@@ -597,7 +597,7 @@ Private Sub ShowDetais()
     Select Case cmbTypeSearch.Text
         Case "Member"
             sql = "SELECT * FROM member WHERE CITY_ID = " & gCityId
-            sql = sql & " AND  Status ='ACTIVE' AND Mobile is not null"
+            sql = sql & " AND  Status ='ACTIVE' AND Mobile is not null  AND Mobile<> ''"
             
             If dteExpairyDate.Text <> "" Then
               strMemberExpiartDate = "Date('" & Format(dteExpairyDate.FormattedText, "yyyy,mm,dd") & "')"
