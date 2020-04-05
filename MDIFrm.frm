@@ -41,6 +41,7 @@ Begin VB.MDIForm MDIFrm
          Strikethrough   =   0   'False
       EndProperty
       PictureBackground=   "MDIFrm.frx":030A
+      TagVariant      =   ""
       OLEDragMode     =   1
       OLEDropMode     =   2
       GroupCount      =   7
@@ -473,7 +474,7 @@ Select Case ItemClicked.Key
                        gchildId = frmChildSearch.ListView.SelectedItem
                        DisplayChild
                      End If
-                     clearAllSelection
+                     'clearAllSelection
     Case Child_Search: frmChildSearch.Show: DoEvents: frmChildSearch.ZOrder 0
     Case Send_Sms: frmSms.Show: DoEvents: frmSms.ZOrder 0
     Case Payment_information:
