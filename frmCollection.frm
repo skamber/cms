@@ -1,5 +1,6 @@
 VERSION 5.00
-Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "msmask32.ocx"
+Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "MSMASK32.OCX"
+Object = "{00025600-0000-0000-C000-000000000046}#5.2#0"; "crystl32.ocx"
 Begin VB.Form frmCollection 
    ClientHeight    =   8865
    ClientLeft      =   60
@@ -12,6 +13,15 @@ Begin VB.Form frmCollection
    ScaleHeight     =   8865
    ScaleWidth      =   12255
    WindowState     =   2  'Maximized
+   Begin Crystal.CrystalReport Report 
+      Left            =   7320
+      Top             =   4560
+      _ExtentX        =   741
+      _ExtentY        =   741
+      _Version        =   348160
+      WindowState     =   2
+      PrintFileLinesPerPage=   60
+   End
    Begin VB.TextBox txtUserName 
       Enabled         =   0   'False
       BeginProperty Font 

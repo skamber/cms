@@ -160,7 +160,6 @@ On Error GoTo ErrorHandler
     Dim strStartDate As String
     Dim strEndDate As String
     Dim intCnt As Integer
-    Dim intNoOfTables As Integer
     Dim NewDate As String
     On Error GoTo ErrorHandler
 
@@ -207,6 +206,7 @@ On Error GoTo ErrorHandler
         .GroupSelectionFormula = ""
         .DiscardSavedData = True
     End With
+    
     Case 9, 10: 'MemberShip Invoice
     With frmPayment.Report
         frmPayment.Report.WindowWidth = Screen.Width
@@ -219,6 +219,20 @@ On Error GoTo ErrorHandler
         .GroupSelectionFormula = ""
         .DiscardSavedData = True
     End With
+    
+    Case 11: 'Collection receipt
+    With frmCollection.Report
+        frmCollection.Report.WindowWidth = Screen.Width
+        frmCollection.Report.WindowHeight = Screen.Height
+        For intCnt = 0 To 30
+            .Formulas(intCnt) = ""
+            .DataFiles(intCnt) = ""
+        Next
+       .SelectionFormula = ""
+        .GroupSelectionFormula = ""
+        .DiscardSavedData = True
+    End With
+    
     Case 0, 1, 2, 3, 4: 'Reporting
     With frmReport.Report
         frmReport.Report.WindowWidth = Screen.Width
@@ -236,7 +250,7 @@ On Error GoTo ErrorHandler
     
     End Select
     Select Case lngReportId
-        Case 5: 'sashflowview
+        Case 5: 'cashflowview
                 With frmCashFlowView
                 strReportId = "CashIn and Cashout Repoert.rpt"
                 strStartDate = "Date(" & Format(.dteFromDate.FormattedText, "yyyy,mm,dd") & ")"
@@ -263,46 +277,44 @@ On Error GoTo ErrorHandler
                 End If
                 
                 End With
-                intNoOfTables = 1
-            
             
         Case 6: 'Receipt
                 
                 strReportId = "InvoiceReceipt.rpt"
-                strReportSQL = "{Receipt.ID} = " & frmReceipt.txtReceiptId.Text
-            
-            intNoOfTables = 2
+                strReportSQL = "{receipt.ID} = " & frmReceipt.txtReceiptId.Text
             
         Case 7: 'Invoice
                 
                 strReportId = "Invoice.rpt"
                 strReportSQL = "{invoice.Invoice_no} = '" & frmInvoice.txtInvoiceNo.Text & "'"
-            
-            intNoOfTables = 1
+
         Case 9: 'MemberShip Invoice
                 
                 strReportId = "MemberShip.rpt"
-                strReportSQL = "{Payment.Receipt_No} = " & frmPayment.txtReceiptNo.Text
-            
-            intNoOfTables = 3
+                strReportSQL = "{payment.Receipt_No} = " & frmPayment.txtReceiptNo.Text
+
         Case 10: 'Payment
             
                 strReportId = "PaymentReceipt.rpt"
-                strReportSQL = "{Payment.Receipt_No} = " & frmPayment.txtReceiptNo.Text
-        intNoOfTables = 3
+                strReportSQL = "{payment.Receipt_No} = " & frmPayment.txtReceiptNo.Text
+        
+        Case 11: 'Collection
+            
+                strReportId = "CollectionReceipt.rpt"
+                strReportSQL = "{collection.COL_ID} = " & frmCollection.txtCollectionNo.Text
         
         Case 0:
                 strReportId = "MemberReport.rpt"
                 With frmReport
                 If .cboReportCriteria1.Text <> "All" Then
-                   strReportSQL = "{Member.PostCode} = '" & .cboReportCriteria1.Text & "'"
+                   strReportSQL = "{member.PostCode} = '" & .cboReportCriteria1.Text & "'"
                 End If
                 
                 If .cboReportCriteria2.Text <> "All" Then
                    If strReportSQL <> "" Then
-                     strReportSQL = strReportSQL & "AND" & "{Member.status} = '" & .cboReportCriteria2.Text & "'"
+                     strReportSQL = strReportSQL & "AND" & "{member.status} = '" & .cboReportCriteria2.Text & "'"
                    Else
-                    strReportSQL = "{Member.status} = '" & .cboReportCriteria2.Text & "'"
+                    strReportSQL = "{member.status} = '" & .cboReportCriteria2.Text & "'"
                    End If
                 End If
                 
@@ -324,69 +336,84 @@ On Error GoTo ErrorHandler
                 If .dteStartDate.Text = "" Then strStartDate = "Date(1970,01,01)"
                 If .dteEndDate.Text = "" Then strEndDate = "Date(2070,01,01)"
                 If .dteStartDate.Text <> "" And .dteEndDate.Text <> "" Then
-                'used to display "for the period..." on report
-                .Report.Formulas(0) = "STARTDATE= " & strStartDate
-                .Report.Formulas(1) = "ENDDATE= " & strEndDate
-                  If strReportSQL <> "" Then
-                     strReportSQL = strReportSQL & "AND" & "{Member.Membership_Expiary} >= " & strStartDate _
-                     & " AND {Member.Membership_Expiary} <= " & strEndDate
-                  Else
-                    strReportSQL = "{Member.Membership_Expiary} >= " & strStartDate _
-                    & " AND {Member.Membership_Expiary} <= " & strEndDate
-                  End If
+                    'used to display "for the period..." on report
+                    .Report.Formulas(0) = "STARTDATE= " & strStartDate
+                    .Report.Formulas(1) = "ENDDATE= " & strEndDate
+                      If strReportSQL <> "" Then
+                         strReportSQL = strReportSQL & "AND" & "{member.Membership_Expiary} >= " & strStartDate _
+                         & " AND {member.Membership_Expiary} <= " & strEndDate
+                      Else
+                        strReportSQL = "{member.Membership_Expiary} >= " & strStartDate _
+                        & " AND {member.Membership_Expiary} <= " & strEndDate
+                      End If
                 End If
+                If strReportSQL <> "" Then
+                  strReportSQL = strReportSQL & " AND {member.CITY_ID} =" & gCityId
+                Else
+                  strReportSQL = "{member.CITY_ID} =" & gCityId
+                End If
+                
                 End With
-                intNoOfTables = 1
+
         Case 1:
                strReportId = "PaymentReport.rpt"
                 With frmReport
                 If .cboReportCriteria1.Text <> "All" Then
-                   strReportSQL = "{AllIncome.User_Name} = '" & .cboReportCriteria1.Text & "'"
+                   strReportSQL = "{allincome.User_Name} = '" & .cboReportCriteria1.Text & "'"
                 End If
 
                 If .cboReportCriteria2.Text <> "All" Then
                    If strReportSQL <> "" Then
-                     strReportSQL = strReportSQL & " AND " & "{AllIncome.Payment} = '" & .cboReportCriteria2.Text & "'"
+                     strReportSQL = strReportSQL & " AND " & "{allincome.Payment} = '" & .cboReportCriteria2.Text & "'"
                    Else
-                    strReportSQL = "{AllIncome.Payment} = '" & .cboReportCriteria2.Text & "'"
+                    strReportSQL = "{allincome.Payment} = '" & .cboReportCriteria2.Text & "'"
                    End If
                 End If
                 
                 If .cboReportCriteria3.Text <> "All" Then
                    If strReportSQL <> "" Then
-                     strReportSQL = strReportSQL & " AND " & "{AllIncome.type} = '" & .cboReportCriteria3.Text & "'"
+                     strReportSQL = strReportSQL & " AND " & "{allincome.type} = '" & .cboReportCriteria3.Text & "'"
                    Else
-                    strReportSQL = "{AllIncome.type} = '" & .cboReportCriteria3.Text & "'"
+                    strReportSQL = "{allincome.type} = '" & .cboReportCriteria3.Text & "'"
                    End If
                 End If
                 
                 If .txtMemberRno.Text <> "" Then
                     If strReportSQL <> "" Then
-                     strReportSQL = strReportSQL & " AND " & "{AllIncome.Mno} = " & .txtMemberRno.Text
+                     strReportSQL = strReportSQL & " AND " & "{allincome.Mno} = " & .txtMemberRno.Text
                    Else
-                    strReportSQL = "{AllIncome.Mno} = " & .txtMemberRno.Text
+                    strReportSQL = "{allincome.Mno} = " & .txtMemberRno.Text
                    End If
                  End If
                 
 
                 strStartDate = "Date(" & Format(.dteStartDate.FormattedText, "yyyy,mm,dd") & ")"
                 strEndDate = "Date(" & Format(.dteEndDate.FormattedText, "yyyy,mm,dd") & ")"
+                                
                 If .dteStartDate.Text = "" Then strStartDate = "Date(1970,01,01)"
                 If .dteEndDate.Text = "" Then strEndDate = "Date(2070,01,01)"
                 'used to display "for the period..." on report
                 .Report.Formulas(0) = "STARTDATE= " & strStartDate
                 .Report.Formulas(1) = "ENDDATE= " & strEndDate
                 If strReportSQL <> "" Then
-                strReportSQL = strReportSQL & "AND" & "{AllIncome.Date_Of_Payment} >= " & strStartDate _
-                & " AND {AllIncome.Date_Of_Payment} <= " & strEndDate
+                strReportSQL = strReportSQL & " AND " & "{allincome.Date_Of_Payment} >= " & strStartDate _
+                & " AND {allincome.Date_Of_Payment} <= " & strEndDate
                 Else
-                strReportSQL = "{AllIncome.Date_Of_Payment} >= " & strStartDate _
-                & " AND {AllIncome.Date_Of_Payment} <= " & strEndDate
+                strReportSQL = "{allincome.Date_Of_Payment} >= " & strStartDate _
+                & " AND {allincome.Date_Of_Payment} <= " & strEndDate
                 End If
-
+                
+                strReportSQL = strReportSQL & " AND " & "{church.cityId} =" & gCityId
+                
+                If gChurchRestriction <> 0 Then
+                  strReportSQL = strReportSQL & " AND " & "{church.Id} =" & gChurchRestriction
+                End If
+                                
+                'strReportSQL = "{Allincome.Date_Of_Payment} In Date(" & Format(.dteStartDate.FormattedText, "yyyy,mm,dd") & ") To Date(" & _
+                'Format(.dteEndDate.FormattedText, "yyyy,mm,dd") & ") "
                 
                 End With
-                intNoOfTables = 1
+
         Case 2:
                 strReportId = "Children Over 18.rpt"
                 With frmReport
@@ -394,23 +421,28 @@ On Error GoTo ErrorHandler
 
                 strStartDate = "Date(" & Format(NewDate, "yyyy,mm,dd") & ")"
                 'used to display "for the period..." on report
-                strReportSQL = "{Children.Birth_Date} <= " & strStartDate
+                strReportSQL = "{children.Birth_Date} <= " & strStartDate
                 If .cboReportCriteria2.Text <> "All" Then
                     If .cboReportCriteria2.Text = "Member" Then
-                       strReportSQL = strReportSQL & " AND {Children.MEMBER} ='Y'"
+                       strReportSQL = strReportSQL & " AND {children.MEMBER} ='Y'"
                     Else
-                       strReportSQL = strReportSQL & " AND {Children.MEMBER} ='N'"
+                       strReportSQL = strReportSQL & " AND {children.MEMBER} ='N'"
                     End If
                 End If
+                strReportSQL = strReportSQL & " AND {member.CITY_ID} =" & gCityId
                 End With
-                intNoOfTables = 1
+ 
         Case 3:
                strReportId = "InvoiceReport.rpt"
                 strStartDate = "Date(" & Format(Date, "yyyy,mm,dd") & ")"
                 'used to display "for the period..." on report
                 strReportSQL = "{invoice.over_due_date} <= " & strStartDate _
-                & " AND {Invoice.Balance} <> " & 0
-                intNoOfTables = 1
+                & " AND {invoice.Balance} <> " & 0 & " AND " & "{church.cityId} =" & gCityId
+                
+                If gChurchRestriction <> 0 Then
+                  strReportSQL = strReportSQL & " AND " & "{church.Id} =" & gChurchRestriction
+                End If
+   
         Case 4:
                strReportId = "ReceiptReport.rpt"
                With frmReport
@@ -422,17 +454,20 @@ On Error GoTo ErrorHandler
                 .Report.Formulas(0) = "STARTDATE= " & strStartDate
                 .Report.Formulas(1) = "ENDDATE= " & strEndDate
                 If strReportSQL <> "" Then
-                strReportSQL = strReportSQL & " AND " & "{Receipt.date_of_Receipt} >= " & strStartDate _
-                & " AND {Receipt.date_of_Receipt} <= " & strEndDate
+                strReportSQL = strReportSQL & " AND " & "{receipt.date_of_Receipt} >= " & strStartDate _
+                & " AND {receipt.date_of_Receipt} <= " & strEndDate
                 Else
-                strReportSQL = "{Receipt.date_of_Receipt} >= " & strStartDate _
-                & " AND {Receipt.date_of_Receipt} <= " & strEndDate
+                strReportSQL = "{receipt.date_of_Receipt} >= " & strStartDate _
+                & " AND {receipt.date_of_Receipt} <= " & strEndDate
                 End If
+                strReportSQL = strReportSQL & " AND " & "{church.cityId} =" & gCityId
+                
+                If gChurchRestriction <> 0 Then
+                  strReportSQL = strReportSQL & " AND " & "{church.Id} =" & gChurchRestriction
+                End If
+              
                 End With
-                intNoOfTables = 2
-                
-                
-                
+                            
     End Select
     Select Case lngReportId
     Case 5: 'CashflowView
@@ -445,14 +480,7 @@ On Error GoTo ErrorHandler
         ElseIf strDestination = "Print" Then
             .Report.Destination = crptToPrinter
         End If
-        
-            For intCnt = 0 To (intNoOfTables - 1)
-                .Report.DataFiles(intCnt) = gLocalDBPath
-            Next
-        'Temporary setup for reporting
-        'Note: DSN must be setup and report attached to exact version.
-        'Further investigation warranted into OLE DB interface ....
-        
+                
         .Report.Connect = objReportConnection
         .Report.SubreportToChange = .Report.GetNthSubreportName(0)
         .Report.SelectionFormula = strReportSQLSubReport
@@ -474,19 +502,12 @@ On Error GoTo ErrorHandler
             .Report.Destination = crptToPrinter
         End If
         
-            For intCnt = 0 To (intNoOfTables - 1)
-                .Report.DataFiles(intCnt) = gLocalDBPath
-            Next
-        'Temporary setup for reporting
-        'Note: DSN must be setup and report attached to exact version.
-        'Further investigation warranted into OLE DB interface ....
-        
+       
         .Report.Connect = objReportConnection
         .Report.Action = 1
     End With
     
     Case 7: 'Invoice
-    
     With frmInvoice
         .Report.ReportFileName = App.Path & "\Reports\" & strReportId
         .Report.SelectionFormula = strReportSQL
@@ -497,13 +518,7 @@ On Error GoTo ErrorHandler
             .Report.Destination = crptToPrinter
         End If
         
-            For intCnt = 0 To (intNoOfTables - 1)
-                .Report.DataFiles(intCnt) = gLocalDBPath
-            Next
-        'Temporary setup for reporting
-        'Note: DSN must be setup and report attached to exact version.
-        'Further investigation warranted into OLE DB interface ....
-        
+
         .Report.Connect = objReportConnection
         .Report.Action = 1
         
@@ -520,21 +535,13 @@ On Error GoTo ErrorHandler
             .Report.Destination = crptToPrinter
         End If
         
-            For intCnt = 0 To (intNoOfTables - 1)
-                .Report.DataFiles(intCnt) = gLocalDBPath
-            Next
-        'Temporary setup for reporting
-        'Note: DSN must be setup and report attached to exact version.
-        'Further investigation warranted into OLE DB interface ....
         
         .Report.Connect = objReportConnection
         .Report.Action = 1
-                
-        
     End With
     
-    Case 0, 1, 2, 3, 4:
-      With frmReport
+    Case 11: 'Collection
+    With frmCollection
         .Report.ReportFileName = App.Path & "\Reports\" & strReportId
         .Report.SelectionFormula = strReportSQL
         
@@ -543,13 +550,21 @@ On Error GoTo ErrorHandler
         ElseIf strDestination = "Print" Then
             .Report.Destination = crptToPrinter
         End If
+        .Report.Connect = objReportConnection
+        .Report.Action = 1
+    End With
+    
+    Case 0, 1, 2, 3, 4:
+      With frmReport
+        .Report.ReportFileName = App.Path & "\Reports\" & strReportId
+        .Report.SelectionFormula = strReportSQL
+        Debug.Print (strReportSQL)
+        If strDestination = "View" Then
+            .Report.Destination = crptToWindow
+        ElseIf strDestination = "Print" Then
+            .Report.Destination = crptToPrinter
+        End If
         
-            For intCnt = 0 To (intNoOfTables - 1)
-                .Report.DataFiles(intCnt) = gLocalDBPath
-            Next
-        'Temporary setup for reporting
-        'Note: DSN must be setup and report attached to exact version.
-        'Further investigation warranted into OLE DB interface ....
         
         .Report.Connect = objReportConnection
         .Report.Action = 1

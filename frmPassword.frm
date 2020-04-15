@@ -235,12 +235,14 @@ Private Sub cmdOK_Click()
     Dim strNewPassword As String
     Dim strConfirmPassword As String
     Dim sql As String
+    Dim encryptedpass As String
+
     Dim objRecordset As Recordset
     
 
-    strOldPassword = UCase(Trim(txtOldPassword.Text))
-    strNewPassword = UCase(Trim(txtNewPassword.Text))
-    strConfirmPassword = UCase(Trim(txtConfirmPassword.Text))
+    strOldPassword = Trim(txtOldPassword.Text)
+    strNewPassword = Trim(txtNewPassword.Text)
+    strConfirmPassword = Trim(txtConfirmPassword.Text)
     
     If (strOldPassword = "") Or (strNewPassword = "") Or (strConfirmPassword = "") Then
         MsgBox "Required field missing - All Password details must be entered.", vbExclamation
@@ -248,7 +250,7 @@ Private Sub cmdOK_Click()
         Exit Sub
     End If
     
-        sql = "SELECT * FROM Users WHERE Id = " & UserId
+        sql = "SELECT * FROM users WHERE Id = " & UserId
         
         Set objRecordset = New ADODB.Recordset
             objRecordset.Open sql, objConnection, adOpenForwardOnly, adLockOptimistic
@@ -259,7 +261,7 @@ Private Sub cmdOK_Click()
         End If
          
         If objRecordset!Logon_Password = strOldPassword Then
-         ElseIf DecryptPassword(objRecordset!Logon_Password) <> strOldPassword Then
+         ElseIf cmdDecrypt(objRecordset!Logon_Password) <> strOldPassword Then
             MsgBox "Password details entered are invalid.  Password update unsuccessful.", vbInformation
             txtOldPassword.SetFocus
             Exit Sub
@@ -284,12 +286,13 @@ Private Sub cmdOK_Click()
             txtNewPassword.SetFocus
             Exit Sub
        End If
-       
+       encryptedpass = cmdEncrypt(strNewPassword)
+       'encryptedpass = Replace(encryptedpass, "'", "''")
         objConnection.BeginTrans
                 
-                sql = "UPDATE Users SET" _
-                            & " Logon_Password =" & "'" & EncryptPassword(strNewPassword) & "'" _
-                            & " ,Password_Last_Update =" & "'" & Format(Date, "dd-mmm-yyyy") & "'"
+                sql = "UPDATE users SET" _
+                            & " Logon_Password =" & "'" & encryptedpass & "'" _
+                            & " ,Password_Last_Update =" & "'" & Format(Date, "yyyy-mm-dd") & "'"
                            
                             
                             'Oracle and Access use different keyword for the sysdate

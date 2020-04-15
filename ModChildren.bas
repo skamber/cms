@@ -88,10 +88,10 @@ On Error GoTo ErrorHandler
             objChild.surname = .txtSurname.Text
             objChild.Email = .txtEmail.Text
             objChild.Memo = .txtMemo.Text
-            
-            
+            objChild.cityId = gCityId
             
             If .dteBirthDate.Text <> "" Then objChild.BirthDate = .dteBirthDate.FormattedText
+            If .dteMemberMobile.Text <> "" Then objChild.Mobile = .dteMemberMobile.FormattedText
     End With
     
     
@@ -145,33 +145,26 @@ ErrorHandler:
 
 End Function
 
-Public Sub GenerateChildrenList(memberNumber As Long)
+Public Sub GenerateChildrenList(sql As String, Form As Object)
  On Error GoTo ErrorHandler
  
-    ' Dim objFollowup_s As PACMSFollowUP.clsFollowup_s
      Dim rslocal As ADODB.Recordset
      Dim strId  As String
      Dim itmx As ListItem
-     Dim sql As String
-    ' Dim lngTotalProspect As Long
-    ' Dim lngTotalPlanning As Long
-    ' Dim lngTotalCoaching As Long
- 
- 
+     
      Screen.MousePointer = vbHourglass
  
-     With frmChildSearch
-             .ListChildrenView.ListItems.Clear
+     With Form
+             .ListView.ListItems.Clear
      
          '==============================================================================
         
             Set rslocal = New ADODB.Recordset
-            sql = "SELECT * FROM CHILDREN WHERE MNo =" & memberNumber
             rslocal.Open sql, objConnection, adOpenForwardOnly, adLockReadOnly
              If Not rslocal.EOF Then
                  Do While Not rslocal.EOF
                      
-                     Set itmx = .ListChildrenView.ListItems.Add(, , CStr(rslocal!Id))
+                     Set itmx = .ListView.ListItems.Add(, , CStr(rslocal!id))
                                     
                                      If Not IsNull(rslocal!childno) Then itmx.SubItems(1) = CStr(rslocal!MNo)
                                      If Not IsNull(rslocal!first_name) Then itmx.SubItems(2) = CStr(rslocal!first_name)
@@ -179,6 +172,8 @@ Public Sub GenerateChildrenList(memberNumber As Long)
                                      If Not IsNull(rslocal!Genda) Then itmx.SubItems(4) = CStr(rslocal!Genda)
                                      If Not IsNull(rslocal!birth_date) Then itmx.SubItems(5) = CStr(rslocal!birth_date)
                                      If Not IsNull(rslocal!MEMBER) Then itmx.SubItems(6) = CStr(rslocal!MEMBER)
+                                     If Not IsNull(rslocal!Mobile) Then itmx.SubItems(7) = CStr(rslocal!Mobile)
+                                     If Not IsNull(rslocal!Email) Then itmx.SubItems(8) = CStr(rslocal!Email)
                      Set itmx = Nothing
                      rslocal.MoveNext
                      
@@ -224,15 +219,16 @@ Public Function DisplayChild()
 
     With frmChildren
         
-        .txtChildMno.Text = ConvertNull(rslocal!Id)
+        .txtChildMno.Text = ConvertNull(rslocal!id)
         .txtGivenName.Text = ConvertNull(rslocal!first_name)
         .txtSurname.Text = ConvertNull(rslocal!surname)
         .cmbGenda.Text = ConvertNull(rslocal!Genda)
         .cmbMemberStatus.Text = ConvertNull(rslocal!MEMBER)
         .txtMemberMno.Text = ConvertNull(rslocal!MNo)
         .txtEmail.Text = ConvertNull(rslocal!Email)
+        .dteMemberMobile.Text = ConvertNull(rslocal!Mobile)
         .dteBirthDate.Text = Format(rslocal!birth_date, DATE_FORMAT)
-        .txtMemo = ConvertNull(rslocal!Comments)
+        .txtMemo = "" & rslocal!Comments
         GetMemberName (.txtMemberMno.Text)
         
         
@@ -242,38 +238,35 @@ Public Function DisplayChild()
 Exit Function
 
 ErrorHandler:
-
-    
-    
     Call objError.ErrorRoutine(Err.Number, Err.Description, objConnection, "modchildren", "DisplayChild", True)
 
 End Function
 
 
 
-Public Sub GetMemberName(MemberNo As Long)
+Public Function GetMemberName(MemberNo As Long)
 On Error GoTo ErrorHandler
  Dim objMember_s As CMSMember.clsMember_s
     
     Dim rslocal As ADODB.Recordset
     On Error GoTo ErrorHandler
-    
+    GetMemberName = False
     frmChildren.txtMemberName = ""
     
     'Retrieve Member record and display on form
     Set objMember_s = New CMSMember.clsMember_s
     Set objMember_s.DatabaseConnection = objConnection
-    Set rslocal = objMember_s.getByMemberId(MemberNo)
+    Set rslocal = objMember_s.getByMemberId(MemberNo, gCityId)
     
 
     If rslocal Is Nothing Then
           MsgBox "Invalid access - No such Member.", vbExclamation
-                Exit Sub
-        Exit Sub
+                Exit Function
+        Exit Function
     End If
 
     Screen.MousePointer = vbHourglass
-
+    GetMemberName = True
     With frmChildren
         
         .txtMemberName.Text = ConvertNull(rslocal!Given_name) & " " & ConvertNull(rslocal!surname)
@@ -281,12 +274,12 @@ On Error GoTo ErrorHandler
     End With
    Set objMember_s = Nothing
    Screen.MousePointer = vbDefault
-Exit Sub
+Exit Function
 
 
-Exit Sub
+Exit Function
 ErrorHandler:
-    Call objError.ErrorRoutine(Err.Number, Err.Description, objConnection, "modChildren", "GenerateMemberInfo", True)
+    Call objError.ErrorRoutine(Err.Number, Err.Description, objConnection, "modChildren", "GetMemberName", True)
 
-End Sub
+End Function
 

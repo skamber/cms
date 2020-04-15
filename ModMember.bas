@@ -173,16 +173,20 @@ On Error GoTo ErrorHandler
             objMember.Initial = .txtStatus.Text
             objMember.address1 = .txtAddress1.Text
             objMember.address2 = .txtAddress2.Text
-            objMember.Comments = .txtmemo.Text
-            
+            objMember.Comments = .txtMemo.Text
+            objMember.Accountname = gUserFullName
             'objMember.Phone = .txtMemberPhone.Text
             objMember.postCode = .txtPostcode.Text
             objMember.SpouseName = .txtSpouse.Text
             objMember.State = .txtState.Text
-            objMember.Status = .cmbStatus.Text
+            objMember.status = .cmbStatus.Text
             objMember.Email = .txtEmail.Text
-                        
+            objMember.cityId = gCityId
+            
+              
+            If .dteDateOfBirth.Text <> "" Then objMember.DateOfBirth = .dteDateOfBirth.FormattedText
             If .dteMemberPhone.Text <> "" Then objMember.Phone = .dteMemberPhone.FormattedText
+            If .dteMemberMobile.Text <> "" Then objMember.Mobile = .dteMemberMobile.FormattedText
             If .dteExpiryDate.Text <> "" Then objMember.MembershipExpiary = .dteExpiryDate.FormattedText
             If .dteCreateDate.Text <> "" Then objMember.Created_date = .dteCreateDate.FormattedText
 
@@ -195,23 +199,18 @@ ErrorHandler:
 
 End Function
 
-Public Sub GenerateMemberList(sql As String)
+Public Sub GenerateMemberList(sql As String, Form As Object)
  On Error GoTo ErrorHandler
- 
-    ' Dim objFollowup_s As PACMSFollowUP.clsFollowup_s
+
      Dim rslocal As ADODB.Recordset
      Dim strId  As String
      Dim itmx As ListItem
      
-    ' Dim lngTotalProspect As Long
-    ' Dim lngTotalPlanning As Long
-    ' Dim lngTotalCoaching As Long
- 
  
      Screen.MousePointer = vbHourglass
- 
-     With frmMemberSearch
-             .ListMemberView.ListItems.Clear
+    
+     With Form
+             .ListView.ListItems.Clear
      
          '==============================================================================
          'get Prospect list
@@ -220,7 +219,7 @@ Public Sub GenerateMemberList(sql As String)
              If Not rslocal.EOF Then
                  Do While Not rslocal.EOF
                      strId = CStr(rslocal!MNo)
-                     Set itmx = .ListMemberView.ListItems.Add()
+                     Set itmx = .ListView.ListItems.Add()
                                      itmx.Key = "#" & strId
                                      itmx.Text = CStr(rslocal!MNo)
                                      If Not IsNull(rslocal!Given_name) Then itmx.SubItems(1) = CStr(rslocal!Given_name)
@@ -228,8 +227,10 @@ Public Sub GenerateMemberList(sql As String)
                                      If Not IsNull(rslocal!address1) Then itmx.SubItems(3) = CStr(rslocal!address1)
                                      If Not IsNull(rslocal!address2) Then itmx.SubItems(4) = CStr(rslocal!address2)
                                      If Not IsNull(rslocal!Membership_Expiary) Then itmx.SubItems(5) = CStr(rslocal!Membership_Expiary)
-                                     If Not IsNull(rslocal!address2) Then itmx.SubItems(6) = CStr(rslocal!Status)
+                                     If Not IsNull(rslocal!status) Then itmx.SubItems(6) = CStr(rslocal!status)
                                      If Not IsNull(rslocal!Phone) Then itmx.SubItems(7) = CStr(rslocal!Phone)
+                                     If Not IsNull(rslocal!Mobile) Then itmx.SubItems(8) = CStr(rslocal!Mobile)
+                                     If Not IsNull(rslocal!Email) Then itmx.SubItems(9) = CStr(rslocal!Email)
                      Set itmx = Nothing
                      rslocal.MoveNext
                      
@@ -265,9 +266,10 @@ Public Function DisplayMember()
     'Retrieve Prospect record and display on form
     Set objMember_s = New CMSMember.clsMember_s
     Set objMember_s.DatabaseConnection = objConnection
-    Set rslocal = objMember_s.getByMemberId(gmemberId)
+    Set rslocal = objMember_s.getByMemberId(gmemberId, gCityId)
 
     If rslocal Is Nothing Then
+        MsgBox "No records found for This Member.", vbExclamation
         Exit Function
     End If
 
@@ -279,7 +281,8 @@ Public Function DisplayMember()
         .txtAddress2.Text = ConvertNull(rslocal!address2)
         .txtGivenName.Text = ConvertNull(rslocal!Given_name)
         .dteMemberPhone.Text = ConvertNull(rslocal!Phone)
-        .txtmemo.Text = ConvertNull(rslocal!Comments)
+        .dteMemberMobile.Text = ConvertNull(rslocal!Mobile)
+        .txtMemo.Text = "" & rslocal!Comments
         .txtMno.Text = ConvertNull(rslocal!MNo)
         .txtPostcode.Text = ConvertNull(rslocal!postCode)
         .txtSpouse.Text = ConvertNull(rslocal!spouse_name)
@@ -287,7 +290,8 @@ Public Function DisplayMember()
         .txtStatus.Text = ConvertNull(rslocal!Mr)
         .txtSurname.Text = ConvertNull(rslocal!surname)
         .dteExpiryDate.Text = Format(rslocal!Membership_Expiary, DATE_FORMAT)
-        .cmbStatus.Text = ConvertNull(rslocal!Status)
+        .dteDateOfBirth.Text = Format(rslocal!DATE_OF_BIRTH, DATE_FORMAT)
+        .cmbStatus.Text = ConvertNull(rslocal!status)
         .dteCreateDate.Text = Format(rslocal!joining_date, DATE_FORMAT)
         .txtEmail.Text = ConvertNull(rslocal!Email)
         
@@ -356,3 +360,5 @@ With frmMember
 End With
 
 End Function
+
+

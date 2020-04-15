@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomctl.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "mscomctl.OCX"
 Begin VB.Form frmChildSearch 
    ClientHeight    =   7305
    ClientLeft      =   60
@@ -79,7 +79,7 @@ Begin VB.Form frmChildSearch
          Width           =   3015
       End
    End
-   Begin MSComctlLib.ListView ListChildrenView 
+   Begin MSComctlLib.ListView ListView 
       Height          =   2655
       Left            =   120
       TabIndex        =   3
@@ -135,28 +135,46 @@ gRecordType = Child_Search
 End Sub
 
 Private Sub Form_Load()
-ListChildrenView.ListItems.Clear
-ListChildrenView.Width = Screen.Width - 5000
-ListChildrenView.Height = Screen.Height - 5000
+ListView.ListItems.Clear
+ListView.Width = Screen.Width - 5000
+ListView.Height = Screen.Height - 5000
 
-ListChildrenView.ColumnHeaders.Add , , "Child Number", ListChildrenView.Width / 7
-ListChildrenView.ColumnHeaders.Add , , "Member Number", ListChildrenView.Width / 7
-ListChildrenView.ColumnHeaders.Add , , "First Name", ListChildrenView.Width / 5
-ListChildrenView.ColumnHeaders.Add , , "Last Name", ListChildrenView.Width / 5
-ListChildrenView.ColumnHeaders.Add , , "Genda", ListChildrenView.Width / 14
-ListChildrenView.ColumnHeaders.Add , , "Birth Data", ListChildrenView.Width / 6
-ListChildrenView.ColumnHeaders.Add , , "Status", ListChildrenView.Width / 9
-ListChildrenView.View = lvwReport
+ListView.ColumnHeaders.Add , , "Child Number", ListView.Width / 7
+ListView.ColumnHeaders.Add , , "Member Number", ListView.Width / 7
+ListView.ColumnHeaders.Add , , "First Name", ListView.Width / 5
+ListView.ColumnHeaders.Add , , "Last Name", ListView.Width / 5
+ListView.ColumnHeaders.Add , , "Genda", ListView.Width / 14
+ListView.ColumnHeaders.Add , , "Birth Data", ListView.Width / 6
+ListView.ColumnHeaders.Add , , "Status", ListView.Width / 9
+ListView.ColumnHeaders.Add , , "Mobile", ListView.Width / 7
+ListView.ColumnHeaders.Add , , "Email", ListView.Width / 5
+ListView.View = lvwReport
 End Sub
 
 
 
 Private Sub txtmemberNo_KeyPress(KeyAscii As Integer)
-If KeyAscii = 13 And txtmemberNo.Text <> "" Then GenerateChildrenList (txtmemberNo.Text)
+
+If KeyAscii = 13 And txtmemberNo.Text <> "" Then Call ShowDetais(txtmemberNo.Text)
 
 End Sub
 
 Private Sub txtmemberNo_LostFocus()
-If txtmemberNo.Text <> "" Then GenerateChildrenList (txtmemberNo.Text)
+
+If txtmemberNo.Text <> "" Then Call ShowDetais(txtmemberNo.Text)
 
 End Sub
+
+Private Sub ShowDetais(memberNumber As String)
+    Dim sql As String
+    Dim retuns As String
+    Dim s As Long
+    Dim frm As Object
+    Set frm = Me
+    
+    sql = "SELECT * FROM children WHERE MNo =" & memberNumber & " AND CITY_ID =" & gCityId
+    
+    Call GenerateChildrenList(sql, frm)
+    
+End Sub
+    

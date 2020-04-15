@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "msmask32.ocx"
+Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "MSMASK32.OCX"
 Begin VB.Form frmMember 
    ClientHeight    =   9015
    ClientLeft      =   285
@@ -13,30 +13,81 @@ Begin VB.Form frmMember
    ScaleHeight     =   9015
    ScaleWidth      =   12600
    WindowState     =   2  'Maximized
-   Begin VB.TextBox txtEmail 
-      BeginProperty Font 
-         Name            =   "Verdana"
-         Size            =   9
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      Height          =   315
-      Left            =   120
-      TabIndex        =   11
-      Top             =   4080
-      Width           =   3975
-   End
    Begin VB.Frame fraMember 
       BorderStyle     =   0  'None
       Enabled         =   0   'False
       Height          =   8415
       Left            =   0
-      TabIndex        =   15
+      TabIndex        =   17
       Top             =   480
       Width           =   12495
+      Begin MSMask.MaskEdBox dteMemberMobile 
+         Height          =   315
+         Left            =   4440
+         TabIndex        =   12
+         Top             =   3600
+         Width           =   2055
+         _ExtentX        =   3625
+         _ExtentY        =   556
+         _Version        =   393216
+         ClipMode        =   1
+         PromptInclude   =   0   'False
+         AllowPrompt     =   -1  'True
+         MaxLength       =   13
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Mask            =   "##########"
+         PromptChar      =   "_"
+      End
+      Begin VB.TextBox txtEmail 
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   315
+         Left            =   120
+         TabIndex        =   11
+         Top             =   3600
+         Width           =   3975
+      End
+      Begin MSMask.MaskEdBox dteDateOfBirth 
+         Height          =   315
+         Left            =   5640
+         TabIndex        =   4
+         Top             =   1200
+         Width           =   1695
+         _ExtentX        =   2990
+         _ExtentY        =   556
+         _Version        =   393216
+         ClipMode        =   1
+         PromptInclude   =   0   'False
+         AllowPrompt     =   -1  'True
+         MaxLength       =   10
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Format          =   "dd/mm/yyyy"
+         Mask            =   "##/##/####"
+         PromptChar      =   "_"
+      End
       Begin VB.TextBox txtMno 
          Enabled         =   0   'False
          BeginProperty Font 
@@ -50,7 +101,7 @@ Begin VB.Form frmMember
          EndProperty
          Height          =   315
          Left            =   120
-         TabIndex        =   17
+         TabIndex        =   19
          Top             =   360
          Width           =   735
       End
@@ -97,7 +148,7 @@ Begin VB.Form frmMember
             Strikethrough   =   0   'False
          EndProperty
          Height          =   315
-         Left            =   3960
+         Left            =   3360
          TabIndex        =   3
          Top             =   1200
          Width           =   1815
@@ -114,7 +165,7 @@ Begin VB.Form frmMember
          EndProperty
          Height          =   315
          Left            =   120
-         TabIndex        =   4
+         TabIndex        =   5
          Top             =   1920
          Width           =   1695
       End
@@ -133,7 +184,7 @@ Begin VB.Form frmMember
          Left            =   2160
          List            =   "frmMember.frx":000D
          Style           =   2  'Dropdown List
-         TabIndex        =   5
+         TabIndex        =   6
          Top             =   1920
          Width           =   1335
       End
@@ -149,7 +200,7 @@ Begin VB.Form frmMember
          EndProperty
          Height          =   315
          Left            =   120
-         TabIndex        =   6
+         TabIndex        =   7
          Top             =   2760
          Width           =   1935
       End
@@ -165,7 +216,7 @@ Begin VB.Form frmMember
          EndProperty
          Height          =   315
          Left            =   2400
-         TabIndex        =   7
+         TabIndex        =   8
          Top             =   2760
          Width           =   2055
       End
@@ -181,7 +232,7 @@ Begin VB.Form frmMember
          EndProperty
          Height          =   315
          Left            =   4800
-         TabIndex        =   8
+         TabIndex        =   9
          Top             =   2760
          Width           =   1095
       End
@@ -197,7 +248,7 @@ Begin VB.Form frmMember
          EndProperty
          Height          =   315
          Left            =   6360
-         TabIndex        =   9
+         TabIndex        =   10
          Top             =   2760
          Width           =   975
       End
@@ -215,14 +266,14 @@ Begin VB.Form frmMember
          Left            =   120
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
-         TabIndex        =   12
+         TabIndex        =   14
          Top             =   4440
          Width           =   9615
       End
       Begin MSMask.MaskEdBox dteExpiryDate 
          Height          =   315
          Left            =   3960
-         TabIndex        =   16
+         TabIndex        =   18
          Top             =   1920
          Width           =   1455
          _ExtentX        =   2566
@@ -247,9 +298,9 @@ Begin VB.Form frmMember
       End
       Begin MSMask.MaskEdBox dteMemberPhone 
          Height          =   315
-         Left            =   7920
-         TabIndex        =   10
-         Top             =   2760
+         Left            =   6600
+         TabIndex        =   13
+         Top             =   3600
          Width           =   1695
          _ExtentX        =   2990
          _ExtentY        =   556
@@ -273,7 +324,7 @@ Begin VB.Form frmMember
       Begin MSMask.MaskEdBox dteCreateDate 
          Height          =   315
          Left            =   1080
-         TabIndex        =   30
+         TabIndex        =   32
          Top             =   360
          Width           =   1455
          _ExtentX        =   2566
@@ -296,6 +347,41 @@ Begin VB.Form frmMember
          Mask            =   "##/##/####"
          PromptChar      =   "_"
       End
+      Begin VB.Label Label5 
+         Caption         =   "Mobile"
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Left            =   4440
+         TabIndex        =   37
+         Top             =   3360
+         Width           =   735
+      End
+      Begin VB.Label label2 
+         Caption         =   "Date Of Birth"
+         BeginProperty Font 
+            Name            =   "Arial"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   14
+         Left            =   5640
+         TabIndex        =   36
+         Top             =   960
+         Width           =   1455
+      End
       Begin VB.Label Label4 
          Caption         =   "Note"
          BeginProperty Font 
@@ -309,7 +395,7 @@ Begin VB.Form frmMember
          EndProperty
          Height          =   255
          Left            =   120
-         TabIndex        =   33
+         TabIndex        =   35
          Top             =   4200
          Width           =   615
       End
@@ -326,12 +412,12 @@ Begin VB.Form frmMember
          EndProperty
          Height          =   255
          Left            =   120
-         TabIndex        =   32
+         TabIndex        =   34
          Top             =   3360
          Width           =   1455
       End
       Begin VB.Label label2 
-         Caption         =   "JOINING DATE"
+         Caption         =   "Joining Date"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25
@@ -344,12 +430,12 @@ Begin VB.Form frmMember
          Height          =   195
          Index           =   13
          Left            =   1080
-         TabIndex        =   31
+         TabIndex        =   33
          Top             =   120
          Width           =   1455
       End
       Begin VB.Label label2 
-         Caption         =   "INITIAL              "
+         Caption         =   "Initial            "
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25
@@ -362,12 +448,12 @@ Begin VB.Form frmMember
          Height          =   195
          Index           =   4
          Left            =   120
-         TabIndex        =   29
+         TabIndex        =   31
          Top             =   960
          Width           =   855
       End
       Begin VB.Label label2 
-         Caption         =   "MNO"
+         Caption         =   "Mno"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25
@@ -380,12 +466,12 @@ Begin VB.Form frmMember
          Height          =   195
          Index           =   0
          Left            =   120
-         TabIndex        =   28
+         TabIndex        =   30
          Top             =   120
          Width           =   855
       End
       Begin VB.Label label2 
-         Caption         =   "STATE"
+         Caption         =   "State"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25
@@ -398,12 +484,12 @@ Begin VB.Form frmMember
          Height          =   195
          Index           =   1
          Left            =   6360
-         TabIndex        =   27
+         TabIndex        =   29
          Top             =   2520
          Width           =   1095
       End
       Begin VB.Label label2 
-         Caption         =   "PHONE"
+         Caption         =   "Phone"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25
@@ -415,13 +501,13 @@ Begin VB.Form frmMember
          EndProperty
          Height          =   195
          Index           =   5
-         Left            =   7920
-         TabIndex        =   26
-         Top             =   2520
+         Left            =   6600
+         TabIndex        =   28
+         Top             =   3360
          Width           =   735
       End
       Begin VB.Label label2 
-         Caption         =   "POST CODE"
+         Caption         =   "Post Code"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25
@@ -434,12 +520,12 @@ Begin VB.Form frmMember
          Height          =   195
          Index           =   6
          Left            =   4800
-         TabIndex        =   25
+         TabIndex        =   27
          Top             =   2520
          Width           =   1095
       End
       Begin VB.Label label2 
-         Caption         =   "ADDRESS2"
+         Caption         =   "Address2"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25
@@ -452,12 +538,12 @@ Begin VB.Form frmMember
          Height          =   195
          Index           =   7
          Left            =   2400
-         TabIndex        =   24
+         TabIndex        =   26
          Top             =   2520
          Width           =   1095
       End
       Begin VB.Label label2 
-         Caption         =   "ADDRESS1"
+         Caption         =   "Address1"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25
@@ -470,12 +556,12 @@ Begin VB.Form frmMember
          Height          =   195
          Index           =   8
          Left            =   120
-         TabIndex        =   23
+         TabIndex        =   25
          Top             =   2520
          Width           =   975
       End
       Begin VB.Label label2 
-         Caption         =   "STATUS"
+         Caption         =   "Status"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25
@@ -488,12 +574,12 @@ Begin VB.Form frmMember
          Height          =   195
          Index           =   9
          Left            =   2160
-         TabIndex        =   22
+         TabIndex        =   24
          Top             =   1680
          Width           =   855
       End
       Begin VB.Label label2 
-         Caption         =   "SPOUSE"
+         Caption         =   "Spouse"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25
@@ -506,12 +592,12 @@ Begin VB.Form frmMember
          Height          =   195
          Index           =   10
          Left            =   120
-         TabIndex        =   21
+         TabIndex        =   23
          Top             =   1680
-         Width           =   855
+         Width           =   1695
       End
       Begin VB.Label label2 
-         Caption         =   "GIVEN NAME"
+         Caption         =   "Given Name"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25
@@ -523,13 +609,13 @@ Begin VB.Form frmMember
          EndProperty
          Height          =   195
          Index           =   11
-         Left            =   3960
-         TabIndex        =   20
+         Left            =   3360
+         TabIndex        =   22
          Top             =   960
          Width           =   1095
       End
       Begin VB.Label label2 
-         Caption         =   "SURNAME                        "
+         Caption         =   "Surname                   "
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25
@@ -542,12 +628,12 @@ Begin VB.Form frmMember
          Height          =   195
          Index           =   12
          Left            =   1320
-         TabIndex        =   19
+         TabIndex        =   21
          Top             =   960
          Width           =   855
       End
       Begin VB.Label label2 
-         Caption         =   "EXPIRY"
+         Caption         =   "Expiry Date"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25
@@ -560,9 +646,9 @@ Begin VB.Form frmMember
          Height          =   195
          Index           =   3
          Left            =   3960
-         TabIndex        =   18
+         TabIndex        =   20
          Top             =   1680
-         Width           =   735
+         Width           =   1215
       End
    End
    Begin VB.PictureBox Picture1 
@@ -593,7 +679,7 @@ Begin VB.Form frmMember
          Height          =   375
          Index           =   0
          Left            =   0
-         TabIndex        =   13
+         TabIndex        =   15
          Top             =   0
          Width           =   2175
       End
@@ -602,7 +688,7 @@ Begin VB.Form frmMember
       Height          =   255
       Index           =   2
       Left            =   0
-      TabIndex        =   14
+      TabIndex        =   16
       Top             =   0
       Width           =   855
    End
@@ -613,6 +699,9 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
+Private Sub dteDateOfBirth_LostFocus()
+Call ValidDateEntry(dteDateOfBirth)
+End Sub
 
 Private Sub dteExpiryDate_GotFocus()
 HighlightText Me
@@ -640,11 +729,9 @@ gRecordMode = RECORD_READ
      gRecordType = MEMBER
      gRecordMode = RECORD_READ
      SetToolbarControl
-     
      MDIFrm.pnlStatusBar.Panels(1).Text = ""
      DoEvents
- 
- 
+     
  Exit Sub
 ErrorHandler:
      Call objError.ErrorRoutine(Err.Number, Err.Description, objConnection, "frmMember", "Form_Load", True)
@@ -655,6 +742,7 @@ Public Sub Form_Activate()
 
     If gRecordMode = RECORD_NEW Or gRecordMode = RECORD_EDIT Then
         fraMember.Enabled = True
+
           
     Else
         fraMember.Enabled = False

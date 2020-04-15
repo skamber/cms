@@ -1,6 +1,6 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
-Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "msmask32.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "mscomctl.OCX"
+Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "MSMASK32.OCX"
 Object = "{00025600-0000-0000-C000-000000000046}#5.2#0"; "crystl32.ocx"
 Begin VB.Form frmCashFlowView 
    ClientHeight    =   9495
@@ -591,15 +591,11 @@ Private Sub LoadCashInList()
 
  On Error GoTo ErrorHandler
  
-    ' Dim objFollowup_s As PACMSFollowUP.clsFollowup_s
      Dim rslocal As ADODB.Recordset
      Dim strId  As String
      Dim itmx As ListItem
      Dim sql As String
-     
-    ' Dim lngTotalProspect As Long
-    ' Dim lngTotalPlanning As Long
-    ' Dim lngTotalCoaching As Long
+
  TotalCashIn_GST = 0
  TotalCashin_Netamount = 0
  TotalCashin_Amount = 0
@@ -613,13 +609,13 @@ Private Sub LoadCashInList()
          '==============================================================================
         
             Set rslocal = New ADODB.Recordset
-            sql = "SELECT * FROM CASHIN Where DateOFCashIn between #" & Format(frmCashFlowView.dteFromDate.FormattedText, "dd-mmm-yyyy") & _
-            "# AND #" & Format(frmCashFlowView.dteToDate.FormattedText, "dd-mmm-yyyy") & "#"
+            sql = "SELECT * FROM cashin Where DateOFCashIn between #" & Format(frmCashFlowView.dteFromDate.FormattedText, "yyyy-mm-dd") & _
+            "# AND #" & Format(frmCashFlowView.dteToDate.FormattedText, "yyyy-mm-dd") & "#"
             rslocal.Open sql, objConnection, adOpenForwardOnly, adLockReadOnly
              If Not rslocal Is Nothing Then
                  Do While Not rslocal.EOF
                      
-                     Set itmx = .ListCashInView.ListItems.Add(, , CStr(rslocal!Id))
+                     Set itmx = .ListCashInView.ListItems.Add(, , CStr(rslocal!id))
                                     
                                      If Not IsNull(rslocal!Item) Then itmx.SubItems(1) = CStr(rslocal!Item)
                                      If Not IsNull(rslocal!DateOfCashin) Then itmx.SubItems(2) = CStr(rslocal!DateOfCashin)
@@ -650,15 +646,11 @@ Private Sub LoadcashOutList()
 
  On Error GoTo ErrorHandler
  
-    ' Dim objFollowup_s As PACMSFollowUP.clsFollowup_s
      Dim rslocal As ADODB.Recordset
      Dim strId  As String
      Dim itmx As ListItem
      Dim sql As String
      
-    ' Dim lngTotalProspect As Long
-    ' Dim lngTotalPlanning As Long
-    ' Dim lngTotalCoaching As Long
  TotalCashOut_GST = 0
  TotalCashOut_Netamount = 0
  TotalCashOut_Amount = 0
@@ -672,13 +664,13 @@ Private Sub LoadcashOutList()
          '==============================================================================
         
             Set rslocal = New ADODB.Recordset
-            sql = "SELECT * FROM CASHOUT Where DateOFCashOut between #" & Format(frmCashFlowView.dteFromDate.FormattedText, "dd-mmm-yyyy") & _
-            "# AND #" & Format(frmCashFlowView.dteToDate.FormattedText, "dd-mmm-yyyy") & "#"
+            sql = "SELECT * FROM cashout Where DateOFCashOut between #" & Format(frmCashFlowView.dteFromDate.FormattedText, "yyyy-mm-dd") & _
+            "# AND #" & Format(frmCashFlowView.dteToDate.FormattedText, "yyyy-mm-dd") & "#"
             rslocal.Open sql, objConnection, adOpenForwardOnly, adLockReadOnly
              If Not rslocal Is Nothing Then
                  Do While Not rslocal.EOF
                      
-                     Set itmx = .ListCashOutView.ListItems.Add(, , CStr(rslocal!Id))
+                     Set itmx = .ListCashOutView.ListItems.Add(, , CStr(rslocal!id))
                                     
                                      If Not IsNull(rslocal!Item) Then itmx.SubItems(1) = CStr(rslocal!Item)
                                      If Not IsNull(rslocal!DateOfCashOut) Then itmx.SubItems(2) = CStr(rslocal!DateOfCashOut)

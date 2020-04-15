@@ -117,8 +117,8 @@ On Error GoTo ErrorHandler
             objcollection.Comments = .txtComments.Text
             objcollection.Payment = .cmbType.Text
             objcollection.types = .cmbTypes.Text
-            objcollection.UserName = .txtUserName.Text
-            objcollection.ChurchId = gChurchId
+            objcollection.userName = gUserFullName
+            objcollection.churchId = gChurchId
             
             If .dteDateofPayment <> "" Then objcollection.Dateofcollection = .dteDateofPayment.FormattedText
 
@@ -151,7 +151,7 @@ On Error GoTo ErrorHandler
             If Not rslocal Is Nothing Then
                 Do Until rslocal.EOF
                     .cmbType.AddItem rslocal!Collection_Type
-                    .cmbType.ItemData(.cmbType.NewIndex) = rslocal!Id
+                    .cmbType.ItemData(.cmbType.NewIndex) = rslocal!id
                     rslocal.MoveNext
                 Loop
                 Set rslocal = Nothing
@@ -161,7 +161,7 @@ On Error GoTo ErrorHandler
             If Not rslocal1 Is Nothing Then
                 Do Until rslocal1.EOF
                     .cmbTypes.AddItem rslocal1!Payment_type
-                    .cmbTypes.ItemData(.cmbTypes.NewIndex) = rslocal1!Id
+                    .cmbTypes.ItemData(.cmbTypes.NewIndex) = rslocal1!id
                     rslocal1.MoveNext
                 Loop
                 Set rslocal1 = Nothing
@@ -183,7 +183,7 @@ Public Function LoadcollectionDefualtValue()
 
 With frmCollection
        .dteDateofPayment.Text = Format(Now(), DATE_FORMAT)
-       .txtUserName.Text = UserName
+       .txtUserName.Text = gUserFullName
 End With
 
 End Function
@@ -233,8 +233,6 @@ Public Sub GenerateCollectionList(sql As String)
      Dim strId  As String
      Dim itmx As ListItem
      
-    
- 
  
      Screen.MousePointer = vbHourglass
  
@@ -252,7 +250,7 @@ Public Sub GenerateCollectionList(sql As String)
                                      If Not IsNull(rslocal!Payment) Then itmx.SubItems(1) = CStr(rslocal!Payment)
                                      If Not IsNull(rslocal!DATE_OF_COLLECTION) Then itmx.SubItems(2) = CStr(rslocal!DATE_OF_COLLECTION)
                                      If Not IsNull(rslocal!Amount) Then itmx.SubItems(3) = CStr(rslocal!Amount)
-                                     If Not IsNull(rslocal!Comments) Then itmx.SubItems(4) = CStr(rslocal!Comments)
+                                     itmx.SubItems(4) = "" & rslocal!Comments
                      Set itmx = Nothing
                      rslocal.MoveNext
                      
@@ -304,7 +302,7 @@ Public Function DisplayCollection()
         .cmbType.Text = ConvertNull(rslocal!Payment)
         .cmbTypes.Text = ConvertNull(rslocal!Type)
         .txtAmount.Text = ConvertNull(rslocal!Amount)
-        .txtComments.Text = ConvertNull(rslocal!Comments)
+        .txtComments.Text = "" & rslocal!Comments
         .txtUserName.Text = ConvertNull(rslocal!USER_NAME)
         
     End With
@@ -316,7 +314,7 @@ ErrorHandler:
 
     
     
-    Call objError.ErrorRoutine(Err.Number, Err.Description, objConnection, "modProspect", "DisplayProspect", True)
+    Call objError.ErrorRoutine(Err.Number, Err.Description, objConnection, "modCollection", "DisplayCollection", True)
 
 End Function
 

@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomctl.ocx"
 Begin VB.Form frmPaymentSearch 
    ClientHeight    =   8370
    ClientLeft      =   60
@@ -165,7 +165,7 @@ Begin VB.Form frmPaymentSearch
       EndProperty
    End
    Begin VB.Label Label5 
-      Caption         =   "TYPE"
+      Caption         =   "Type"
       BeginProperty Font 
          Name            =   "Arial"
          Size            =   8.25
@@ -183,7 +183,7 @@ Begin VB.Form frmPaymentSearch
    End
    Begin VB.Label Label4 
       Alignment       =   1  'Right Justify
-      Caption         =   "GIVEN NAME"
+      Caption         =   "Given Name"
       BeginProperty Font 
          Name            =   "Arial"
          Size            =   8.25
@@ -201,7 +201,7 @@ Begin VB.Form frmPaymentSearch
    End
    Begin VB.Label Label3 
       Alignment       =   1  'Right Justify
-      Caption         =   "SURNAME"
+      Caption         =   "Surname"
       BeginProperty Font 
          Name            =   "Arial"
          Size            =   8.25
@@ -219,7 +219,7 @@ Begin VB.Form frmPaymentSearch
    End
    Begin VB.Label Label2 
       Alignment       =   1  'Right Justify
-      Caption         =   "MNO"
+      Caption         =   "Mno"
       BeginProperty Font 
          Name            =   "Arial"
          Size            =   8.25
@@ -276,92 +276,92 @@ End Sub
 Private Sub ListPaymentView_ColumnClick(ByVal ColumnHeader As MSComctlLib.ColumnHeader)
 
     'Call SortListView(ListPaymentView, ColumnHeader)
-    Call ClearHeaderIcons(ColumnHeader.Index)
-    Select Case ColumnHeader.Index
+    Call ClearHeaderIcons(ColumnHeader.index)
+    Select Case ColumnHeader.index
         Case 1
             Select Case ColumnHeader.Icon
                 Case "down"
                     ColumnHeader.Icon = "up"
-                    Call SortColumn(ListPaymentView, ColumnHeader.Index, sortDescending, sortNumeric)
+                    Call SortColumn(ListPaymentView, ColumnHeader.index, sortDescending, sortNumeric)
                 Case "up"
                     ColumnHeader.Icon = "down"
-                    Call SortColumn(ListPaymentView, ColumnHeader.Index, sortAscending, sortNumeric)
+                    Call SortColumn(ListPaymentView, ColumnHeader.index, sortAscending, sortNumeric)
                Case Else
                     ColumnHeader.Icon = "down"
-                    Call SortColumn(ListPaymentView, ColumnHeader.Index, sortAscending, sortNumeric)
+                    Call SortColumn(ListPaymentView, ColumnHeader.index, sortAscending, sortNumeric)
             End Select
         Case 2
             Select Case ColumnHeader.Icon
                 Case "down"
                     ColumnHeader.Icon = "up"
-                    Call SortColumn(ListPaymentView, ColumnHeader.Index, sortDescending, sortAlpha)
+                    Call SortColumn(ListPaymentView, ColumnHeader.index, sortDescending, sortAlpha)
                 Case "up"
                     ColumnHeader.Icon = "down"
-                    Call SortColumn(ListPaymentView, ColumnHeader.Index, sortAscending, sortAlpha)
+                    Call SortColumn(ListPaymentView, ColumnHeader.index, sortAscending, sortAlpha)
                 Case Else
                     ColumnHeader.Icon = "down"
-                    Call SortColumn(ListPaymentView, ColumnHeader.Index, sortAscending, sortAlpha)
+                    Call SortColumn(ListPaymentView, ColumnHeader.index, sortAscending, sortAlpha)
             End Select
         Case 3
             Select Case ColumnHeader.Icon
                 Case "down"
                     ColumnHeader.Icon = "up"
-                    Call SortColumn(ListPaymentView, ColumnHeader.Index, sortDescending, sortDate)
+                    Call SortColumn(ListPaymentView, ColumnHeader.index, sortDescending, sortDate)
                 Case "up"
                     ColumnHeader.Icon = "down"
-                    Call SortColumn(ListPaymentView, ColumnHeader.Index, sortAscending, sortDate)
+                    Call SortColumn(ListPaymentView, ColumnHeader.index, sortAscending, sortDate)
                 Case Else
                     ColumnHeader.Icon = "down"
-                    Call SortColumn(ListPaymentView, ColumnHeader.Index, sortAscending, sortDate)
+                    Call SortColumn(ListPaymentView, ColumnHeader.index, sortAscending, sortDate)
             End Select
     
         Case 4
             Select Case ColumnHeader.Icon
                 Case "down"
                     ColumnHeader.Icon = "up"
-                    Call SortColumn(ListPaymentView, ColumnHeader.Index, sortDescending, sortDate)
+                    Call SortColumn(ListPaymentView, ColumnHeader.index, sortDescending, sortDate)
                 Case "up"
                     ColumnHeader.Icon = "down"
-                    Call SortColumn(ListPaymentView, ColumnHeader.Index, sortAscending, sortDate)
+                    Call SortColumn(ListPaymentView, ColumnHeader.index, sortAscending, sortDate)
                 Case Else
                     ColumnHeader.Icon = "down"
-                    Call SortColumn(ListPaymentView, ColumnHeader.Index, sortAscending, sortDate)
+                    Call SortColumn(ListPaymentView, ColumnHeader.index, sortAscending, sortDate)
             End Select
         Case 5
             Select Case ColumnHeader.Icon
                 Case "down"
                     ColumnHeader.Icon = "up"
-                    Call SortColumn(ListPaymentView, ColumnHeader.Index, sortDescending, sortDate)
+                    Call SortColumn(ListPaymentView, ColumnHeader.index, sortDescending, sortDate)
                 Case "up"
                     ColumnHeader.Icon = "down"
-                    Call SortColumn(ListPaymentView, ColumnHeader.Index, sortAscending, sortDate)
+                    Call SortColumn(ListPaymentView, ColumnHeader.index, sortAscending, sortDate)
                 Case Else
                     ColumnHeader.Icon = "down"
-                    Call SortColumn(ListPaymentView, ColumnHeader.Index, sortAscending, sortDate)
+                    Call SortColumn(ListPaymentView, ColumnHeader.index, sortAscending, sortDate)
             End Select
         Case 6
             Select Case ColumnHeader.Icon
                 Case "down"
                     ColumnHeader.Icon = "up"
-                    Call SortColumn(ListPaymentView, ColumnHeader.Index, sortDescending, sortNumeric)
+                    Call SortColumn(ListPaymentView, ColumnHeader.index, sortDescending, sortNumeric)
                 Case "up"
                     ColumnHeader.Icon = "down"
-                    Call SortColumn(ListPaymentView, ColumnHeader.Index, sortAscending, sortNumeric)
+                    Call SortColumn(ListPaymentView, ColumnHeader.index, sortAscending, sortNumeric)
                 Case Else
                     ColumnHeader.Icon = "down"
-                    Call SortColumn(ListPaymentView, ColumnHeader.Index, sortAscending, sortNumeric)
+                    Call SortColumn(ListPaymentView, ColumnHeader.index, sortAscending, sortNumeric)
             End Select
         Case 7
             Select Case ColumnHeader.Icon
                 Case "down"
                     ColumnHeader.Icon = "up"
-                    Call SortColumn(ListPaymentView, ColumnHeader.Index, sortDescending, sortNumeric)
+                    Call SortColumn(ListPaymentView, ColumnHeader.index, sortDescending, sortNumeric)
                 Case "up"
                     ColumnHeader.Icon = "down"
-                    Call SortColumn(ListPaymentView, ColumnHeader.Index, sortAscending, sortNumeric)
+                    Call SortColumn(ListPaymentView, ColumnHeader.index, sortAscending, sortNumeric)
                 Case Else
                     ColumnHeader.Icon = "down"
-                    Call SortColumn(ListPaymentView, ColumnHeader.Index, sortAscending, sortNumeric)
+                    Call SortColumn(ListPaymentView, ColumnHeader.index, sortAscending, sortNumeric)
             End Select
     End Select
 
@@ -370,7 +370,7 @@ End Sub
 Private Sub ClearHeaderIcons(CurrentHeader As Integer)
     Dim i As Integer
     For i = 1 To ListPaymentView.ColumnHeaders.Count
-        If ListPaymentView.ColumnHeaders(i).Index <> CurrentHeader Then
+        If ListPaymentView.ColumnHeaders(i).index <> CurrentHeader Then
             ListPaymentView.ColumnHeaders(i).Icon = Empty
         End If
     Next
@@ -381,9 +381,9 @@ Private Sub txtmno_KeyPress(KeyAscii As Integer)
  
  
     If KeyAscii = 13 And txtMno.Text <> "" Then
-      GenerateMemberInfo (txtMno.Text)
-      
-      GeneratePaymentList (txtMno.Text)
+      If GenerateMemberInfo(txtMno.Text) Then
+        GeneratePaymentList (txtMno.Text)
+      End If
     End If
     
 End Sub

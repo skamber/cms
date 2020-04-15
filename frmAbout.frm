@@ -2,26 +2,60 @@ VERSION 5.00
 Begin VB.Form frmAbout 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "About"
-   ClientHeight    =   3345
+   ClientHeight    =   3690
    ClientLeft      =   45
    ClientTop       =   330
-   ClientWidth     =   6570
+   ClientWidth     =   7260
    ControlBox      =   0   'False
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    Moveable        =   0   'False
-   ScaleHeight     =   3345
-   ScaleWidth      =   6570
+   ScaleHeight     =   3690
+   ScaleWidth      =   7260
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin VB.CommandButton cmdOK 
       Caption         =   "OK"
       Height          =   375
-      Left            =   2640
-      TabIndex        =   2
-      Top             =   2640
+      Left            =   3120
+      TabIndex        =   1
+      Top             =   3240
       Width           =   1095
+   End
+   Begin VB.Label Label3 
+      Caption         =   "Label3"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   275
+      Left            =   3480
+      TabIndex        =   5
+      Top             =   1320
+      Width           =   1335
+   End
+   Begin VB.Label Label1 
+      Caption         =   "Version:"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   275
+      Left            =   2400
+      TabIndex        =   4
+      Top             =   1320
+      Width           =   855
    End
    Begin VB.Label Label5 
       Caption         =   "CMS"
@@ -34,10 +68,10 @@ Begin VB.Form frmAbout
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      ForeColor       =   &H000000FF&
+      ForeColor       =   &H00000000&
       Height          =   375
       Left            =   2280
-      TabIndex        =   4
+      TabIndex        =   3
       Top             =   120
       Width           =   735
    End
@@ -52,33 +86,15 @@ Begin VB.Form frmAbout
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      ForeColor       =   &H000000FF&
+      ForeColor       =   &H00000000&
       Height          =   375
       Left            =   2280
-      TabIndex        =   3
+      TabIndex        =   2
       Top             =   840
       Width           =   4095
    End
-   Begin VB.Label Label3 
-      Caption         =   "Version 2.2"
-      BeginProperty Font 
-         Name            =   "Verdana"
-         Size            =   9
-         Charset         =   0
-         Weight          =   700
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      ForeColor       =   &H000000FF&
-      Height          =   255
-      Left            =   2280
-      TabIndex        =   1
-      Top             =   1320
-      Width           =   2055
-   End
    Begin VB.Label Label2 
-      Caption         =   "Developed by  Sami Kamber 2002 - 2014"
+      Caption         =   $"frmAbout.frx":0000
       BeginProperty Font 
          Name            =   "Verdana"
          Size            =   9.75
@@ -88,17 +104,17 @@ Begin VB.Form frmAbout
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      ForeColor       =   &H000000FF&
-      Height          =   375
+      ForeColor       =   &H00000000&
+      Height          =   1215
       Left            =   2280
       TabIndex        =   0
-      Top             =   1680
+      Top             =   1800
       Width           =   4215
    End
    Begin VB.Image Image1 
       Height          =   2100
       Left            =   120
-      Picture         =   "frmAbout.frx":0000
+      Picture         =   "frmAbout.frx":009B
       Stretch         =   -1  'True
       Top             =   120
       Width           =   2055
@@ -109,7 +125,12 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
 Private Sub cmdOK_Click()
 Unload frmAbout
+End Sub
+
+Private Sub Form_Load()
+Label3.Caption = VERSION
 End Sub
 

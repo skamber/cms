@@ -22,33 +22,34 @@ ErrorHandler:
 
 End Function
 
-Public Function LoadChurchComboBox()
+Public Function LoadCityNamesComboBox()
 On Error GoTo ErrorHandler
 
     Dim objOrganisation_s As CMSOrganisation.clsOrganisation
     Dim rslocal As ADODB.Recordset
     Set objOrganisation_s = New CMSOrganisation.clsOrganisation
     Set objOrganisation_s.DatabaseConnection = objConnection
-    
-       
-     
-    Set rslocal = objOrganisation_s.getChurchName
+
+    Set rslocal = objOrganisation_s.getCities()
 
     With frmLogon
             
-            .cmbChurchName.Clear
+            .cmbCityName.Clear
             If Not rslocal Is Nothing Then
                 Do Until rslocal.EOF
-                    .cmbChurchName.AddItem rslocal!Name
-                    .cmbChurchName.ItemData(.cmbChurchName.NewIndex) = rslocal!Id
+                    .cmbCityName.AddItem rslocal!cityName
+                    .cmbCityName.ItemData(.cmbCityName.NewIndex) = rslocal!id
+                    Dim cityName As String
+                    Dim cityId As String
+                    cityName = rslocal!cityName
+                    cityId = rslocal!id
+                    Cities.Add cityName, cityId
+                    
                     rslocal.MoveNext
                 Loop
                 Set rslocal = Nothing
             End If
-            
     End With
-    
-
     Set objOrganisation_s = Nothing
 
 
@@ -58,6 +59,62 @@ ErrorHandler:
 
 End Function
 
+Public Function LoadChurchComboBox()
+On Error GoTo ErrorHandler
+
+    Dim objOrganisation_s As CMSOrganisation.clsOrganisation
+    Dim rslocal As ADODB.Recordset
+    Set objOrganisation_s = New CMSOrganisation.clsOrganisation
+    Set objOrganisation_s.DatabaseConnection = objConnection
+
+       
+     
+    Set rslocal = objOrganisation_s.getChurchName(gCityId)
+
+    With frmLogon
+            
+            .cmbChurchName.Clear
+            If Not rslocal Is Nothing Then
+                Do Until rslocal.EOF
+                    .cmbChurchName.AddItem rslocal!Name
+                    .cmbChurchName.ItemData(.cmbChurchName.NewIndex) = rslocal!id
+                    rslocal.MoveNext
+                Loop
+                Set rslocal = Nothing
+            End If
+    End With
+    Set objOrganisation_s = Nothing
+
+Exit Function
+ErrorHandler:
+    'Call objError.ErrorRoutine(Err.Number, Err.Description, objConnection, "modlogon", "LoadChurchComboBox", True)
+
+End Function
+
+Public Function validateApplicationVersion()
+On Error GoTo ErrorHandler
+
+    Dim sql As String
+    Dim rslocal As ADODB.Recordset
+
+     validateApplicationVersion = False
+         
+    sql = "SELECT * FROM app WHERE version=  '" & VERSION & "'"
+    Set rslocal = New ADODB.Recordset
+        rslocal.Open sql, objConnection, adOpenForwardOnly, adLockReadOnly
+
+    If rslocal.EOF = True Then
+        MsgBox "Invalid application version number " & VERSION & ".  Please contact the systems administration.", vbExclamation
+        frmLogon.txtLogonId.SetFocus
+        Exit Function
+    End If
+    validateApplicationVersion = True
+    
+Exit Function
+ErrorHandler:
+    Call objError.ErrorRoutine(Err.Number, Err.Description, objConnection, "modLogon", "CheckLogonId", True)
+
+End Function
 
 Public Function CheckLogonId(ByVal strLogonID As String, ByVal strLogonPassword As String)
 On Error GoTo ErrorHandler
@@ -70,7 +127,7 @@ On Error GoTo ErrorHandler
     Dim Ctr As Integer
     CheckLogonId = False
          
-    sql = "SELECT * FROM USERS WHERE Logon_ID = '" & strLogonID & "'"
+    sql = "SELECT * FROM users WHERE Logon_ID = '" & strLogonID & "'" & " AND city_Id =" & gCityId
     
     Set rslocal = New ADODB.Recordset
         rslocal.Open sql, objConnection, adOpenForwardOnly, adLockReadOnly
@@ -87,7 +144,7 @@ On Error GoTo ErrorHandler
     If (rslocal!Logon_Password = "WELCOME") And (strLogonPassword = "WELCOME") Then
         
     Else
-      If DecryptPassword(rslocal!Logon_Password) <> strLogonPassword Then
+      If cmdDecrypt(rslocal!Logon_Password) <> strLogonPassword Then
         MsgBox "Logon Password is invalid.  Access has been denied.", vbExclamation
         frmLogon.txtPassword.SetFocus
         NumLogIN = NumLogIN + 1
@@ -98,17 +155,27 @@ On Error GoTo ErrorHandler
         Exit Function
     End If
     End If
-    If getUserPriveleges(rslocal!Id) Then
+    
+    gChurchRestriction = rslocal!Church_Id
+    If gChurchRestriction <> 0 And gChurchRestriction <> gChurchId Then
+         MsgBox "You don't have access to this church.  Access has been denied.", vbExclamation
+         CheckLogonId = False
+         Exit Function
+    End If
+     
+    
+    If getUserPriveleges(rslocal!id) Then
               CheckLogonId = True
     Else
         CheckLogonId = False
         
     End If
-    UserName = rslocal!Full_Name
-    UserId = rslocal!Id
+    gUserFullName = rslocal!Full_Name
+    UserId = rslocal!id
     dtePasswordLastUpdate = rslocal!Password_Last_Update
     checkSystemManager = rslocal!SYSTEM_MANAGER
     checkReportView = rslocal!Report_View
+   
     CheckPasword = rslocal!Logon_Password
     If checkSystemManager = "Y" Then
       systemManager = True
@@ -124,10 +191,6 @@ On Error GoTo ErrorHandler
       ReportView = False
     End If
     Set rslocal = Nothing
-    
-   
-    
-
 
 Exit Function
 ErrorHandler:
@@ -135,8 +198,8 @@ ErrorHandler:
 
 End Function
 
-Public Function EncryptPassword(s As String) As String
-EncryptPassword = EDS(s)
+Public Function encryptPassword(s As String) As String
+encryptPassword = EDS(s)
 End Function
 
 Public Function DecryptPassword(s As String) As String
@@ -164,7 +227,77 @@ For i = 1 To Len(s)
 Mid(s, i, 1) = Chr(Asc(Mid(s, i, 1)) Xor encrypt(i))
 Next i
 EDS = s
+
 End Function
+
+Public Function cmdEncrypt(txtText As String)
+    ' You can encrypt twice for extra security
+    cmdEncrypt = EncryptText((txtText), SALT_PASSWORD)
+    cmdEncrypt = EncryptText((cmdEncrypt), SALT_PASSWORD)
+End Function
+
+Public Function cmdDecrypt(txtText As String)
+    cmdDecrypt = DecryptText((txtText), SALT_PASSWORD)
+    cmdDecrypt = DecryptText((cmdDecrypt), SALT_PASSWORD)
+End Function
+
+Public Function cmdDecryptLicence(txtText As String)
+    cmdDecryptLicence = DecryptText((txtText), SALT_LICENCE)
+    cmdDecryptLicence = DecryptText((cmdDecryptLicence), SALT_LICENCE)
+End Function
+
+'Encrypt text
+Private Function EncryptText(strText As String, ByVal strPwd As String)
+    Dim i As Integer, c As Integer
+    Dim strBuff As String
+
+#If Not CASE_SENSITIVE_PASSWORD Then
+
+    'Convert password to upper case
+    'if not case-sensitive
+    strPwd = UCase$(strPwd)
+
+#End If
+
+    'Encrypt string
+    If Len(strPwd) Then
+        For i = 1 To Len(strText)
+            c = Asc(Mid$(strText, i, 1))
+            c = c + Asc(Mid$(strPwd, (i Mod Len(strPwd)) + 1, 1))
+            strBuff = strBuff & Chr$(c And &HFF)
+        Next i
+    Else
+        strBuff = strText
+    End If
+    EncryptText = strBuff
+End Function
+
+'Decrypt text encrypted with EncryptText
+Private Function DecryptText(strText As String, ByVal strPwd As String)
+    Dim i As Integer, c As Integer
+    Dim strBuff As String
+
+#If Not CASE_SENSITIVE_PASSWORD Then
+
+    'Convert password to upper case
+    'if not case-sensitive
+    strPwd = UCase$(strPwd)
+
+#End If
+
+    'Decrypt string
+    If Len(strPwd) Then
+        For i = 1 To Len(strText)
+            c = Asc(Mid$(strText, i, 1))
+            c = c - Asc(Mid$(strPwd, (i Mod Len(strPwd)) + 1, 1))
+            strBuff = strBuff & Chr$(c And &HFF)
+        Next i
+    Else
+        strBuff = strText
+    End If
+    DecryptText = strBuff
+End Function
+       
 
 
 Public Function LockUser(strLogonID As String)

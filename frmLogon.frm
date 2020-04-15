@@ -12,7 +12,7 @@ Begin VB.Form frmLogon
    MinButton       =   0   'False
    ScaleHeight     =   4365
    ScaleWidth      =   6735
-   Begin VB.ComboBox cmbChurchName 
+   Begin VB.ComboBox cmbCityName 
       BeginProperty Font 
          Name            =   "Verdana"
          Size            =   9
@@ -27,8 +27,27 @@ Begin VB.Form frmLogon
       Left            =   3240
       List            =   "frmLogon.frx":030C
       Style           =   2  'Dropdown List
-      TabIndex        =   3
+      TabIndex        =   10
       Top             =   2520
+      Width           =   2655
+   End
+   Begin VB.ComboBox cmbChurchName 
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   330
+      ItemData        =   "frmLogon.frx":030E
+      Left            =   3240
+      List            =   "frmLogon.frx":0310
+      Style           =   2  'Dropdown List
+      TabIndex        =   3
+      Top             =   3000
       Width           =   2655
    End
    Begin VB.TextBox txtLogonId 
@@ -52,7 +71,7 @@ Begin VB.Form frmLogon
       Height          =   375
       Left            =   5040
       TabIndex        =   5
-      Top             =   3480
+      Top             =   3720
       Width           =   1095
    End
    Begin VB.CommandButton cmdEnter 
@@ -60,7 +79,7 @@ Begin VB.Form frmLogon
       Height          =   375
       Left            =   3480
       TabIndex        =   4
-      Top             =   3480
+      Top             =   3720
       Width           =   1095
    End
    Begin VB.TextBox txtPassword 
@@ -81,6 +100,25 @@ Begin VB.Form frmLogon
       Top             =   2040
       Width           =   2655
    End
+   Begin VB.Label Label6 
+      BackStyle       =   0  'Transparent
+      Caption         =   "City"
+      BeginProperty Font 
+         Name            =   "Times New Roman"
+         Size            =   12
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H8000000E&
+      Height          =   375
+      Left            =   2040
+      TabIndex        =   11
+      Top             =   2520
+      Width           =   1095
+   End
    Begin VB.Label Label5 
       BackStyle       =   0  'Transparent
       Caption         =   "Church "
@@ -97,7 +135,7 @@ Begin VB.Form frmLogon
       Height          =   375
       Left            =   2040
       TabIndex        =   9
-      Top             =   2520
+      Top             =   3000
       Width           =   1095
    End
    Begin VB.Label Label4 
@@ -116,12 +154,12 @@ Begin VB.Form frmLogon
       Height          =   375
       Left            =   720
       TabIndex        =   8
-      Top             =   960
+      Top             =   840
       Width           =   3615
    End
    Begin VB.Label Label1 
       BackStyle       =   0  'Transparent
-      Caption         =   "Logon ID "
+      Caption         =   "Login ID "
       BeginProperty Font 
          Name            =   "Times New Roman"
          Size            =   12
@@ -180,7 +218,7 @@ Begin VB.Form frmLogon
       Appearance      =   0  'Flat
       Height          =   5000
       Left            =   0
-      Picture         =   "frmLogon.frx":030E
+      Picture         =   "frmLogon.frx":0312
       Stretch         =   -1  'True
       Top             =   0
       Width           =   7000
@@ -192,26 +230,40 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
+Private Sub cmbCityName_Click()
+   If cmbCityName.ListIndex >= 0 Then
+      gCityId = cmbCityName.ItemData(cmbCityName.ListIndex)
+      LoadChurchComboBox
+   End If
+End Sub
 
 Private Sub cmdEnter_Click()
     Dim sLogonID As String
     Dim sLogonPassword As String
     Dim dtePasswordLastUpdate As String
     
+    If Not ValidConnectionCount Then
+      Exit Sub
+    End If
+    If Not validateApplicationVersion Then
+        Exit Sub
+    End If
+    
     sLogonID = UCase(Trim(txtLogonId.Text))
-    sLogonPassword = UCase(Trim(txtPassword.Text))
+    sLogonPassword = Trim(txtPassword.Text)
     sChurchName = UCase(Trim(cmbChurchName.Text))
     If Not ValidateLogon(sLogonID, sLogonPassword, sChurchName) Then
         Exit Sub
     End If
+
+    'gChurchId = cmbChurchName.ListIndex
+    gChurchId = cmbChurchName.ItemData(cmbChurchName.ListIndex)
     
     If Not CheckLogonId(sLogonID, sLogonPassword) Then Exit Sub
     If Not CheckPasswordChange Then
         frmPassword.Show vbModal
     End If
 
-    'gChurchId = cmbChurchName.ListIndex
-    gChurchId = cmbChurchName.ItemData(cmbChurchName.ListIndex)
     
     Unload frmLogon
     frmMember.Show
@@ -224,11 +276,15 @@ End
 End Sub
 
 Private Sub Form_Load()
-Call ConnectACCESS
-LoadChurchComboBox
-If cmbChurchName.ListCount > 0 Then
-    cmbChurchName.ListIndex = 0
-End If
+LoadSetting
+Call ConnectDatabase
+LoadCityNamesComboBox
+'LoadChurchComboBox
+
+'If cmbChurchName.ListCount > 0 Then
+'    cmbChurchName.
+'    cmbChurchName.ListIndex = 0
+'End If
 Call CentreForm(Me, 2)
 
 End Sub

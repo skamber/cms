@@ -1,10 +1,10 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "mscomctl.OCX"
 Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "MSMASK32.OCX"
 Begin VB.Form frmUserAccount 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "User Account"
-   ClientHeight    =   7290
+   ClientHeight    =   8400
    ClientLeft      =   2295
    ClientTop       =   2595
    ClientWidth     =   7560
@@ -12,8 +12,45 @@ Begin VB.Form frmUserAccount
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   7290
+   ScaleHeight     =   8400
    ScaleWidth      =   7560
+   Begin VB.ComboBox cmbChurch 
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   330
+      ItemData        =   "UserAccount.frx":0000
+      Left            =   1560
+      List            =   "UserAccount.frx":0002
+      TabIndex        =   24
+      Top             =   4200
+      Width           =   2655
+   End
+   Begin VB.ComboBox cmbCity 
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   330
+      ItemData        =   "UserAccount.frx":0004
+      Left            =   1560
+      List            =   "UserAccount.frx":0006
+      TabIndex        =   23
+      Text            =   "cmbCity"
+      Top             =   3600
+      Width           =   2655
+   End
    Begin VB.CheckBox chkReportView 
       Caption         =   "REPORT VIEW"
       BeginProperty Font 
@@ -61,7 +98,7 @@ Begin VB.Form frmUserAccount
       Height          =   2790
       Left            =   4560
       TabIndex        =   15
-      Top             =   3480
+      Top             =   4680
       Width           =   2535
    End
    Begin MSMask.MaskEdBox dtePasswordLastUpdate 
@@ -104,7 +141,7 @@ Begin VB.Form frmUserAccount
       Height          =   2415
       Left            =   480
       TabIndex        =   12
-      Top             =   3840
+      Top             =   5040
       Width           =   3735
       Begin VB.CheckBox chkDelete 
          Caption         =   "Delete Data"
@@ -181,7 +218,7 @@ Begin VB.Form frmUserAccount
       Left            =   3240
       TabIndex        =   10
       TabStop         =   0   'False
-      Top             =   6720
+      Top             =   7680
       Width           =   1095
    End
    Begin VB.TextBox txtPassword 
@@ -212,7 +249,7 @@ Begin VB.Form frmUserAccount
       EndProperty
       Height          =   315
       Left            =   1560
-      TabIndex        =   2
+      TabIndex        =   3
       Top             =   2160
       Width           =   1815
    End
@@ -228,7 +265,7 @@ Begin VB.Form frmUserAccount
       EndProperty
       Height          =   315
       Left            =   1560
-      TabIndex        =   1
+      TabIndex        =   2
       Top             =   1680
       Width           =   1815
    End
@@ -245,7 +282,7 @@ Begin VB.Form frmUserAccount
       EndProperty
       Height          =   315
       Left            =   1560
-      TabIndex        =   3
+      TabIndex        =   1
       Top             =   1200
       Width           =   1815
    End
@@ -333,26 +370,60 @@ Begin VB.Form frmUserAccount
       BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
          NumListImages   =   5
          BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "UserAccount.frx":0000
+            Picture         =   "UserAccount.frx":0008
             Key             =   "New"
          EndProperty
          BeginProperty ListImage2 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "UserAccount.frx":0118
+            Picture         =   "UserAccount.frx":0120
             Key             =   "Edit"
          EndProperty
          BeginProperty ListImage3 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "UserAccount.frx":0230
+            Picture         =   "UserAccount.frx":0238
             Key             =   "Delete"
          EndProperty
          BeginProperty ListImage4 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "UserAccount.frx":0344
+            Picture         =   "UserAccount.frx":034C
             Key             =   "Save"
          EndProperty
          BeginProperty ListImage5 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "UserAccount.frx":045C
+            Picture         =   "UserAccount.frx":0464
             Key             =   "Cancel"
          EndProperty
       EndProperty
+   End
+   Begin VB.Label Label9 
+      Caption         =   "Church"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   315
+      Left            =   120
+      TabIndex        =   26
+      Top             =   4200
+      Width           =   1215
+   End
+   Begin VB.Label Label8 
+      Caption         =   "City"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   315
+      Left            =   120
+      TabIndex        =   25
+      Top             =   3600
+      Width           =   1350
    End
    Begin VB.Label Label7 
       Caption         =   "Object Name"
@@ -368,7 +439,7 @@ Begin VB.Form frmUserAccount
       Height          =   255
       Left            =   4560
       TabIndex        =   20
-      Top             =   3240
+      Top             =   4440
       Width           =   1335
    End
    Begin VB.Label Label6 
@@ -482,10 +553,6 @@ Attribute VB_Exposed = False
 
 Option Explicit
 
-
-
-
-
 Public Sub CboUserName_Click()
 On Error GoTo ErrorHandler
 
@@ -501,19 +568,32 @@ ErrorHandler:
 End Sub
 
 Private Sub chkDelete_Click()
-do_permissioms (4)
+    do_permissioms (4)
 End Sub
 
 Private Sub chkInsert_Click()
-do_permissioms (2)
+    do_permissioms (2)
 End Sub
 
 Private Sub chkRead_Click()
-do_permissioms (1)
+    do_permissioms (1)
 End Sub
 
 Private Sub chkUpdate_Click()
-do_permissioms (3)
+    do_permissioms (3)
+End Sub
+
+
+Private Sub cmbCity_Click()
+loadChurches
+End Sub
+
+Private Sub loadChurches()
+ If cmbCity.ListIndex >= 0 Then
+   Dim sCity As Integer
+    sCity = cmbCity.ItemData(cmbCity.ListIndex)
+    LoadChurchComboBoxWithAll (sCity)
+  End If
 End Sub
 
 Private Sub cmdOK_Click()
@@ -534,6 +614,7 @@ Private Sub Form_Load()
  On Error GoTo ErrorHandler
 
 LoadUserAccountComboBox
+LoadCityNames
 'InitialiseUserAccount
 gRecordUserType = RECORD_READ
 SetToolbarUserAccountControl

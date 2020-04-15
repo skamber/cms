@@ -35,7 +35,10 @@ On Error GoTo ErrorHandler
     For Each ctrl In frmUserAccount.Controls
         
         If TypeOf ctrl Is TextBox Then ctrl.Text = ""
-        If TypeOf ctrl Is ComboBox Then ctrl.ListIndex = -1
+        If TypeOf ctrl Is ComboBox Then
+            ctrl.ListIndex = -1
+            'ctrl.Text = ""
+        End If
         If TypeOf ctrl Is MaskEdBox Then ctrl.Text = ""
         Set ctrl = Nothing
         
@@ -48,10 +51,10 @@ On Error GoTo ErrorHandler
     LoadPermissions(Ctr, 3) = "N"
     LoadPermissions(Ctr, 4) = "N"
     Next Ctr
-    frmUserAccount.chkDelete.Value = 0
-    frmUserAccount.chkInsert.Value = 0
-    frmUserAccount.chkRead.Value = 0
-    frmUserAccount.chkUpdate.Value = 0
+    frmUserAccount.chkDelete.value = 0
+    frmUserAccount.chkInsert.value = 0
+    frmUserAccount.chkRead.value = 0
+    frmUserAccount.chkUpdate.value = 0
     
     
 Exit Function
@@ -81,7 +84,7 @@ On Error GoTo ErrorHandler
             If Not rslocal Is Nothing Then
                 Do Until rslocal.EOF
                     .CboUserName.AddItem rslocal!Full_Name
-                    .CboUserName.ItemData(.CboUserName.NewIndex) = rslocal!Id
+                    .CboUserName.ItemData(.CboUserName.NewIndex) = rslocal!id
                     rslocal.MoveNext
                 Loop
                 Set rslocal = Nothing
@@ -170,22 +173,33 @@ Public Function DisplayUserAccount()
         Exit Function
         End If
       With frmUserAccount
-        .txtUserId = rslocal!Id
+        .txtUserId = rslocal!id
         .txtUserName = rslocal!Full_Name
         .txtLogonId = rslocal!Logon_Id
+        Dim cityId As Long
+        Dim churchId As Long
+        Dim index As Long
+        cityId = ConvertNull(rslocal!City_Id)
+        index = FindCBIndexById(.cmbCity, cityId)
+        .cmbCity.Text = .cmbCity.List(index)
+        LoadChurchComboBoxWithAll (cityId)
+        churchId = ConvertNull(rslocal!Church_Id)
+        index = FindCBIndexById(.cmbChurch, churchId)
+        .cmbChurch.Text = .cmbChurch.List(index)
+        
         .txtPassword = rslocal!Logon_Password
         checkSystemManager = rslocal!SYSTEM_MANAGER
         checkReportView = rslocal!Report_View
         If checkSystemManager = "Y" Then
-            .chkSystemManager.Value = 1
+            .chkSystemManager.value = 1
          Else
-         .chkSystemManager.Value = 0
+         .chkSystemManager.value = 0
         End If
         
         If checkReportView = "Y" Then
-            .chkReportView.Value = 1
+            .chkReportView.value = 1
          Else
-         .chkReportView.Value = 0
+         .chkReportView.value = 0
         End If
         
         .dtePasswordLastUpdate = Format(rslocal!Password_Last_Update, DATE_FORMAT) & ""
@@ -312,6 +326,10 @@ Public Sub UserAccountActivate()
         .listActions.Enabled = True
         .chkSystemManager.Enabled = True
         .chkReportView.Enabled = True
+        .cmbCity.Enabled = True
+        .cmbChurch.Enabled = True
+        
+        
 '        .cboOffice.Enabled = True
 '        .lstPractice.ListIndex = -1
 '        .lstPrivilege.ListIndex = -1
@@ -328,7 +346,8 @@ Public Sub UserAccountActivate()
         .fram1.Enabled = False
         .chkSystemManager.Enabled = False
         .chkReportView.Enabled = False
-        
+        .cmbCity.Enabled = False
+        .cmbChurch.Enabled = False
         .listActions.Enabled = True
 '        .cboOffice.Enabled = False
 '        .lstPractice.ListIndex = -1
@@ -359,16 +378,19 @@ On Error GoTo ErrorHandler
     Set objUserPermission_s = New CMSUser.clsUserPermissions_s
     Set objUserPermission_s.DatabaseConnection = objConnection
 
-    PopulateUserAccountObject objUser
+    If Not PopulateUserAccountObject(objUser) Then
+     MsgBox "Invalid data entry.", vbExclamation
+     Exit Function
+    End If
     
     'Insert or Update record
     Select Case gRecordUserType
 Case RECORD_NEW:
-             
+
         objuser_s.insertUser objUser
         objUser.UserId = objuser_s.NewUserId
         gUserAccountId = objUser.UserId
-        gUserAccountName = objUser.UserName
+        gUserAccountName = objUser.userName
         frmUserAccount.CboUserName.AddItem gUserAccountName
         frmUserAccount.CboUserName.ItemData(frmUserAccount.CboUserName.NewIndex) = gUserAccountId
         frmUserAccount.txtUserId = objuser_s.NewUserId
@@ -398,26 +420,45 @@ ErrorHandler:
     
 End Function
 
+
+
 Public Function PopulateUserAccountObject(objUser As CMSUser.clsUser)
 
 On Error GoTo ErrorHandler
-
+PopulateUserAccountObject = False
     With frmUserAccount
-
-            If Trim(.txtUserName.Text) <> "" Then objUser.UserName = UCase(.txtUserName.Text)
+    
+            If Trim(.txtUserName.Text) <> "" Then objUser.userName = UCase(.txtUserName.Text)
+            If Trim(.cmbCity.Text) <> "" Then
+            .cmbCity.ListIndex = FindCBIndexByName(.cmbCity, .cmbCity.Text)
+              objUser.cityId = .cmbCity.ItemData(.cmbCity.ListIndex)
+            Else
+            MsgBox "Invalid city selection.", vbExclamation
+            Exit Function
+            End If
+            
+            If Trim(.cmbChurch.Text) <> "" Then
+            .cmbChurch.ListIndex = FindCBIndexByName(.cmbChurch, .cmbChurch.Text)
+              objUser.churchId = .cmbChurch.ItemData(.cmbChurch.ListIndex)
+            Else
+            MsgBox "Invalid Church selection.", vbExclamation
+            Exit Function
+            End If
+            
             If Trim(.txtLogonId.Text) <> "" Then objUser.LogonId = UCase(.txtLogonId.Text)
             If Trim(.txtPassword.Text) <> "" Then objUser.LogonPassword = .txtPassword.Text
-            If .chkSystemManager.Value = 1 Then
+            If .chkSystemManager.value = 1 Then
                 objUser.systemManager = "Y"
             Else
                objUser.systemManager = "N"
             End If
-            If .chkReportView.Value = 1 Then
+            If .chkReportView.value = 1 Then
                 objUser.ReportView = "Y"
             Else
                objUser.ReportView = "N"
             End If
             If .dtePasswordLastUpdate.Text <> "" Then objUser.PasswordLastChange = .dtePasswordLastUpdate.FormattedText
+            PopulateUserAccountObject = True
      End With
     
 Exit Function
@@ -485,7 +526,7 @@ On Error GoTo ErrorHandler
     Dim sql As String
     Dim Count As Byte
     Count = 1
-    sql = "SELECT * FROM PRIVILEGE WHERE User_Id = " & UserId
+    sql = "SELECT * FROM privilege WHERE User_Id = " & UserId
     sql = sql & " Order by Action_Id"
     Set Userprivilege = New ADODB.Recordset
         Userprivilege.Open sql, objConnection, adOpenForwardOnly, adLockReadOnly
@@ -518,7 +559,7 @@ On Error GoTo ErrorHandler
     Dim sql As String
     Dim Count As Byte
     Count = 1
-    sql = "SELECT * FROM PRIVILEGE WHERE User_Id = " & UserId
+    sql = "SELECT * FROM privilege WHERE User_Id = " & UserId
     sql = sql & " Order by Action_Id"
     Set Userprivilege = New ADODB.Recordset
         Userprivilege.Open sql, objConnection, adOpenForwardOnly, adLockReadOnly
@@ -555,25 +596,25 @@ If frmUserAccount.listActions.ListIndex = -1 Then Exit Sub
 Select Case Item
 
 Case 1:
-        If .chkRead.Value = 1 Then
+        If .chkRead.value = 1 Then
         LoadPermissions(frmUserAccount.listActions.ItemData(frmUserAccount.listActions.ListIndex), 1) = "Y"
         Else
         LoadPermissions(frmUserAccount.listActions.ItemData(frmUserAccount.listActions.ListIndex), 1) = "N"
         End If
 Case 2:
-        If .chkInsert.Value = 1 Then
+        If .chkInsert.value = 1 Then
         LoadPermissions(frmUserAccount.listActions.ItemData(frmUserAccount.listActions.ListIndex), 2) = "Y"
         Else
         LoadPermissions(frmUserAccount.listActions.ItemData(frmUserAccount.listActions.ListIndex), 2) = "N"
         End If
 Case 3:
-        If .chkUpdate.Value = 1 Then
+        If .chkUpdate.value = 1 Then
         LoadPermissions(frmUserAccount.listActions.ItemData(frmUserAccount.listActions.ListIndex), 3) = "Y"
         Else
         LoadPermissions(frmUserAccount.listActions.ItemData(frmUserAccount.listActions.ListIndex), 3) = "N"
         End If
 Case 4:
-        If .chkDelete.Value = 1 Then
+        If .chkDelete.value = 1 Then
         LoadPermissions(frmUserAccount.listActions.ItemData(frmUserAccount.listActions.ListIndex), 4) = "Y"
         Else
         LoadPermissions(frmUserAccount.listActions.ItemData(frmUserAccount.listActions.ListIndex), 4) = "N"
@@ -596,25 +637,25 @@ With frmUserAccount
 
 
 If LoadPermissions(Item, 1) = "Y" Then
-        .chkRead.Value = 1
+        .chkRead.value = 1
 Else
-.chkRead.Value = 0
+.chkRead.value = 0
 End If
 
 If LoadPermissions(Item, 2) = "Y" Then
-        .chkInsert.Value = 1
+        .chkInsert.value = 1
 Else
-.chkInsert.Value = 0
+.chkInsert.value = 0
 End If
 If LoadPermissions(Item, 3) = "Y" Then
-        .chkUpdate.Value = 1
+        .chkUpdate.value = 1
 Else
-.chkUpdate.Value = 0
+.chkUpdate.value = 0
 End If
 If LoadPermissions(Item, 4) = "Y" Then
-        .chkDelete.Value = 1
+        .chkDelete.value = 1
 Else
-.chkDelete.Value = 0
+.chkDelete.value = 0
 End If
 End With
 
@@ -646,14 +687,79 @@ On Error GoTo ErrorHandler
     LoadPermissions(Ctr, 3) = "N"
     LoadPermissions(Ctr, 4) = "N"
     Next Ctr
-    frmUserAccount.chkDelete.Value = 0
-    frmUserAccount.chkInsert.Value = 0
-    frmUserAccount.chkRead.Value = 0
-    frmUserAccount.chkUpdate.Value = 0
+    frmUserAccount.chkDelete.value = 0
+    frmUserAccount.chkInsert.value = 0
+    frmUserAccount.chkRead.value = 0
+    frmUserAccount.chkUpdate.value = 0
     
     
 Exit Function
 ErrorHandler:
     Call objError.ErrorRoutine(Err.Number, Err.Description, objConnection, "modUserAccount", "InitialiseUserAccount", True)
+
+End Function
+
+Public Function LoadCityNames()
+On Error GoTo ErrorHandler
+
+    Dim objOrganisation_s As CMSOrganisation.clsOrganisation
+    Dim rslocal As ADODB.Recordset
+    Set objOrganisation_s = New CMSOrganisation.clsOrganisation
+    Set objOrganisation_s.DatabaseConnection = objConnection
+
+    Set rslocal = objOrganisation_s.getCities()
+
+    With frmUserAccount
+            
+            .cmbCity.Clear
+            If Not rslocal Is Nothing Then
+                Do Until rslocal.EOF
+                    .cmbCity.AddItem rslocal!cityName
+                    .cmbCity.ItemData(.cmbCity.NewIndex) = rslocal!id
+                    rslocal.MoveNext
+                Loop
+                Set rslocal = Nothing
+            End If
+    End With
+    Set objOrganisation_s = Nothing
+
+Exit Function
+ErrorHandler:
+    'Call objError.ErrorRoutine(Err.Number, Err.Description, objConnection, "modlogon", "LoadChurchComboBox", True)
+
+End Function
+
+
+
+
+Public Function LoadChurchComboBoxWithAll(ByVal sCity As Long)
+On Error GoTo ErrorHandler
+
+    Dim objOrganisation_s As CMSOrganisation.clsOrganisation
+    Dim rslocal As ADODB.Recordset
+    Set objOrganisation_s = New CMSOrganisation.clsOrganisation
+    Set objOrganisation_s.DatabaseConnection = objConnection
+
+    Set rslocal = objOrganisation_s.getChurchName(sCity)
+
+    With frmUserAccount
+            
+            .cmbChurch.Clear
+            .cmbChurch.AddItem "ALL"
+            .cmbChurch.ItemData(.cmbChurch.NewIndex) = 0
+            If Not rslocal Is Nothing Then
+                Do Until rslocal.EOF
+                    .cmbChurch.AddItem rslocal!Name
+                    .cmbChurch.ItemData(.cmbChurch.NewIndex) = rslocal!id
+                    rslocal.MoveNext
+                Loop
+                Set rslocal = Nothing
+            End If
+    End With
+    Set objOrganisation_s = Nothing
+
+Exit Function
+ErrorHandler:
+    Call objError.ErrorRoutine(Err.Number, Err.Description, objConnection, "modUserAccount", "LoadChurchComboBoxWithAll", True)
 
 End Function

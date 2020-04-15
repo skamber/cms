@@ -99,17 +99,17 @@ End Function
 Public Function SaveReceipt() As Boolean
 On Error GoTo ErrorHandler
 
-    Dim objReceipt As CMSreceipt.clsReceipt
+    Dim objReceipt As CMSReceipt.clsReceipt
     
-    Dim objreceipt_s As CMSreceipt.clsReceipt_s
+    Dim objreceipt_s As CMSReceipt.clsReceipt_s
     
 
 
     SaveReceipt = False
                             
     'Receipt record
-    Set objReceipt = New CMSreceipt.clsReceipt
-    Set objreceipt_s = New CMSreceipt.clsReceipt_s
+    Set objReceipt = New CMSReceipt.clsReceipt
+    Set objreceipt_s = New CMSReceipt.clsReceipt_s
     Set objreceipt_s.DatabaseConnection = objConnection
 
 
@@ -124,7 +124,7 @@ On Error GoTo ErrorHandler
         UpdateInvoiceBalance (frmReceipt.txtInvoiceID)
     ElseIf gRecordMode = RECORD_EDIT Then
         
-        objReceipt.Id = gReceiptId
+        objReceipt.id = gReceiptId
         objreceipt_s.Updatereceipt objReceipt
         UpdateInvoiceBalance (frmReceipt.txtInvoiceID)
     
@@ -143,7 +143,7 @@ ErrorHandler:
     
 End Function
 
-Public Function PopulateReceiptObject(objReceipt As CMSreceipt.clsReceipt)
+Public Function PopulateReceiptObject(objReceipt As CMSReceipt.clsReceipt)
 On Error GoTo ErrorHandler
 'save data from form to newly created object for insert or update
 
@@ -157,10 +157,11 @@ On Error GoTo ErrorHandler
             If .dteDate.Text <> "" Then objReceipt.DateOfReceipt = .dteDate.FormattedText
             objReceipt.INV_NO = .txtInvoiceNo.Text
             objReceipt.Amount = .txtAmountToPay.Text
-            objReceipt.Accountname = .txtUser.Text
+            objReceipt.Accountname = gUserFullName
             objReceipt.INV_ID = .txtInvoiceID.Text
             objReceipt.ChequeNumber = .txtChequeNo.Text
-            objReceipt.ChurchId = gChurchId
+            objReceipt.churchId = gChurchId
+            objReceipt.Comments = .txtComment.Text
             
             
     End With
@@ -176,7 +177,7 @@ Public Function LoadReceiptDefualtValue()
 
 With frmReceipt
        .dteDate.Text = Format(Now(), DATE_FORMAT)
-       .txtUser.Text = UserName
+       .txtUser.Text = gUserFullName
        
 End With
 
@@ -185,11 +186,10 @@ End Function
 Sub GetInvoiceInfo()
  On Error GoTo ErrorHandler
  
-    ' Dim objFollowup_s As PACMSFollowUP.clsFollowup_s
-     Dim objInvoice_s As CMSinvoice.clsInvoice_s
+     Dim objInvoice_s As CMSInvoice.clsInvoice_s
      Dim rslocal As ADODB.Recordset
      
-    Set objInvoice_s = New CMSinvoice.clsInvoice_s
+    Set objInvoice_s = New CMSInvoice.clsInvoice_s
     Set objInvoice_s.DatabaseConnection = objConnection
  
    
@@ -204,12 +204,12 @@ Sub GetInvoiceInfo()
          Screen.MousePointer = vbDefault
          Exit Sub
          Else
-          .txtName.Text = rslocal!Name1
-          .txtSurname.Text = rslocal!name2
-          .txtInvoiceID.Text = rslocal!Id
-          .txtAmountToPay.Text = rslocal!balance
-          mReceiptAmountAlocated = rslocal!balance
-          Call ValidNumericEntry(.txtAmountToPay)
+         .txtName.Text = rslocal!Name1
+         .txtSurname.Text = rslocal!name2
+         .txtInvoiceID.Text = rslocal!id
+         .txtAmountToPay.Text = rslocal!balance
+         mReceiptAmountAlocated = rslocal!balance
+         Call ValidNumericEntry(.txtAmountToPay)
          End If
      End With
      
@@ -225,16 +225,12 @@ End Sub
 Public Function getReceiptAmount(InvoiceId As Long) As Double
   On Error GoTo ErrorHandler
  
-    ' Dim objFollowup_s As PACMSFollowUP.clsFollowup_s
-     Dim objreceipt_s As CMSreceipt.clsReceipt_s
+     Dim objreceipt_s As CMSReceipt.clsReceipt_s
      Dim rslocal As ADODB.Recordset
      Dim TotalAmount As Double
-    Set objreceipt_s = New CMSreceipt.clsReceipt_s
+    Set objreceipt_s = New CMSReceipt.clsReceipt_s
     Set objreceipt_s.DatabaseConnection = objConnection
  
-    ' Dim lngTotalProspect As Long
-    ' Dim lngTotalPlanning As Long
-    ' Dim lngTotalCoaching As Long
  Set rslocal = objreceipt_s.getByInvoiceId(InvoiceId)
      TotalAmount = 0
      Screen.MousePointer = vbHourglass
@@ -255,15 +251,10 @@ End Function
 Public Sub GenerateReceiptList(sql As String)
  On Error GoTo ErrorHandler
  
-    ' Dim objFollowup_s As PACMSFollowUP.clsFollowup_s
      Dim rslocal As ADODB.Recordset
      Dim strId  As String
      Dim itmx As ListItem
      
-    ' Dim lngTotalProspect As Long
-    ' Dim lngTotalPlanning As Long
-    ' Dim lngTotalCoaching As Long
- 
  
      Screen.MousePointer = vbHourglass
  
@@ -276,10 +267,10 @@ Public Sub GenerateReceiptList(sql As String)
             rslocal.Open sql, objConnection, adOpenForwardOnly, adLockReadOnly
              If Not rslocal.EOF Then
                  Do While Not rslocal.EOF
-                     strId = CStr(rslocal!Id)
+                     strId = CStr(rslocal!id)
                      Set itmx = .ListReceiptView.ListItems.Add()
                                      itmx.Key = "#" & strId
-                                     itmx.Text = CStr(rslocal!Id)
+                                     itmx.Text = CStr(rslocal!id)
                                      If Not IsNull(rslocal!INV_ID) Then itmx.SubItems(1) = CStr(rslocal!INV_ID)
                                      If Not IsNull(rslocal!INV_NO) Then itmx.SubItems(2) = CStr(rslocal!INV_NO)
                                      If Not IsNull(rslocal!Amount) Then itmx.SubItems(3) = CStr(rslocal!Amount)
@@ -300,7 +291,7 @@ Public Sub GenerateReceiptList(sql As String)
  
  Exit Sub
 ErrorHandler:
-     Call objError.ErrorRoutine(Err.Number, Err.Description, objConnection, "modMember", "GenerateMemberList", True)
+     Call objError.ErrorRoutine(Err.Number, Err.Description, objConnection, "modReceipt", "GenerateMemberList", True)
  
  End Sub
 Public Sub UpdateInvoiceBalance(InvoiceId As Long)
@@ -308,11 +299,11 @@ Public Sub UpdateInvoiceBalance(InvoiceId As Long)
     Dim TotalAmount As Double
     Dim TotalReceiptAmount As Double
     Dim AmountBalance As Double
-    Dim objInvoice_s As CMSinvoice.clsInvoice_s
+    Dim objInvoice_s As CMSInvoice.clsInvoice_s
     Dim rslocal As ADODB.Recordset
     On Error GoTo ErrorHandler
    
-    Set objInvoice_s = New CMSinvoice.clsInvoice_s
+    Set objInvoice_s = New CMSInvoice.clsInvoice_s
     Set objInvoice_s.DatabaseConnection = objConnection
     Set rslocal = objInvoice_s.getByInvoiceId(InvoiceId)
     If rslocal Is Nothing Then
@@ -324,7 +315,7 @@ Public Sub UpdateInvoiceBalance(InvoiceId As Long)
     TotalReceiptAmount = getReceiptAmount(InvoiceId)
     AmountBalance = TotalAmount - TotalReceiptAmount
     
-    Set objInvoice_s = New CMSinvoice.clsInvoice_s
+    Set objInvoice_s = New CMSInvoice.clsInvoice_s
     Set objInvoice_s.DatabaseConnection = objConnection
     objInvoice_s.UpdateBalance InvoiceId, AmountBalance
     Set objInvoice_s = Nothing
@@ -334,3 +325,44 @@ ErrorHandler:
      Call objError.ErrorRoutine(Err.Number, Err.Description, objConnection, "modReceipt", "UpdateInvoiceBalance", True)
  
 End Sub
+
+Public Function DisplayReceipt()
+
+    Dim objreceipt_s As CMSReceipt.clsReceipt_s
+    
+    Dim rslocal As ADODB.Recordset
+    
+    On Error GoTo ErrorHandler
+    
+    Call InitialiseReceipt
+    
+    'Retrieve Prospect record and display on form
+    Set objreceipt_s = New CMSReceipt.clsReceipt_s
+    Set objreceipt_s.DatabaseConnection = objConnection
+    Set rslocal = objreceipt_s.getByReceiptId(gReceiptId)
+
+    If rslocal Is Nothing Then
+        Exit Function
+    End If
+
+    Screen.MousePointer = vbHourglass
+
+    With frmReceipt
+        
+        .txtChequeNo.Text = ConvertNull(rslocal!cheque_Number)
+        .txtInvoiceID.Text = ConvertNull(rslocal!INV_NO)
+        .txtReceiptId.Text = ConvertNull(rslocal!id)
+        .txtAmountToPay.Text = ConvertNull(rslocal!Amount)
+        .txtComment.Text = "" & rslocal!Comments
+    End With
+   Set objreceipt_s = Nothing
+   Screen.MousePointer = vbDefault
+Exit Function
+
+ErrorHandler:
+
+    'Call objError.ErrorRoutine(Err.Number, Err.Description, objConnection, "modReceipt", "DisplayCollection", True)
+
+End Function
+
+

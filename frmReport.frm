@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "msmask32.ocx"
+Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "MSMASK32.OCX"
 Object = "{00025600-0000-0000-C000-000000000046}#5.2#0"; "crystl32.ocx"
 Begin VB.Form frmReport 
    ClientHeight    =   8880
@@ -480,13 +480,8 @@ On Error GoTo ErrorHandler
     End With
 
     Set objReportConnection = New ADODB.Connection
-
-    'Connect to database for reporting...
-   
-        objReportConnection = objConnection & ";PWD=" & gDatabasePassword
-    
+    objReportConnection = objConnection
     Report.Connect = objReportConnection
-    
     MDIFrm.pnlStatusBar.Panels(1).Text = ""
     
     
@@ -497,9 +492,9 @@ ErrorHandler:
 End Sub
 
 
-Private Sub optReport_Click(Index As Integer)
+Private Sub optReport_Click(index As Integer)
      ReportCriteria_Reset
-    lngReportId = Index
+    lngReportId = index
     If Not CheckReportSecurity Then Exit Sub
     Call ReportCriteria_1(lngReportId)
     

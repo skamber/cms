@@ -63,14 +63,14 @@ End Function
 Public Function SaveInvoice() As Boolean
 On Error GoTo ErrorHandler
 
-    Dim objInvoice As CMSinvoice.clsInvoice
-    Dim objInvoice_s As CMSinvoice.clsInvoice_s
+    Dim objInvoice As CMSInvoice.clsInvoice
+    Dim objInvoice_s As CMSInvoice.clsInvoice_s
 
     SaveInvoice = False
                             
     'Member record
-    Set objInvoice = New CMSinvoice.clsInvoice
-    Set objInvoice_s = New CMSinvoice.clsInvoice_s
+    Set objInvoice = New CMSInvoice.clsInvoice
+    Set objInvoice_s = New CMSInvoice.clsInvoice_s
     Set objInvoice_s.DatabaseConnection = objConnection
 
 
@@ -86,7 +86,7 @@ On Error GoTo ErrorHandler
         
     ElseIf (gRecordMode = RECORD_EDIT) Or (gRecordMode = RECORD_READ) Then
         
-        objInvoice.Id = gInvoiceId
+        objInvoice.id = gInvoiceId
         objInvoice_s.UpdateInvoice objInvoice
         
     
@@ -162,7 +162,7 @@ On Error GoTo ErrorHandler
             If Not rslocal Is Nothing Then
                 Do Until rslocal.EOF
                     .cmbTerms.AddItem rslocal!TermName
-                    .cmbTerms.ItemData(.cmbTerms.NewIndex) = rslocal!Id
+                    .cmbTerms.ItemData(.cmbTerms.NewIndex) = rslocal!id
                     rslocal.MoveNext
                 Loop
                 Set rslocal = Nothing
@@ -172,7 +172,7 @@ On Error GoTo ErrorHandler
             If Not rslocal Is Nothing Then
                 Do Until rslocal.EOF
                     .CmbItemDescription.AddItem rslocal!Descriprtion
-                    .CmbItemDescription.ItemData(.CmbItemDescription.NewIndex) = rslocal!Id
+                    .CmbItemDescription.ItemData(.CmbItemDescription.NewIndex) = rslocal!id
                     rslocal.MoveNext
                 Loop
                 Set rslocal = Nothing
@@ -190,7 +190,7 @@ ErrorHandler:
 
 End Function
 
-Public Function PopulateInvoiceObject(objInvoice As CMSinvoice.clsInvoice)
+Public Function PopulateInvoiceObject(objInvoice As CMSInvoice.clsInvoice)
 On Error GoTo ErrorHandler
 'save data from form to newly created object for insert or update
 
@@ -206,6 +206,7 @@ On Error GoTo ErrorHandler
         If Trim(.txtAddress2.Text) <> "" Then objInvoice.address2 = .txtAddress2.Text
         If Trim(.txtPostcode.Text) <> "" Then objInvoice.Address3 = .txtPostcode.Text
         If Trim(.txtMobile.Text) <> "" Then objInvoice.Mobile = .txtMobile.Text
+        If Trim(.txtEmail.Text) <> "" Then objInvoice.Email = .txtEmail.Text
         If Trim(.txtBalance.Text) <> "" Then objInvoice.balance = .txtBalance.Text
         If .dteInvoiceDate.Text <> "" Then objInvoice.dateofInvoice = .dteInvoiceDate.FormattedText
         If .dteOverDueDate.Text <> "" Then objInvoice.over_due_date = .dteOverDueDate.FormattedText
@@ -213,6 +214,8 @@ On Error GoTo ErrorHandler
         If Trim(.txtState) <> "" Then objInvoice.State = .txtState
         If Trim(.txtTotalAmount.Text) <> "" Then objInvoice.Total_Amount = .txtTotalAmount.Text
         If Trim(.cmbTerms.Text) <> "" Then objInvoice.Terms = .cmbTerms.Text
+        objInvoice.churchId = gChurchId
+        objInvoice.Accountname = gUserFullName
         
     End With
     
@@ -226,16 +229,10 @@ End Function
 Public Sub GenerateInvoiceList(sql As String)
  On Error GoTo ErrorHandler
  
-    ' Dim objFollowup_s As PACMSFollowUP.clsFollowup_s
      Dim rslocal As ADODB.Recordset
      Dim strId  As String
      Dim itmx As ListItem
-     
-    ' Dim lngTotalProspect As Long
-    ' Dim lngTotalPlanning As Long
-    ' Dim lngTotalCoaching As Long
- 
- 
+      
      Screen.MousePointer = vbHourglass
  
      With frmInvoiceSearch
@@ -247,10 +244,10 @@ Public Sub GenerateInvoiceList(sql As String)
             rslocal.Open sql, objConnection, adOpenForwardOnly, adLockReadOnly
              If Not rslocal.EOF Then
                  Do While Not rslocal.EOF
-                     strId = CStr(rslocal!Id)
+                     strId = CStr(rslocal!id)
                      Set itmx = .ListInvoiceView.ListItems.Add()
                                      itmx.Key = "#" & strId
-                                     itmx.Text = CStr(rslocal!Id)
+                                     itmx.Text = CStr(rslocal!id)
                                      If Not IsNull(rslocal!Invoice_no) Then itmx.SubItems(1) = CStr(rslocal!Invoice_no)
                                      If Not IsNull(rslocal!Ref) Then itmx.SubItems(2) = CStr(rslocal!Ref)
                                      If Not IsNull(rslocal!Name1) Then itmx.SubItems(3) = CStr(rslocal!Name1)
@@ -378,14 +375,14 @@ End Sub
 Public Function SaveInvoiceItem() As Boolean
 On Error GoTo ErrorHandler
 
-    Dim objInvoiceItem As CMSinvoiceItem.clsInvoiceItem
-    Dim objInvoiceItem_s As CMSinvoiceItem.clsInvoiceItem_s
+    Dim objInvoiceItem As CMSInvoiceItem.clsInvoiceItem
+    Dim objInvoiceItem_s As CMSInvoiceItem.clsInvoiceItem_s
 
     SaveInvoiceItem = False
                             
     'Member record
-    Set objInvoiceItem = New CMSinvoiceItem.clsInvoiceItem
-    Set objInvoiceItem_s = New CMSinvoiceItem.clsInvoiceItem_s
+    Set objInvoiceItem = New CMSInvoiceItem.clsInvoiceItem
+    Set objInvoiceItem_s = New CMSInvoiceItem.clsInvoiceItem_s
     Set objInvoiceItem_s.DatabaseConnection = objConnection
 
 
@@ -418,7 +415,7 @@ ErrorHandler:
     
 End Function
 
-Public Function PopulateInvoiceItemObject(objInvoiceItem As CMSinvoiceItem.clsInvoiceItem)
+Public Function PopulateInvoiceItemObject(objInvoiceItem As CMSInvoiceItem.clsInvoiceItem)
 On Error GoTo ErrorHandler
 'save data from form to newly created object for insert or update
 
@@ -444,19 +441,15 @@ End Function
 Sub displayInvoiceItemList()
  On Error GoTo ErrorHandler
  
-    ' Dim objFollowup_s As PACMSFollowUP.clsFollowup_s
-     Dim objInvoiceItem_s As CMSinvoiceItem.clsInvoiceItem_s
+     Dim objInvoiceItem_s As CMSInvoiceItem.clsInvoiceItem_s
      Dim rslocal As ADODB.Recordset
      Dim strId  As String
      Dim itmx As ListItem
      
      Dim TotalItemsAmount, BalanceAmount As Double
-    Set objInvoiceItem_s = New CMSinvoiceItem.clsInvoiceItem_s
+    Set objInvoiceItem_s = New CMSInvoiceItem.clsInvoiceItem_s
     Set objInvoiceItem_s.DatabaseConnection = objConnection
  
-    ' Dim lngTotalProspect As Long
-    ' Dim lngTotalPlanning As Long
-    ' Dim lngTotalCoaching As Long
  Set rslocal = objInvoiceItem_s.getByInvoiceId(gInvoiceId)
      TotalItemsAmount = 0
      Screen.MousePointer = vbHourglass
@@ -511,18 +504,14 @@ End Sub
 Sub displayInvoiceSearchItemList()
  On Error GoTo ErrorHandler
  
-    ' Dim objFollowup_s As PACMSFollowUP.clsFollowup_s
-     Dim objInvoiceItem_s As CMSinvoiceItem.clsInvoiceItem_s
+     Dim objInvoiceItem_s As CMSInvoiceItem.clsInvoiceItem_s
      Dim rslocal As ADODB.Recordset
      Dim strId  As String
      Dim itmx As ListItem
      
-    Set objInvoiceItem_s = New CMSinvoiceItem.clsInvoiceItem_s
+    Set objInvoiceItem_s = New CMSInvoiceItem.clsInvoiceItem_s
     Set objInvoiceItem_s.DatabaseConnection = objConnection
- 
-    ' Dim lngTotalProspect As Long
-    ' Dim lngTotalPlanning As Long
-    ' Dim lngTotalCoaching As Long
+
  Set rslocal = objInvoiceItem_s.getByInvoiceId(gInvoiceId)
     
      Screen.MousePointer = vbHourglass
@@ -573,7 +562,7 @@ End Sub
 
 Public Function DisplayInvoiceItem()
 
-    Dim objInvoiceItem_s As CMSinvoiceItem.clsInvoiceItem_s
+    Dim objInvoiceItem_s As CMSInvoiceItem.clsInvoiceItem_s
     
     Dim rslocal As ADODB.Recordset
    ' Dim intCnt As Integer
@@ -584,7 +573,7 @@ Public Function DisplayInvoiceItem()
     Call InitialiseInvoiceItem
     
     'Retrieve Prospect record and display on form
-    Set objInvoiceItem_s = New CMSinvoiceItem.clsInvoiceItem_s
+    Set objInvoiceItem_s = New CMSInvoiceItem.clsInvoiceItem_s
     Set objInvoiceItem_s.DatabaseConnection = objConnection
     Set rslocal = objInvoiceItem_s.getByInvoiceItemId(gInvoiceItemId)
 
@@ -618,7 +607,7 @@ End Function
 
 Public Function DisplayInvoice()
 
-    Dim objInvoice_s As CMSinvoice.clsInvoice_s
+    Dim objInvoice_s As CMSInvoice.clsInvoice_s
     
     Dim rslocal As ADODB.Recordset
    ' Dim intCnt As Integer
@@ -629,7 +618,7 @@ Public Function DisplayInvoice()
     Call InitialiseInvoiceItem
     
     'Retrieve Prospect record and display on form
-    Set objInvoice_s = New CMSinvoice.clsInvoice_s
+    Set objInvoice_s = New CMSInvoice.clsInvoice_s
     Set objInvoice_s.DatabaseConnection = objConnection
     Set rslocal = objInvoice_s.getByInvoiceId(gInvoiceId)
 
@@ -647,6 +636,7 @@ Public Function DisplayInvoice()
         .txtAddress2.Text = ConvertNull(rslocal!address2)
         .txtPostcode.Text = ConvertNull(rslocal!Address3)
         .txtMobile.Text = ConvertNull(rslocal!Mobile)
+        .txtEmail.Text = ConvertNull(rslocal!Email)
         .txtBalance.Text = ConvertNull(rslocal!balance)
         .dteInvoiceDate.Text = Format(rslocal!Created_date, DATE_FORMAT)
         .dtePhone.Text = ConvertNull(rslocal!Phone)

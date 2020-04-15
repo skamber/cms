@@ -2,7 +2,6 @@ Attribute VB_Name = "modMain"
 Option Explicit
 Public Const INI_FILE_NAME = "CMS.INI"
 Public Const gDatabasePassword = "WingedBull"
-Public gDatabaseType As String
 Public gmemberId As Long
 Public gchildId As Long
 Public gPaymentId As Long
@@ -14,6 +13,15 @@ Public gInvoiceItemId As Long
 Public gCashoutId As Long
 Public gCashflowItemId As Long
 Public gChurchId As Long
+Public gCityId As Long
+Public gCityName As String
+Public gHost As String
+Public gDatabaseName As String
+Public gUserName As String
+Public gUserFullName As String
+Public gPassword As String
+Public gCertPath As String
+Public gLicenseLimit As String
 Public PrivilegeBookMark As Variant
 Public Userprivilege As ADODB.Recordset
 Public objConnection As ADODB.Connection
@@ -31,12 +39,15 @@ Public CashOutSelected As Boolean
 Public CashflowItemSelected As Boolean
 Public systemManager As Boolean
 Public ReportView As Boolean
+Public gChurchRestriction As Long
 Public CompulsoryChangePassword As Boolean
-Public UserName As String
 Public Permissions(1 To 20, 1 To 4) As String
 Public LoadPermissions(1 To 20, 1 To 4) As String
+Public Cities As New COLLECTION
 Public UserId As Long
 Public Const DATE_FORMAT = "dd/mm/yyyy"
+Public Const DATE_FORMAT1 = "ddmmyyyy"
+Public Const VERSION = "3.0.1"
 Public Const DATE_TIME_FORMAT = "yyyy/mm/dd hh:mm:ss"
 Public Const NUMERIC_FORMAT = "###,###,###,##0.00"
 Public Const MEMBER = "Member"
@@ -52,6 +63,7 @@ Public Const RECEIPT = "Receipt"
 Public Const REPORTING = "Reporting"
 Public Const Member_information = "MemberMenu"
 Public Const Member_Search = "SearchMembers"
+Public Const Send_Sms = "SendSms"
 Public Const Child_Search = "SearchChildren"
 Public Const Children_information = "ChildrenMenu"
 Public Const Payment_information = "PaymentMenu"
@@ -77,6 +89,12 @@ Public Const RECORD_REMOVE = "Remove"
 Public Const RECORD_COPY = "Copy"
 Public Const RECORD_PRINT = "Print"
 Public Const RECORD_PRIVIEW = "Preview"
+Public Const SALT_PASSWORD = "Shana&Nineb"
+Public Const SALT_LICENCE = "Nineb&Shana"
+
+Public gSmsUserName As String
+Public gSmsPassword As String
+Public gSmsMessageFrom As String
 
 Public Enum eSortOrder
     sortAscending = 0
@@ -89,7 +107,6 @@ Public Enum eSortType
 End Enum
 
 
-Public gLocalDBPath As String
 Public Declare Function GetPrivateProfileString Lib "kernel32" Alias "GetPrivateProfileStringA" _
     (ByVal lpApplicationName As String, ByVal lpKeyName As Any, ByVal lpDefault As String, _
     ByVal lpReturnedString As String, ByVal nSize As Long, ByVal lpFileName As String) As Long
@@ -104,10 +121,10 @@ Public Sub CentreForm(frm As Form, intPosition As Integer)
 
 End Sub
 
-Public Function ConnectACCESS()
+
+Public Function LoadSetting()
 
     Dim sAppName As String * 100
-    Dim sKeyName As String * 100
     Dim sDefault As String * 100
     Dim sRet As String * 100
     Dim lSize As Long
@@ -118,29 +135,70 @@ Public Function ConnectACCESS()
     
     ' connect to local database
     sAppName = "Connection"
-    sKeyName = "Local"
     sDefault = ""
     sRet = ""
     lSize = 100
     sFileName = App.Path & "\" & INI_FILE_NAME
     
-    lRet = GetPrivateProfileString(sAppName, sKeyName, sDefault, sRet, lSize, sFileName)
-    gLocalDBPath = Left(sRet, InStrB(1, sRet, Chr(0)) / 2)
+    lRet = GetPrivateProfileString(sAppName, "Host", sDefault, sRet, lSize, sFileName)
+    gHost = Left(sRet, InStrB(1, sRet, Chr(0)) / 2)
     
+    lRet = GetPrivateProfileString(sAppName, "Database", sDefault, sRet, lSize, sFileName)
+    gDatabaseName = Left(sRet, InStrB(1, sRet, Chr(0)) / 2)
+    
+    lRet = GetPrivateProfileString(sAppName, "UserName", sDefault, sRet, lSize, sFileName)
+    gUserName = Left(sRet, InStrB(1, sRet, Chr(0)) / 2)
+    
+    lRet = GetPrivateProfileString(sAppName, "UserPassword", sDefault, sRet, lSize, sFileName)
+    gPassword = Left(sRet, InStrB(1, sRet, Chr(0)) / 2)
+    gPassword = cmdDecrypt(gPassword)
+
+    lRet = GetPrivateProfileString(sAppName, "CertPath", sDefault, sRet, lSize, sFileName)
+    gCertPath = Left(sRet, InStrB(1, sRet, Chr(0)) / 2)
+    
+    sAppName = "Licence"
+    lRet = GetPrivateProfileString(sAppName, "LicenseLimit", sDefault, sRet, lSize, sFileName)
+    gLicenseLimit = Left(sRet, InStrB(1, sRet, Chr(0)) / 2)
+    
+    sAppName = "SMS"
+    lRet = GetPrivateProfileString(sAppName, "UserName", sDefault, sRet, lSize, sFileName)
+    gSmsUserName = Left(sRet, InStrB(1, sRet, Chr(0)) / 2)
+    
+    lRet = GetPrivateProfileString(sAppName, "Password", sDefault, sRet, lSize, sFileName)
+    gSmsPassword = Left(sRet, InStrB(1, sRet, Chr(0)) / 2)
+    
+    lRet = GetPrivateProfileString(sAppName, "MessageFrom", sDefault, sRet, lSize, sFileName)
+    gSmsMessageFrom = Left(sRet, InStrB(1, sRet, Chr(0)) / 2)
+    
+    
+Exit Function
+ErrorHandler:
+    Call objError.ErrorRoutine(Err.Number, Err.Description, objConnection, "modMain", "ConnectDatabase", True)
+
+End Function
+
+Public Function ConnectDatabase()
+         
     Set objConnection = New ADODB.Connection
-    On Error Resume Next
+    Dim connection_string As String
     
+    On Error Resume Next
+    If gCertPath = "" Then
+    connection_string = "Driver={MySQL ODBC 5.3 Unicode Driver};Server=" & gHost & ";Database=" & _
+            gDatabaseName & "; User=" & gUserName & ";Password=" & gPassword & _
+            "; Option=3;"
+    Else
+    connection_string = "Driver={MySQL ODBC 5.3 Unicode Driver};Server=" & gHost & ";Database=" & _
+            gDatabaseName & "; User=" & gUserName & ";Password=" & gPassword & _
+            ";sslca=" & gCertPath & "; sslverify=1; Option=3;"
+    End If
     With objConnection
-            .Provider = "Microsoft.Jet.OLEDB.4.0;" & "Jet OLEDB:Database Password=" & gDatabasePassword
-            
-            .Open gLocalDBPath, "Admin", ""
+            .Open connection_string
     End With
-    gDatabaseType = "ACCESS"
-                            
 
 Exit Function
 ErrorHandler:
-    Call objError.ErrorRoutine(Err.Number, Err.Description, objConnection, "modMain", "ConnectACCESS", True)
+    Call objError.ErrorRoutine(Err.Number, Err.Description, objConnection, "modMain", "ConnectDatabase", True)
 
 End Function
 Public Function SetToolbarControl()
@@ -398,10 +456,10 @@ Public Function ProcessRecord(ByVal sFunction As String)
         
         
         Case RECORD_DELETE
-'                     If User.Manager = "N" Then
-'                        MsgBox "Delete function restricted to Manager access level.", vbExclamation
-'                        Exit Function
-'                     End If
+                    ' If User.Manager = "N" Then
+                    '    MsgBox "Delete function restricted to Manager access level.", vbExclamation
+                    '    Exit Function
+                    ' End If
                     Select Case gRecordType
                     
                     Case MEMBER:
@@ -789,6 +847,11 @@ Public Function ProcessRecord(ByVal sFunction As String)
                                   End If
                                  End If
                     Case COLLECTION:
+                                If frmCollection.txtCollectionNo.Text = "" Then
+                                  MsgBox "Please Save the collection before print or Priview", vbInformation, "CMS - Error Continuing"
+                                Else
+                                  Call GenerateReport(11, "Print", objConnection)
+                                 End If
                           
                     Case INVOICE:
                                If frmInvoice.txtInvoiceNo.Text = "" Then
@@ -827,6 +890,11 @@ Public Function ProcessRecord(ByVal sFunction As String)
                            End If
                         End If
                    Case COLLECTION:
+                        If frmCollection.txtCollectionNo.Text = "" Then
+                            MsgBox "Please Save the collection before print or Priview", vbInformation, "CMS - Error Continuing"
+                        Else
+                            Call GenerateReport(11, "View", objConnection)
+                        End If
                           
                    Case INVOICE:
                            If frmInvoice.txtInvoiceNo.Text = "" Then
@@ -878,6 +946,43 @@ ErrorHandler:
 
 End Function
 
+
+Public Function ValidConnectionCount() As Boolean
+
+Dim objOrganisation As CMSOrganisation.clsOrganisation
+Dim ConnCount As Long
+Dim sLicenceCount As String
+Dim lLicenceCount As Long
+On Error GoTo ErrorHandler
+
+
+Set objOrganisation = New CMSOrganisation.clsOrganisation
+Set objOrganisation.DatabaseConnection = objConnection
+ConnCount = objOrganisation.getConnectionCounts(gDatabaseName, gUserName)
+
+sLicenceCount = cmdDecryptLicence(gLicenseLimit)
+
+lLicenceCount = Right(sLicenceCount, 1)
+
+' the licene should be number with length of 10
+If Not IsNumeric(sLicenceCount) And Len(sLicenceCount) <> 10 Then
+        MsgBox "You have invalid licence. Please contact the systems administration.", vbExclamation
+        frmLogon.txtLogonId.SetFocus
+    ValidConnectionCount = False
+End If
+
+If ConnCount > lLicenceCount Then
+      MsgBox "You have exceeded connection count. Please contact the systems administration.", vbExclamation
+        frmLogon.txtLogonId.SetFocus
+    ValidConnectionCount = False
+Else
+  ValidConnectionCount = True
+End If
+Exit Function
+ErrorHandler:
+    Call objError.ErrorRoutine(Err.Number, Err.Description, objConnection, "modMain", "ValidConnectionCount", True)
+
+End Function
 Public Function ValidDateEntry(ctrl As MaskEdBox)
 On Error GoTo ErrorHandler
 '==============================================================================
@@ -970,8 +1075,8 @@ End Sub
 Public Sub SortListView(lvwCtrl As ListView, ColumnHeader As ColumnHeader)
 On Error GoTo ErrorHandler
 
-    If (ColumnHeader.Index - 1 <> lvwCtrl.SortKey) Then
-        lvwCtrl.SortKey = ColumnHeader.Index - 1
+    If (ColumnHeader.index - 1 <> lvwCtrl.SortKey) Then
+        lvwCtrl.SortKey = ColumnHeader.index - 1
     Else
         If (lvwCtrl.SortOrder = lvwAscending) Then
             lvwCtrl.SortOrder = lvwDescending
@@ -1123,7 +1228,7 @@ End Function
 
 
 Public Function ConvertNull(rvarValue As Variant)
-
+    
     If IsNull(rvarValue) Then
         ConvertNull = ""
     Else
@@ -1155,7 +1260,7 @@ End Function
 
 Public Sub clearAllSelection()
 MemberSelected = False
-'ChildSelected = False
+ChildSelected = False
 PaymentSelected = False
 CashInSelected = False
 CashOutSelected = False
@@ -1178,4 +1283,79 @@ Else
   s = Chr(AsciiNumber)
   get_MoreThanAndLessThan = Start & s
 End If
+End Function
+
+
+Public Function FindCBIndexByName(ByRef cbComboBox As ComboBox, ByRef strSearchValue As String) As Integer
+    Dim n As Integer
+    For n = 0 To cbComboBox.ListCount - 1
+        If cbComboBox.List(n) = strSearchValue Then
+          ' // Return the found index
+            FindCBIndexByName = n
+          ' // and exit
+            Exit Function
+        End If
+    Next
+  ' // Set not found value
+    FindCBIndexByName = -1
+End Function
+
+
+Public Function FindCBIndexById(ByRef cbComboBox As ComboBox, ByRef id As Long) As Integer
+    Dim n As Integer
+    For n = 0 To cbComboBox.ListCount - 1
+        If cbComboBox.ItemData(n) = id Then
+          ' // Return the found index
+            FindCBIndexById = n
+          ' // and exit
+            Exit Function
+        End If
+    Next
+  ' // Set not found value
+    FindCBIndexById = -1
+End Function
+
+Public Function SendEmail(ByVal from As String, ByVal recipient As String, ByVal subject As String, _
+ByVal message As String, ByVal userName As String, ByVal password As String)
+
+Dim oSmtp As New EASendMailObjLib.Mail
+    oSmtp.LicenseCode = "TryIt"
+
+    ' Set your Gmail email address
+    oSmtp.FromAddr = from
+
+    ' Add recipient email address
+    oSmtp.AddRecipientEx recipient, 0
+
+    ' Set email subject
+    oSmtp.subject = subject
+
+    ' Set email body
+    oSmtp.BodyText = message
+
+    ' Gmail SMTP server address
+    oSmtp.ServerAddr = "smtp.gmail.com"
+
+    ' If you want to use direct SSL 465 port,
+    ' Please add this line, otherwise TLS will be used.
+    oSmtp.ServerPort = 465
+
+    ' set 25 or 587 port
+    'oSmtp.ServerPort = 25
+
+    ' detect SSL/TLS automatically
+    oSmtp.SSL_init
+
+    ' Gmail user authentication should use your
+    ' Gmail email address as the user name.
+    ' For example: your email is "gmailid@gmail.com", then the user should be "gmailid@gmail.com"
+    oSmtp.userName = userName
+    oSmtp.password = password  '"Dyana7611!"
+
+    If oSmtp.SendMail() = 0 Then
+        MsgBox "email was sent successfully!"
+    Else
+        MsgBox "failed to send email with the following error:" & oSmtp.GetLastErrDescription()
+    End If
+
 End Function
