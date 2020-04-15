@@ -27,6 +27,9 @@ Private Const DATE_FORMAT = "dd/mm/yyyy"
 'local variable(s) to hold property value(s)
 Private mvarSystemManager As String 'local copy
 Private mvarReportView As String 'local copy
+Private mvarCityId As Long
+Private mvarChurchId As Long
+
 Public Property Let ReportView(ByVal vData As String)
 
     mvarReportView = vData
@@ -89,4 +92,28 @@ End Property
 
 Public Property Get LogonPassword() As String
     LogonPassword = mvarLogonPassword
+End Property
+
+Public Property Let CityId(ByVal vData As Long)
+'used when assigning a value to the property, on the left side of an assignment.
+'Syntax: X.mno = 5
+    mvarCityId = vData
+End Property
+
+Public Property Get CityId() As Long
+'used when retrieving value of a property, on the right side of an assignment.
+'Syntax: Debug.Print X.mno
+    CityId = mvarCityId
+End Property
+
+Public Property Let ChurchId(ByVal vData As Long)
+'used when assigning a value to the property, on the left side of an assignment.
+'Syntax: X.mno = 5
+    mvarChurchId = vData
+End Property
+
+Public Property Get ChurchId() As Long
+'used when retrieving value of a property, on the right side of an assignment.
+'Syntax: Debug.Print X.mno
+    ChurchId = mvarChurchId
 End Property

@@ -45,7 +45,7 @@ On Error GoTo ErrorHandler
     Dim sql As String
 
 
-    sql = "DELETE FROM User_Practice_link" _
+    sql = "DELETE FROM user_practice_link" _
         & " WHERE User_Id = " & lngUserID
     
     dbConnection.Execute sql

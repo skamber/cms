@@ -69,7 +69,7 @@ On Error GoTo ErrorHandler
     
    
         'get next number -- cannot use AutoNumber function
-        sql = "SELECT MAX(ID) FROM INVOICE"
+        sql = "SELECT MAX(ID) FROM invoice"
         Set rsLocal = New ADODB.Recordset
             rsLocal.Open sql, dbConnection
             
@@ -86,13 +86,14 @@ On Error GoTo ErrorHandler
         Set rsLocal = Nothing
     
     'insert new record
-    sql = "INSERT INTO INVOICE" _
-                & " (ID, Invoice_no, Ref, Name1, Name2, Address1, Address2" _
+    sql = "INSERT INTO invoice" _
+                & " (ID, Invoice_no, church_id,Ref, Name1, Name2, Address1, Address2" _
                 & " ,Address3, Terms,Total_amount,state,Balance" _
-                & " ,Phone,Mobile,Created_date,over_due_date )" _
+                & " ,Phone,Mobile,USER_NAME,email,Created_date,over_due_date,UPDATE_DATE)" _
                 & " VALUES" _
                 & " (" & NewInvoiceId _
                 & ",'" & NewInvoiceNo & "'" _
+                & "," & objInvoice.ChurchId _
                 & ",'" & NewRefNo & "','" & objInvoice.Name1 & "'" _
                 & ",'" & objInvoice.Name2 & "','" & objInvoice.Address1 & "','" & objInvoice.Address2 & "'" _
                 & ",'" & objInvoice.Address3 & "','" & objInvoice.Terms & "'" _
@@ -100,23 +101,27 @@ On Error GoTo ErrorHandler
                 & ",'" & objInvoice.state & "'" _
                 & "," & objInvoice.Balance _
                 & ",'" & objInvoice.Phone & "'" _
-                & ",'" & objInvoice.Mobile & "'"
-
+                & ",'" & objInvoice.Mobile & "'" _
+                & ",'" & objInvoice.Accountname & "'" _
+                & ",'" & objInvoice.Email & "'"
                 If objInvoice.dateofInvoice = "" Then
                 sql = sql & ", NULL"
                 Else
-                sql = sql & ",'" & Format(objInvoice.dateofInvoice, "dd-mmm-yyyy") & "'"
+                sql = sql & ",'" & Format(objInvoice.dateofInvoice, "yyyy-mm-dd") & "'"
                 End If
                 
                 If objInvoice.over_due_date = "" Then
                 sql = sql & ", NULL)"
                 Else
-                sql = sql & ",'" & Format(objInvoice.over_due_date, "dd-mmm-yyyy") & "')"
+                sql = sql & ",'" & Format(objInvoice.over_due_date, "yyyy-mm-dd") & "'"
                 End If
+                sql = sql & ",'" & Format(Now(), "yyyy-mm-dd hh:mm:ss") & "')"
+    'Debug.Print (sql)
     dbConnection.Execute sql
 
 Exit Function
 ErrorHandler:
+    Debug.Print (Err.Description)
     'Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsInvoice_s", "InsertInvoice", True)
 
 End Function
@@ -127,8 +132,9 @@ On Error GoTo ErrorHandler
     Dim sql As String
 
     
-    sql = "UPDATE INVOICE SET" _
+    sql = "UPDATE invoice SET" _
                 & " Invoice_no =" & "'" & objInvoice.Invoice_no & "'" _
+                & " ,church_id =" & objInvoice.ChurchId _
                 & " ,Ref =" & "'" & objInvoice.Ref & "'" _
                 & " ,Name1 =" & "'" & objInvoice.Name1 & "'" _
                 & " ,Name2 =" & "'" & objInvoice.Name2 & "'" _
@@ -140,21 +146,23 @@ On Error GoTo ErrorHandler
                 & " ,state =" & "'" & objInvoice.state & "'" _
                 & " ,Balance =" & objInvoice.Balance _
                 & " ,Phone =" & "'" & objInvoice.Phone & "'" _
-                & " ,Mobile =" & "'" & objInvoice.Mobile & "'"
+                & " ,Mobile =" & "'" & objInvoice.Mobile & "'" _
+                & " ,USER_NAME =" & "'" & objInvoice.Accountname & "'" _
+                & " ,Email =" & "'" & objInvoice.Email & "'"
     If objInvoice.dateofInvoice <> "" Then
-        sql = sql & " ,Created_date =" & "'" & Format(objInvoice.dateofInvoice, "dd-mmm-yyyy") & "'"
+        sql = sql & " ,Created_date =" & "'" & Format(objInvoice.dateofInvoice, "yyyy-mm-dd") & "'"
     Else
         sql = sql & " ,Created_date = NULL "
     End If
     
     If objInvoice.over_due_date <> "" Then
-        sql = sql & " ,over_due_date =" & "'" & Format(objInvoice.over_due_date, "dd-mmm-yyyy") & "'"
+        sql = sql & " ,over_due_date =" & "'" & Format(objInvoice.over_due_date, "yyyy-mm-dd") & "'"
     Else
         sql = sql & " ,over_due_date = NULL "
     End If
-    
+     sql = sql & " ,UPDATE_DATE =" & "'" & Format(Now(), "yyyy-mm-dd hh:mm:ss") & "'"
     sql = sql & " WHERE ID = " & objInvoice.ID
-    
+    'Debug.Print (sql)
     dbConnection.Execute sql
 
 
@@ -171,7 +179,7 @@ On Error GoTo ErrorHandler
     Dim rsLocal As ADODB.Recordset
     
 
-    sql = "SELECT * FROM Invoice WHERE id = " & lngInvoiceID
+    sql = "SELECT * FROM invoice WHERE id = " & lngInvoiceID
     
     Set rsLocal = New ADODB.Recordset
         rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly
@@ -187,7 +195,7 @@ On Error GoTo ErrorHandler
 
 Exit Function
 ErrorHandler:
-'    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsMember_s", "getByMemberId", True)
+'    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsInvoice_s", "getByInvoiceId", True)
 
 End Function
 
@@ -198,7 +206,7 @@ On Error GoTo ErrorHandler
     Dim rsLocal As ADODB.Recordset
     
 
-    sql = "SELECT * FROM Invoice WHERE Invoice_no = '" & lngInvoiceNo & "'"
+    sql = "SELECT * FROM invoice WHERE Invoice_no = '" & lngInvoiceNo & "'"
     
     Set rsLocal = New ADODB.Recordset
         rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly
@@ -214,7 +222,7 @@ On Error GoTo ErrorHandler
 
 Exit Function
 ErrorHandler:
-'    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsMember_s", "getByMemberId", True)
+'    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsInvoice_s", "getByInvoiceNo", True)
 
 End Function
 
@@ -224,7 +232,7 @@ On Error GoTo ErrorHandler
     Dim sql As String
 
     
-    sql = "UPDATE Invoice SET"
+    sql = "UPDATE invoice SET"
     sql = sql & " Balance =" & Balance
     sql = sql & " WHERE ID = " & InvoiceId
     dbConnection.Execute sql

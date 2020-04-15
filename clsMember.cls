@@ -28,12 +28,44 @@ Private mvarPostCode As String 'local copy
 Private mvarPhone As String 'local copy
 Private mvarMembershipExpiary As String 'local copy
 Private mvarcreated_date As String
+Private mvarDateOfBirth As String
 Private mvarcomments As String 'local copy
 Private mvarSTATUS As String 'local copy
 Private mvarEMAIL As String 'local copy
 Private Const DATE_FORMAT = "dd/mm/yyyy"
 'local variable(s) to hold property value(s)
 Private mvarInitial As String 'local copy
+Private mvarCityId As Long
+Private mvarMobile As String 'local copy
+Private mvarAccountname As String 'local copy
+
+
+Public Property Let Accountname(ByVal vData As String)
+'used when assigning a value to the property, on the left side of an assignment.
+'Syntax: X.Accountname = 5
+    mvarAccountname = vData
+End Property
+
+
+Public Property Get Accountname() As String
+'used when retrieving value of a property, on the right side of an assignment.
+'Syntax: Debug.Print X.Accountname
+    Accountname = mvarAccountname
+End Property
+
+
+Public Property Let DateOfBirth(ByVal vData As String)
+'used when assigning a value to the property, on the left side of an assignment.
+'Syntax: X.MembershipExpiary = 5
+    mvarDateOfBirth = Format(vData, DATE_FORMAT)
+End Property
+
+
+Public Property Get DateOfBirth() As String
+'used when retrieving value of a property, on the right side of an assignment.
+'Syntax: Debug.Print X.MembershipExpiary
+    DateOfBirth = Format(mvarDateOfBirth, DATE_FORMAT)
+End Property
 
 Public Property Let Created_Date(ByVal vData As String)
 'used when assigning a value to the property, on the left side of an assignment.
@@ -272,3 +304,28 @@ Public Property Get Email() As String
     Email = mvarEMAIL
 End Property
 
+Public Property Let cityId(ByVal vData As Long)
+'used when assigning a value to the property, on the left side of an assignment.
+'Syntax: X.mno = 5
+    mvarCityId = vData
+End Property
+
+
+Public Property Get cityId() As Long
+'used when retrieving value of a property, on the right side of an assignment.
+'Syntax: Debug.Print X.mno
+    cityId = mvarCityId
+End Property
+
+Public Property Let Mobile(ByVal vData As String)
+'used when assigning a value to the property, on the left side of an assignment.
+'Syntax: X.Phone = 5
+    mvarMobile = vData
+End Property
+
+
+Public Property Get Mobile() As String
+'used when retrieving value of a property, on the right side of an assignment.
+'Syntax: Debug.Print X.Phone
+    Mobile = mvarMobile
+End Property

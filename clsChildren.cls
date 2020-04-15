@@ -23,6 +23,8 @@ Private mvarMember As String 'local copy
 Private mvarBirthDate As String 'local copy
 Private mvarEmail As String 'local copy
 Private mvarMemo As String 'local copy
+Private mvarCityId As Long
+Private mvarMobile As String 'local copy
 Private Const DATE_FORMAT = "dd/mm/yyyy"
 Public Property Let BirthDate(ByVal vData As String)
 'used when assigning a value to the property, on the left side of an assignment.
@@ -151,5 +153,27 @@ Public Property Get MNo() As Long
     MNo = mvarMNo
 End Property
 
+Public Property Let cityId(ByVal vData As Long)
+'used when assigning a value to the property, on the left side of an assignment.
+'Syntax: X.mno = 5
+    mvarCityId = vData
+End Property
 
 
+Public Property Get cityId() As Long
+'used when retrieving value of a property, on the right side of an assignment.
+'Syntax: Debug.Print X.mno
+    cityId = mvarCityId
+End Property
+
+Public Property Let Mobile(ByVal vData As String)
+'used when assigning a value to the property, on the left side of an assignment.
+'Syntax: X.Phone = 5
+    mvarMobile = vData
+End Property
+
+Public Property Get Mobile() As String
+'used when retrieving value of a property, on the right side of an assignment.
+'Syntax: Debug.Print X.Phone
+    Mobile = mvarMobile
+End Property

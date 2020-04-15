@@ -43,7 +43,7 @@ On Error GoTo ErrorHandler
         
    
         'get next number -- cannot use AutoNumber function
-        sql = "SELECT MAX(ID) FROM RECEIPT"
+        sql = "SELECT MAX(ID) FROM receipt"
         Set rsLocal = New ADODB.Recordset
             rsLocal.Open sql, dbConnection
             
@@ -58,8 +58,8 @@ On Error GoTo ErrorHandler
     
     
     'insert new record
-    sql = "INSERT INTO RECEIPT" _
-                & " (ID, INV_ID,INV_NO, church_id, amount,user_Name, Cheque_number,Date_Of_Receipt)" _
+    sql = "INSERT INTO receipt" _
+                & " (ID, INV_ID,INV_NO, church_id, amount,user_Name, Cheque_number,Date_Of_Receipt,COMMENTS, UPDATE_DATE)" _
                 & " VALUES" _
                 & " (" & NewReceiptId _
                 & "," & objReceipt.INV_ID _
@@ -71,7 +71,14 @@ On Error GoTo ErrorHandler
                 If objReceipt.DateOfReceipt = "" Then
                 sql = sql & ", NULL"
                 Else
-                sql = sql & ",'" & Format(objReceipt.DateOfReceipt, "dd-mmm-yyyy") & "')"
+                sql = sql & ",'" & Format(objReceipt.DateOfReceipt, "yyyy-mm-dd") & "'"
+                End If
+                
+                If objReceipt.comments = "" Then
+                sql = sql & ", NULL)"
+                Else
+                sql = sql & ",'" & objReceipt.comments & "'"
+                sql = sql & ",'" & Format(Now(), "yyyy-mm-dd hh:mm:ss") & "')"
                 End If
     
     dbConnection.Execute sql
@@ -88,7 +95,7 @@ On Error GoTo ErrorHandler
     Dim sql As String
 
     
-    sql = "UPDATE RECEIPT SET " _
+    sql = "UPDATE receipt SET " _
                 & "INV_NO =" & "'" & objReceipt.INV_NO & "'" _
                 & " ,INV_ID =" & objReceipt.INV_ID _
                 & " ,church_id =" & objReceipt.ChurchId _
@@ -96,11 +103,11 @@ On Error GoTo ErrorHandler
                 & " ,User_Name = '" & objReceipt.Accountname & "'" _
                 & " ,Cheque_number ='" & objReceipt.ChequeNumber & "'"
     If objReceipt.DateOfReceipt <> "" Then
-        sql = sql & " ,Date_Of_Receipt =" & "'" & Format(objReceipt.DateOfReceipt, "dd-mmm-yyyy") & "'"
+        sql = sql & " ,Date_Of_Receipt =" & "'" & Format(objReceipt.DateOfReceipt, "yyyy-mm-dd") & "'"
     Else
         sql = sql & " ,Date_Of_Receipt = NULL "
     End If
-    
+    sql = sql & " ,UPDATE_DATE =" & "'" & Format(Now(), "yyyy-mm-dd hh:mm:ss") & "'"
     sql = sql & " WHERE ID = " & objReceipt.ID
     
     dbConnection.Execute sql
@@ -119,7 +126,7 @@ On Error GoTo ErrorHandler
     Dim rsLocal As ADODB.Recordset
     
 
-    sql = "SELECT * FROM Receipt WHERE INV_ID = " & lngInvoiceid
+    sql = "SELECT * FROM receipt WHERE INV_ID = " & lngInvoiceid
     
     Set rsLocal = New ADODB.Recordset
         rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly
@@ -135,11 +142,38 @@ On Error GoTo ErrorHandler
 
 Exit Function
 ErrorHandler:
-'    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsMember_s", "getByMemberId", True)
+'    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsReceipt_s", "getByInvoiceId", True)
 
 End Function
 
 
+Public Function getByReceiptId(ByVal lngReceiptID As Long) As ADODB.Recordset
+On Error GoTo ErrorHandler
+
+    Dim sql As String
+    Dim rsLocal As ADODB.Recordset
+    
+
+    sql = "SELECT * FROM receipt where ID = " & lngReceiptID
+    
+    Set rsLocal = New ADODB.Recordset
+        rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly
+    
+    If rsLocal.EOF = True Then
+        MsgBox "No records found for This Receipt.", vbExclamation
+        Set getByReceiptId = Nothing
+    Else
+        Set getByReceiptId = rsLocal
+    End If
+    
+    Set rsLocal = Nothing
+
+
+Exit Function
+ErrorHandler:
+'    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsCollection_s", "getByCollectionId", True)
+
+End Function
 
 
 

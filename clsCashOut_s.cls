@@ -58,7 +58,7 @@ On Error GoTo ErrorHandler
     
     
     'insert new record
-    sql = "INSERT INTO CASHOUT" _
+    sql = "INSERT INTO cashout" _
                 & " (ID, ITEM, ITEM_CODE, AMOUNT, GST, Net_AMOUNT, COMMENT" _
                 & " ,DateOfCashOut )" _
                 & " VALUES" _
@@ -71,7 +71,7 @@ On Error GoTo ErrorHandler
                 If objCashOut.DateOfCashOut = "" Then
                 sql = sql & ", NULL)"
                 Else
-                sql = sql & ",'" & Format(objCashOut.DateOfCashOut, "dd-mmm-yyyy") & "')"
+                sql = sql & ",'" & Format(objCashOut.DateOfCashOut, "yyyy-mm-dd") & "')"
                 End If
     
     dbConnection.Execute sql
@@ -88,7 +88,7 @@ On Error GoTo ErrorHandler
     Dim sql As String
 
     
-    sql = "UPDATE CASHOUT SET" _
+    sql = "UPDATE cashout SET" _
                 & " ITEM =" & "'" & objCashOut.ITEM & "'" _
                 & " ,ITEM_CODE =" & "'" & objCashOut.Item_code & "'" _
                 & " ,AMOUNT =" & objCashOut.Amount _
@@ -98,7 +98,7 @@ On Error GoTo ErrorHandler
                 
                 
     If objCashOut.DateOfCashOut <> "" Then
-        sql = sql & " ,DateOfCashOut =" & "'" & Format(objCashOut.DateOfCashOut, "dd-mmm-yyyy") & "'"
+        sql = sql & " ,DateOfCashOut =" & "'" & Format(objCashOut.DateOfCashOut, "yyyy-mm-dd") & "'"
     Else
         sql = sql & " ,DateOfCashOut = NULL "
     End If
@@ -121,7 +121,7 @@ On Error GoTo ErrorHandler
     Dim rsLocal As ADODB.Recordset
     
 
-    sql = "SELECT * FROM CASHOUT WHERE ID = " & lngCashOutID
+    sql = "SELECT * FROM cashout WHERE ID = " & lngCashOutID
     
     Set rsLocal = New ADODB.Recordset
         rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly

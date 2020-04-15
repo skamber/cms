@@ -45,7 +45,7 @@ On Error GoTo ErrorHandler
     
    
         'get next number -- cannot use AutoNumber function
-        sql = "SELECT MAX(col_ID) FROM COLLECTION"
+        sql = "SELECT MAX(col_ID) FROM collection"
         Set rsLocal = New ADODB.Recordset
             rsLocal.Open sql, dbConnection
             
@@ -60,8 +60,8 @@ On Error GoTo ErrorHandler
     
     
     'insert new record
-    sql = "INSERT INTO COLLECTION" _
-                & " (col_ID,payment, Amount, church_id, User_Name,type,comments,Date_of_collection)" _
+    sql = "INSERT INTO collection" _
+                & " (col_ID,payment, Amount, church_id, User_Name,type,comments,Date_of_collection,UPDATE_DATE)" _
                 & " VALUES" _
                 & " (" & NewCollectionId _
                 & ",'" & objCollection.payment & "'" _
@@ -73,14 +73,15 @@ On Error GoTo ErrorHandler
                 If objCollection.comments = "" Then
                 sql = sql & ", NULL"
                 Else
-                sql = sql & ",'" & objCollection.comments & "'"
+                sql = sql & ",""" & objCollection.comments & """"
                 End If
                 
                 If objCollection.Dateofcollection = "" Then
                 sql = sql & ", NULL)"
                 Else
-                sql = sql & ",'" & Format(objCollection.Dateofcollection, "dd-mmm-yyyy") & "')"
+                sql = sql & ",'" & Format(objCollection.Dateofcollection, "yyyy-mm-dd") & "'"
                 End If
+                sql = sql & ",'" & Format(Now(), "yyyy-mm-dd hh:mm:ss") & "')"
     
     dbConnection.Execute sql
 
@@ -96,20 +97,21 @@ On Error GoTo ErrorHandler
     Dim sql As String
 
     
-    sql = "UPDATE COLLECTION SET" _
+    sql = "UPDATE collection SET" _
                 & " payment =" & "'" & objCollection.payment & "'" _
                 & " ,type =" & "'" & objCollection.types & "'" _
                 & " ,church_id =" & objCollection.ChurchId _
                 & " ,Amount =" & objCollection.Amount _
                 & " ,User_Name =" & "'" & objCollection.UserName & "'" _
-                & " ,comments =" & "'" & objCollection.comments & "'"
+                & " ,comments =" & """" & objCollection.comments & """"
                
                 
     If objCollection.Dateofcollection <> "" Then
-        sql = sql & " ,Date_of_collection =" & "'" & Format(objCollection.Dateofcollection, "dd-mmm-yyyy") & "'"
+        sql = sql & " ,Date_of_collection =" & "'" & Format(objCollection.Dateofcollection, "yyyy-mm-dd") & "'"
     Else
         sql = sql & " ,Date_of_collection = NULL "
     End If
+    sql = sql & " ,UPDATE_DATE =" & "'" & Format(Now(), "yyyy-mm-dd hh:mm:ss") & "'"
     
     sql = sql & " WHERE col_ID = " & objCollection.col_ID
     
@@ -130,7 +132,7 @@ On Error GoTo ErrorHandler
     Dim rsLocal As ADODB.Recordset
     
 
-    sql = "SELECT * FROM Collection where COL_ID = " & lngCollectionID
+    sql = "SELECT * FROM collection where COL_ID = " & lngCollectionID
     
     Set rsLocal = New ADODB.Recordset
         rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly
@@ -147,6 +149,6 @@ On Error GoTo ErrorHandler
 
 Exit Function
 ErrorHandler:
-'    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsMember_s", "getByMemberId", True)
+'    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsCollection_s", "getByCollectionId", True)
 
 End Function

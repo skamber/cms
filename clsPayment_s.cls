@@ -42,7 +42,7 @@ On Error GoTo ErrorHandler
     
    
         'get next number -- cannot use AutoNumber function
-        sql = "SELECT MAX(Receipt_No) FROM PAYMENT"
+        sql = "SELECT MAX(Receipt_No) FROM payment"
         Set rsLocal = New ADODB.Recordset
             rsLocal.Open sql, dbConnection
             
@@ -57,10 +57,10 @@ On Error GoTo ErrorHandler
     
     
     'insert new record
-    sql = "INSERT INTO PAYMENT" _
+    sql = "INSERT INTO payment" _
                 & " (MNo, type,Payment, donation_type,Amount_in_Words, church_id,Amount" _
                 & ", Receipt_No, user_name, comments,Member_Effective, Member_Expiary" _
-                & ", Date_Of_Payment)" _
+                & ", Date_Of_Payment, UPDATE_DATE)" _
                 & " VALUES" _
                 & " (" & objpayment.MNo _
                 & ",'" & objpayment.Payment & "'" _
@@ -74,27 +74,30 @@ On Error GoTo ErrorHandler
                 If objpayment.comments = "" Then
                 sql = sql & ", NULL"
                 Else
-                sql = sql & ",'" & objpayment.comments & "'"
+                sql = sql & ",""" & objpayment.comments & """"
                 End If
                 
                 If objpayment.MemberEffective = "" Then
                 sql = sql & ", NULL"
                 Else
-                sql = sql & ",'" & Format(objpayment.MemberEffective, "dd-mmm-yyyy") & "'"
+                sql = sql & ",'" & Format(objpayment.MemberEffective, "yyyy-mm-dd") & "'"
                 End If
                 
                 If objpayment.MemberExpiary = "" Then
                 sql = sql & ", NULL"
                 Else
-                sql = sql & ",'" & Format(objpayment.MemberExpiary, "dd-mmm-yyyy") & "'"
+                sql = sql & ",'" & Format(objpayment.MemberExpiary, "yyyy-mm-dd") & "'"
                 End If
                 
                 If objpayment.DateofPayment = "" Then
                 sql = sql & ", NULL)"
                 Else
-                sql = sql & ",'" & Format(objpayment.DateofPayment, "dd-mmm-yyyy") & "')"
+                sql = sql & ",'" & Format(objpayment.DateofPayment, "yyyy-mm-dd") & "'"
                 End If
                 
+                sql = sql & ",'" & Format(Now(), "yyyy-mm-dd hh:mm:ss") & "')"
+                
+          'Debug.Print (sql)
     dbConnection.Execute sql
 
 Exit Function
@@ -109,7 +112,7 @@ On Error GoTo ErrorHandler
     Dim sql As String
 
     
-    sql = "UPDATE PAYMENT SET" _
+    sql = "UPDATE payment SET" _
                 & " MNo =" & objpayment.MNo _
                 & " ,church_id =" & objpayment.ChurchId _
                 & " ,Payment =" & "'" & objpayment.PaymentType & "'" _
@@ -120,28 +123,30 @@ On Error GoTo ErrorHandler
                 & " ,user_name =" & "'" & objpayment.Accountname & "'"
                 
     If objpayment.comments <> "" Then
-       sql = sql & ", comments =" & "'" & objpayment.comments & "'"
+       sql = sql & ", comments =" & """" & objpayment.comments & """"
      Else
        sql = sql & ",comments = NULL "
     End If
                 
     If objpayment.MemberEffective <> "" Then
-        sql = sql & " ,Member_Effective =" & "'" & Format(objpayment.MemberEffective, "dd-mmm-yyyy") & "'"
+        sql = sql & " ,Member_Effective =" & "'" & Format(objpayment.MemberEffective, "yyyy-mm-dd") & "'"
     Else
         sql = sql & " ,Member_Effective = NULL "
     End If
     
     If objpayment.MemberExpiary <> "" Then
-        sql = sql & " ,Member_Expiary =" & "'" & Format(objpayment.MemberExpiary, "dd-mmm-yyyy") & "'"
+        sql = sql & " ,Member_Expiary =" & "'" & Format(objpayment.MemberExpiary, "yyyy-mm-dd") & "'"
     Else
         sql = sql & " ,Member_Expiary = NULL "
     End If
     
     If objpayment.DateofPayment <> "" Then
-        sql = sql & " ,Date_Of_Payment =" & "'" & Format(objpayment.DateofPayment, "dd-mmm-yyyy") & "'"
+        sql = sql & " ,Date_Of_Payment =" & "'" & Format(objpayment.DateofPayment, "yyyy-mm-dd") & "'"
     Else
         sql = sql & " ,Date_Of_Payment = NULL "
     End If
+    
+    sql = sql & " ,UPDATE_DATE =" & "'" & Format(Now(), "yyyy-mm-dd hh:mm:ss") & "'"
     
     sql = sql & " WHERE Receipt_No = " & objpayment.ReceiptNo
     
@@ -162,7 +167,7 @@ On Error GoTo ErrorHandler
     Dim rsLocal As ADODB.Recordset
     
 
-    sql = "SELECT * FROM PAYMENT WHERE Receipt_No = " & lngPaymentID
+    sql = "SELECT * FROM payment WHERE Receipt_No = " & lngPaymentID
     
     Set rsLocal = New ADODB.Recordset
         rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly

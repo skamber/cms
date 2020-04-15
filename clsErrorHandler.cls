@@ -123,7 +123,7 @@ On Error GoTo InternalError
 
 
     'Display Form to inform users of type of error occurred.
-    If bVisibleToUser = True Then MsgBox sDisplayMessage, vbExclamation
+    If bVisibleToUser = True Then MsgBox sDisplayMessage, vbExclamation, "CMS Error"
 
     'transaction rollback, clear error collection - if no transaction continue.
     If Not objConnection Is Nothing Then

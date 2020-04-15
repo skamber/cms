@@ -53,7 +53,7 @@ On Error GoTo ErrorHandler
     Dim rsLocal As ADODB.Recordset
     
 
-    sql = "SELECT Id, FULL_NAME FROM Users " _
+    sql = "SELECT Id, FULL_NAME FROM users " _
         & "WHERE Id = " & lngUserID
         
     Set rsLocal = New ADODB.Recordset
@@ -71,7 +71,8 @@ On Error GoTo ErrorHandler
 
 Exit Function
 ErrorHandler:
-'    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsUser_s", "getUserName", True)
+
+    'Call ObjError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsUser_s", "getUserName", True)
 
 End Function
 
@@ -85,7 +86,7 @@ On Error GoTo ErrorHandler
     Dim rsLocal As ADODB.Recordset
     
 
-    sql = "SELECT Id, Full_name FROM Users "
+    sql = "SELECT Id, Full_name FROM users "
         
         
     Set rsLocal = New ADODB.Recordset
@@ -103,7 +104,7 @@ On Error GoTo ErrorHandler
 
 Exit Function
 ErrorHandler:
-'    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsUser_s", "getAllUserName", True)
+    'Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsUser_s", "getAllUserName", True)
 
 End Function
 
@@ -114,7 +115,7 @@ On Error GoTo ErrorHandler
     Dim rsLocal As ADODB.Recordset
     
 
-    sql = "SELECT * FROM Users " _
+    sql = "SELECT * FROM users " _
         & "WHERE Id =" & lngUserID
         
     Set rsLocal = New ADODB.Recordset
@@ -132,7 +133,7 @@ On Error GoTo ErrorHandler
 
 Exit Function
 ErrorHandler:
-'    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsUser_s", "getUserAccountRecord", True)
+   'Call ObjError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsUser_s", "getUserAccountRecord", True)
 
 End Function
 
@@ -144,13 +145,16 @@ On Error GoTo ErrorHandler
     Dim sql As String
 
     
-    sql = "UPDATE USERS SET" _
+    sql = "UPDATE users SET" _
                 & " Full_Name =" & "'" & objUser.Username & "'" _
                 & " ,LOGON_ID =" & "'" & objUser.LogonId & "'" _
                 & " ,SYSTEM_MANAGER =" & "'" & objUser.SystemManager & "'" _
                 & " ,LOGON_PASSWORD =" & "'" & objUser.LogonPassword & "'" _
-                & " ,Report_View =" & "'" & objUser.ReportView & "'"
-        sql = sql & " ,PASSWORD_LAST_UPDATE =" & "'" & Format(objUser.PasswordLastChange, "dd-mmm-yyyy") & "'"
+                & " ,Report_View =" & "'" & objUser.ReportView & "'" _
+                & " ,City_Id =" & objUser.CityId _
+                & " ,Church_Id =" & objUser.ChurchId
+                
+        sql = sql & " ,PASSWORD_LAST_UPDATE =" & "'" & Format(objUser.PasswordLastChange, "yyyy-mm-dd") & "'"
     
     sql = sql & " WHERE ID = " & objUser.UserId
     
@@ -159,7 +163,7 @@ On Error GoTo ErrorHandler
 
 Exit Function
 ErrorHandler:
-    '    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsUser_s", "UpdateUser", True)
+        'Call ObjError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsUser_s", "UpdateUser", True)
 
 End Function
 
@@ -172,7 +176,7 @@ On Error GoTo ErrorHandler
            
    
         'get next number -- cannot use AutoNumber function
-        sql = "SELECT MAX(ID) FROM Users"
+        sql = "SELECT MAX(ID) FROM users"
         Set rsLocal = New ADODB.Recordset
             rsLocal.Open sql, dbConnection
             
@@ -187,16 +191,18 @@ On Error GoTo ErrorHandler
     
     
     'insert new record
-    sql = "INSERT INTO Users" _
-                & " (Id, Full_Name, LOGON_ID,LOGON_PASSWORD,SYSTEM_MANAGER,REPORT_VIEW,PASSWORD_LAST_UPDATE)" _
+    sql = "INSERT INTO users" _
+                & " (Id, City_Id, church_id, Full_Name, LOGON_ID,LOGON_PASSWORD,SYSTEM_MANAGER,REPORT_VIEW,PASSWORD_LAST_UPDATE)" _
                 & " VALUES" _
                 & " (" & NewUserId _
+                & "," & objUser.CityId _
+                & "," & objUser.ChurchId _
                 & ",'" & objUser.Username & "'" _
                 & ",'" & objUser.LogonId & "'" _
                 & ",'" & objUser.LogonPassword & "'" _
                 & ",'" & objUser.SystemManager & "'" _
                 & ",'" & objUser.ReportView & "'"
-                 sql = sql & ",'" & Format(objUser.PasswordLastChange, "dd-mmm-yyyy") & "')"
+                 sql = sql & ",'" & Format(objUser.PasswordLastChange, "yyyy-mm-dd") & "')"
            
         
     dbConnection.Execute sql
@@ -205,7 +211,7 @@ On Error GoTo ErrorHandler
 Exit Function
 ErrorHandler:
        
-    'Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsUser_s", "InsertUser", True)
+    'Call ObjError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsUser_s", "InsertUser", True)
 
 End Function
 
@@ -215,7 +221,7 @@ On Error GoTo ErrorHandler
     Dim sql As String
 
 
-    sql = "DELETE FROM Users" _
+    sql = "DELETE FROM users" _
         & " WHERE Id = " & lngUserID
     
     dbConnection.Execute sql
@@ -223,7 +229,7 @@ On Error GoTo ErrorHandler
 
 Exit Function
 ErrorHandler:
-    'Call objError.ErrorRoutine(Err.Number, Err.Description, objConnection, "clsUser_s", "DeleteUser", True)
+    'Call ObjError.ErrorRoutine(Err.Number, Err.Description, objConnection, "clsUser_s", "DeleteUser", True)
     
 End Function
 

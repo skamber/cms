@@ -40,7 +40,7 @@ On Error GoTo ErrorHandler
         
    
         'get next number -- cannot use AutoNumber function
-        sql = "SELECT MAX(MNO) FROM MEMBER"
+        sql = "SELECT MAX(MNO) FROM member"
         Set rsLocal = New ADODB.Recordset
             rsLocal.Open sql, dbConnection
             
@@ -55,39 +55,50 @@ On Error GoTo ErrorHandler
     
     
     'insert new record
-    sql = "INSERT INTO MEMBER" _
-                & " (MNo, Mr, Surname, Given_Name, Full_Name, Spouse_Name, Address1" _
-                & " ,Address2, STATE,PostCode, Phone,  comments" _
-                & " ,STATUS,Email ,joining_date,Membership_Expiary)" _
+    sql = "INSERT INTO member" _
+                & " (MNo, Mr, Surname, Given_Name, Full_Name, Spouse_Name, Address1, CITY_ID" _
+                & " ,Address2, STATE,PostCode, Phone,  mobile, comments" _
+                & " ,STATUS,USER_NAME, Email ,joining_date,Membership_Expiary,DATE_OF_BIRTH, UPDATE_DATE)" _
                 & " VALUES" _
                 & " (" & NewMemberId _
                 & ",'" & objMember.Initial & "'" _
                 & ",'" & objMember.Surname & "','" & objMember.GivenName & "'" _
-                & ",'" & objMember.FullName & "','" & objMember.SpouseName & "','" & objMember.Address1 & "'" _
+                & ",'" & objMember.FullName & "','" & objMember.SpouseName & "','" _
+                & objMember.Address1 & "'," & objMember.cityId _
                 & ",'" & objMember.Address2 & "','" & objMember.State & "'" _
                 & ",'" & objMember.PostCode & "'" _
                 & ",'" & objMember.Phone & "'" _
-                & ",'" & objMember.comments & "'" _
+                & ",'" & objMember.Mobile & "'" _
+                & ",""" & objMember.comments & """" _
                 & ",'" & objMember.STATUS & "'" _
+                & ",'" & objMember.Accountname & "'" _
                 & ",'" & objMember.Email & "'"
                 
                 If objMember.Created_Date = "" Then
-                sql = sql & ", NULL"
+                  sql = sql & ", NULL"
                 Else
-                sql = sql & ",'" & Format(objMember.Created_Date, "dd-mmm-yyyy") & "'"
+                  sql = sql & ",'" & Format(objMember.Created_Date, "yyyy-mm-dd") & "'"
                 End If
                 
                 If objMember.MembershipExpiary = "" Then
-                sql = sql & ", NULL)"
+                  sql = sql & ", NULL"
                 Else
-                sql = sql & ",'" & Format(objMember.MembershipExpiary, "dd-mmm-yyyy") & "')"
+                  sql = sql & ",'" & Format(objMember.MembershipExpiary, "yyyy-mm-dd") & "'"
                 End If
-    
+                
+                If objMember.DateOfBirth = "" Then
+                  sql = sql & ", NULL)"
+                Else
+                  sql = sql & ",'" & Format(objMember.DateOfBirth, "yyyy-mm-dd") & "'"
+                End If
+                sql = sql & ",'" & Format(Now(), "yyyy-mm-dd hh:mm:ss") & "')"
+    'Debug.Print (sql)
     dbConnection.Execute sql
 
 Exit Function
 ErrorHandler:
-    'Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsmember_s", "Insertmember", True)
+   
+    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsmember_s", "Insertmember", True)
 
 End Function
 
@@ -97,7 +108,7 @@ On Error GoTo ErrorHandler
     Dim sql As String
 
     
-    sql = "UPDATE MEMBER SET" _
+    sql = "UPDATE member SET" _
                 & " Mr =" & "'" & objMember.Initial & "'" _
                 & " ,Surname =" & "'" & objMember.Surname & "'" _
                 & " ,Given_Name =" & "'" & objMember.GivenName & "'" _
@@ -108,31 +119,39 @@ On Error GoTo ErrorHandler
                 & " ,STATE =" & "'" & objMember.State & "'" _
                 & " ,PostCode =" & "'" & objMember.PostCode & "'" _
                 & " ,Phone =" & "'" & objMember.Phone & "'" _
-                & " ,comments =" & "'" & objMember.comments & "'" _
+                & " ,Mobile =" & "'" & objMember.Mobile & "'" _
+                & " ,comments =" & """" & objMember.comments & """" _
                 & " ,STATUS =" & "'" & objMember.STATUS & "'" _
+                & " ,USER_NAME =" & "'" & objMember.Accountname & "'" _
                 & " ,EMAIL =" & "'" & objMember.Email & "'"
                 
     If objMember.Created_Date <> "" Then
-        sql = sql & " ,joining_date =" & "'" & Format(objMember.Created_Date, "dd-mmm-yyyy") & "'"
+        sql = sql & " ,joining_date =" & "'" & Format(objMember.Created_Date, "yyyy-mm-dd") & "'"
     Else
         sql = sql & " ,joining_date = NULL "
     End If
     
                 
     If objMember.MembershipExpiary <> "" Then
-        sql = sql & " ,Membership_Expiary =" & "'" & Format(objMember.MembershipExpiary, "dd-mmm-yyyy") & "'"
+        sql = sql & " ,Membership_Expiary =" & "'" & Format(objMember.MembershipExpiary, "yyyy-mm-dd") & "'"
     Else
         sql = sql & " ,Membership_Expiary = NULL "
     End If
     
+    If objMember.DateOfBirth <> "" Then
+        sql = sql & " ,DATE_OF_BIRTH =" & "'" & Format(objMember.DateOfBirth, "yyyy-mm-dd") & "'"
+    Else
+        sql = sql & " ,DATE_OF_BIRTH = NULL "
+    End If
+     sql = sql & " ,UPDATE_DATE =" & "'" & Format(Now(), "yyyy-mm-dd hh:mm:ss") & "'"
     sql = sql & " WHERE Mno = " & objMember.mno
-    
+    'Debug.Print (sql)
     dbConnection.Execute sql
 
 
 Exit Function
 ErrorHandler:
-    'Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsMember_s", "UpdateMember", True)
+    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsMember_s", "UpdateMember", True)
 
 End Function
 
@@ -142,11 +161,11 @@ On Error GoTo ErrorHandler
     Dim sql As String
 
     
-    sql = "UPDATE MEMBER SET" _
+    sql = "UPDATE member SET" _
                 
                 
     If ExparyDate <> "" Then
-        sql = sql & " Membership_Expiary =" & "'" & Format(ExparyDate, "dd-mmm-yyyy") & "'"
+        sql = sql & " Membership_Expiary =" & "'" & Format(ExparyDate, "yyyy-mm-dd") & "'"
     Else
         sql = sql & " ,Membership_Expiary = NULL "
     End If
@@ -158,23 +177,22 @@ On Error GoTo ErrorHandler
 
 Exit Function
 ErrorHandler:
-    'Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsMember_s", "UpdateExparydate", True)
+    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsMember_s", "UpdateExparydate", True)
 
 End Function
-Public Function getByMemberId(ByVal lngMemberID As Long) As ADODB.Recordset
+Public Function getByMemberId(ByVal lngMemberID As Long, lngCityId As Long) As ADODB.Recordset
 On Error GoTo ErrorHandler
 
     Dim sql As String
     Dim rsLocal As ADODB.Recordset
     
 
-    sql = "SELECT * FROM Member WHERE Mno = " & lngMemberID
+    sql = "SELECT * FROM member WHERE Mno = " & lngMemberID & " AND CITY_ID =  " & lngCityId
     
     Set rsLocal = New ADODB.Recordset
         rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly
     
     If rsLocal.EOF = True Then
-        MsgBox "No records found for This Member.", vbExclamation
         Set getByMemberId = Nothing
     Else
         Set getByMemberId = rsLocal
@@ -185,7 +203,7 @@ On Error GoTo ErrorHandler
 
 Exit Function
 ErrorHandler:
-'    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsMember_s", "getByMemberId", True)
+    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsMember_s", "getByMemberId", True)
 
 End Function
 
@@ -196,7 +214,7 @@ On Error GoTo ErrorHandler
     Dim rsLocal As ADODB.Recordset
     
 
-    sql = "SELECT Distinct postCode FROM Member"
+    sql = "SELECT distinct postCode FROM member"
 
     Set rsLocal = New ADODB.Recordset
         rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly
@@ -212,7 +230,7 @@ On Error GoTo ErrorHandler
 
 Exit Function
 ErrorHandler:
-'    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsMember_s", "GetPostCode", True)
+    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsMember_s", "GetPostCode", True)
 
 End Function
 
@@ -222,7 +240,7 @@ On Error GoTo ErrorHandler
     Dim sql As String
 
     
-    sql = "UPDATE MEMBER SET" _
+    sql = "UPDATE member SET" _
                 
                 
     If STATUS <> "" Then
@@ -238,7 +256,7 @@ On Error GoTo ErrorHandler
 
 Exit Function
 ErrorHandler:
-    'Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsMember_s", "UpdateExparydate", True)
+    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsMember_s", "UpdateExparydate", True)
 
 End Function
 

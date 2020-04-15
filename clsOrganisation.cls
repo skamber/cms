@@ -26,7 +26,7 @@ On Error GoTo ErrorHandler
     Dim rsLocal As ADODB.Recordset
     
     
-    sql = "SELECT Action_Id, Action_name FROM Actions " _
+    sql = "SELECT Action_Id, Action_name FROM actions " _
             & "WHERE Action_name = " & "'" & strActionName & "'"
 
     Set rsLocal = New ADODB.Recordset
@@ -43,8 +43,8 @@ On Error GoTo ErrorHandler
 
 Exit Function
 ErrorHandler:
-'    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getPracticeName", True)
 
+    'Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getPracticeName", True)
 End Function
 
 Public Function getPayment() As ADODB.Recordset
@@ -54,7 +54,7 @@ On Error GoTo ErrorHandler
     Dim rsLocal As ADODB.Recordset
     
     
-    sql = "SELECT Id, Payment_type FROM Type"
+    sql = "SELECT Id, Payment_type FROM type"
    
     Set rsLocal = New ADODB.Recordset
         rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly
@@ -71,7 +71,7 @@ On Error GoTo ErrorHandler
 
 Exit Function
 ErrorHandler:
-'    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getPayment", True)
+    'Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getPayment", True)
 
 End Function
 
@@ -82,7 +82,7 @@ On Error GoTo ErrorHandler
     Dim rsLocal As ADODB.Recordset
     
     
-    sql = "SELECT ID, Payment FROM Payment_type"
+    sql = "SELECT ID, Payment FROM payment_type"
    
     Set rsLocal = New ADODB.Recordset
         rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly
@@ -110,7 +110,7 @@ On Error GoTo ErrorHandler
     Dim rsLocal As ADODB.Recordset
     
     
-    sql = "SELECT ID, AmountInWord FROM WordAmount"
+    sql = "SELECT ID, AmountInWord FROM wordamount"
    
     Set rsLocal = New ADODB.Recordset
         rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly
@@ -127,7 +127,7 @@ On Error GoTo ErrorHandler
 
 Exit Function
 ErrorHandler:
-'    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getPaymentType", True)
+    'Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getPaymentType", True)
 
 End Function
 
@@ -138,7 +138,7 @@ On Error GoTo ErrorHandler
     Dim rsLocal As ADODB.Recordset
     
     
-    sql = "SELECT Id, Collection_type FROM CollectionType"
+    sql = "SELECT Id, Collection_type FROM collectiontype"
    
     Set rsLocal = New ADODB.Recordset
         rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly
@@ -155,7 +155,7 @@ On Error GoTo ErrorHandler
 
 Exit Function
 ErrorHandler:
-'    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getPayment", True)
+    'Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getPayment", True)
 
 End Function
 
@@ -168,8 +168,8 @@ On Error GoTo ErrorHandler
     
     Select Case CashFlowType
     
-    Case "CASHIN": sql = "SELECT Id, itemName FROM CashflowItem where type ='CASHIN'"
-    Case "CASHOUT": sql = "SELECT Id, itemName FROM CashflowItem where type ='CASHOUT'"
+    Case "CASHIN": sql = "SELECT Id, itemName FROM cashflowitem where type ='CASHIN'"
+    Case "CASHOUT": sql = "SELECT Id, itemName FROM cashflowitem where type ='CASHOUT'"
     End Select
     Set rsLocal = New ADODB.Recordset
         rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly
@@ -186,7 +186,7 @@ On Error GoTo ErrorHandler
 
 Exit Function
 ErrorHandler:
-'    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getPayment", True)
+   ' Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getPayment", True)
 
 End Function
 
@@ -197,7 +197,7 @@ On Error GoTo ErrorHandler
     Dim rsLocal As ADODB.Recordset
     
     
-    sql = "SELECT ItemCode, GST FROM CashflowItem WHERE ItemName ='" & lngItem & "'"
+    sql = "SELECT ItemCode, GST FROM cashflowitem WHERE ItemName ='" & lngItem & "'"
    
     Set rsLocal = New ADODB.Recordset
         rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly
@@ -227,7 +227,7 @@ On Error GoTo ErrorHandler
     Dim rsLocal As ADODB.Recordset
     
     
-    sql = "SELECT ID, TermName FROM Term"
+    sql = "SELECT ID, TermName FROM term"
    
     Set rsLocal = New ADODB.Recordset
         rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly
@@ -244,7 +244,7 @@ On Error GoTo ErrorHandler
 
 Exit Function
 ErrorHandler:
-'    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getPayment", True)
+  ' Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getPayment", True)
 
 End Function
 
@@ -255,7 +255,7 @@ On Error GoTo ErrorHandler
     Dim rsLocal As ADODB.Recordset
     
     
-    sql = "SELECT Action_id, Action_Name FROM Actions"
+    sql = "SELECT Action_id, Action_Name FROM actions"
 
     Set rsLocal = New ADODB.Recordset
         rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly
@@ -271,7 +271,7 @@ On Error GoTo ErrorHandler
 
 Exit Function
 ErrorHandler:
-'    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getPracticeName", True)
+    'Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getPracticeName", True)
 
 End Function
 
@@ -282,7 +282,7 @@ On Error GoTo ErrorHandler
     Dim rsLocal As ADODB.Recordset
     
     
-    sql = "SELECT ID, Descriprtion ,GST FROM InvoiceItemType"
+    sql = "SELECT ID, Descriprtion ,GST FROM invoiceitemtype"
    
     Set rsLocal = New ADODB.Recordset
         rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly
@@ -299,7 +299,7 @@ On Error GoTo ErrorHandler
 
 Exit Function
 ErrorHandler:
-'    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getPayment", True)
+  ' Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getPayment", True)
 
 End Function
 
@@ -310,7 +310,7 @@ On Error GoTo ErrorHandler
     Dim rsLocal As ADODB.Recordset
     
     
-    sql = "SELECT ID, Donation FROM Donation_type"
+    sql = "SELECT ID, Donation FROM donation_type"
    
     Set rsLocal = New ADODB.Recordset
         rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly
@@ -327,17 +327,17 @@ On Error GoTo ErrorHandler
 
 Exit Function
 ErrorHandler:
-    'Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getPaymentType", True)
+   ' Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getPaymentType", True)
 
 End Function
-Public Function getChurchName() As ADODB.Recordset
+Public Function getChurchName(ByVal lngCityID As Long) As ADODB.Recordset
 On Error GoTo ErrorHandler
 
     Dim sql As String
     Dim rsLocal As ADODB.Recordset
     
     
-    sql = "SELECT ID, Name FROM Church"
+    sql = "SELECT ID, Name FROM church WHERE cityId = " & lngCityID
    
     Set rsLocal = New ADODB.Recordset
         rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly
@@ -354,7 +354,68 @@ On Error GoTo ErrorHandler
 
 Exit Function
 ErrorHandler:
+       
+   'Debug.Print (Err.Description)
     'Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getChurchName", True)
+
+End Function
+
+Public Function getCities() As ADODB.Recordset
+On Error GoTo ErrorHandler
+
+    Dim sql As String
+    Dim rsLocal As ADODB.Recordset
+    
+    
+    sql = "SELECT ID, CityName, CountryId FROM city order by CityName"
+   
+    Set rsLocal = New ADODB.Recordset
+        rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly
+
+    If rsLocal.EOF = True Then
+        'MsgBox "No records found for Office.", vbExclamation
+        Set getCities = Nothing
+    Else
+        Set getCities = rsLocal
+    End If
+    
+    Set rsLocal = Nothing
+
+
+Exit Function
+ErrorHandler:
+       
+   'Debug.Print (Err.Description)
+   ' Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getCities", True)
+
+End Function
+
+Public Function getCityNameById(ByVal cityId As Long) As ADODB.Recordset
+On Error GoTo ErrorHandler
+
+    Dim sql As String
+    Dim rsLocal As ADODB.Recordset
+    
+    sql = "SELECT CityName FROM city WHERE ID =" & cityId
+   
+    Set rsLocal = New ADODB.Recordset
+        rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly
+
+    If rsLocal.EOF = True Then
+        'MsgBox "No records found for Office.", vbExclamation
+        Set getCityNameById = Nothing
+    Else
+        Set getCityNameById = rsLocal
+    End If
+    
+    Set rsLocal = Nothing
+
+
+Exit Function
+ErrorHandler:
+       
+   'Debug.Print (Err.Description)
+   ' Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getCities", True)
 
 End Function
 
@@ -365,7 +426,7 @@ On Error GoTo ErrorHandler
     Dim rsLocal As ADODB.Recordset
     
     
-    sql = "SELECT Name FROM Church WHERE id =" & lngId
+    sql = "SELECT Name FROM church WHERE id =" & lngId
    
     Set rsLocal = New ADODB.Recordset
         rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly
@@ -385,3 +446,33 @@ ErrorHandler:
     'Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getChurchName", True)
 
 End Function
+
+
+Public Function getConnectionCounts(sDatabase As String, sUser As String) As Long
+On Error GoTo ErrorHandler
+
+    Dim sql As String
+    Dim rsLocal As ADODB.Recordset
+    sql = "select count(*) as conCount from (" & _
+          "select  tmp.ipAddress from (" & _
+          "SELECT LEFT(pl.host,(LOCATE(':',pl.host) - 1)) AS ipAddress FROM INFORMATION_SCHEMA.PROCESSLIST as pl where user='" & sUser & "' and DB='" & sDatabase & "' " & _
+          ") as tmp group by tmp.ipAddress ) as tmp1"
+    
+   
+    Set rsLocal = New ADODB.Recordset
+        rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly
+    
+    If rsLocal.EOF = True Then
+        getConnectionCounts = 0
+    Else
+        getConnectionCounts = rsLocal!conCount
+    End If
+    
+    Set rsLocal = Nothing
+
+Exit Function
+ErrorHandler:
+    'Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsOrganisation_s", "getChurchName", True)
+
+End Function
+

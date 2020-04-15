@@ -44,7 +44,7 @@ On Error GoTo ErrorHandler
     
    
         'get next number -- cannot use AutoNumber function
-        sql = "SELECT MAX(Item_Id) FROM InvoiceItem"
+        sql = "SELECT MAX(Item_Id) FROM invoiceitem"
         Set rsLocal = New ADODB.Recordset
             rsLocal.Open sql, dbConnection
             
@@ -59,7 +59,7 @@ On Error GoTo ErrorHandler
     
     
     'insert new record
-    sql = "INSERT INTO InvoiceItem" _
+    sql = "INSERT INTO invoiceitem" _
                 & " (Item_Id, Invoice_id, Description, Amount, Gst, total_amount)" _
                 & " VALUES" _
                 & " (" & NewInvoiceItemId _
@@ -84,7 +84,7 @@ On Error GoTo ErrorHandler
     Dim sql As String
 
     
-    sql = "UPDATE InvoiceItem SET" _
+    sql = "UPDATE invoiceitem SET" _
                 & " Invoice_id =" & objInvoiceItem.Invoice_id _
                 & " ,Description =" & "'" & objInvoiceItem.Description & "'" _
                 & " ,Amount =" & objInvoiceItem.Amount _
@@ -109,7 +109,7 @@ On Error GoTo ErrorHandler
     Dim rsLocal As ADODB.Recordset
     
 
-    sql = "SELECT * FROM InvoiceItem WHERE Invoice_id = " & lngInvoiceID
+    sql = "SELECT * FROM invoiceitem WHERE Invoice_id = " & lngInvoiceID
     
     Set rsLocal = New ADODB.Recordset
         rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly
@@ -125,7 +125,7 @@ On Error GoTo ErrorHandler
 
 Exit Function
 ErrorHandler:
-'    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsMember_s", "getByMemberId", True)
+'    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsInvoiceItem_s", "getByInvoiceId", True)
 
 End Function
 
@@ -136,7 +136,7 @@ On Error GoTo ErrorHandler
     Dim rsLocal As ADODB.Recordset
     
 
-    sql = "SELECT * FROM InvoiceItem WHERE Item_id = " & lngInvoiceItemID
+    sql = "SELECT * FROM invoiceitem WHERE Item_id = " & lngInvoiceItemID
     
     Set rsLocal = New ADODB.Recordset
         rsLocal.Open sql, dbConnection, adOpenForwardOnly, adLockReadOnly
@@ -152,7 +152,7 @@ On Error GoTo ErrorHandler
 
 Exit Function
 ErrorHandler:
-'    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsMember_s", "getByMemberId", True)
+'    Call objError.ErrorRoutine(Err.Number, Err.Description, dbConnection, "clsInvoiceItem_s", "getByInvoiceItemId", True)
 
 End Function
 
