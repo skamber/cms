@@ -1,0 +1,5 @@
+Line 227: Class MSMask.MaskEdBox of control dteInvoiceDate was not a loaded control class.
+Line 254: Class MSMask.MaskEdBox of control dtePhone was not a loaded control class.
+Line 475: Class MSComctlLib.ListView of control InvoiceItemList was not a loaded control class.
+Line 503: Class Crystal.CrystalReport of control Report was not a loaded control class.
+Line 518: Class MSMask.MaskEdBox of control dteOverDueDate was not a loaded control class.

@@ -1,0 +1,10 @@
+$ git remote show orgin_cms
+* remote orgin_cms
+  Fetch URL: https://samikamber@bitbucket.org/samikamber/cms.git
+  Push  URL: https://samikamber@bitbucket.org/samikamber/cms.git
+  HEAD branch: master
+  Remote branch:
+    master tracked
+  Local ref configured for 'git push':
+    master pushes to master (up to date)
+
