@@ -833,6 +833,11 @@ Public Function ProcessRecord(ByVal sFunction As String)
                   Select Case gRecordType
                             
                     Case MEMBER:
+                                If frmMember.txtMno.Text = "" Then
+                                  MsgBox "Please Save the member before print or Priview", vbInformation, "CMS - Error Continuing"
+                                Else
+                                  Call GenerateReport(12, "Print", objConnection)
+                                 End If
                      
                     Case Children_information:
                         
@@ -876,6 +881,11 @@ Public Function ProcessRecord(ByVal sFunction As String)
                  Select Case gRecordType
                             
                    Case MEMBER:
+                        If frmMember.txtMno.Text = "" Then
+                                  MsgBox "Please Save the member before print or Priview", vbInformation, "CMS - Error Continuing"
+                        Else
+                                  Call GenerateReport(12, "View", objConnection)
+                        End If
                      
                    Case Children_information:
                        

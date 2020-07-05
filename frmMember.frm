@@ -1,5 +1,6 @@
 VERSION 5.00
 Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "MSMASK32.OCX"
+Object = "{00025600-0000-0000-C000-000000000046}#5.2#0"; "crystl32.ocx"
 Begin VB.Form frmMember 
    ClientHeight    =   9015
    ClientLeft      =   285
@@ -13,6 +14,16 @@ Begin VB.Form frmMember
    ScaleHeight     =   9015
    ScaleWidth      =   12600
    WindowState     =   2  'Maximized
+   Begin Crystal.CrystalReport report 
+      Left            =   9000
+      Top             =   3960
+      _ExtentX        =   741
+      _ExtentY        =   741
+      _Version        =   348160
+      WindowBorderStyle=   1
+      PrintFileLinesPerPage=   60
+      WindowShowPrintSetupBtn=   -1  'True
+   End
    Begin VB.Frame fraMember 
       BorderStyle     =   0  'None
       Enabled         =   0   'False

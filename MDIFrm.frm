@@ -41,6 +41,7 @@ Begin VB.MDIForm MDIFrm
          Strikethrough   =   0   'False
       EndProperty
       PictureBackground=   "MDIFrm.frx":030A
+      TagVariant      =   ""
       OLEDragMode     =   1
       OLEDropMode     =   2
       GroupCount      =   7

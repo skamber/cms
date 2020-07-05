@@ -167,10 +167,10 @@ On Error GoTo ErrorHandler
     Select Case lngReportId
     Case 5: 'CashflowView
     
-       With frmCashFlowView.Report
+       With frmCashFlowView.report
         
-        frmCashFlowView.Report.WindowWidth = Screen.Width
-        frmCashFlowView.Report.WindowHeight = Screen.Height
+        frmCashFlowView.report.WindowWidth = Screen.Width
+        frmCashFlowView.report.WindowHeight = Screen.Height
         For intCnt = 0 To 30
             .Formulas(intCnt) = ""
             .DataFiles(intCnt) = ""
@@ -183,9 +183,9 @@ On Error GoTo ErrorHandler
       End With
     
     Case 6: 'Receipt
-    With frmReceipt.Report
-        frmReceipt.Report.WindowWidth = Screen.Width
-        frmReceipt.Report.WindowHeight = Screen.Height
+    With frmReceipt.report
+        frmReceipt.report.WindowWidth = Screen.Width
+        frmReceipt.report.WindowHeight = Screen.Height
         For intCnt = 0 To 30
             .Formulas(intCnt) = ""
             .DataFiles(intCnt) = ""
@@ -195,9 +195,9 @@ On Error GoTo ErrorHandler
         .DiscardSavedData = True
     End With
     Case 7: 'Invoice
-    With frmInvoice.Report
-        frmInvoice.Report.WindowWidth = Screen.Width
-        frmInvoice.Report.WindowHeight = Screen.Height
+    With frmInvoice.report
+        frmInvoice.report.WindowWidth = Screen.Width
+        frmInvoice.report.WindowHeight = Screen.Height
         For intCnt = 0 To 30
             .Formulas(intCnt) = ""
             .DataFiles(intCnt) = ""
@@ -208,9 +208,9 @@ On Error GoTo ErrorHandler
     End With
     
     Case 9, 10: 'MemberShip Invoice
-    With frmPayment.Report
-        frmPayment.Report.WindowWidth = Screen.Width
-        frmPayment.Report.WindowHeight = Screen.Height
+    With frmPayment.report
+        frmPayment.report.WindowWidth = Screen.Width
+        frmPayment.report.WindowHeight = Screen.Height
         For intCnt = 0 To 30
             .Formulas(intCnt) = ""
             .DataFiles(intCnt) = ""
@@ -221,9 +221,22 @@ On Error GoTo ErrorHandler
     End With
     
     Case 11: 'Collection receipt
-    With frmCollection.Report
-        frmCollection.Report.WindowWidth = Screen.Width
-        frmCollection.Report.WindowHeight = Screen.Height
+    With frmCollection.report
+        frmCollection.report.WindowWidth = Screen.Width
+        frmCollection.report.WindowHeight = Screen.Height
+        For intCnt = 0 To 30
+            .Formulas(intCnt) = ""
+            .DataFiles(intCnt) = ""
+        Next
+       .SelectionFormula = ""
+        .GroupSelectionFormula = ""
+        .DiscardSavedData = True
+    End With
+    
+    Case 12: 'member Id
+    With frmMember.report
+        frmMember.report.WindowWidth = Screen.Width
+        frmMember.report.WindowHeight = Screen.Height
         For intCnt = 0 To 30
             .Formulas(intCnt) = ""
             .DataFiles(intCnt) = ""
@@ -234,9 +247,9 @@ On Error GoTo ErrorHandler
     End With
     
     Case 0, 1, 2, 3, 4: 'Reporting
-    With frmReport.Report
-        frmReport.Report.WindowWidth = Screen.Width
-        frmReport.Report.WindowHeight = Screen.Height
+    With frmReport.report
+        frmReport.report.WindowWidth = Screen.Width
+        frmReport.report.WindowHeight = Screen.Height
         For intCnt = 0 To 30
             .Formulas(intCnt) = ""
             .DataFiles(intCnt) = ""
@@ -258,8 +271,8 @@ On Error GoTo ErrorHandler
                 If .dteFromDate.Text = "" Then strStartDate = "Date(1970,01,01)"
                 If .dteToDate.Text = "" Then strEndDate = "Date(2070,01,01)"
                 'used to display "for the period..." on report
-                .Report.Formulas(0) = "STARTDATE= " & strStartDate
-                .Report.Formulas(1) = "ENDDATE= " & strEndDate
+                .report.Formulas(0) = "STARTDATE= " & strStartDate
+                .report.Formulas(1) = "ENDDATE= " & strEndDate
                 If strReportSQL <> "" Then
                 strReportSQL = strReportSQL & "AND" & "{cashin.dateofcashin} >= " & strStartDate _
                 & " AND {cashin.dateofcashin} <= " & strEndDate
@@ -302,6 +315,12 @@ On Error GoTo ErrorHandler
             
                 strReportId = "CollectionReceipt.rpt"
                 strReportSQL = "{collection.COL_ID} = " & frmCollection.txtCollectionNo.Text
+                
+        
+        Case 12: 'CardId
+            
+                strReportId = "IdCard.rpt"
+                strReportSQL = "{member.MNo} = " & frmMember.txtMno.Text
         
         Case 0:
                 strReportId = "MemberReport.rpt"
@@ -320,14 +339,14 @@ On Error GoTo ErrorHandler
                 
                 Select Case .cboReportCriteria3.Text
                 
-                Case "SURNAME": frmReport.Report.SortFields(0) = "+{Member.Surname}"
+                Case "SURNAME": frmReport.report.SortFields(0) = "+{Member.Surname}"
                                 
-                Case "GIVEN_NAME": frmReport.Report.SortFields(0) = "+{Member.GIVEN_NAME}"
+                Case "GIVEN_NAME": frmReport.report.SortFields(0) = "+{Member.GIVEN_NAME}"
                                    
-                Case "POSTCODE": frmReport.Report.SortFields(0) = "+{Member.POSTCODE}"
-                Case "MEMBERSHIP_EXPIARY": frmReport.Report.SortFields(0) = "+{Member.MEMBERSHIP_EXPIARY}"
-                Case "STATUS": frmReport.Report.SortFields(0) = "+{Member.STATUS}"
-                Case "MNO": frmReport.Report.SortFields(0) = "+{Member.MNO}"
+                Case "POSTCODE": frmReport.report.SortFields(0) = "+{Member.POSTCODE}"
+                Case "MEMBERSHIP_EXPIARY": frmReport.report.SortFields(0) = "+{Member.MEMBERSHIP_EXPIARY}"
+                Case "STATUS": frmReport.report.SortFields(0) = "+{Member.STATUS}"
+                Case "MNO": frmReport.report.SortFields(0) = "+{Member.MNO}"
                End Select
                 
                 
@@ -337,8 +356,8 @@ On Error GoTo ErrorHandler
                 If .dteEndDate.Text = "" Then strEndDate = "Date(2070,01,01)"
                 If .dteStartDate.Text <> "" And .dteEndDate.Text <> "" Then
                     'used to display "for the period..." on report
-                    .Report.Formulas(0) = "STARTDATE= " & strStartDate
-                    .Report.Formulas(1) = "ENDDATE= " & strEndDate
+                    .report.Formulas(0) = "STARTDATE= " & strStartDate
+                    .report.Formulas(1) = "ENDDATE= " & strEndDate
                       If strReportSQL <> "" Then
                          strReportSQL = strReportSQL & "AND" & "{member.Membership_Expiary} >= " & strStartDate _
                          & " AND {member.Membership_Expiary} <= " & strEndDate
@@ -393,8 +412,8 @@ On Error GoTo ErrorHandler
                 If .dteStartDate.Text = "" Then strStartDate = "Date(1970,01,01)"
                 If .dteEndDate.Text = "" Then strEndDate = "Date(2070,01,01)"
                 'used to display "for the period..." on report
-                .Report.Formulas(0) = "STARTDATE= " & strStartDate
-                .Report.Formulas(1) = "ENDDATE= " & strEndDate
+                .report.Formulas(0) = "STARTDATE= " & strStartDate
+                .report.Formulas(1) = "ENDDATE= " & strEndDate
                 If strReportSQL <> "" Then
                 strReportSQL = strReportSQL & " AND " & "{allincome.Date_Of_Payment} >= " & strStartDate _
                 & " AND {allincome.Date_Of_Payment} <= " & strEndDate
@@ -451,8 +470,8 @@ On Error GoTo ErrorHandler
                 If .dteStartDate.Text = "" Then strStartDate = "Date(1970,01,01)"
                 If .dteEndDate.Text = "" Then strEndDate = "Date(2070,01,01)"
                 'used to display "for the period..." on report
-                .Report.Formulas(0) = "STARTDATE= " & strStartDate
-                .Report.Formulas(1) = "ENDDATE= " & strEndDate
+                .report.Formulas(0) = "STARTDATE= " & strStartDate
+                .report.Formulas(1) = "ENDDATE= " & strEndDate
                 If strReportSQL <> "" Then
                 strReportSQL = strReportSQL & " AND " & "{receipt.date_of_Receipt} >= " & strStartDate _
                 & " AND {receipt.date_of_Receipt} <= " & strEndDate
@@ -472,20 +491,20 @@ On Error GoTo ErrorHandler
     Select Case lngReportId
     Case 5: 'CashflowView
          With frmCashFlowView
-        .Report.ReportFileName = App.Path & "\Reports\" & strReportId
-        .Report.SelectionFormula = strReportSQL
+        .report.ReportFileName = App.Path & "\Reports\" & strReportId
+        .report.SelectionFormula = strReportSQL
         
         If strDestination = "View" Then
-            .Report.Destination = crptToWindow
+            .report.Destination = crptToWindow
         ElseIf strDestination = "Print" Then
-            .Report.Destination = crptToPrinter
+            .report.Destination = crptToPrinter
         End If
                 
-        .Report.Connect = objReportConnection
-        .Report.SubreportToChange = .Report.GetNthSubreportName(0)
-        .Report.SelectionFormula = strReportSQLSubReport
-        .Report.Action = 1
-       .Report.SubreportToChange = ""
+        .report.Connect = objReportConnection
+        .report.SubreportToChange = .report.GetNthSubreportName(0)
+        .report.SelectionFormula = strReportSQLSubReport
+        .report.Action = 1
+       .report.SubreportToChange = ""
 
 
 
@@ -493,81 +512,98 @@ On Error GoTo ErrorHandler
     Case 6: 'Receipt
     
     With frmReceipt
-        .Report.ReportFileName = App.Path & "\Reports\" & strReportId
-        .Report.SelectionFormula = strReportSQL
+        .report.ReportFileName = App.Path & "\Reports\" & strReportId
+        .report.SelectionFormula = strReportSQL
         
         If strDestination = "View" Then
-            .Report.Destination = crptToWindow
+            .report.Destination = crptToWindow
         ElseIf strDestination = "Print" Then
-            .Report.Destination = crptToPrinter
+            .report.Destination = crptToPrinter
         End If
         
        
-        .Report.Connect = objReportConnection
-        .Report.Action = 1
+        .report.Connect = objReportConnection
+        .report.Action = 1
     End With
     
     Case 7: 'Invoice
     With frmInvoice
-        .Report.ReportFileName = App.Path & "\Reports\" & strReportId
-        .Report.SelectionFormula = strReportSQL
+        .report.ReportFileName = App.Path & "\Reports\" & strReportId
+        .report.SelectionFormula = strReportSQL
         
         If strDestination = "View" Then
-            .Report.Destination = crptToWindow
+            .report.Destination = crptToWindow
         ElseIf strDestination = "Print" Then
-            .Report.Destination = crptToPrinter
+            .report.Destination = crptToPrinter
         End If
         
 
-        .Report.Connect = objReportConnection
-        .Report.Action = 1
+        .report.Connect = objReportConnection
+        .report.Action = 1
         
     End With
     Case 9, 10: 'MemberShip Invoice
     Dim result As String
     With frmPayment
-        .Report.ReportFileName = App.Path & "\Reports\" & strReportId
-        .Report.SelectionFormula = strReportSQL
+        .report.ReportFileName = App.Path & "\Reports\" & strReportId
+        .report.SelectionFormula = strReportSQL
         
         If strDestination = "View" Then
-            .Report.Destination = crptToWindow
+            .report.Destination = crptToWindow
         ElseIf strDestination = "Print" Then
-            .Report.Destination = crptToPrinter
+            .report.Destination = crptToPrinter
         End If
         
         
-        .Report.Connect = objReportConnection
-        .Report.Action = 1
+        .report.Connect = objReportConnection
+        .report.Action = 1
     End With
     
     Case 11: 'Collection
     With frmCollection
-        .Report.ReportFileName = App.Path & "\Reports\" & strReportId
-        .Report.SelectionFormula = strReportSQL
+        .report.ReportFileName = App.Path & "\Reports\" & strReportId
+        .report.SelectionFormula = strReportSQL
         
         If strDestination = "View" Then
-            .Report.Destination = crptToWindow
+            .report.Destination = crptToWindow
         ElseIf strDestination = "Print" Then
-            .Report.Destination = crptToPrinter
+            .report.Destination = crptToPrinter
         End If
-        .Report.Connect = objReportConnection
-        .Report.Action = 1
+        .report.Connect = objReportConnection
+        .report.Action = 1
+    End With
+    
+    Case 12: 'CardId
+    
+    With frmMember
+        .report.ReportFileName = App.Path & "\Reports\" & strReportId
+        .report.SelectionFormula = strReportSQL
+        
+        If strDestination = "View" Then
+            .report.Destination = crptToWindow
+        ElseIf strDestination = "Print" Then
+            .report.Destination = crptToPrinter
+        End If
+        
+       
+        .report.Connect = objReportConnection
+        .report.Action = 1
     End With
     
     Case 0, 1, 2, 3, 4:
       With frmReport
-        .Report.ReportFileName = App.Path & "\Reports\" & strReportId
-        .Report.SelectionFormula = strReportSQL
+        .report.ReportFileName = App.Path & "\Reports\" & strReportId
+        .report.SelectionFormula = strReportSQL
         Debug.Print (strReportSQL)
         If strDestination = "View" Then
-            .Report.Destination = crptToWindow
+            .report.Destination = crptToWindow
         ElseIf strDestination = "Print" Then
-            .Report.Destination = crptToPrinter
+            .report.Destination = crptToPrinter
         End If
         
         
-        .Report.Connect = objReportConnection
-        .Report.Action = 1
+        .report.Connect = objReportConnection
+        .report.Action = 1
     End With
     End Select
     DoEvents

@@ -617,3 +617,14 @@ FOR EACH ROW BEGIN
 
 end//
 DELIMITER ;
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ALTER TABLE `city` ADD COLUMN `title1` varchar(200) DEFAULT NULL ;
+ALTER TABLE `city` ADD COLUMN `title2` varchar(200) DEFAULT NULL ;
+
+UPDATE `church`.`city` SET `title1`='jyrwtjd jxndmd yqylwtq jtxylfw jtfydq jtdv', `title2`='Holy Apostolic Catholic Assyrian Church of the East' WHERE `ID`='1';
+UPDATE `church`.`city` SET `title1`='jyrwtjd jxndmd yqylwtq jtxylfw jtfydq jtdv', `title2`='Holy Apostolic Catholic Assyrian Church of the East' WHERE `ID`='2';
+UPDATE `church`.`city` SET `title1`='jyrwtjd jxndmd yqylwtq jtxylfw jtfydq jtdv', `title2`='Holy Apostolic Catholic Assyrian Church of the East' WHERE `ID`='3';
+
+  `title2` varchar(200) DEFAULT NULL,
